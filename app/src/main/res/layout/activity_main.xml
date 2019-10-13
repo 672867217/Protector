@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFEC9">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="169dp"
+        android:layout_y="159dp"
+        android:text="断相保护器测试台"
+        android:textColor="#62332E"
+        android:textSize="100px"
+        tools:layout_editor_absoluteX="710dp"
+        tools:layout_editor_absoluteY="327dp" />
+
+    <LinearLayout
+        android:layout_width="945dp"
+        android:layout_height="443dp"
+        android:layout_x="320dp"
+        android:layout_y="393dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="346dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70px"
+            android:layout_marginBottom="50px"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="275dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="200dp"
+                android:background="@drawable/chushi"
+                android:text="测       试"
+                android:textSize="36sp"
+                tools:layout_editor_absoluteX="406dp"
+                tools:layout_editor_absoluteY="561dp" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="275dp"
+                android:layout_height="80dp"
+                android:background="@drawable/chushi"
+                android:text="按日期查询"
+                android:textSize="36sp"
+                tools:layout_editor_absoluteX="406dp"
+                tools:layout_editor_absoluteY="561dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70px"
+            android:layout_marginBottom="50px"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="275dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="200dp"
+                android:background="@drawable/chushi"
+                android:text="设      置"
+                android:textSize="36sp"
+
+                tools:layout_editor_absoluteX="406dp"
+                tools:layout_editor_absoluteY="561dp" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="275dp"
+                android:layout_height="80dp"
+                android:background="@drawable/chushi"
+                android:text="按编号查询"
+                android:textSize="36sp"
+                tools:layout_editor_absoluteX="406dp"
+                tools:layout_editor_absoluteY="561dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70px"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="275dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="200dp"
+                android:background="@drawable/chushi"
+                android:text="统       计"
+                android:textSize="36sp"
+                tools:layout_editor_absoluteX="406dp"
+                tools:layout_editor_absoluteY="561dp" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="275dp"
+                android:layout_height="80dp"
+                android:background="@drawable/chushi"
+                android:text="误差分析"
+                android:textSize="36sp"
+                tools:layout_editor_absoluteX="406dp"
+                tools:layout_editor_absoluteY="561dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</AbsoluteLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BD5E5F"
+    tools:context=".Setting">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="450dp"
+        android:layout_y="53dp"
+        android:text="ERP通讯："
+        android:textColor="#fff"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="53dp"
+        android:layout_y="53dp"
+        android:text="内部通讯："
+        android:textColor="#fff"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <TextView
+        android:id="@+id/erptongxun"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_x="610dp"
+        android:layout_y="53dp"
+        android:background="@drawable/f_yuanjiao"
+        android:gravity="center"
+        android:text="脱机"
+        android:textColor="#000"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <TextView
+        android:id="@+id/neibutongxun2"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_x="215dp"
+        android:layout_y="53dp"
+        android:background="@drawable/f_yuanjiao"
+        android:gravity="center"
+        android:text="正常"
+        android:textColor="#000"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="1215dp"
+        android:layout_y="53dp"
+        android:background="@drawable/baocun"
+        android:text="返  回"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="555dp"
+        tools:layout_editor_absoluteY="281dp" />
+</AbsoluteLayout>
