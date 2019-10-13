@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
+        //设置页
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 //        };
 //        timer.schedule(timerTask,0,5000);
 
+        //测试页
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 params.width = 800;
                 params.height = 1200;
                 dialog.getWindow().setAttributes(params); */
-
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog1_btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -106,7 +107,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        //统计页
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Stats.class));
+            }
+        });
     }
 }
