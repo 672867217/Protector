@@ -2,11 +2,13 @@ package com.example.protector;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Setting.class));
+            }
+        });
 
 
 //        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
