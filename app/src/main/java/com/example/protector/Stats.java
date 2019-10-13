@@ -102,7 +102,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         if (dayOfMonth+1 < 10) {
                             myday = "0"+(dayOfMonth+1);
                         } else {
-                            myday = String.valueOf(dayOfMonth+1);
+                            myday = String.valueOf(dayOfMonth);
                         }
                         stats_tv3.setText(year+"-"+mymonth+"-"+myday);
                     }
