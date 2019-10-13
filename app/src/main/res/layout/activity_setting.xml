@@ -72,7 +72,7 @@
     <LinearLayout
         android:layout_width="437dp"
         android:layout_height="324dp"
-        android:layout_x="50dp"
+        android:layout_x="32dp"
         android:layout_y="149dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
@@ -160,44 +160,50 @@
                 android:textColor="#000"
                 android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_x="37dp"
-                android:layout_y="180dp"
-                android:background="@drawable/baocun"
-                android:text="添  加"
-                android:textColor="#000"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="33dp"
-                tools:layout_editor_absoluteY="162dp" />
+            <LinearLayout
+                android:layout_width="403dp"
+                android:layout_height="58dp"
+                android:layout_x="33dp"
+                android:layout_y="191dp"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="122dp"
+                tools:layout_editor_absoluteY="210dp">
 
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_x="165dp"
-                android:layout_y="183dp"
-                android:background="@drawable/baocun"
-                android:text="修  改"
-                android:textColor="#000"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="33dp"
-                tools:layout_editor_absoluteY="162dp" />
+                <Button
+                    android:id="@+id/button8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/baocun"
+                    android:text="添  加"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="33dp"
+                    tools:layout_editor_absoluteY="162dp" />
 
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_x="299dp"
-                android:layout_y="181dp"
-                android:background="@drawable/baocun"
-                android:text="删  除"
-                android:textColor="#000"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="33dp"
-                tools:layout_editor_absoluteY="162dp" />
+                <Button
+                    android:id="@+id/button9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/baocun"
+                    android:text="修  改"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="33dp"
+                    tools:layout_editor_absoluteY="162dp" />
+
+                <Button
+                    android:id="@+id/button10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baocun"
+                    android:text="删  除"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="33dp"
+                    tools:layout_editor_absoluteY="162dp" />
+            </LinearLayout>
 
         </AbsoluteLayout>
     </LinearLayout>
@@ -205,7 +211,7 @@
     <LinearLayout
         android:layout_width="437dp"
         android:layout_height="324dp"
-        android:layout_x="50dp"
+        android:layout_x="32dp"
         android:layout_y="550dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
@@ -293,44 +299,48 @@
                 android:textColor="#000"
                 android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/button11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_x="37dp"
-                android:layout_y="180dp"
-                android:background="@drawable/baocun"
-                android:text="添  加"
-                android:textColor="#000"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="33dp"
-                tools:layout_editor_absoluteY="162dp" />
+            <LinearLayout
+                android:layout_width="403dp"
+                android:layout_height="50dp"
+                android:layout_x="31dp"
+                android:layout_y="208dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_x="165dp"
-                android:layout_y="183dp"
-                android:background="@drawable/baocun"
-                android:text="修  改"
-                android:textColor="#000"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="33dp"
-                tools:layout_editor_absoluteY="162dp" />
+                <Button
+                    android:id="@+id/button11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/baocun"
+                    android:text="添  加"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="33dp"
+                    tools:layout_editor_absoluteY="162dp" />
 
-            <Button
-                android:id="@+id/button13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_x="299dp"
-                android:layout_y="181dp"
-                android:background="@drawable/baocun"
-                android:text="删  除"
-                android:textColor="#000"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="33dp"
-                tools:layout_editor_absoluteY="162dp" />
+                <Button
+                    android:id="@+id/button12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/baocun"
+                    android:text="修  改"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="33dp"
+                    tools:layout_editor_absoluteY="162dp" />
+
+                <Button
+                    android:id="@+id/button13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baocun"
+                    android:text="删  除"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="33dp"
+                    tools:layout_editor_absoluteY="162dp" />
+            </LinearLayout>
 
         </AbsoluteLayout>
     </LinearLayout>
@@ -374,7 +384,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="启动响应时间：< 150ms"
+                    android:text="启动响应时间：＜ 150ms"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -383,7 +393,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="断相响应时间：< 250ms"
+                    android:text="断相响应时间：＜ 250ms"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -428,7 +438,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="断相直流输出电压：< 0.2V"
+                    android:text="断相直流输出电压：＜ 0.2V"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -437,7 +447,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="交流线圈压降：< 3.0V"
+                    android:text="交流线圈压降：＜ 3.0V"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -446,7 +456,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="相间绝缘电阻：> 500MΩ"
+                    android:text="相间绝缘电阻：＞ 500MΩ"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -455,7 +465,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="相对地绝缘电阻： > 500MΩ"
+                    android:text="相对地绝缘电阻： ＞ 500MΩ"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -464,7 +474,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="相对线圈绝缘电阻： > 500MΩ"
+                    android:text="相对线圈绝缘电阻： ＞ 500MΩ"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -473,9 +483,318 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="线圈对地绝缘电阻： > 500MΩ"
+                    android:text="线圈对地绝缘电阻： ＞ 500MΩ"
                     android:textColor="#000"
                     android:textSize="22sp" />
+            </LinearLayout>
+        </AbsoluteLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="724dp"
+        android:layout_x="900dp"
+        android:layout_y="148dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="203dp">
+
+        <TextView
+            android:layout_width="437dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fenseshangyuanjiao"
+            android:gravity="center"
+            android:text="标准参数"
+            android:textColor="#000000"
+            android:textSize="35sp"
+            tools:layout_editor_absoluteX="135dp"
+            tools:layout_editor_absoluteY="142dp" />
+
+        <AbsoluteLayout
+            android:layout_width="match_parent"
+            android:layout_height="676dp"
+            android:background="@drawable/f_baisebiankuan">
+
+            <LinearLayout
+                android:layout_width="403dp"
+                android:layout_height="512dp"
+                android:layout_x="16dp"
+                android:layout_y="24dp"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="启动响应时间：＜  "
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/ed_qidongxiangying"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/f_yuanjiaotouming"
+                        android:text="150"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="  ms"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="断相响应时间：＜  "
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/ed_duanxiangxiangying"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/f_yuanjiaotouming"
+                    android:gravity="center"
+                    android:text="250"
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  ms"
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="13秒限时时间：13s±  "
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+                <EditText
+                    android:id="@+id/ed_13xianshi"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/f_yuanjiaotouming"
+                    android:gravity="center"
+                    android:text="0.5"
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  s"
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="30秒限时时间：13s±  "
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+                    <EditText
+                        android:id="@+id/ed_30xianshi"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/f_yuanjiaotouming"
+                        android:gravity="center"
+                        android:text="0.5"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="  s"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="串联驱动电压：20.0V - 27.5V"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="并联驱动电压：10.0V - 14.0V"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="断相直流输出电压：＜ 0.2V"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="交流线圈压降：＜ 3.0V"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="相间绝缘电阻：＞ 500MΩ"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="相对地绝缘电阻： ＞ 500MΩ"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="相对线圈绝缘电阻： ＞ 500MΩ"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="线圈对地绝缘电阻： ＞ 500MΩ"
+                        android:textColor="#000"
+                        android:textSize="22sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="403dp"
+                android:layout_height="59dp"
+                android:layout_x="24dp"
+                android:layout_y="571dp"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="544dp">
+
+                <Button
+                    android:id="@+id/button14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/baocun"
+                    android:text="修  改"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="21dp"
+                    tools:layout_editor_absoluteY="572dp" />
+
+                <Button
+                    android:id="@+id/button15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/baocun"
+                    android:text="取  消"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="21dp"
+                    tools:layout_editor_absoluteY="572dp" />
+
+                <Button
+                    android:id="@+id/button16"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baocun"
+                    android:text="默认值"
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="21dp"
+                    tools:layout_editor_absoluteY="572dp" />
             </LinearLayout>
         </AbsoluteLayout>
     </LinearLayout>
