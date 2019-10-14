@@ -65,7 +65,7 @@
             android:textSize="22dp" />
 
         <Spinner
-            android:id="@+id/stats_spinner"
+            android:id="@+id/chanpin_spinner"
             android:layout_width="291dp"
             android:layout_height="40dp"
             android:background="@drawable/myspinner"
@@ -100,7 +100,7 @@
             android:textSize="22dp" />
 
         <TextView
-            android:id="@+id/stats_tv2"
+            android:id="@+id/xinghao"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:background="#98fffe"
@@ -118,7 +118,7 @@
             android:textSize="22dp" />
 
         <TextView
-            android:id="@+id/stats_tv3"
+            android:id="@+id/shengchanchang"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:background="#98fffe"

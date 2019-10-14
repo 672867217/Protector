@@ -69,7 +69,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button18"
+        android:id="@+id/chaxun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="621dp"
@@ -81,7 +81,7 @@
         tools:layout_editor_absoluteY="101dp" />
 
     <Button
-        android:id="@+id/button19"
+        android:id="@+id/fanhui"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="740dp"
@@ -91,4 +91,99 @@
         android:textSize="22sp"
         tools:layout_editor_absoluteX="164dp"
         tools:layout_editor_absoluteY="101dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_x="0dp"
+        android:layout_y="92dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="产品编号 : "
+            android:textColor="#000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/chanpinbianhao"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="#98fffe"
+            android:gravity="center"
+            android:text=" "
+            android:textColor="#000000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="产品名称 :"
+            android:textColor="#000"
+            android:textSize="22dp" />
+
+        <Spinner
+            android:id="@+id/chanpin_spinner"
+            android:layout_width="291dp"
+            android:layout_height="40dp"
+            android:background="@drawable/myspinner"
+            android:gravity="center"
+            android:popupBackground="@drawable/f_baisebiankuan"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="型号 :"
+            android:textColor="#000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/xinghao"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test2_2"
+            android:gravity="center"
+            android:text=" "
+            android:textColor="#000000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:gravity="center"
+            android:text="生产厂  :"
+            android:textColor="#000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/shengchanchang"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test2_2"
+            android:gravity="center"
+            android:text=" "
+            android:textColor="#000000"
+            android:textSize="22dp" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="812dp"
+        android:layout_y="149dp"
+        android:numColumns="4"
+        android:horizontalSpacing="43dp"
+        android:orientation="horizontal"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp">
+
+    </GridView>
+
 </AbsoluteLayout>

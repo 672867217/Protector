@@ -1,19 +1,14 @@
 package com.example.protector;
 
 import android.app.DatePickerDialog;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -125,10 +120,10 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         stats_btn1 = (Button) findViewById(R.id.stats_btn1);
         stats_btn2 = (Button) findViewById(R.id.stats_btn2);
         stats_tv1 = (TextView) findViewById(R.id.stats_tv1);
-        stats_tv2 = (TextView) findViewById(R.id.stats_tv2);
-        stats_tv3 = (TextView) findViewById(R.id.stats_tv3);
+        stats_tv2 = (TextView) findViewById(R.id.xinghao);
+        stats_tv3 = (TextView) findViewById(R.id.shengchanchang);
         stats_gridview = (GridView) findViewById(R.id.stats_gridview);
-        stats_spinner = (Spinner) findViewById(R.id.stats_spinner);
+        stats_spinner = (Spinner) findViewById(R.id.chanpin_spinner);
 
         stats_btn1.setOnClickListener(this);
         stats_btn2.setOnClickListener(this);
