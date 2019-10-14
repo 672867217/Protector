@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View view = getLayoutInflater().inflate(R.layout.dialog_datequery, null);
-                Dialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
+                final Dialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
                 Button btn1 = view.findViewById(R.id.dialog_date_btn);
@@ -76,26 +76,34 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        dialog.dismiss();
                     }
                 });
                 btn2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        dialog.dismiss();
+
                     }
                 });
                 btn3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        dialog.dismiss();
+
                     }
                 });
                 btn4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        dialog.dismiss();
+
                     }
                 });
+
             }
         });
 

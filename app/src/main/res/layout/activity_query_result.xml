@@ -742,7 +742,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_x="20dp"
-        android:layout_y="440dp"
+        android:layout_y="430dp"
         android:background="@drawable/bg_rouseyuanjiao"
         android:gravity="center"
         android:text="测试结果"
@@ -948,7 +948,7 @@
         android:layout_width="1320dp"
         android:layout_height="500dp"
         android:layout_x="20dp"
-        android:layout_y="483dp"
+        android:layout_y="473dp"
         android:background="@drawable/bg_ziseyuanjiao3"
         android:orientation="vertical">
 
