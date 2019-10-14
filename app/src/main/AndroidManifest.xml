@@ -13,8 +13,10 @@
         <activity android:name=".QueryResult"></activity>
         <activity android:name=".DateQuery" />
         <activity android:name=".NumberQuery" />
+        <activity android:name=".NumberQueryParticular" />
         <activity android:name=".Stats" />
         <activity android:name=".Setting" />
+        <activity android:name=".ErrorAnalysis" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -45,12 +46,56 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Setting.class));
             }
         });
-
         //编号查询
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),NumberQuery.class));
+            }
+        });
+        //误差分析
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getApplicationContext(),ErrorAnalysis.class));
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = getLayoutInflater().inflate(R.layout.dialog_datequery, null);
+                Dialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+                Button btn1 = view.findViewById(R.id.dialog_date_btn);
+                Button btn2 = view.findViewById(R.id.dialog_date_btn2);
+                Button btn3 = view.findViewById(R.id.dialog_date_btn3);
+                Button btn4 = view.findViewById(R.id.dialog_date_btn4);
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                    }
+                });
+                btn2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                    }
+                });
+                btn3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                    }
+                });
+                btn4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                    }
+                });
             }
         });
 
