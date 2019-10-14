@@ -1,8 +1,11 @@
 package com.example.protector;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -18,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -211,7 +216,24 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv3.setText(bean1.value3+"");
             holder.testItem2Tv4.setText(bean1.value4+"");
 
-            holder.testBtn2.setEnabled(false);
+            holder.testBtn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    View view = LayoutInflater.from(Test.this).inflate(R.layout.dialog_test4,null);
+                    final Dialog dialog = new AlertDialog.Builder(Test.this).setView(view).show();
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//                    final Timer timer = new Timer();
+//                    TimerTask timerTask = new TimerTask() {
+//                        @Override
+//                        public void run() {
+//                            dialog.dismiss();
+//                            System.out.println("提示关闭了~~~~~~");
+//                            timer.cancel();
+//                        }
+//                    };
+//                    timer.schedule(timerTask,0,1000);
+                }
+            });
         }
 
         protected class ViewHolder {
