@@ -1,9 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#035f5e"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".Test">
 
-</AbsoluteLayout>
+    <LinearLayout
+        android:layout_width="1300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <include
+            layout="@layout/header"
+            android:layout_width="550dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="本班测试情况"
+            android:textAlignment="textStart"
+            android:textColor="#ffffff"
+            android:textSize="40dp" />
+
+        <Button
+            android:id="@+id/test_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="1215dp"
+            android:layout_y="53dp"
+            android:background="@drawable/baocun"
+            android:text="返  回"
+            android:textColor="#000000"
+            android:textSize="22dp"
+            tools:layout_editor_absoluteX="555dp"
+            tools:layout_editor_absoluteY="281dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1300dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <AbsoluteLayout
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_ziseyuanjiao"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_x="0dp"
+                android:layout_y="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="产品名称 :"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/stats_spinner"
+                    android:layout_width="182dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/myspinner"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="型号 :"
+                    android:textColor="#000"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/stats_tv1"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="QDX2-S13/30"
+                    android:textColor="#000000"
+                    android:textSize="22dp" />
+
+            </LinearLayout>
+
+        </AbsoluteLayout>
+
+        <GridView
+            android:id="@+id/test_gv1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/transparent"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/test_gv2"
+        android:layout_width="1300dp"
+        android:layout_height="650dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:horizontalSpacing="10dp"
+        android:numColumns="5" />
+</LinearLayout>
