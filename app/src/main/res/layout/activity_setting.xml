@@ -133,6 +133,7 @@
                 android:layout_height="30dp"
                 android:layout_x="158dp"
                 android:layout_y="23dp"
+                android:background="@drawable/sprinner"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="-25dp" />
 
@@ -272,6 +273,7 @@
                 android:layout_height="30dp"
                 android:layout_x="220dp"
                 android:layout_y="20dp"
+                android:background="@drawable/sprinner"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="-25dp" />
 
