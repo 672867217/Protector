@@ -69,7 +69,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_chaxun"
+        android:id="@+id/btn_dayin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="621dp"

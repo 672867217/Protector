@@ -11,25 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
-import android.widget.Button;
-import java.util.ArrayList;
-import java.util.List;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 public class ErrorAnalysis extends AppCompatActivity {
 
@@ -91,7 +78,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         headerTv2 = (TextView) findViewById(R.id.header_tv2);
         headerTv3 = (TextView) findViewById(R.id.header_tv3);
         headerTv4 = (TextView) findViewById(R.id.header_tv4);
-        btnChaxun = (Button) findViewById(R.id.btn_chaxun);
+        btnChaxun = (Button) findViewById(R.id.btn_dayin);
         btnCancel = (Button) findViewById(R.id.btn_cancel);
         statsSpinner = (Spinner) findViewById(R.id.stats_spinner);
         statsTv1 = (TextView) findViewById(R.id.stats_tv1);
