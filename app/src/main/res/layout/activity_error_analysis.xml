@@ -4,6 +4,396 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CDCCFD"
     tools:context=".ErrorAnalysis">
 
+
+    <LinearLayout
+        android:layout_width="525dp"
+        android:layout_height="30dp"
+        android:layout_x="20dp"
+        android:layout_y="39dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/header_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="内部通讯 : "
+                android:textColor="#fff"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/header_tv2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="center"
+                android:text="正常"
+                android:textColor="#000000"
+                android:textSize="22dp"
+                tools:visibility=" " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/header_tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ERP通讯 : "
+                android:textColor="#fff"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/header_tv4"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="center"
+                android:text="脱机"
+                android:textColor="#000000"
+                android:textSize="22dp"
+                tools:visibility=" " />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_chaxun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="621dp"
+        android:layout_y="29dp"
+        android:background="@drawable/baocun"
+        android:text="分 析"
+        android:textSize="22sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="740dp"
+        android:layout_y="29dp"
+        android:background="@drawable/baocun"
+        android:text="返  回"
+        android:textSize="22sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <LinearLayout
+        android:layout_width="1340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_x="20dp"
+        android:layout_y="102dp"
+        android:gravity="center|left"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="产品名称 :"
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
+
+        <Spinner
+            android:id="@+id/stats_spinner"
+            android:layout_width="278dp"
+            android:layout_height="40dp"
+            android:background="@drawable/myspinner"
+            android:gravity="center"
+            android:popupBackground="@drawable/f_baisebiankuan"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="型号 :"
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/stats_tv1"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test2_2"
+            android:gravity="center"
+            android:text="QDX2-S13/30"
+            android:textColor="#000000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="测试日期 :"
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/stats_tv2"
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text=" "
+            android:textColor="#000000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="至"
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/stats_tv3"
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text=" "
+            android:textColor="#000000"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="测试台："
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#000"
+            android:textSize="22dp" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_y="156dp"
+        android:horizontalSpacing="14dp"
+        android:numColumns="5"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="149dp" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="1337dp"
+        android:layout_height="60dp"
+        android:layout_x="14dp"
+        android:layout_y="705dp">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/yellowkuan"
+            android:gravity="center"
+            android:text="3"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="序号"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="123dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="编号"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="217dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="完成时间"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="A相电流（A）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="B相电流（B）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="C相电流（C）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="串联电压（V）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="并联电压（V）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="启动时间（ms）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="断相时间（ms）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="13秒时间（ms）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="30秒时间（ms）"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="测试结论"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/greenkuan"
+            android:gravity="center"
+            android:text="测试人"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="253dp"
+        android:layout_x="0dp"
+        android:layout_y="765dp"
+        android:verticalScrollbarPosition="left"
+        android:paddingLeft="14dp"
+        android:scrollbarStyle="insideInset"
+        android:paddingRight="14dp"
+        android:scrollbarThumbVertical="@drawable/guntiaoshixiao"
+        android:scrollbarTrackVertical="@color/yellow"
+        android:scrollbarSize="50dp"
+        android:divider="#00000000"
+        android:dividerHeight="0dp"
+        android:scrollbarFadeDuration="0"
+        android:fadeScrollbars="false"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="723dp" />
 </AbsoluteLayout>
