@@ -10,8 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ErrorAnalysis"></activity>
-        <activity android:name=".NumberQueryParticular" />
+        <activity android:name=".QueryResult"></activity>
+        <activity android:name=".DateQuery" />
         <activity android:name=".NumberQuery" />
         <activity android:name=".Stats" />
         <activity android:name=".Setting" />

@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
 //        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
 //
 //        Timer timer = new Timer();
