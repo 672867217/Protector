@@ -119,7 +119,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
             holder.item1Title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(getApplicationContext(),NumberQueryParticular.class));
+                    startActivity(new Intent(getApplicationContext(),QueryResult.class));
                 }
             });
         }

@@ -54,6 +54,12 @@ public class ErrorAnalysis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error_analysis);
         initView();
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         List list = new ArrayList();
         List list2 = new ArrayList();
         list.add("");
@@ -61,37 +67,6 @@ public class ErrorAnalysis extends AppCompatActivity {
         list.add("");
         list.add("");
         list.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
         list2.add("");
         list2.add("");
         list2.add("");
