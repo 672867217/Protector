@@ -665,7 +665,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="50dp"
         android:layout_x="20dp"
-        android:layout_y="60dp"
+        android:layout_y="65dp"
         android:gravity="center|left"
         android:orientation="horizontal">
 
@@ -946,7 +946,7 @@
 
     <AbsoluteLayout
         android:layout_width="1320dp"
-        android:layout_height="500dp"
+        android:layout_height="495dp"
         android:layout_x="20dp"
         android:layout_y="473dp"
         android:background="@drawable/bg_ziseyuanjiao3"
@@ -1024,7 +1024,7 @@
                 android:text="电气特性"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26dp" />
+                android:textSize="24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1378,7 +1378,7 @@
                 android:text="时间特性"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26dp" />
+                android:textSize="24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1628,7 +1628,7 @@
                 android:text="绝缘电阻测试结果"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26dp" />
+                android:textSize="24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

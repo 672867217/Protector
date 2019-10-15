@@ -7,6 +7,47 @@
     android:background="#336799"
     tools:context=".DateQuery">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="1304dp"
+        android:layout_y="950dp"
+        android:text="页"
+        android:textColor="#ffffff"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/footer_tv3"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:layout_x="1255dp"
+        android:layout_y="945dp"
+        android:background="@drawable/f_baisebiankuan"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/footer_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="20dp"
+        android:layout_y="950dp"
+        android:text="统计 ：2019-6-12 至 2019-6-20 一测测试数量：656台，通过645台，未通过11台"
+        android:textColor="#ffffff"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/footer_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="1076dp"
+        android:layout_y="947dp"
+        android:text="共 10 页    第"
+        android:textColor="#ffffff"
+        android:textSize="32dp" />
+
     <LinearLayout
         android:layout_width="525dp"
         android:layout_height="30dp"
@@ -112,7 +153,7 @@
 
         <Spinner
             android:id="@+id/stats_spinner"
-            android:layout_width="291dp"
+            android:layout_width="280dp"
             android:layout_height="40dp"
             android:background="@drawable/myspinner"
             android:gravity="center"
@@ -129,7 +170,7 @@
 
         <TextView
             android:id="@+id/stats_tv1"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
