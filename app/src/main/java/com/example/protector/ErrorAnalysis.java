@@ -70,6 +70,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         errorlistitemAdapter = new ErrorlistitemAdapter(getApplicationContext(),list2);
         listView.setAdapter(errorlistitemAdapter);
+        listView.setEnabled(false);
         errorlistitemAdapter.notifyDataSetChanged();
     }
 
@@ -202,7 +203,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.errorlistitem, null);
+                convertView = layoutInflater.inflate(R.layout.errorlistitem, parent,false);
                 convertView.setTag(new ViewHolder(convertView));
             }
             initializeViews((String)getItem(position), (ViewHolder) convertView.getTag());

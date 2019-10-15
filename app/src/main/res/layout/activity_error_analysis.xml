@@ -379,21 +379,35 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="253dp"
-        android:layout_x="0dp"
-        android:layout_y="765dp"
-        android:verticalScrollbarPosition="left"
-        android:paddingLeft="14dp"
-        android:scrollbarStyle="insideInset"
-        android:paddingRight="14dp"
-        android:scrollbarThumbVertical="@drawable/guntiaoshixiao"
-        android:scrollbarTrackVertical="@color/yellow"
-        android:scrollbarSize="50dp"
+        android:layout_width="1302dp"
+        android:layout_height="196dp"
+        android:layout_x="64dp"
+        android:layout_y="764dp"
         android:divider="#00000000"
         android:dividerHeight="0dp"
-        android:scrollbarFadeDuration="0"
-        android:fadeScrollbars="false"
+        android:scrollbars="none"
+        android:paddingRight="14dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="723dp" />
+
+    <Button
+        android:id="@+id/up"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_x="14dp"
+        android:layout_y="765dp"
+        android:background="@drawable/shangjiantouyouxiao"
+        tools:layout_editor_absoluteX="-6dp"
+        tools:layout_editor_absoluteY="795dp" />
+
+    <Button
+        android:id="@+id/down"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_x="14dp"
+        android:layout_y="911dp"
+        android:background="@drawable/xiajiantouyouxiao"
+        tools:layout_editor_absoluteX="-6dp"
+        tools:layout_editor_absoluteY="795dp" />
+
 </AbsoluteLayout>

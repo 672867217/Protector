@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="1287dp"
-    android:layout_height="40dp">
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="1287dp"
+        android:minHeight="24.5dp"
+        android:layout_height="24.5dp">
+
 
     <TextView
         android:id="@+id/textView12"
@@ -146,5 +154,5 @@
         android:text="测试人"
         android:textSize="18sp"
         android:textStyle="bold" />
-
+    </LinearLayout>
 </LinearLayout>
