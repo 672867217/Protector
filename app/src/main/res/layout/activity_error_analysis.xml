@@ -206,7 +206,7 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="149dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="1337dp"
         android:layout_height="60dp"
         android:layout_x="14dp"
@@ -218,7 +218,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/yellowkuan"
             android:gravity="center"
-            android:text="3"
+            android:text="1"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -380,7 +380,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="1302dp"
-        android:layout_height="196dp"
+        android:layout_height="200dp"
         android:layout_x="64dp"
         android:layout_y="764dp"
         android:divider="#00000000"

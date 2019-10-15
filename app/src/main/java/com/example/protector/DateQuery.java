@@ -3,6 +3,8 @@ package com.example.protector;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +39,14 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
     private TextView footer_tv3;
     private TextView footer_tv1;
     private TextView footer_tv2;
-    private ImageView img_shang,img_xia;
+    private ImageView img_shang, img_xia;
     private ListView listview1;
     private ListView listview2;
 
     List list1 = new ArrayList();
     List list2 = new ArrayList();
-    DateQueryItemAdapter adapter1,adapter2;
-    private int page,index =36, shuliang = 200;
+    DateQueryItemAdapter adapter1, adapter2;
+    private int page, index = 36, shuliang = 200;
     private SimpleDateFormat dateFormat;
 
     @Override
@@ -55,64 +57,190 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
 
 
         dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-        for (int i = 0; i < 36; i++) {
+        for (int i = 0; i < shuliang; i++) {
             Bean bean = new Bean();
-            bean.number1 = "000"+(i+1);
-            bean.number2 = "8000000"+(i+1);
+            bean.number1 = "000" + (i + 1);
+            bean.number2 = "8000000" + (i + 1);
             bean.date = dateFormat.format(new Date());
             bean.result = "合格";
             bean.name = "柳铁信息";
             if (i < 18) {
                 list1.add(bean);
-            }else {
+            } else if (i>=18 && i<36){
                 list2.add(bean);
+            }else
+            {
+               break;
+            }
+            if (i == shuliang-1) {
+                for (int j = 0; j < 36 - shuliang % 36; j++) {
+                    bean = new Bean();
+                    bean.number1 = "";
+                    bean.number2 = "";
+                    bean.date = "";
+                    bean.result = "";
+                    bean.name = "";
+                    if (36 - shuliang % 36 -j > 18) {
+                        list1.add(bean);
+                    } else {
+                        list2.add(bean);
+                    }
+                }
             }
         }
-        adapter1 = new DateQueryItemAdapter(this,list1);
+        adapter1 = new DateQueryItemAdapter(this, list1);
         listview1.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();
-        adapter2 = new DateQueryItemAdapter(this,list2);
+        adapter2 = new DateQueryItemAdapter(this, list2);
         listview2.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
         // 进入页面根据数量默认显示
         if (shuliang > 36) {
-            img_shang.setBackgroundResource(R.drawable.shangjiantouhui);
-            img_xia.setBackgroundResource(R.drawable.xiajiantou);
-        }else {
-            img_shang.setBackgroundResource(R.drawable.shangjiantouhui);
-            img_xia.setBackgroundResource(R.drawable.xiajiantouhui);
+            img_shang.setImageResource(R.drawable.shangjiantouhui);
+            img_xia.setImageResource(R.drawable.xiajiantou);
+            img_shang.setEnabled(false);
+        } else {
+            img_shang.setImageResource(R.drawable.shangjiantouhui);
+            img_xia.setImageResource(R.drawable.xiajiantouhui);
+            img_shang.setEnabled(false);
+            img_xia.setEnabled(false);
         }
+        footer_tv3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!footer_tv3.getText().toString().equals("")){
+                    System.out.println(Integer.parseInt(footer_tv3.getText().toString()));
+                    if(shuliang % 36>Integer.parseInt(footer_tv3.getText().toString())){
+                        page = Integer.parseInt(footer_tv3.getText().toString())-1;
+                        list1.clear();
+                        list2.clear();
+                        for (int i = index * page; i < index * page + 36; i++) {
+                            if (i == shuliang) {
+                                for (int j = 0; j < 36 - shuliang % 36; j++) {
+                                    Bean bean = new Bean();
+                                    bean.number1 = "";
+                                    bean.number2 = "";
+                                    bean.date = "";
+                                    bean.result = "";
+                                    bean.name = "";
+                                    if (36 - shuliang % 36 -j> 18) {
+                                        list1.add(bean);
+                                    } else {
+                                        list2.add(bean);
+                                    }
+                                }
+                                return;
+                            } else {
+                                Bean bean = new Bean();
+                                bean.number1 = "000" + (i + 1);
+                                bean.number2 = "8000000" + (i + 1);
+                                bean.date = dateFormat.format(new Date());
+                                bean.result = "合格";
+                                bean.name = "柳铁信息";
+                                if (i < index * page + 18) {
+                                    list1.add(bean);
+                                } else if (i >= index * page + 18 && i < index * page + 36) {
+                                    list2.add(bean);
+                                }
+                            }
+                            adapter1.notifyDataSetChanged();
+                            adapter2.notifyDataSetChanged();
+                        }
+                    }
+                }
+
+            }
+        });
         //翻页点击逻辑
         page = 0;
         img_shang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              page = page-1;
+                if (page > 0) {
+                    if(page == 1){
+                        img_shang.setImageResource(R.drawable.shangjiantouhui);
+                        img_shang.setEnabled(false);
+                    }
+                    img_xia.setEnabled(true);
+                    img_xia.setImageResource(R.drawable.xiajiantou);
+                    page = page - 1;
+                    footer_tv3.setText(page+1+"");
+                    list1.clear();
+                    list2.clear();
+                    for (int i = index * page; i < index * page + 36; i++) {
+                        Bean bean = new Bean();
+                        bean.number1 = "000" + (i + 1);
+                        bean.number2 = "8000000" + (i + 1);
+                        bean.date = dateFormat.format(new Date());
+                        bean.result = "合格";
+                        bean.name = "柳铁信息";
+                        if (i < index * page + 18) {
+                            list1.add(bean);
+                        } else if (i >= index * page + 18 && i < index * page + 36) {
+                            list2.add(bean);
+                        }
+                        adapter1.notifyDataSetChanged();
+                        adapter2.notifyDataSetChanged();
+                    }
+                }
             }
         });
         img_xia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                page = page+1;
-                if (page > 0) {
-                    index = index*page;
-                }
-                list1.clear();
-                list2.clear();
-                for (int i = index; i < shuliang; i++) {
-                    Bean bean = new Bean();
-                    bean.number1 = "000"+(i+1);
-                    bean.number2 = "8000000"+(i+1);
-                    bean.date = dateFormat.format(new Date());
-                    bean.result = "合格";
-                    bean.name = "柳铁信息";
-                    if (i < index+18) {
-                        list1.add(bean);
-                    }else if (i>=index+18){
-                        list2.add(bean);
+
+                if (shuliang / 36 > page) {
+                    System.out.println(page+";;;;;;"+shuliang/36);
+                    if(page+1 == shuliang/36){
+                        img_xia.setImageResource(R.drawable.xiajiantouhui);
+                        img_xia.setEnabled(false);
                     }
-                    adapter1.notifyDataSetChanged();
-                    adapter2.notifyDataSetChanged();
+                    img_shang.setImageResource(R.drawable.shangjiantou);
+                    img_shang.setEnabled(true);
+                    page = page + 1;
+                    footer_tv3.setText(page+1+"");
+                    list1.clear();
+                    list2.clear();
+                    for (int i = index * page; i < index * page + 36; i++) {
+                        if (i == shuliang) {
+                            for (int j = 0; j < 36 - shuliang % 36; j++) {
+                                Bean bean = new Bean();
+                                bean.number1 = "";
+                                bean.number2 = "";
+                                bean.date = "";
+                                bean.result = "";
+                                bean.name = "";
+                                if (36 - shuliang % 36 -j> 18) {
+                                    list1.add(bean);
+                                } else {
+                                    list2.add(bean);
+                                }
+                            }
+                            return;
+                        } else {
+                            Bean bean = new Bean();
+                            bean.number1 = "000" + (i + 1);
+                            bean.number2 = "8000000" + (i + 1);
+                            bean.date = dateFormat.format(new Date());
+                            bean.result = "合格";
+                            bean.name = "柳铁信息";
+                            if (i < index * page + 18) {
+                                list1.add(bean);
+                            } else if (i >= index * page + 18 && i < index * page + 36) {
+                                list2.add(bean);
+                            }
+                        }
+                        adapter1.notifyDataSetChanged();
+                        adapter2.notifyDataSetChanged();
+                    }
                 }
             }
         });

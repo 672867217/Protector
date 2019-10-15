@@ -3,13 +3,16 @@ package com.example.protector;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -32,10 +35,14 @@ public class ErrorAnalysis extends AppCompatActivity {
     private TextView statsTv3;
     private TextView textView5;
     private TextView textView6;
+    private TextView textView11;
     private GridView gridView;
     private ListView listView;
+    private Button up,down;
+    private int page, index = 8, shuliang = 100;
     private ErroritemAdapter adapter;
     private ErrorlistitemAdapter errorlistitemAdapter;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,23 +55,33 @@ public class ErrorAnalysis extends AppCompatActivity {
             }
         });
         List list = new ArrayList();
-        List list2 = new ArrayList();
+        final List list2 = new ArrayList();
         list.add("");
         list.add("");
         list.add("");
         list.add("");
         list.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
-        list2.add("");
+        for (int i = 0; i < shuliang; i++) {
+            if(i==8){
+                break;
+            }
+            Particular particular = new Particular();
+            particular.id = String.format("%04d",i+1);
+            particular.number = String.format("%04d",i+1);
+            particular.time = dateFormat.format(new Date());
+            particular.a = "0.08";
+            particular.b = "0.16";
+            particular.c = "0.68";
+            particular.chuanlian = "1.08";
+            particular.binglian = "0.28";
+            particular.qidong = "0";
+            particular.duanxiang = "0";
+            particular.m13 = "21";
+            particular.m30 = "33";
+            particular.ceshi = "合格";
+            particular.man = "赵四";
+            list2.add(particular);
+        }
         adapter = new ErroritemAdapter(getApplicationContext(),list);
         gridView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -72,8 +89,127 @@ public class ErrorAnalysis extends AppCompatActivity {
         listView.setAdapter(errorlistitemAdapter);
         listView.setEnabled(false);
         errorlistitemAdapter.notifyDataSetChanged();
+        if (shuliang > 8) {
+            up.setBackgroundResource(R.drawable.shangjiantouhui);
+            down.setBackgroundResource(R.drawable.xiajiantou);
+            up.setEnabled(false);
+        } else {
+            up.setBackgroundResource(R.drawable.shangjiantouhui);
+            down.setBackgroundResource(R.drawable.xiajiantouhui);
+            up.setEnabled(false);
+            down.setEnabled(false);
+        }
+        page = 0;
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (page > 0) {
+                    if(page == 1){
+                        up.setBackgroundResource(R.drawable.shangjiantouhui);
+                        up.setEnabled(false);
+                    }
+                    down.setEnabled(true);
+                    down.setBackgroundResource(R.drawable.xiajiantou);
+                    page = page - 1;
+                    textView11.setText(page+1+"");
+                    list2.clear();
+                    for (int i = index * page; i < index * page + 8; i++) {
+                        Particular particular = new Particular();
+                        particular.id = String.format("%04d",i+1);
+                        particular.number = String.format("%04d",i+1);
+                        particular.time = dateFormat.format(new Date());
+                        particular.a = "0.08";
+                        particular.b = "0.16";
+                        particular.c = "0.68";
+                        particular.chuanlian = "1.08";
+                        particular.binglian = "0.28";
+                        particular.qidong = "0";
+                        particular.duanxiang = "0";
+                        particular.m13 = "21";
+                        particular.m30 = "33";
+                        particular.ceshi = "合格";
+                        particular.man = "赵四";
+                        list2.add(particular);
+                        errorlistitemAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (shuliang / 8 > page) {
+                    if(page+1 == shuliang/8){
+                        down.setBackgroundResource(R.drawable.xiajiantouhui);
+                        down.setEnabled(false);
+                    }
+                    up.setBackgroundResource(R.drawable.shangjiantou);
+                    up.setEnabled(true);
+                    page = page + 1;
+                    textView11.setText(page+1+"");
+                    list2.clear();
+                    for (int i = index * page; i < index * page + 8; i++) {
+                        if (i == shuliang) {
+                            for (int j = 0; j < 8 - shuliang % 8; j++) {
+                                Particular particular = new Particular();
+                                particular.id = String.format("%04d",i+1);
+                                particular.number = String.format("%04d",i+1);
+                                particular.time = dateFormat.format(new Date());
+                                particular.a = "0.08";
+                                particular.b = "0.16";
+                                particular.c = "0.68";
+                                particular.chuanlian = "1.08";
+                                particular.binglian = "0.28";
+                                particular.qidong = "0";
+                                particular.duanxiang = "0";
+                                particular.m13 = "21";
+                                particular.m30 = "33";
+                                particular.ceshi = "合格";
+                                particular.man = "赵四";
+                                list2.add(particular);
+                            }
+                            return;
+                        } else {
+                            Particular particular = new Particular();
+                            particular.id = String.format("%04d",i+1);
+                            particular.number = String.format("%04d",i+1);
+                            particular.time = dateFormat.format(new Date());
+                            particular.a = "0.08";
+                            particular.b = "0.16";
+                            particular.c = "0.68";
+                            particular.chuanlian = "1.08";
+                            particular.binglian = "0.28";
+                            particular.qidong = "0";
+                            particular.duanxiang = "0";
+                            particular.m13 = "21";
+                            particular.m30 = "33";
+                            particular.ceshi = "合格";
+                            particular.man = "赵四";
+                            list2.add(particular);
+                        }
+                        errorlistitemAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
     }
 
+    class Particular{
+        String id;
+        String number;
+        String time;
+        String a;
+        String b;
+        String c;
+        String chuanlian;
+        String binglian;
+        String qidong;
+        String duanxiang;
+        String m13;
+        String m30;
+        String ceshi;
+        String man;
+    }
     private void initView() {
         headerTv = (TextView) findViewById(R.id.header_tv);
         headerTv2 = (TextView) findViewById(R.id.header_tv2);
@@ -87,8 +223,11 @@ public class ErrorAnalysis extends AppCompatActivity {
         statsTv3 = (TextView) findViewById(R.id.stats_tv3);
         textView5 = (TextView) findViewById(R.id.textView5);
         textView6 = (TextView) findViewById(R.id.textView6);
+        textView11 = (TextView) findViewById(R.id.textView11);
         gridView = (GridView) findViewById(R.id.gridView);
         listView = (ListView) findViewById(R.id.listView);
+        up = (Button) findViewById(R.id.up);
+        down= (Button) findViewById(R.id.down);
     }
 
     public class ErroritemAdapter extends BaseAdapter {
@@ -174,7 +313,7 @@ public class ErrorAnalysis extends AppCompatActivity {
 
     public class ErrorlistitemAdapter extends BaseAdapter {
 
-        private List<String> objects = new ArrayList();
+        private List<Particular> objects = new ArrayList();
 
         private Context context;
         private LayoutInflater layoutInflater;
@@ -191,7 +330,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         }
 
         @Override
-        public String getItem(int position) {
+        public Particular getItem(int position) {
             return objects.get(position);
         }
 
@@ -206,12 +345,26 @@ public class ErrorAnalysis extends AppCompatActivity {
                 convertView = layoutInflater.inflate(R.layout.errorlistitem, parent,false);
                 convertView.setTag(new ViewHolder(convertView));
             }
-            initializeViews((String)getItem(position), (ViewHolder) convertView.getTag());
+            initializeViews((Particular)getItem(position), (ViewHolder) convertView.getTag());
             return convertView;
         }
 
-        private void initializeViews(String object, ViewHolder holder) {
+        private void initializeViews(Particular object, ViewHolder holder) {
             //TODO implement
+            holder.textView12.setText(object.id);
+            holder.textView13.setText(object.number);
+            holder.textView14.setText(object.time);
+            holder.textView15.setText(object.a);
+            holder.textView16.setText(object.b);
+            holder.textView17.setText(object.c);
+            holder.textView18.setText(object.chuanlian);
+            holder.textView19.setText(object.binglian);
+            holder.textView20.setText(object.qidong);
+            holder.textView21.setText(object.duanxiang);
+            holder.textView22.setText(object.m13);
+            holder.textView23.setText(object.m30);
+            holder.textView25.setText(object.ceshi);
+            holder.textView26.setText(object.man);
         }
 
         protected class ViewHolder {

@@ -34,7 +34,7 @@
             android:textColor="#ffffff"
             android:textSize="32dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/footer_tv3"
             android:layout_width="45dp"
             android:layout_height="50dp"
