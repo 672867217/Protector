@@ -1,5 +1,6 @@
 package com.example.protector;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -19,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -46,22 +50,37 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
     List list1 = new ArrayList();
     List list2 = new ArrayList();
     DateQueryItemAdapter adapter1, adapter2;
-    private int page, index = 36, shuliang = 600,num;
+    private int index=0, num36 = 36, shuliang = 0,page;
     private SimpleDateFormat dateFormat;
+    private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_query);
         initView();
+        dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        //spinner
+        List list = new ArrayList();
 
+        for (int i = 0; i < 5; i++) {
+            list.add(" 智能冗余型断相保护器"+(i+1));
+        }
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,list);
+        stats_spinner.setAdapter(arrayAdapter);
+
+        //表格适配器部分
+        adapter1 = new DateQueryItemAdapter(this, list1);
+        listview1.setAdapter(adapter1);
+        adapter2 = new DateQueryItemAdapter(this, list2);
+        listview2.setAdapter(adapter2);
+        //翻页逻辑
         if(shuliang%36==0){
-            num = shuliang/36;
+            page = shuliang/36;
         }else
         {
-            num = shuliang/36+1;
+            page = shuliang/36+1;
         }
-        dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
         footer_tv3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -73,39 +92,38 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!footer_tv3.getText().toString().equals("")){
-                    if(num>=Integer.parseInt(footer_tv3.getText().toString())
-                            && Integer.parseInt(footer_tv3.getText().toString())>0){
-                        page = Integer.parseInt(footer_tv3.getText().toString())-1;
+                if(!editable.toString().equals("")){
+                    if(page>=Integer.parseInt(editable.toString()) && Integer.parseInt(editable.toString())>0){
+                        index = Integer.parseInt(editable.toString())-1;
                         list1.clear();
                         list2.clear();
                         int a = 0;
-                        if(index * page + 36>shuliang){
+                        if(num36 * index + num36>shuliang){
                             a = shuliang;
                         }else{
-                            a = index * page + 36;
+                            a = num36 * index + num36;
                         }
-                        for (int i = index * page; i < a; i++) {
+                        for (int i = num36 * index; i < a; i++) {
                             Bean bean = new Bean();
                             bean.number1 = "000" + (i + 1);
                             bean.number2 = "8000000" + (i + 1);
                             bean.date = dateFormat.format(new Date());
                             bean.result = "合格";
                             bean.name = "柳铁信息";
-                            if (i < index * page + 18) {
+                            if (i < num36 * index + 18) {
                                 list1.add(bean);
-                            } else if (i >= index * page + 18 && i < index * page + 36) {
+                            } else if (i >= num36 * index + 18 && i < num36 * index + num36) {
                                 list2.add(bean);
                             }
-                            if (i == a-1 && a%36>0) {
-                                for (int j = 0; j < 36 - shuliang % 36; j++) {
+                            if (i == a-1 && a%num36 >0) {
+                                for (int j = 0; j < num36 - shuliang % num36; j++) {
                                     bean = new Bean();
                                     bean.number1 = "";
                                     bean.number2 = "";
                                     bean.date = "";
                                     bean.result = "";
                                     bean.name = "";
-                                    if (36 - shuliang % 36 -j> 18) {
+                                    if (num36 - shuliang % num36 -j> 18) {
                                         list1.add(bean);
                                     } else {
                                         list2.add(bean);
@@ -115,12 +133,12 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         }
                         adapter1.notifyDataSetChanged();
                         adapter2.notifyDataSetChanged();
-                        if(page+1 == num){
+                        if(index+1 == page){
                             img_xia.setImageResource(R.drawable.xiajiantouhui);
                             img_xia.setEnabled(false);
                             img_shang.setImageResource(R.drawable.shangjiantou);
                             img_shang.setEnabled(true);
-                        }else if(page == 0){
+                        }else if(index == 0){
                             img_shang.setImageResource(R.drawable.shangjiantouhui);
                             img_shang.setEnabled(false);
                             img_xia.setImageResource(R.drawable.xiajiantou);
@@ -133,47 +151,87 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                             img_xia.setEnabled(true);
                         }
                     }
-
                 }
             }
         });
-        adapter1 = new DateQueryItemAdapter(this, list1);
-        listview1.setAdapter(adapter1);
-        adapter2 = new DateQueryItemAdapter(this, list2);
-        listview2.setAdapter(adapter2);
         footer_tv3.setText("1");
-        //翻页点击逻辑
-        page = 0;
         img_shang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (page > 0) {
-                    if(page == 1){
+                if (index > 0) {
+                    if(index == 1){
                         img_shang.setImageResource(R.drawable.shangjiantouhui);
                         img_shang.setEnabled(false);
                     }
                     img_xia.setEnabled(true);
                     img_xia.setImageResource(R.drawable.xiajiantou);
-                    page = page - 1;
-                    footer_tv3.setText(page+1+"");
+                    index = index - 1;
+                    footer_tv3.setText(index+1+"");
                 }
             }
         });
         img_xia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (num > page+1) {
-                    page = page + 1;
-                    if(page+1 == num){
+                if (page > index+1) {
+                    index = index + 1;
+                    if(index+1 == page){
                         img_xia.setImageResource(R.drawable.xiajiantouhui);
                         img_xia.setEnabled(false);
                     }
                     img_shang.setImageResource(R.drawable.shangjiantou);
                     img_shang.setEnabled(true);
-                    footer_tv3.setText(page+1+"");
+                    footer_tv3.setText(index+1+"");
                 }
             }
         });
+        //选择测试日期段
+        calendar = Calendar.getInstance();
+        stats_tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(DateQuery.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String mymonth,myday;
+                        if (month+1 < 10) {
+                            mymonth = "0"+(month+1);
+                        } else {
+                            mymonth = String.valueOf(month+1);
+                        }
+                        if (dayOfMonth+1 < 10) {
+                            myday = "0"+(dayOfMonth+1);
+                        } else {
+                            myday = String.valueOf(dayOfMonth+1);
+                        }
+                        stats_tv2.setText(year+"-"+mymonth+"-"+myday);
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
+            }
+        });
+        stats_tv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(DateQuery.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String mymonth,myday;
+                        if (month+1 < 10) {
+                            mymonth = "0"+(month+1);
+                        } else {
+                            mymonth = String.valueOf(month+1);
+                        }
+                        if (dayOfMonth+1 < 10) {
+                            myday = "0"+(dayOfMonth+1);
+                        } else {
+                            myday = String.valueOf(dayOfMonth);
+                        }
+                        stats_tv3.setText(year+"-"+mymonth+"-"+myday);
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
+            }
+        });
+
     }
 
     private void initView() {

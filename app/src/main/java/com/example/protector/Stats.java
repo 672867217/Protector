@@ -45,7 +45,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         List list = new ArrayList();
 
         for (int i = 0; i < strings.length; i++) {
-            list.add(" 智能亢余型断相保护器"+(i+1));
+            list.add(" 智能冗余型断相保护器"+(i+1));
             Bean bean = new Bean();
             bean.name = strings[i];
             beanList.add(bean);
@@ -85,7 +85,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Stats.this, new DatePickerDialog.OnDateSetListener() {
+                new DatePickerDialog(Stats.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String mymonth,myday;
@@ -101,8 +101,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         }
                         stats_tv3.setText(year+"-"+mymonth+"-"+myday);
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK));
-                datePickerDialog.show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
             }
         });
 
