@@ -50,7 +50,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
     List list1 = new ArrayList();
     List list2 = new ArrayList();
     DateQueryItemAdapter adapter1, adapter2;
-    private int index=0, num36 = 36, shuliang = 0,page;
+    private int index=0, num36 = 36, shuliang = 100,page;
     private SimpleDateFormat dateFormat;
     private Calendar calendar;
 
@@ -81,6 +81,9 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         {
             page = shuliang/36+1;
         }
+        if(shuliang == 0){
+            init();
+        }
         footer_tv3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -95,6 +98,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 if(!editable.toString().equals("")){
                     if(page>=Integer.parseInt(editable.toString()) && Integer.parseInt(editable.toString())>0){
                         index = Integer.parseInt(editable.toString())-1;
+                        System.out.println("llllllllllllllllllllll");
                         list1.clear();
                         list2.clear();
                         int a = 0;
@@ -133,11 +137,16 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         }
                         adapter1.notifyDataSetChanged();
                         adapter2.notifyDataSetChanged();
-                        if(index+1 == page){
+                        if(index+1 == page && index>0){
                             img_xia.setImageResource(R.drawable.xiajiantouhui);
                             img_xia.setEnabled(false);
                             img_shang.setImageResource(R.drawable.shangjiantou);
                             img_shang.setEnabled(true);
+                        }else if (index+1 == page && index==0) {
+                            img_xia.setImageResource(R.drawable.xiajiantouhui);
+                            img_xia.setEnabled(false);
+                            img_shang.setImageResource(R.drawable.shangjiantouhui);
+                            img_shang.setEnabled(false);
                         }else if(index == 0){
                             img_shang.setImageResource(R.drawable.shangjiantouhui);
                             img_shang.setEnabled(false);
@@ -232,6 +241,25 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
             }
         });
 
+    }
+    private void init(){
+        img_shang.setImageResource(R.drawable.shangjiantouhui);
+        img_shang.setEnabled(false);
+        img_xia.setImageResource(R.drawable.xiajiantouhui);
+        img_xia.setEnabled(false);
+        for (int j = 0; j < 36; j++) {
+            Bean bean = new Bean();
+            bean.number1 = "";
+            bean.number2 = "";
+            bean.date = "";
+            bean.result = "";
+            bean.name = "";
+            if (j< 18) {
+                list1.add(bean);
+            } else {
+                list2.add(bean);
+            }
+        }
     }
 
     private void initView() {
