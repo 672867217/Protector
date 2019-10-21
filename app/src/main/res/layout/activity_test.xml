@@ -131,7 +131,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="测试日期 :"
+                    android:text="数据保存 :"
                     android:textColor="#000"
                     android:textSize="14sp" />
 
@@ -156,7 +156,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="生  产  厂  :"
+                    android:text="生  产  厂 :"
                     android:textColor="#000"
                     android:textSize="14sp" />
 
@@ -179,7 +179,7 @@
 
                 <Spinner
                     android:id="@+id/chanpin_spinner3"
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/myspinner"
                     android:gravity="center"
