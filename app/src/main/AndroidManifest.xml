@@ -14,6 +14,7 @@
         <activity android:name=".DateQuery" />
         <activity android:name=".NumberQuery" />
         <activity android:name=".Stats" />
+        <activity android:name=".Test" />
         <activity android:name=".Setting" />
         <activity android:name=".ErrorAnalysis" />
         <activity android:name=".MainActivity">

@@ -39,7 +39,6 @@ public class SerialPortUtil {
             inputStream = serialPort.getInputStream();
             outputStream = serialPort.getOutputStream();
             isStart = true;
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,13 +106,12 @@ public class SerialPortUtil {
                     int size = inputStream.read(readData);
                     if (size > 0) {
                         String readString2 = new String(readData).trim();
-                        Log.d("aaaaaaaaaaa",readString2);
+                        Log.d("aaa接收到了：",readString2);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 

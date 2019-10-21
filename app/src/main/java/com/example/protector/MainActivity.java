@@ -1,31 +1,19 @@
 package com.example.protector;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.protector.util.DataUtils;
 import com.example.protector.util.SerialPortUtil;
-
-import java.nio.Buffer;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import android_serialport_api.SerialPortFinder;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
@@ -38,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private SerialPortUtil utils = new SerialPortUtil();
     private byte[] mBuffer;
+    public  char strChar;
+    DataUtils dataUtils = new DataUtils();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
-        utils.openSerialPort();
+//        utils.openSerialPort();
+
+        System.out.println("0xAA 0x00 0xFF 0x20 0x05 转换后：");
+
+
         //串口数据监听事件
 //        utils.setOnDataReceiveListener(new SerialPortUtils.OnDataReceiveListener() {
 //            @Override
