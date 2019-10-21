@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
-//        utils.openSerialPort();
+        utils.openSerialPort();
         for (int i = 0; i < 30; i++) {
             List<String> strings = dataUtils.getDivLines("AA00FF1049020100C804C4B8D20404008000E600F200F400FC00F1008E0CE90FF3F7080CF5371724094C0A3C0B18008800EC00F500E605190BD1040105E904DF03A203B103C3047E04E104220334",2);
             if(strings.get(3).equals("10")){
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
         List<TestData> list = DataSupport.findAll(TestData.class);
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getAjiwucha());
+            System.out.println(list.get(i).getCecheng()+"..."+(i+1));
         }
         //串口数据监听事件
 //        utils.setOnDataReceiveListener(new SerialPortUtils.OnDataReceiveListener() {

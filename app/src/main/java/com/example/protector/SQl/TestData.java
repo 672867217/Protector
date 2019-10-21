@@ -2,54 +2,55 @@ package com.example.protector.SQl;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TestData extends DataSupport {
+public class TestData extends DataSupport implements Serializable {
     private int id;
     private Date date;//时间
-    private String gongwei;//工位
-    private String cecheng;//测程
-    private String ceshishichang;//测试时长
-    private String chanpinbianma;//产品编码
-    private String ajiguzhang;//A机故障测试结果
-    private String bjiguzhang;//B机故障测试结果
-    private String baojin;//报警状态
-    private String xianquanchuanlian1;//线圈串联电压1
-    private String xianquanchuanlian2;//线圈串联电压2
-    private String xianquanchuanlian3;//线圈串联电压3
-    private String xianquanchuanlian4;//线圈串联电压4
-    private String xianquanchuanlian5;//线圈串联电压5
-    private String xianquanbinglian;//线圈并联电压
-    private String ajiwucha;//A机驱动电压误差值
-    private String bjiwucha;//B机驱动电压误差值
-    private String axiangawucha;//A机A相电流误差值
-    private String axiangbwucha;//A机B相电流误差值
-    private String axiangcwucha;//A机C相电流误差值
-    private String bxiangawucha;//B机A相电流误差值
-    private String bxiangbwucha;//B机B相电流误差值
-    private String bxiangcwucha;//B机C相电流误差值
-    private String aduanxiangdianya;//A相断相后驱动电压
-    private String bduanxiangdianya;//B相断相后驱动电压
-    private String cduanxiangdianya;//C相断相后驱动电压
-    private String axiangceyajiang;//A相一次侧压降
-    private String bxiangceyajiang;//B相一次侧压降
-    private String cxiangceyajiang;//C相一次侧压降
-    private String qidongshijian;//启动时间
-    private String aduanxiangxiangying;//A相断相响应时间
-    private String bduanxiangxiangying;//B相断相响应时间
-    private String cduanxiangxiangying;//C相断相响应时间
-    private String m13xianshishijian;//13秒限时时间
-    private String m30xianshishijian;//30秒限时时间
-    private String abxiangjianjueyuan;//AB相间绝缘电阻
-    private String acxiangjianjueyuan;//AC相间绝缘电阻
-    private String bcxiangjianjueyuan;//BC相间绝缘电阻
-    private String axiangduidijueyuan;//A相对地绝缘电阻
-    private String bxiangduidijueyuan;//B相对地绝缘电阻
-    private String cxiangduidijueyuan;//C相对地绝缘电阻
-    private String axiangduixianquanjueyuan;//A相对线圈绝缘电阻
-    private String bxiangduixianquanjueyuan;//B相对线圈绝缘电阻
-    private String cxiangduixianquanjeuyuan;//C相对线圈绝缘电阻
-    private String xianquanduidijueyuan;//线圈对地绝缘电阻
+    private String gongwei = "";//工位
+    private String cecheng = "";//测程
+    private String ceshishichang = "";//测试时长
+    private String chanpinbianma = "";//产品编码
+    private String ajiguzhang = "";//A机故障测试结果
+    private String bjiguzhang = "";//B机故障测试结果
+    private String baojin = "";//报警状态
+    private String xianquanchuanlian1 = "";//线圈串联电压1
+    private String xianquanchuanlian2 = "";//线圈串联电压2
+    private String xianquanchuanlian3 = "";//线圈串联电压3
+    private String xianquanchuanlian4 = "";//线圈串联电压4
+    private String xianquanchuanlian5 = "";//线圈串联电压5
+    private String xianquanbinglian = "";//线圈并联电压
+    private String ajiwucha = "";//A机驱动电压误差值
+    private String bjiwucha = "";//B机驱动电压误差值
+    private String axiangawucha = "";//A机A相电流误差值
+    private String axiangbwucha = "";//A机B相电流误差值
+    private String axiangcwucha = "";//A机C相电流误差值
+    private String bxiangawucha = "";//B机A相电流误差值
+    private String bxiangbwucha = "";//B机B相电流误差值
+    private String bxiangcwucha = "";//B机C相电流误差值
+    private String aduanxiangdianya = "";//A相断相后驱动电压
+    private String bduanxiangdianya = "";//B相断相后驱动电压
+    private String cduanxiangdianya = "";//C相断相后驱动电压
+    private String axiangceyajiang = "";//A相一次侧压降
+    private String bxiangceyajiang = "";//B相一次侧压降
+    private String cxiangceyajiang = "";//C相一次侧压降
+    private String qidongshijian = "";//启动时间
+    private String aduanxiangxiangying = "";//A相断相响应时间
+    private String bduanxiangxiangying = "";//B相断相响应时间
+    private String cduanxiangxiangying = "";//C相断相响应时间
+    private String m13xianshishijian = "";//13秒限时时间
+    private String m30xianshishijian = "";//30秒限时时间
+    private String abxiangjianjueyuan = "";//AB相间绝缘电阻
+    private String acxiangjianjueyuan = "";//AC相间绝缘电阻
+    private String bcxiangjianjueyuan = "";//BC相间绝缘电阻
+    private String axiangduidijueyuan = "";//A相对地绝缘电阻
+    private String bxiangduidijueyuan = "";//B相对地绝缘电阻
+    private String cxiangduidijueyuan = "";//C相对地绝缘电阻
+    private String axiangduixianquanjueyuan = "";//A相对线圈绝缘电阻
+    private String bxiangduixianquanjueyuan = "";//B相对线圈绝缘电阻
+    private String cxiangduixianquanjeuyuan = "";//C相对线圈绝缘电阻
+    private String xianquanduidijueyuan = "";//线圈对地绝缘电阻
 
     public Date getDate() {
         return date;
