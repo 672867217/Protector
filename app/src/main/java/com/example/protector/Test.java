@@ -32,6 +32,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.example.protector.util.DataUtils;
+
 public class Test extends AppCompatActivity implements View.OnClickListener {
 
     private TextView header_tv;
@@ -54,7 +56,15 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         initView();
+        String data = "AA00FF1049020100C804C4B8D20404008000E600F200F400FC00F1008E0CE90FF3F7080CF5371724094C0A3C0B18008800EC00F500E605190BD1040105E904DF03A203B103C3047E04E104220334";
 
+        List<String> dataList = new ArrayList<>();
+        for (int i = 0; i < data.length(); i++) {
+            dataList = new DataUtils().getDivLines(data,2);
+        }
+        for (int i = 0; i < dataList.size(); i++) {
+            System.out.println("这是第"+i+"条："+dataList.get(i));
+        }
         for (int i = 0; i < 5; i++) {
             if (i < 4) {
                 Bean1 bean1 = new Bean1();

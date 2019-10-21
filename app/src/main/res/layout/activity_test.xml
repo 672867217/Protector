@@ -71,7 +71,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_x="0"
+                android:layout_x="0dp"
                 android:layout_y="200dp"
                 android:gravity="center|left"
                 android:orientation="horizontal">
@@ -123,7 +123,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_x="0"
+                android:layout_x="0dp"
                 android:layout_y="155dp"
                 android:gravity="center|left"
                 android:orientation="horizontal">

@@ -85,7 +85,7 @@ public class DataUtils {
      * @param length      指定的长度
      * @return
      */
-    public static List<String> getDivLines(String inputString, int length) {
+    public static List<String>  getDivLines(String inputString, int length) {
         List<String> divList = new ArrayList<>();
         int remainder = (inputString.length()) % length;
         // 一共要分割成几段
@@ -100,6 +100,7 @@ public class DataUtils {
         }
         return divList;
     }
+
 
     /**
      * 计算长度，两个字节长度
