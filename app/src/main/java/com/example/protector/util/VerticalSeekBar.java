@@ -31,7 +31,7 @@ public class VerticalSeekBar extends SeekBar {
     }
 
     @Override
-    protected synchronized void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas) {
         canvas.rotate(-90);
         canvas.translate(-getHeight(),0);
         super.onDraw(canvas);

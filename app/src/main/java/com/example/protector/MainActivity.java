@@ -1,5 +1,6 @@
 package com.example.protector;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,15 +9,23 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.protector.util.SerialPortUtil;
+
+import java.nio.Buffer;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import android_serialport_api.SerialPortFinder;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
@@ -27,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button6;
     private Button button5;
     private SharedPreferences.Editor editor;
-
+    private SerialPortUtil utils = new SerialPortUtil();
+    private byte[] mBuffer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +49,20 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
+        utils.openSerialPort();
+        //串口数据监听事件
+//        utils.setOnDataReceiveListener(new SerialPortUtils.OnDataReceiveListener() {
+//            @Override
+//            public void onDataReceive(byte[] buffer, int size) {
+//                //
+//                //在线程中直接操作UI会报异常：ViewRootImpl$CalledFromWrongThreadException
+//                //解决方法：handler
+//                //
+//                mBuffer = buffer;
+//                Toast.makeText(MainActivity.this, "size："+ String.valueOf(mBuffer.length)+"数据监听："+ new String(mBuffer), Toast.LENGTH_SHORT).show();
+//                System.out.println( new String(mBuffer));
+//            }
+//        });
         //设置页
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,5 +200,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,Stats.class));
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        utils.closeSerialPort();
     }
 }
