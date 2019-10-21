@@ -1,19 +1,33 @@
 package com.example.protector;
 
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.protector.util.DataUtils;
 import com.example.protector.util.SerialPortUtil;
+
+import java.nio.Buffer;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android_serialport_api.SerialPortFinder;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
