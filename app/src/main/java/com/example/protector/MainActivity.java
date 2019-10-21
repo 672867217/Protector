@@ -20,10 +20,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.protector.SQl.TestData;
 import com.example.protector.util.DataUtils;
 import com.example.protector.util.SerialPortUtil;
 
+import org.litepal.crud.DataSupport;
+
 import java.nio.Buffer;
+import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private byte[] mBuffer;
     public  char strChar;
     DataUtils dataUtils = new DataUtils();
-
+    TestData testData ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +60,61 @@ public class MainActivity extends AppCompatActivity {
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
 //        utils.openSerialPort();
-
-        System.out.println("0xAA 0x00 0xFF 0x20 0x05 转换后：");
-
-
+        for (int i = 0; i < 30; i++) {
+            List<String> strings = dataUtils.getDivLines("AA00FF1049020100C804C4B8D20404008000E600F200F400FC00F1008E0CE90FF3F7080CF5371724094C0A3C0B18008800EC00F500E605190BD1040105E904DF03A203B103C3047E04E104220334",2);
+            if(strings.get(3).equals("10")){
+                testData = new TestData();
+                testData.setDate(new Date());
+                testData.setGongwei(new DataUtils().HexToInt(strings.get(5))+"");
+                testData.setCecheng(new DataUtils().HexToInt(strings.get(6))+"");
+                testData.setCeshishichang(new DataUtils().HexToInt(strings.get(7)+strings.get(8))+"");
+                testData.setChanpinbianma(new DataUtils().HexToInt(strings.get(9)+strings.get(10)+strings.get(11)+strings.get(12))+"");
+                            /*testData.setAjiguzhang(new DataUtils().HexToInt(strings.get(5))+"");
+                            testData.setBjiguzhang(new DataUtils().HexToInt(strings.get(5))+"");
+                            testData.setBaojin(new DataUtils().HexToInt(strings.get(5))+"");*/
+                testData.setXianquanchuanlian1(new DataUtils().HexToInt(strings.get(17)+strings.get(18))+"");
+                testData.setXianquanchuanlian2(new DataUtils().HexToInt(strings.get(19)+strings.get(20))+"");
+                testData.setXianquanchuanlian3(new DataUtils().HexToInt(strings.get(21)+strings.get(22))+"");
+                testData.setXianquanchuanlian4(new DataUtils().HexToInt(strings.get(23)+strings.get(24))+"");
+                testData.setXianquanchuanlian5(new DataUtils().HexToInt(strings.get(25)+strings.get(26))+"");
+                testData.setXianquanbinglian(new DataUtils().HexToInt(strings.get(27)+strings.get(28))+"");
+                testData.setAjiwucha(new DataUtils().HexToInt(strings.get(29))+"");
+                testData.setBjiwucha(new DataUtils().HexToInt(strings.get(30))+"");
+                testData.setAxiangawucha(new DataUtils().HexToInt(strings.get(31))+"");
+                testData.setAxiangbwucha(new DataUtils().HexToInt(strings.get(32))+"");
+                testData.setAxiangcwucha(new DataUtils().HexToInt(strings.get(33))+"");
+                testData.setBxiangawucha(new DataUtils().HexToInt(strings.get(34))+"");
+                testData.setBxiangbwucha(new DataUtils().HexToInt(strings.get(35))+"");
+                testData.setBxiangcwucha(new DataUtils().HexToInt(strings.get(36))+"");
+                testData.setAduanxiangdianya(new DataUtils().HexToInt(strings.get(37))+"");
+                testData.setBduanxiangdianya(new DataUtils().HexToInt(strings.get(38))+"");
+                testData.setCduanxiangdianya(new DataUtils().HexToInt(strings.get(39))+"");
+                testData.setAxiangceyajiang(new DataUtils().HexToInt(strings.get(40)+strings.get(41))+"");
+                testData.setBxiangceyajiang(new DataUtils().HexToInt(strings.get(42)+strings.get(43))+"");
+                testData.setCxiangceyajiang(new DataUtils().HexToInt(strings.get(44)+strings.get(45))+"");
+                testData.setQidongshijian(new DataUtils().HexToInt(strings.get(46)+strings.get(47))+"");
+                testData.setAduanxiangxiangying(new DataUtils().HexToInt(strings.get(48)+strings.get(49))+"");
+                testData.setBduanxiangxiangying(new DataUtils().HexToInt(strings.get(50)+strings.get(51))+"");
+                testData.setCduanxiangxiangying(new DataUtils().HexToInt(strings.get(52)+strings.get(53))+"");
+                testData.setM13xianshishijian(new DataUtils().HexToInt(strings.get(54)+strings.get(55))+"");
+                testData.setM30xianshishijian(new DataUtils().HexToInt(strings.get(56)+strings.get(57))+"");
+                testData.setAbxiangjianjueyuan(new DataUtils().HexToInt(strings.get(58)+strings.get(59))+"");
+                testData.setAcxiangjianjueyuan(new DataUtils().HexToInt(strings.get(60)+strings.get(61))+"");
+                testData.setBcxiangjianjueyuan(new DataUtils().HexToInt(strings.get(62)+strings.get(63))+"");
+                testData.setAxiangduidijueyuan(new DataUtils().HexToInt(strings.get(64)+strings.get(65))+"");
+                testData.setBxiangduidijueyuan(new DataUtils().HexToInt(strings.get(66)+strings.get(67))+"");
+                testData.setCxiangduidijueyuan(new DataUtils().HexToInt(strings.get(68)+strings.get(69))+"");
+                testData.setAxiangduixianquanjueyuan(new DataUtils().HexToInt(strings.get(70)+strings.get(71))+"");
+                testData.setBxiangduixianquanjueyuan(new DataUtils().HexToInt(strings.get(72)+strings.get(73))+"");
+                testData.setCxiangduixianquanjeuyuan(new DataUtils().HexToInt(strings.get(74)+strings.get(75))+"");
+                testData.setXianquanduidijueyuan(new DataUtils().HexToInt(strings.get(76)+strings.get(77))+"");
+                testData.save();
+            }
+        }
+        List<TestData> list = DataSupport.findAll(TestData.class);
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getAjiwucha());
+        }
         //串口数据监听事件
 //        utils.setOnDataReceiveListener(new SerialPortUtils.OnDataReceiveListener() {
 //            @Override

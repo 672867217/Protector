@@ -2,8 +2,11 @@ package com.example.protector.SQl;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.Date;
+
 public class TestData extends DataSupport {
     private int id;
+    private Date date;//时间
     private String gongwei;//工位
     private String cecheng;//测程
     private String ceshishichang;//测试时长
@@ -47,6 +50,14 @@ public class TestData extends DataSupport {
     private String bxiangduixianquanjueyuan;//B相对线圈绝缘电阻
     private String cxiangduixianquanjeuyuan;//C相对线圈绝缘电阻
     private String xianquanduidijueyuan;//线圈对地绝缘电阻
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public int getId() {
         return id;
