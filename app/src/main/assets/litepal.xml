@@ -2,9 +2,11 @@
 <litepal>
     <dbname value="demo" ></dbname>
 
-    <version value="2" ></version>
+    <version value="3" ></version>
     <list>
         <mapping class="com.example.protector.SQl.XiuGai"></mapping>
         <mapping class="com.example.protector.SQl.TestData"></mapping>
+        <mapping class="com.example.protector.SQl.Operator"></mapping>
+        <mapping class="com.example.protector.SQl.ProductType"></mapping>
     </list>
 </litepal>

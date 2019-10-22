@@ -137,6 +137,7 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
     }
 
     private void initView() {
+        //xsacsdc
         test_item2_tv = (TextView) findViewById(R.id.test_item2_tv);
         textView13 = (TextView) findViewById(R.id.textView13);
         result_tv8 = (TextView) findViewById(R.id.result_tv8);

@@ -6,6 +6,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TestData extends DataSupport implements Serializable {
+    //测试数据表
+    //---------------------------
+
+
     private int id;
     private Date date;//时间
     private String gongwei = "";//工位

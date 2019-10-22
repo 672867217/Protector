@@ -142,11 +142,10 @@
                 android:layout_width="242dp"
                 android:layout_height="30dp"
                 android:layout_x="156dp"
+                android:paddingLeft="5dp"
                 android:layout_y="65dp"
-                android:gravity="center"
-                android:text="QDX2-S13/30"
-                android:textColor="#000"
                 android:background="@drawable/f_yuanjiaotouming"
+                android:textColor="#000"
                 android:textSize="22sp" />
 
             <TextView
@@ -155,17 +154,17 @@
                 android:layout_height="30dp"
                 android:layout_x="154dp"
                 android:layout_y="112dp"
+                android:paddingLeft="5dp"
                 android:background="@drawable/f_yuanjiaotouming"
-                android:gravity="center"
-                android:text="柳州承天科技有限公司"
                 android:textColor="#000"
                 android:textSize="22sp" />
 
             <LinearLayout
-                android:layout_width="403dp"
+                android:layout_width="match_parent"
                 android:layout_height="58dp"
-                android:layout_x="33dp"
+                android:layout_x="0dp"
                 android:layout_y="191dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteX="122dp"
                 tools:layout_editor_absoluteY="210dp">
@@ -284,9 +283,8 @@
                 android:layout_x="220dp"
                 android:layout_y="64dp"
                 android:background="@drawable/f_yuanjiaotouming"
-                android:gravity="center"
-                android:text="133"
                 android:textColor="#000"
+                android:paddingLeft="5dp"
                 android:textSize="22sp" />
 
             <TextView
@@ -296,16 +294,16 @@
                 android:layout_x="220dp"
                 android:layout_y="112dp"
                 android:background="@drawable/f_yuanjiaotouming"
-                android:gravity="center"
-                android:text="男"
                 android:textColor="#000"
+                android:paddingLeft="5dp"
                 android:textSize="22sp" />
 
             <LinearLayout
-                android:layout_width="403dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_x="31dp"
-                android:layout_y="208dp"
+                android:layout_x="0dp"
+                android:layout_y="206dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
@@ -950,10 +948,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="403dp"
+                android:layout_width="match_parent"
                 android:layout_height="59dp"
-                android:layout_x="21dp"
+                android:layout_x="0dp"
                 android:layout_y="604dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="544dp">

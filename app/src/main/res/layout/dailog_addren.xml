@@ -50,6 +50,8 @@
                     android:id="@+id/editText"
                     android:layout_width="133dp"
                     android:layout_height="29dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="#000"
                     android:background="@drawable/dialog_test2_2"
                     android:ems="10" />
             </LinearLayout>
@@ -74,6 +76,7 @@
                     android:id="@+id/spinner1"
                     android:layout_width="133dp"
                     android:layout_height="29dp"
+                    
                     android:background="@drawable/sprinner"
                     android:ems="10" />
             </LinearLayout>

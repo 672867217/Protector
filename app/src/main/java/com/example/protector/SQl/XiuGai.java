@@ -4,6 +4,8 @@ package com.example.protector.SQl;
 import org.litepal.crud.DataSupport;
 
 public class XiuGai extends DataSupport {
+    //设置参数表
+    //---------------------------
     private int id;
     private String qidong ="150";
     private String duanxiang ="250";
