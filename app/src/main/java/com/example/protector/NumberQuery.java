@@ -85,7 +85,6 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 for (int i = 0; i < data.size(); i++) {
                     System.out.println(data.get(i).getChanpinbianma()+"..."+chanpinbianhao.getText().toString().trim());
                     if (data.get(i).getChanpinbianma().equals(chanpinbianhao.getText().toString().trim())) {
-                        System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
                         if (data.get(i).getCecheng().equals("1")) {
                             list.add(data.get(i));
                         } else if (data.get(i).getCecheng().equals("2")) {
@@ -208,7 +207,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 holder.item1Tv9.setText("");
                 holder.item1Tv10.setText(arr2[arr2.length-1]+"");
                 holder.item1Tv11.setText(arr3[arr3.length-1]+"");
-                holder.item1Tv12.setText(arr4[arr4.length-1]+"");
+                holder.item1Tv12.setText(arr4[0]+"");
                 holder.item1Tv13.setText("");
                 holder.item1Tv14.setText("");
             }

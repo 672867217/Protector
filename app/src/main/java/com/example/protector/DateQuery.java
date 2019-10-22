@@ -3,20 +3,24 @@ package com.example.protector;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,29 +32,29 @@ import java.util.List;
 
 public class DateQuery extends AppCompatActivity implements View.OnClickListener {
 
+    private TextView footer_tv1;
+    private TextView footer_tv2;
+    private EditText footer_tv3;
+    private AbsoluteLayout layout_footer;
     private TextView header_tv;
     private TextView header_tv2;
     private TextView header_tv3;
     private TextView header_tv4;
-    private Button btn_dayin;
+    private Button btn_chaxuan;
     private Button btn_cancel;
     private Spinner stats_spinner;
     private TextView stats_tv1;
     private TextView stats_tv2;
     private TextView stats_tv3;
-    private TextView textView5;
-    private TextView textView6;
-    private TextView footer_tv3;
-    private TextView footer_tv1;
-    private TextView footer_tv2;
-    private ImageView img_shang, img_xia;
+    private TextView tv_cecheng;
     private ListView listview1;
     private ListView listview2;
-
+    private ImageView img_shang;
+    private ImageView img_xia;
     List list1 = new ArrayList();
     List list2 = new ArrayList();
     DateQueryItemAdapter adapter1, adapter2;
-    private int index=0, num36 = 36, shuliang = 100,page;
+    private int index = 0, num36 = 36, shuliang = 0, page;
     private SimpleDateFormat dateFormat;
     private Calendar calendar;
 
@@ -59,14 +63,30 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_query);
         initView();
+        SharedPreferences preferences = getSharedPreferences("cecheng",0);
+        switch (Integer.parseInt(preferences.getString("what","1"))) {
+            case 0:
+                tv_cecheng.setText("其他");
+                break;
+            case 1:
+                tv_cecheng.setText("一测");
+                break;
+            case 2:
+                tv_cecheng.setText("二测");
+                break;
+            case 3:
+                tv_cecheng.setText("三测");
+                break;
+        }
+
         dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
         //spinner
         List list = new ArrayList();
 
         for (int i = 0; i < 5; i++) {
-            list.add(" 智能冗余型断相保护器"+(i+1));
+            list.add(" 智能冗余型断相保护器" + (i + 1));
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
         stats_spinner.setAdapter(arrayAdapter);
 
         //表格适配器部分
@@ -75,13 +95,12 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         adapter2 = new DateQueryItemAdapter(this, list2);
         listview2.setAdapter(adapter2);
         //翻页逻辑
-        if(shuliang%36==0){
-            page = shuliang/36;
-        }else
-        {
-            page = shuliang/36+1;
+        if (shuliang % 36 == 0) {
+            page = shuliang / 36;
+        } else {
+            page = shuliang / 36 + 1;
         }
-        if(shuliang == 0){
+        if (shuliang == 0) {
             init();
         }
         footer_tv3.addTextChangedListener(new TextWatcher() {
@@ -95,16 +114,15 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!editable.toString().equals("")){
-                    if(page>=Integer.parseInt(editable.toString()) && Integer.parseInt(editable.toString())>0){
-                        index = Integer.parseInt(editable.toString())-1;
-                        System.out.println("llllllllllllllllllllll");
+                if (!editable.toString().equals("")) {
+                    if (page >= Integer.parseInt(editable.toString()) && Integer.parseInt(editable.toString()) > 0) {
+                        index = Integer.parseInt(editable.toString()) - 1;
                         list1.clear();
                         list2.clear();
                         int a = 0;
-                        if(num36 * index + num36>shuliang){
+                        if (num36 * index + num36 > shuliang) {
                             a = shuliang;
-                        }else{
+                        } else {
                             a = num36 * index + num36;
                         }
                         for (int i = num36 * index; i < a; i++) {
@@ -119,7 +137,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                             } else if (i >= num36 * index + 18 && i < num36 * index + num36) {
                                 list2.add(bean);
                             }
-                            if (i == a-1 && a%num36 >0) {
+                            if (i == a - 1 && a % num36 > 0) {
                                 for (int j = 0; j < num36 - shuliang % num36; j++) {
                                     bean = new Bean();
                                     bean.number1 = "";
@@ -127,7 +145,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                                     bean.date = "";
                                     bean.result = "";
                                     bean.name = "";
-                                    if (num36 - shuliang % num36 -j> 18) {
+                                    if (num36 - shuliang % num36 - j > 18) {
                                         list1.add(bean);
                                     } else {
                                         list2.add(bean);
@@ -137,23 +155,22 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         }
                         adapter1.notifyDataSetChanged();
                         adapter2.notifyDataSetChanged();
-                        if(index+1 == page && index>0){
+                        if (index + 1 == page && index > 0) {
                             img_xia.setImageResource(R.drawable.xiajiantouhui);
                             img_xia.setEnabled(false);
                             img_shang.setImageResource(R.drawable.shangjiantou);
                             img_shang.setEnabled(true);
-                        }else if (index+1 == page && index==0) {
+                        } else if (index + 1 == page && index == 0) {
                             img_xia.setImageResource(R.drawable.xiajiantouhui);
                             img_xia.setEnabled(false);
                             img_shang.setImageResource(R.drawable.shangjiantouhui);
                             img_shang.setEnabled(false);
-                        }else if(index == 0){
+                        } else if (index == 0) {
                             img_shang.setImageResource(R.drawable.shangjiantouhui);
                             img_shang.setEnabled(false);
                             img_xia.setImageResource(R.drawable.xiajiantou);
                             img_xia.setEnabled(true);
-                        }else
-                        {
+                        } else {
                             img_shang.setImageResource(R.drawable.shangjiantou);
                             img_shang.setEnabled(true);
                             img_xia.setImageResource(R.drawable.xiajiantou);
@@ -168,29 +185,29 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View v) {
                 if (index > 0) {
-                    if(index == 1){
+                    if (index == 1) {
                         img_shang.setImageResource(R.drawable.shangjiantouhui);
                         img_shang.setEnabled(false);
                     }
                     img_xia.setEnabled(true);
                     img_xia.setImageResource(R.drawable.xiajiantou);
                     index = index - 1;
-                    footer_tv3.setText(index+1+"");
+                    footer_tv3.setText(index + 1 + "");
                 }
             }
         });
         img_xia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (page > index+1) {
+                if (page > index + 1) {
                     index = index + 1;
-                    if(index+1 == page){
+                    if (index + 1 == page) {
                         img_xia.setImageResource(R.drawable.xiajiantouhui);
                         img_xia.setEnabled(false);
                     }
                     img_shang.setImageResource(R.drawable.shangjiantou);
                     img_shang.setEnabled(true);
-                    footer_tv3.setText(index+1+"");
+                    footer_tv3.setText(index + 1 + "");
                 }
             }
         });
@@ -202,18 +219,18 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 new DatePickerDialog(DateQuery.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String mymonth,myday;
-                        if (month+1 < 10) {
-                            mymonth = "0"+(month+1);
+                        String mymonth, myday;
+                        if (month + 1 < 10) {
+                            mymonth = "0" + (month + 1);
                         } else {
-                            mymonth = String.valueOf(month+1);
+                            mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth+1 < 10) {
-                            myday = "0"+(dayOfMonth+1);
+                        if (dayOfMonth + 1 < 10) {
+                            myday = "0" + (dayOfMonth + 1);
                         } else {
-                            myday = String.valueOf(dayOfMonth+1);
+                            myday = String.valueOf(dayOfMonth + 1);
                         }
-                        stats_tv2.setText(year+"-"+mymonth+"-"+myday);
+                        stats_tv2.setText(year + "-" + mymonth + "-" + myday);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
             }
@@ -224,25 +241,26 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 new DatePickerDialog(DateQuery.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String mymonth,myday;
-                        if (month+1 < 10) {
-                            mymonth = "0"+(month+1);
+                        String mymonth, myday;
+                        if (month + 1 < 10) {
+                            mymonth = "0" + (month + 1);
                         } else {
-                            mymonth = String.valueOf(month+1);
+                            mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth+1 < 10) {
-                            myday = "0"+(dayOfMonth+1);
+                        if (dayOfMonth + 1 < 10) {
+                            myday = "0" + (dayOfMonth + 1);
                         } else {
                             myday = String.valueOf(dayOfMonth);
                         }
-                        stats_tv3.setText(year+"-"+mymonth+"-"+myday);
+                        stats_tv3.setText(year + "-" + mymonth + "-" + myday);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
             }
         });
 
     }
-    private void init(){
+
+    private void init() {
         img_shang.setImageResource(R.drawable.shangjiantouhui);
         img_shang.setEnabled(false);
         img_xia.setImageResource(R.drawable.xiajiantouhui);
@@ -254,7 +272,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
             bean.date = "";
             bean.result = "";
             bean.name = "";
-            if (j< 18) {
+            if (j < 18) {
                 list1.add(bean);
             } else {
                 list2.add(bean);
@@ -262,31 +280,6 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private void initView() {
-        header_tv = (TextView) findViewById(R.id.header_tv);
-        header_tv2 = (TextView) findViewById(R.id.header_tv2);
-        header_tv3 = (TextView) findViewById(R.id.header_tv3);
-        header_tv4 = (TextView) findViewById(R.id.header_tv4);
-        btn_dayin = (Button) findViewById(R.id.btn_dayin);
-        btn_cancel = (Button) findViewById(R.id.btn_cancel);
-        stats_spinner = (Spinner) findViewById(R.id.stats_spinner);
-        stats_tv1 = (TextView) findViewById(R.id.stats_tv1);
-        stats_tv2 = (TextView) findViewById(R.id.stats_tv2);
-        stats_tv3 = (TextView) findViewById(R.id.stats_tv3);
-        textView5 = (TextView) findViewById(R.id.textView5);
-        textView6 = (TextView) findViewById(R.id.textView6);
-        img_shang = (ImageView) findViewById(R.id.img_shang);
-        img_xia = (ImageView) findViewById(R.id.img_xia);
-
-        btn_dayin.setOnClickListener(this);
-        btn_cancel.setOnClickListener(this);
-        footer_tv3 = (TextView) findViewById(R.id.footer_tv3);
-        footer_tv1 = (TextView) findViewById(R.id.footer_tv1);
-        footer_tv2 = (TextView) findViewById(R.id.footer_tv2);
-        listview1 = (ListView) findViewById(R.id.listview1);
-        listview2 = (ListView) findViewById(R.id.listview2);
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -297,7 +290,43 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
             case R.id.btn_cancel:
                 finish();
                 break;
+            case R.id.btn_chaxuan:
+                if (stats_tv2.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "请选择开始日期", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (stats_tv3.getText().toString().equals("")) {
+                    Toast.makeText(this, "请选择结束日期", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                break;
         }
+    }
+
+    private void initView() {
+        footer_tv1 = (TextView) findViewById(R.id.footer_tv1);
+        footer_tv2 = (TextView) findViewById(R.id.footer_tv2);
+        footer_tv3 = (EditText) findViewById(R.id.footer_tv3);
+        layout_footer = (AbsoluteLayout) findViewById(R.id.layout_footer);
+        header_tv = (TextView) findViewById(R.id.header_tv);
+        header_tv2 = (TextView) findViewById(R.id.header_tv2);
+        header_tv3 = (TextView) findViewById(R.id.header_tv3);
+        header_tv4 = (TextView) findViewById(R.id.header_tv4);
+        btn_chaxuan = (Button) findViewById(R.id.btn_chaxuan);
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
+        stats_spinner = (Spinner) findViewById(R.id.stats_spinner);
+        stats_tv1 = (TextView) findViewById(R.id.stats_tv1);
+        stats_tv2 = (TextView) findViewById(R.id.stats_tv2);
+        stats_tv3 = (TextView) findViewById(R.id.stats_tv3);
+        tv_cecheng = (TextView) findViewById(R.id.tv_cecheng);
+        listview1 = (ListView) findViewById(R.id.listview1);
+        listview2 = (ListView) findViewById(R.id.listview2);
+        img_shang = (ImageView) findViewById(R.id.img_shang);
+        img_xia = (ImageView) findViewById(R.id.img_xia);
+
+        btn_chaxuan.setOnClickListener(this);
+        btn_cancel.setOnClickListener(this);
     }
 
     class Bean {

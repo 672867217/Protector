@@ -23,6 +23,7 @@ import org.litepal.crud.DataSupport;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +47,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     private Spinner chanpin_spinner;
     private TextView stats_tv1;
     String[] sp_name = {"其他测程","一测", "二测", "三测"};
+    String[] sp_save = {"自动", "手动"};
+    String[] sp_ceshi = {"人员1", "人员2", "人员3"};
+    String[] sp_chanpin = {"产品名称1", "产品名称2", "产品名称3"};
+    String[] sp_shengchan = {"生产厂1", "生产厂2", "生产厂3"};
     String[] gv1_name2 = {"一测", "二测", "三测","其他"};
     List<Bean> list1 = new ArrayList();
     List<TestData> list2 = new ArrayList();
@@ -90,8 +95,16 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         test_gv2.setAdapter(testGv2ItemAdapter);
         testGv2ItemAdapter.notifyDataSetChanged();
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_name);
-        chanpin_spinner3.setAdapter(arrayAdapter);
+        ArrayAdapter nameAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_name);
+        ArrayAdapter ceshiAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item,sp_ceshi);
+        ArrayAdapter chanpinAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_chanpin);
+        ArrayAdapter saveAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_save);
+        ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_shengchan);
+        chanpin_spinner.setAdapter(chanpinAdapter);
+        chanpin_spinner2.setAdapter(shengchanAdapter);
+        chanpin_spinner3.setAdapter(nameAdapter);
+        chanpin_spinner4.setAdapter(saveAdapter);
+        chanpin_spinner5.setAdapter(ceshiAdapter);
         chanpin_spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -218,6 +231,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem1Tv2.setText(bean1.tongguo);
             holder.testItem1Tv3.setText(bean1.weitongguo);
             holder.testItem1Tv4.setText(bean1.yongshi);
+
         }
 
         protected class ViewHolder {
@@ -285,22 +299,58 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             if (Integer.parseInt(testData.getCeshishichang()) < 60) {
                 holder.testItem2Tv5.setText(testData.getCeshishichang()+"s");
             } else {
-
                 holder.testItem2Tv5.setText(Integer.parseInt(testData.getCeshishichang())/60+"'"
                         +Integer.parseInt(testData.getCeshishichang())%60+"s");
             }
             //测试结果
-            holder.testItem2Tv7.setText(testData.getQidongshijian());
+//            holder.testItem2Tv7.setText(testData.getQidongshijian());
             holder.testItem2Tv8.setText(testData.getQidongshijian());
             holder.testItem2Tv9.setText(testData.getM13xianshishijian());
             holder.testItem2Tv10.setText(testData.getM30xianshishijian());
-            holder.testItem2Tv11.setText(testData.getQidongshijian());
-            holder.testItem2Tv12.setText(testData.getQidongshijian());
-            holder.testItem2Tv13.setText(testData.getQidongshijian());
-            holder.testItem2Tv14.setText(testData.getQidongshijian());
-            holder.testItem2Tv15.setText(testData.getQidongshijian());
+            holder.testItem2Tv11.setText("");
+            holder.testItem2Tv12.setText("");
+//            holder.testItem2Tv13.setText(testData.getQidongshijian());
+//            holder.testItem2Tv14.setText(testData.getQidongshijian());
+//            holder.testItem2Tv15.setText(testData.getQidongshijian());
             holder.testItem2Tv16.setText("无");
             holder.testItem2Tv17.setText("合格");
+
+            int[] arr = new int[3];
+            int[] arr2 = new int[3];
+            int[] arr3 = new int[3];
+            int[] arr4 = new int[9];
+            arr[0] = Integer.parseInt(testData.getAduanxiangxiangying());
+            arr[1] = Integer.parseInt(testData.getBduanxiangxiangying());
+            arr[2] = Integer.parseInt(testData.getCduanxiangxiangying());
+
+            arr2[0] = Integer.parseInt(testData.getAduanxiangdianya());
+            arr2[1] = Integer.parseInt(testData.getBduanxiangdianya());
+            arr2[2] = Integer.parseInt(testData.getCduanxiangdianya());
+
+            arr3[0] = Integer.parseInt(testData.getAxiangceyajiang());
+            arr3[1] = Integer.parseInt(testData.getBxiangceyajiang());
+            arr3[2] = Integer.parseInt(testData.getCxiangceyajiang());
+
+            arr4[0] = Integer.parseInt(testData.getAbxiangjianjueyuan());
+            arr4[1] = Integer.parseInt(testData.getAcxiangjianjueyuan());
+            arr4[2] = Integer.parseInt(testData.getBcxiangjianjueyuan());
+            arr4[3] = Integer.parseInt(testData.getAxiangduidijueyuan());
+            arr4[4] = Integer.parseInt(testData.getBxiangduidijueyuan());
+            arr4[5] = Integer.parseInt(testData.getCxiangduidijueyuan());
+            arr4[6] = Integer.parseInt(testData.getAxiangduixianquanjueyuan());
+            arr4[7] = Integer.parseInt(testData.getBxiangduixianquanjueyuan());
+            arr4[8] = Integer.parseInt(testData.getCxiangduixianquanjeuyuan());
+
+            Arrays.sort(arr); //断相响应时间
+            Arrays.sort(arr2); //断相电压
+            Arrays.sort(arr3); //线圈压降
+            Arrays.sort(arr4); //绝缘电阻
+
+            holder.testItem2Tv7.setText(arr[arr.length-1]+"");
+            holder.testItem2Tv13.setText(arr2[arr2.length-1]+"");
+            holder.testItem2Tv14.setText(arr3[arr3.length-1]+"");
+            holder.testItem2Tv15.setText(arr4[0]+"");
+
 
             holder.testBtn2.setOnClickListener(new View.OnClickListener() {
                 @Override

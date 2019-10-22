@@ -8,12 +8,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
-        utils.openSerialPort();
+//        utils.openSerialPort();
         for (int i = 0; i < 30; i++) {
             List<String> strings = dataUtils.getDivLines("AA00FF1049020100C804C4B8D20404008000E600F200F400FC00F1008E0CE90FF3F7080CF5371724094C0A3C0B18008800EC00F500E605190BD1040105E904DF03A203B103C3047E04E104220334",2);
             if(strings.get(3).equals("10")){
@@ -155,16 +157,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 View view = getLayoutInflater().inflate(R.layout.dialog_datequery, null);
                 final Dialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
+//                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_touming);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
                 Button btn1 = view.findViewById(R.id.dialog_date_btn);
                 Button btn2 = view.findViewById(R.id.dialog_date_btn2);
                 Button btn3 = view.findViewById(R.id.dialog_date_btn3);
                 Button btn4 = view.findViewById(R.id.dialog_date_btn4);
+                final SharedPreferences.Editor editor = getSharedPreferences("cecheng",0).edit();
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        editor.putString("what", "1").commit();
                         dialog.dismiss();
                     }
                 });
@@ -172,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        editor.putString("what", "2").commit();
+
                         dialog.dismiss();
 
                     }
@@ -180,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        editor.putString("what", "3").commit();
+
                         dialog.dismiss();
 
                     }
@@ -188,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
+                        editor.putString("what", "0").commit();
+
                         dialog.dismiss();
 
                     }
@@ -217,12 +228,12 @@ public class MainActivity extends AppCompatActivity {
                 final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
                 Button dialog1_btn1 = view.findViewById(R.id.test_dialog1_btn1);
                 Button dialog1_btn2 = view.findViewById(R.id.test_dialog1_btn2);
-         /*
-                设置dialog 宽 高的大小
-                final WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-                params.width = 800;
-                params.height = 1200;
-                dialog.getWindow().setAttributes(params); */
+
+             //   设置dialog 宽 高的大小
+//                final WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+//                params.width = 320;
+//                params.height = 300;
+//                dialog.getWindow().setAttributes(params);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog1_btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
