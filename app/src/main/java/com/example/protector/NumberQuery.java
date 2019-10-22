@@ -206,7 +206,8 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                         Intent intent = new Intent(getApplicationContext(), QueryResult.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("data",object);
-                        bundle.putSerializable("dianzu",arr4[0]);
+                        bundle.putInt("dianzu",arr4[0]);
+                        bundle.putInt("flag",1);
                         intent.putExtra("s",bundle);
                         startActivity(intent);
                     }

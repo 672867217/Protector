@@ -85,6 +85,7 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
     private TextView result_tv28;
     private TextView result_tv29;
     private TextView result_tv30;
+    private int dianzu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,10 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_query_result);
         initView();
         TestData testData = (TestData) getIntent().getBundleExtra("s").getSerializable("data");
-        int dianzu =  getIntent().getBundleExtra("s").getInt("dianzu");
+        if(getIntent().getBundleExtra("s").getInt("flag") == 1){
+            dianzu = getIntent().getBundleExtra("s").getInt("dianzu");
+            result2_tv12.setText(dianzu+"");
+        }
         textView6.setText(testData.getChanpinbianma());
         result_tv3.setText(testData.getGongwei());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -116,7 +120,9 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         result2_tv9.setText(testData.getBduanxiangdianya());
         result2_tv10.setText("");
         result2_tv11.setText(testData.getCduanxiangdianya());
-        result2_tv12.setText(dianzu+"");
+        /////////////////////////////////////
+        //result2_tv12.setText(dianzu+"");
+        ////////////////////////////////////
         result2_tv13.setText(testData.getAxiangceyajiang());
         result2_tv14.setText(testData.getBxiangceyajiang());
         result2_tv15.setText(testData.getCxiangceyajiang());
