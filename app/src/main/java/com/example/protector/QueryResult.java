@@ -86,16 +86,20 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
     private TextView result_tv29;
     private TextView result_tv30;
     private int dianzu;
+    private TestData testData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_result);
         initView();
-        TestData testData = (TestData) getIntent().getBundleExtra("s").getSerializable("data");
         if(getIntent().getBundleExtra("s").getInt("flag") == 1){
+            testData = (TestData) getIntent().getBundleExtra("s").getSerializable("data");
             dianzu = getIntent().getBundleExtra("s").getInt("dianzu");
             result2_tv12.setText(dianzu+"");
+        }else
+        {
+
         }
         textView6.setText(testData.getChanpinbianma());
         result_tv3.setText(testData.getGongwei());
