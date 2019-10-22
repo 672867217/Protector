@@ -146,6 +146,7 @@
         android:background="#e6e6e6"
         android:text="测试结果"
         android:textAlignment="center"
+        android:textColor="#000"
         android:textSize="30sp" />
 
     <LinearLayout

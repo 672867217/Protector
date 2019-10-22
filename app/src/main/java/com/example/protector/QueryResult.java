@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.protector.SQl.TestData;
+
+import java.text.SimpleDateFormat;
+
 public class QueryResult extends AppCompatActivity implements View.OnClickListener {
 
     private TextView test_item2_tv;
@@ -87,7 +91,49 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_result);
         initView();
-
+        TestData testData = (TestData) getIntent().getBundleExtra("s").getSerializable("data");
+        int dianzu =  getIntent().getBundleExtra("s").getInt("dianzu");
+        textView6.setText(testData.getChanpinbianma());
+        result_tv3.setText(testData.getGongwei());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        result_tv4.setText(simpleDateFormat.format(testData.getDate()));
+        result_tv12.setText(testData.getAxiangawucha());
+        result_tv13.setText(testData.getAxiangcwucha());
+        result_tv14.setText(testData.getAxiangbwucha());
+        result_tv15.setText(testData.getAduanxiangdianya());
+        result_tv20.setText(testData.getBxiangawucha());
+        result_tv21.setText(testData.getBxiangcwucha());
+        result_tv22.setText(testData.getBxiangbwucha());
+        result_tv23.setText(testData.getBduanxiangdianya());
+        result2_tv1.setText(testData.getM13xianshishijian());
+        result2_tv2.setText(testData.getM30xianshishijian());
+        result2_tv3.setText(testData.getQidongshijian());
+        result2_tv4.setText(testData.getAduanxiangxiangying());
+        result2_tv5.setText(testData.getBduanxiangxiangying());
+        result2_tv6.setText(testData.getCduanxiangxiangying());
+        result2_tv7.setText(testData.getAduanxiangdianya());
+        result2_tv8.setText(testData.getXianquanbinglian());
+        result2_tv9.setText(testData.getBduanxiangdianya());
+        result2_tv10.setText("");
+        result2_tv11.setText(testData.getCduanxiangdianya());
+        result2_tv12.setText(dianzu+"");
+        result2_tv13.setText(testData.getAxiangceyajiang());
+        result2_tv14.setText(testData.getBxiangceyajiang());
+        result2_tv15.setText(testData.getCxiangceyajiang());
+        result_tv27.setText(testData.getXianquanchuanlian1());
+        result_tv28.setText(testData.getXianquanchuanlian3());
+        result_tv29.setText(testData.getXianquanchuanlian2());
+        result_tv30.setText(testData.getXianquanchuanlian4());
+        result2_tv16.setText(testData.getAbxiangjianjueyuan());
+        result2_tv17.setText(testData.getBcxiangjianjueyuan());
+        result2_tv18.setText(testData.getAcxiangjianjueyuan());
+        result2_tv19.setText(testData.getAxiangduidijueyuan());
+        result2_tv20.setText(testData.getBxiangduidijueyuan());
+        result2_tv21.setText(testData.getCxiangduidijueyuan());
+        result2_tv22.setText(testData.getAxiangduixianquanjueyuan());
+        result2_tv23.setText(testData.getBxiangduixianquanjueyuan());
+        result2_tv24.setText(testData.getCxiangduixianquanjeuyuan());
+        result2_tv25.setText(testData.getXianquanduidijueyuan());
     }
 
     private void initView() {

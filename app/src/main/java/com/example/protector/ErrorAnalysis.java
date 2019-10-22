@@ -38,11 +38,13 @@ public class ErrorAnalysis extends AppCompatActivity {
     private TextView textView11;
     private GridView gridView;
     private ListView listView;
-    private Button up,down;
-    private int page, index = 8, shuliang = 100;
+    private Button up, down;
+    private int page, index = 8, shuliang = 0;
     private ErroritemAdapter adapter;
     private ErrorlistitemAdapter errorlistitemAdapter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+    private List list2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,37 +57,17 @@ public class ErrorAnalysis extends AppCompatActivity {
             }
         });
         List list = new ArrayList();
-        final List list2 = new ArrayList();
+        list2 = new ArrayList();
         list.add("");
         list.add("");
         list.add("");
         list.add("");
         list.add("");
-        for (int i = 0; i < shuliang; i++) {
-            if(i==8){
-                break;
-            }
-            Particular particular = new Particular();
-            particular.id = String.format("%04d",i+1);
-            particular.number = String.format("%04d",i+1);
-            particular.time = dateFormat.format(new Date());
-            particular.a = "0.08";
-            particular.b = "0.16";
-            particular.c = "0.68";
-            particular.chuanlian = "1.08";
-            particular.binglian = "0.28";
-            particular.qidong = "0";
-            particular.duanxiang = "0";
-            particular.m13 = "21";
-            particular.m30 = "33";
-            particular.ceshi = "合格";
-            particular.man = "赵四";
-            list2.add(particular);
-        }
-        adapter = new ErroritemAdapter(getApplicationContext(),list);
+        init();
+        adapter = new ErroritemAdapter(getApplicationContext(), list);
         gridView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        errorlistitemAdapter = new ErrorlistitemAdapter(getApplicationContext(),list2);
+        errorlistitemAdapter = new ErrorlistitemAdapter(getApplicationContext(), list2);
         listView.setAdapter(errorlistitemAdapter);
         listView.setEnabled(false);
         errorlistitemAdapter.notifyDataSetChanged();
@@ -104,19 +86,25 @@ public class ErrorAnalysis extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (page > 0) {
-                    if(page == 1){
+                    if (page == 1) {
                         up.setBackgroundResource(R.drawable.shangjiantouhui);
                         up.setEnabled(false);
                     }
                     down.setEnabled(true);
                     down.setBackgroundResource(R.drawable.xiajiantou);
                     page = page - 1;
-                    textView11.setText(page+1+"");
+                    textView11.setText(page + 1 + "");
                     list2.clear();
-                    for (int i = index * page; i < index * page + 8; i++) {
+                    int a = 0;
+                    if (8 * page + 8 > shuliang) {
+                        a = shuliang;
+                    } else {
+                        a = 8 * page + 8;
+                    }
+                    for (int i = index * page; i < a; i++) {
                         Particular particular = new Particular();
-                        particular.id = String.format("%04d",i+1);
-                        particular.number = String.format("%04d",i+1);
+                        particular.id = String.format("%04d", i + 1);
+                        particular.number = String.format("%04d", i + 1);
                         particular.time = dateFormat.format(new Date());
                         particular.a = "0.08";
                         particular.b = "0.16";
@@ -139,53 +127,57 @@ public class ErrorAnalysis extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (shuliang / 8 > page) {
-                    if(page+1 == shuliang/8){
+                    if (page + 1 == shuliang / 8) {
                         down.setBackgroundResource(R.drawable.xiajiantouhui);
                         down.setEnabled(false);
                     }
                     up.setBackgroundResource(R.drawable.shangjiantou);
                     up.setEnabled(true);
                     page = page + 1;
-                    textView11.setText(page+1+"");
+                    textView11.setText(page + 1 + "");
                     list2.clear();
-                    for (int i = index * page; i < index * page + 8; i++) {
-                        if (i == shuliang) {
+                    int a = 0;
+                    if (8 * page + 8 > shuliang) {
+                        a = shuliang;
+                    } else {
+                        a = 8 * page + 8;
+                    }
+                    for (int i = 8 * page; i < a; i++) {
+                        Particular particular = new Particular();
+                        particular.id = String.format("%04d", i + 1);
+                        particular.number = String.format("%04d", i + 1);
+                        particular.time = dateFormat.format(new Date());
+                        particular.a = "0.08";
+                        particular.b = "0.16";
+                        particular.c = "0.68";
+                        particular.chuanlian = "1.08";
+                        particular.binglian = "0.28";
+                        particular.qidong = "0";
+                        particular.duanxiang = "0";
+                        particular.m13 = "21";
+                        particular.m30 = "33";
+                        particular.ceshi = "合格";
+                        particular.man = "赵四";
+                        list2.add(particular);
+                        if (i == a - 1 && a % 8 > 0) {
                             for (int j = 0; j < 8 - shuliang % 8; j++) {
-                                Particular particular = new Particular();
-                                particular.id = String.format("%04d",i+1);
-                                particular.number = String.format("%04d",i+1);
-                                particular.time = dateFormat.format(new Date());
-                                particular.a = "0.08";
-                                particular.b = "0.16";
-                                particular.c = "0.68";
-                                particular.chuanlian = "1.08";
-                                particular.binglian = "0.28";
-                                particular.qidong = "0";
-                                particular.duanxiang = "0";
-                                particular.m13 = "21";
-                                particular.m30 = "33";
-                                particular.ceshi = "合格";
-                                particular.man = "赵四";
+                                particular = new Particular();
+                                particular.id = "";
+                                particular.number = "";
+                                particular.time = "";
+                                particular.a = "";
+                                particular.b = "";
+                                particular.c = "";
+                                particular.chuanlian = "";
+                                particular.binglian = "";
+                                particular.qidong = "";
+                                particular.duanxiang = "";
+                                particular.m13 = "";
+                                particular.m30 = "";
+                                particular.ceshi = "";
+                                particular.man = "";
                                 list2.add(particular);
                             }
-                            return;
-                        } else {
-                            Particular particular = new Particular();
-                            particular.id = String.format("%04d",i+1);
-                            particular.number = String.format("%04d",i+1);
-                            particular.time = dateFormat.format(new Date());
-                            particular.a = "0.08";
-                            particular.b = "0.16";
-                            particular.c = "0.68";
-                            particular.chuanlian = "1.08";
-                            particular.binglian = "0.28";
-                            particular.qidong = "0";
-                            particular.duanxiang = "0";
-                            particular.m13 = "21";
-                            particular.m30 = "33";
-                            particular.ceshi = "合格";
-                            particular.man = "赵四";
-                            list2.add(particular);
                         }
                         errorlistitemAdapter.notifyDataSetChanged();
                     }
@@ -193,8 +185,27 @@ public class ErrorAnalysis extends AppCompatActivity {
             }
         });
     }
-
-    class Particular{
+    private void init(){
+        for (int j = 0; j < 8; j++) {
+            Particular particular = new Particular();
+            particular.id = "";
+            particular.number = "";
+            particular.time = "";
+            particular.a = "";
+            particular.b = "";
+            particular.c = "";
+            particular.chuanlian = "";
+            particular.binglian = "";
+            particular.qidong = "";
+            particular.duanxiang = "";
+            particular.m13 = "";
+            particular.m30 = "";
+            particular.ceshi = "";
+            particular.man = "";
+            list2.add(particular);
+        }
+    }
+    class Particular {
         String id;
         String number;
         String time;
@@ -210,6 +221,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         String ceshi;
         String man;
     }
+
     private void initView() {
         headerTv = (TextView) findViewById(R.id.header_tv);
         headerTv2 = (TextView) findViewById(R.id.header_tv2);
@@ -227,7 +239,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         gridView = (GridView) findViewById(R.id.gridView);
         listView = (ListView) findViewById(R.id.listView);
         up = (Button) findViewById(R.id.up);
-        down= (Button) findViewById(R.id.down);
+        down = (Button) findViewById(R.id.down);
     }
 
     public class ErroritemAdapter extends BaseAdapter {
@@ -237,7 +249,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         private Context context;
         private LayoutInflater layoutInflater;
 
-        public ErroritemAdapter(Context context,List list) {
+        public ErroritemAdapter(Context context, List list) {
             this.context = context;
             this.layoutInflater = LayoutInflater.from(context);
             this.objects = list;
@@ -264,7 +276,7 @@ public class ErrorAnalysis extends AppCompatActivity {
                 convertView = layoutInflater.inflate(R.layout.erroritem, null);
                 convertView.setTag(new ViewHolder(convertView));
             }
-            initializeViews((String)getItem(position), (ViewHolder) convertView.getTag());
+            initializeViews((String) getItem(position), (ViewHolder) convertView.getTag());
             return convertView;
         }
 
@@ -318,7 +330,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         private Context context;
         private LayoutInflater layoutInflater;
 
-        public ErrorlistitemAdapter(Context context,List list) {
+        public ErrorlistitemAdapter(Context context, List list) {
             this.context = context;
             this.layoutInflater = LayoutInflater.from(context);
             this.objects = list;
@@ -342,10 +354,10 @@ public class ErrorAnalysis extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.errorlistitem, parent,false);
+                convertView = layoutInflater.inflate(R.layout.errorlistitem, parent, false);
                 convertView.setTag(new ViewHolder(convertView));
             }
-            initializeViews((Particular)getItem(position), (ViewHolder) convertView.getTag());
+            initializeViews((Particular) getItem(position), (ViewHolder) convertView.getTag());
             return convertView;
         }
 

@@ -28,7 +28,9 @@ import com.example.protector.util.SerialPortUtil;
 
 import org.litepal.crud.DataSupport;
 
+import java.math.BigDecimal;
 import java.nio.Buffer;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     public  char strChar;
     DataUtils dataUtils = new DataUtils();
     TestData testData ;
+    BigDecimal b1 = new BigDecimal("0.001");
+    BigDecimal b3 = new BigDecimal("0.01");
+    BigDecimal b4 = new BigDecimal("0.1");
+    DecimalFormat decimalFormat = new DecimalFormat("0.00");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,32 +80,32 @@ public class MainActivity extends AppCompatActivity {
                             /*testData.setAjiguzhang(new DataUtils().HexToInt(strings.get(5))+"");
                             testData.setBjiguzhang(new DataUtils().HexToInt(strings.get(5))+"");
                             testData.setBaojin(new DataUtils().HexToInt(strings.get(5))+"");*/
-                testData.setXianquanchuanlian1(new DataUtils().HexToInt(strings.get(17)+strings.get(18))+"");
-                testData.setXianquanchuanlian2(new DataUtils().HexToInt(strings.get(19)+strings.get(20))+"");
-                testData.setXianquanchuanlian3(new DataUtils().HexToInt(strings.get(21)+strings.get(22))+"");
-                testData.setXianquanchuanlian4(new DataUtils().HexToInt(strings.get(23)+strings.get(24))+"");
-                testData.setXianquanchuanlian5(new DataUtils().HexToInt(strings.get(25)+strings.get(26))+"");
-                testData.setXianquanbinglian(new DataUtils().HexToInt(strings.get(27)+strings.get(28))+"");
-                testData.setAjiwucha(new DataUtils().HexToInt(strings.get(29))+"");
-                testData.setBjiwucha(new DataUtils().HexToInt(strings.get(30))+"");
-                testData.setAxiangawucha(new DataUtils().HexToInt(strings.get(31))+"");
-                testData.setAxiangbwucha(new DataUtils().HexToInt(strings.get(32))+"");
-                testData.setAxiangcwucha(new DataUtils().HexToInt(strings.get(33))+"");
-                testData.setBxiangawucha(new DataUtils().HexToInt(strings.get(34))+"");
-                testData.setBxiangbwucha(new DataUtils().HexToInt(strings.get(35))+"");
-                testData.setBxiangcwucha(new DataUtils().HexToInt(strings.get(36))+"");
-                testData.setAduanxiangdianya(new DataUtils().HexToInt(strings.get(37))+"");
-                testData.setBduanxiangdianya(new DataUtils().HexToInt(strings.get(38))+"");
-                testData.setCduanxiangdianya(new DataUtils().HexToInt(strings.get(39))+"");
-                testData.setAxiangceyajiang(new DataUtils().HexToInt(strings.get(40)+strings.get(41))+"");
-                testData.setBxiangceyajiang(new DataUtils().HexToInt(strings.get(42)+strings.get(43))+"");
-                testData.setCxiangceyajiang(new DataUtils().HexToInt(strings.get(44)+strings.get(45))+"");
+                testData.setXianquanchuanlian1(jisuan3(new DataUtils().HexToInt(strings.get(17)+strings.get(18))+""));
+                testData.setXianquanchuanlian2(jisuan3(new DataUtils().HexToInt(strings.get(19)+strings.get(20))+""));
+                testData.setXianquanchuanlian3(jisuan3(new DataUtils().HexToInt(strings.get(21)+strings.get(22))+""));
+                testData.setXianquanchuanlian4(jisuan3(new DataUtils().HexToInt(strings.get(23)+strings.get(24))+""));
+                testData.setXianquanchuanlian5(jisuan3(new DataUtils().HexToInt(strings.get(25)+strings.get(26))+""));
+                testData.setXianquanbinglian(jisuan3(new DataUtils().HexToInt(strings.get(27)+strings.get(28))+""));
+                testData.setAjiwucha(jisuan3(new DataUtils().HexToInt(strings.get(29))+""));
+                testData.setBjiwucha(jisuan3(new DataUtils().HexToInt(strings.get(30))+""));
+                testData.setAxiangawucha(jisuan2(new DataUtils().HexToInt(strings.get(31))+""));
+                testData.setAxiangbwucha(jisuan2(new DataUtils().HexToInt(strings.get(32))+""));
+                testData.setAxiangcwucha(jisuan2(new DataUtils().HexToInt(strings.get(33))+""));
+                testData.setBxiangawucha(jisuan2(new DataUtils().HexToInt(strings.get(34))+""));
+                testData.setBxiangbwucha(jisuan2(new DataUtils().HexToInt(strings.get(35))+""));
+                testData.setBxiangcwucha(jisuan2(new DataUtils().HexToInt(strings.get(36))+""));
+                testData.setAduanxiangdianya(jisuan2(new DataUtils().HexToInt(strings.get(37))+""));
+                testData.setBduanxiangdianya(jisuan2(new DataUtils().HexToInt(strings.get(38))+""));
+                testData.setCduanxiangdianya(jisuan2(new DataUtils().HexToInt(strings.get(39))+""));
+                testData.setAxiangceyajiang(jisuan(new DataUtils().HexToInt(strings.get(40)+strings.get(41))+""));
+                testData.setBxiangceyajiang(jisuan(new DataUtils().HexToInt(strings.get(42)+strings.get(43))+""));
+                testData.setCxiangceyajiang(jisuan(new DataUtils().HexToInt(strings.get(44)+strings.get(45))+""));
                 testData.setQidongshijian(new DataUtils().HexToInt(strings.get(46)+strings.get(47))+"");
                 testData.setAduanxiangxiangying(new DataUtils().HexToInt(strings.get(48)+strings.get(49))+"");
                 testData.setBduanxiangxiangying(new DataUtils().HexToInt(strings.get(50)+strings.get(51))+"");
                 testData.setCduanxiangxiangying(new DataUtils().HexToInt(strings.get(52)+strings.get(53))+"");
-                testData.setM13xianshishijian(new DataUtils().HexToInt(strings.get(54)+strings.get(55))+"");
-                testData.setM30xianshishijian(new DataUtils().HexToInt(strings.get(56)+strings.get(57))+"");
+                testData.setM13xianshishijian(jisuan2(new DataUtils().HexToInt(strings.get(54)+strings.get(55))+""));
+                testData.setM30xianshishijian(jisuan2(new DataUtils().HexToInt(strings.get(56)+strings.get(57))+""));
                 testData.setAbxiangjianjueyuan(new DataUtils().HexToInt(strings.get(58)+strings.get(59))+"");
                 testData.setAcxiangjianjueyuan(new DataUtils().HexToInt(strings.get(60)+strings.get(61))+"");
                 testData.setBcxiangjianjueyuan(new DataUtils().HexToInt(strings.get(62)+strings.get(63))+"");
@@ -112,10 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 testData.setXianquanduidijueyuan(new DataUtils().HexToInt(strings.get(76)+strings.get(77))+"");
                 testData.save();
             }
-        }
-        List<TestData> list = DataSupport.findAll(TestData.class);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getCecheng()+"..."+(i+1));
         }
         //串口数据监听事件
 //        utils.setOnDataReceiveListener(new SerialPortUtils.OnDataReceiveListener() {
@@ -278,6 +280,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private String jisuan(String s){
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b1));
+    }
+    private String jisuan2(String s){
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b3));
+    }
+    private String jisuan3(String s){
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b4));
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

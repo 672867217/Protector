@@ -83,7 +83,6 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 list.clear();
                 List<TestData> data = DataSupport.findAll(TestData.class);
                 for (int i = 0; i < data.size(); i++) {
-                    System.out.println(data.get(i).getChanpinbianma()+"..."+chanpinbianhao.getText().toString().trim());
                     if (data.get(i).getChanpinbianma().equals(chanpinbianhao.getText().toString().trim())) {
                         if (data.get(i).getCecheng().equals("1")) {
                             list.add(data.get(i));
@@ -144,16 +143,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
 
         private void initializeViews(final TestData object, ViewHolder holder, int position) {
             //TODO implement
-            holder.item1Title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), QueryResult.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("data",object);
-                    intent.putExtra("s",bundle);
-                    startActivity(intent);
-                }
-            });
+
             switch (position) {
                 case 0:
                     holder.item1Title.setText("一测");
@@ -171,26 +161,26 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
             if(!object.getAduanxiangxiangying().equals("")){
                 holder.item1Tv1.setText(object.getGongwei());
                 //holder.item1Tv2.setText(simpleDateFormat.format(object.getDate())+"");
-                //holder.item1Tv3.setText(simpleDateFormat2.format(object.getDate())+"");
+                holder.item1Tv3.setText(simpleDateFormat2.format(object.getDate())+"");
                 System.out.println(object.getDate());
                 holder.item1Tv4.setText("");
                 holder.item1Tv5.setText(object.getQidongshijian());
                 int[] arr = new int[3];
-                int[] arr2 = new int[3];
-                int[] arr3 = new int[3];
-                int[] arr4 = new int[9];
+                double[] arr2 = new double[3];
+                double[] arr3 = new double[3];
+                final int[] arr4 = new int[9];
                 arr[0] = Integer.parseInt(object.getAduanxiangxiangying());
                 arr[1] = Integer.parseInt(object.getBduanxiangxiangying());
                 arr[2] = Integer.parseInt(object.getCduanxiangxiangying());
-                arr2[0] = Integer.parseInt(object.getAduanxiangdianya());
-                arr2[1] = Integer.parseInt(object.getBduanxiangdianya());
-                arr2[2] = Integer.parseInt(object.getCduanxiangdianya());
-                arr3[0] = Integer.parseInt(object.getAxiangceyajiang());
-                arr3[1] = Integer.parseInt(object.getBxiangceyajiang());
-                arr3[2] = Integer.parseInt(object.getCxiangceyajiang());
-                arr4[0] = Integer.parseInt(object.getAcxiangjianjueyuan());
-                arr4[1] = Integer.parseInt(object.getBcxiangjianjueyuan());
-                arr4[2] = Integer.parseInt(object.getAcxiangjianjueyuan());
+                arr2[0] = Double.parseDouble(object.getAduanxiangdianya());
+                arr2[1] = Double.parseDouble(object.getBduanxiangdianya());
+                arr2[2] = Double.parseDouble(object.getCduanxiangdianya());
+                arr3[0] = Double.parseDouble(object.getAxiangceyajiang());
+                arr3[1] = Double.parseDouble(object.getBxiangceyajiang());
+                arr3[2] = Double.parseDouble(object.getCxiangceyajiang());
+                arr4[0] = Integer.parseInt(object.getAbxiangjianjueyuan());
+                arr4[1] = Integer.parseInt(object.getAcxiangjianjueyuan());
+                arr4[2] = Integer.parseInt(object.getBcxiangjianjueyuan());
                 arr4[3] = Integer.parseInt(object.getAxiangduidijueyuan());
                 arr4[4] = Integer.parseInt(object.getBxiangduidijueyuan());
                 arr4[5] = Integer.parseInt(object.getCxiangduidijueyuan());
@@ -210,6 +200,17 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 holder.item1Tv12.setText(arr4[0]+"");
                 holder.item1Tv13.setText("");
                 holder.item1Tv14.setText("");
+                holder.item1Title.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), QueryResult.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("data",object);
+                        bundle.putSerializable("dianzu",arr4[0]);
+                        intent.putExtra("s",bundle);
+                        startActivity(intent);
+                    }
+                });
             }
 
             holder.item1Btn.setOnClickListener(new View.OnClickListener() {

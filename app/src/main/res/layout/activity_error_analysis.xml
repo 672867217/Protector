@@ -317,7 +317,7 @@
             android:background="@drawable/greenkuan"
             android:gravity="center"
             android:text="启动时间（ms）"
-            android:textSize="18sp"
+            android:textSize="17dp"
             android:textStyle="bold" />
 
         <TextView
@@ -328,7 +328,7 @@
             android:background="@drawable/greenkuan"
             android:gravity="center"
             android:text="断相时间（ms）"
-            android:textSize="18sp"
+            android:textSize="17dp"
             android:textStyle="bold" />
 
         <TextView
@@ -339,7 +339,7 @@
             android:background="@drawable/greenkuan"
             android:gravity="center"
             android:text="13秒时间（ms）"
-            android:textSize="18sp"
+            android:textSize="17dp"
             android:textStyle="bold" />
 
         <TextView
@@ -350,7 +350,7 @@
             android:background="@drawable/greenkuan"
             android:gravity="center"
             android:text="30秒时间（ms）"
-            android:textSize="18sp"
+            android:textSize="17dp"
             android:textStyle="bold" />
 
         <TextView
