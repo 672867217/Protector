@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.protector.SQl.Operator;
+import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.TestData;
 
 import org.litepal.crud.DataSupport;
@@ -48,9 +50,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     private TextView stats_tv1;
     String[] sp_name = {"其他测程","一测", "二测", "三测"};
     String[] sp_save = {"自动", "手动"};
-    String[] sp_ceshi = {"人员1", "人员2", "人员3"};
-    String[] sp_chanpin = {"产品名称1", "产品名称2", "产品名称3"};
-    String[] sp_shengchan = {"生产厂1", "生产厂2", "生产厂3"};
+    List sp_ceshi = new ArrayList() ;
+    List sp_chanpin  = new ArrayList() ;
+    List sp_shengchan = new ArrayList() ;
     String[] gv1_name2 = {"一测", "二测", "三测","其他"};
     List<Bean> list1 = new ArrayList();
     List<TestData> list2 = new ArrayList();
@@ -94,7 +96,15 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         testGv2ItemAdapter = new TestGv2ItemAdapter(this, list2);
         test_gv2.setAdapter(testGv2ItemAdapter);
         testGv2ItemAdapter.notifyDataSetChanged();
-
+        List<ProductType> types = DataSupport.findAll(ProductType.class);
+        List<Operator> operators = DataSupport.findAll(Operator.class);
+        for (int i = 0; i < types.size(); i++) {
+            sp_chanpin.add(types.get(i).getName());
+            sp_shengchan.add(types.get(i).getChangjia());
+        }
+        for (int i = 0; i < operators.size(); i++) {
+            sp_ceshi.add(operators.get(i).getName());
+        }
         ArrayAdapter nameAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_name);
         ArrayAdapter ceshiAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item,sp_ceshi);
         ArrayAdapter chanpinAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_chanpin);

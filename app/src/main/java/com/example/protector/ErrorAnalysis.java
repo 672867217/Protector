@@ -1,6 +1,7 @@
 package com.example.protector;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -56,6 +57,12 @@ public class ErrorAnalysis extends AppCompatActivity {
     private List<Particular> list2;
     private Calendar calendar;
     private List<Particular2> list;
+    private List<TestData> data;
+    private List<TestData> gongweiList1;
+    private List<TestData> gongweiList2;
+    private List<TestData> gongweiList3;
+    private List<TestData> gongweiList4;
+    private List<TestData> gongweiList5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,16 +91,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         listView.setAdapter(errorlistitemAdapter);
         listView.setEnabled(false);
         errorlistitemAdapter.notifyDataSetChanged();
-        if (shuliang > 8) {
-            up.setBackgroundResource(R.drawable.shangjiantouhui);
-            down.setBackgroundResource(R.drawable.xiajiantou);
-            up.setEnabled(false);
-        } else {
-            up.setBackgroundResource(R.drawable.shangjiantouhui);
-            down.setBackgroundResource(R.drawable.xiajiantouhui);
-            up.setEnabled(false);
-            down.setEnabled(false);
-        }
+        btn();
         page = 0;
         up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,19 +115,19 @@ public class ErrorAnalysis extends AppCompatActivity {
                     for (int i = index * page; i < a; i++) {
                         Particular particular = new Particular();
                         particular.id = String.format("%04d", i + 1);
-                        particular.number = String.format("%04d", i + 1);
-                        particular.time = dateFormat.format(new Date());
-                        particular.a = "0.08";
-                        particular.b = "0.16";
-                        particular.c = "0.68";
-                        particular.chuanlian = "1.08";
-                        particular.binglian = "0.28";
-                        particular.qidong = "0";
-                        particular.duanxiang = "0";
-                        particular.m13 = "21";
-                        particular.m30 = "33";
-                        particular.ceshi = "合格";
-                        particular.man = "赵四";
+                        particular.number = data.get(i).getChanpinbianma();
+                        particular.time = dateFormat.format(data.get(i).getDate());
+                        particular.a = data.get(i).getAxiangawucha();
+                        particular.b = data.get(i).getAxiangbwucha();
+                        particular.c = data.get(i).getAxiangcwucha();
+                        particular.chuanlian = "";
+                        particular.binglian = data.get(i).getXianquanbinglian();
+                        particular.qidong = data.get(i).getQidongshijian();
+                        particular.duanxiang = "";
+                        particular.m13 = data.get(i).getM13xianshishijian();
+                        particular.m30 = data.get(i).getM30xianshishijian();
+                        particular.ceshi = "";
+                        particular.man = "";
                         list2.add(particular);
                         errorlistitemAdapter.notifyDataSetChanged();
                     }
@@ -158,19 +156,19 @@ public class ErrorAnalysis extends AppCompatActivity {
                     for (int i = 8 * page; i < a; i++) {
                         Particular particular = new Particular();
                         particular.id = String.format("%04d", i + 1);
-                        particular.number = String.format("%04d", i + 1);
-                        particular.time = dateFormat.format(new Date());
-                        particular.a = "0.08";
-                        particular.b = "0.16";
-                        particular.c = "0.68";
-                        particular.chuanlian = "1.08";
-                        particular.binglian = "0.28";
-                        particular.qidong = "0";
-                        particular.duanxiang = "0";
-                        particular.m13 = "21";
-                        particular.m30 = "33";
-                        particular.ceshi = "合格";
-                        particular.man = "赵四";
+                        particular.number = data.get(i).getChanpinbianma();
+                        particular.time = dateFormat.format(data.get(i).getDate());
+                        particular.a = data.get(i).getAxiangawucha();
+                        particular.b = data.get(i).getAxiangbwucha();
+                        particular.c = data.get(i).getAxiangcwucha();
+                        particular.chuanlian = "";
+                        particular.binglian = data.get(i).getXianquanbinglian();
+                        particular.qidong = data.get(i).getQidongshijian();
+                        particular.duanxiang = "";
+                        particular.m13 = data.get(i).getM13xianshishijian();
+                        particular.m30 = data.get(i).getM30xianshishijian();
+                        particular.ceshi = "";
+                        particular.man = "";
                         list2.add(particular);
                         if (i == a - 1 && a % 8 > 0) {
                             for (int j = 0; j < 8 - shuliang % 8; j++) {
@@ -269,11 +267,11 @@ public class ErrorAnalysis extends AppCompatActivity {
                     return;
                 }
                 //每个工位的所有数据list
-                List<TestData> gongweiList1 = new ArrayList<>();
-                List<TestData> gongweiList2 = new ArrayList<>();
-                List<TestData> gongweiList3 = new ArrayList<>();
-                List<TestData> gongweiList4 = new ArrayList<>();
-                List<TestData> gongweiList5 = new ArrayList<>();
+                gongweiList1 = new ArrayList<>();
+                gongweiList2 = new ArrayList<>();
+                gongweiList3 = new ArrayList<>();
+                gongweiList4 = new ArrayList<>();
+                gongweiList5 = new ArrayList<>();
                 for (int j = 0; j < dataList.size(); j++) {
                     System.out.println(dataList.get(j).getGongwei()+"-------QQQ");
                     switch (dataList.get(j).getGongwei()) {
@@ -348,7 +346,20 @@ public class ErrorAnalysis extends AppCompatActivity {
         });
 
     }
+    private void btn(){
+        if (shuliang > 8) {
+            up.setBackgroundResource(R.drawable.shangjiantouhui);
+            down.setBackgroundResource(R.drawable.xiajiantou);
+            up.setEnabled(false);
+        } else {
+            up.setBackgroundResource(R.drawable.shangjiantouhui);
+            down.setBackgroundResource(R.drawable.xiajiantouhui);
+            up.setEnabled(false);
+            down.setEnabled(false);
+        }
+    }
     private void init(){
+
         for (int j = 0; j < 8; j++) {
             Particular particular = new Particular();
             particular.id = "";
@@ -534,11 +545,11 @@ public class ErrorAnalysis extends AppCompatActivity {
                 convertView = layoutInflater.inflate(R.layout.erroritem, null);
                 convertView.setTag(new ViewHolder(convertView));
             }
-            initializeViews((Particular2) getItem(position), (ViewHolder) convertView.getTag());
+            initializeViews((Particular2) getItem(position), (ViewHolder) convertView.getTag(),position);
             return convertView;
         }
 
-        private void initializeViews(Particular2 particular2, ViewHolder holder) {
+        private void initializeViews(Particular2 particular2, ViewHolder holder, final int position) {
             //TODO implement
             holder.item1Title.setText(particular2.id);
             holder.itemTv1.setText(particular2.a);
@@ -555,6 +566,90 @@ public class ErrorAnalysis extends AppCompatActivity {
             holder.itemTv12.setText(particular2.ceshi3);
             holder.itemTv13.setText(particular2.qita);
             holder.itemTv14.setText(particular2.heji);
+            if(particular2.m13 == null){
+                holder.itemBtn.setBackgroundResource(R.drawable.queding);
+                holder.itemBtn.setEnabled(false);
+                holder.itemBtn.setTextColor(Color.parseColor("#000000"));
+            }else
+            {
+                holder.itemBtn.setBackgroundResource(R.drawable.baocun);
+                holder.itemBtn.setEnabled(true);
+                holder.itemBtn.setTextColor(Color.parseColor("#000000"));
+            }
+            holder.itemBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (position)
+                    {
+                        case 0:
+                            data = gongweiList1;
+                            break;
+                        case 1:
+                            data = gongweiList2;
+                            break;
+                        case 2:
+                            data = gongweiList3;
+                            break;
+                        case 3:
+                            data = gongweiList4;
+                            break;
+                        case 4:
+                            data = gongweiList5;
+                            break;
+                    }
+                    shuliang = data.size();
+                    list2.clear();
+                    int a = 0;
+                    if (8 * page + 8 > shuliang) {
+                        a = shuliang;
+                    } else {
+                        a = 8 * page + 8;
+                    }
+                    for (int i = 8 * page; i < a; i++) {
+                        Particular particular = new Particular();
+                        particular.id = String.format("%04d", i + 1);
+                        particular.number = data.get(i).getChanpinbianma();
+                        particular.time = dateFormat.format(data.get(i).getDate());
+                        particular.a = data.get(i).getAxiangawucha();
+                        particular.b = data.get(i).getAxiangbwucha();
+                        particular.c = data.get(i).getAxiangcwucha();
+                        particular.chuanlian = "";
+                        particular.binglian = data.get(i).getXianquanbinglian();
+                        particular.qidong = data.get(i).getQidongshijian();
+                        particular.duanxiang = "";
+                        particular.m13 = data.get(i).getM13xianshishijian();
+                        particular.m30 = data.get(i).getM30xianshishijian();
+                        particular.ceshi = "";
+                        particular.man = "";
+                        list2.add(particular);
+                        if (i == a - 1 && a % 8 > 0) {
+                            for (int j = 0; j < 8 - shuliang % 8; j++) {
+                                particular = new Particular();
+                                particular.id = "";
+                                particular.number = "";
+                                particular.time = "";
+                                particular.a = "";
+                                particular.b = "";
+                                particular.c = "";
+                                particular.chuanlian = "";
+                                particular.binglian = "";
+                                particular.qidong = "";
+                                particular.duanxiang = "";
+                                particular.m13 = "";
+                                particular.m30 = "";
+                                particular.ceshi = "";
+                                particular.man = "";
+                                list2.add(particular);
+                            }
+                        }
+                        errorlistitemAdapter.notifyDataSetChanged();
+                    }
+                    if(data.size()>8){
+                        down.setBackgroundResource(R.drawable.xiajiantou);
+                        down.setEnabled(true);
+                    }
+                }
+            });
         }
 
         protected class ViewHolder {

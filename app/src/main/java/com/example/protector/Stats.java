@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.protector.SQl.Operator;
+import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.TestData;
 
 import org.litepal.crud.DataSupport;
@@ -54,15 +57,30 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         List list = new ArrayList();
 
         for (int i = 0; i < strings.length; i++) {
-            list.add(" 智能冗余型断相保护器" + (i + 1));
             Bean bean = new Bean();
             bean.name = strings[i];
             beanList.add(bean);
         }
-
+        final List<ProductType> types = DataSupport.findAll(ProductType.class);
+        for (int i = 0; i < types.size(); i++) {
+            list.add(types.get(i).getName());
+        }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
         chanpin_spinner.setAdapter(arrayAdapter);
+        chanpin_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(types.size()!=0){
+                    xinghao.setText(types.get(i).getXinghao());
+                }
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         adapter = new StatsGvItemAdapter(beanList);
         stats_gridview.setAdapter(adapter);
         adapter.notifyDataSetChanged();

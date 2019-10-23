@@ -31,6 +31,10 @@ import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
 import java.text.ParseException;
+import com.example.protector.SQl.ProductType;
+
+import org.litepal.crud.DataSupport;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -95,12 +99,27 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         //spinner
         final List list = new ArrayList();
 
-        for (int i = 0; i < 5; i++) {
-            list.add(" 智能冗余型断相保护器" + (i + 1));
+        final List<ProductType> types = DataSupport.findAll(ProductType.class);
+        for (int i = 0; i < types.size(); i++) {
+            list.add(types.get(i).getName());
         }
+
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
         stats_spinner.setAdapter(arrayAdapter);
+        stats_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(types.size()!=0){
+                    stats_tv1.setText(types.get(i).getXinghao());
+                }
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         //表格适配器部分
         adapter1 = new DateQueryItemAdapter(this, list1);
         listview1.setAdapter(adapter1);
