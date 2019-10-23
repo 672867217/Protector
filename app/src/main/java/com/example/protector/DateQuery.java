@@ -127,6 +127,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         listview2.setAdapter(adapter2);
 
         if (shuliang == 0) {
+            listview1.setEnabled(false);
+            listview2.setEnabled(false);
             init();
         }
 
@@ -386,6 +388,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 shuliang = dataList2.size();
                 init2();
                 dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                listview1.setEnabled(true);
+                listview2.setEnabled(true);
                 footer_tv3.setText("1");
                 layout_footer.setVisibility(View.VISIBLE);
                 footer_tv1.setText("统计："+stats_tv2.getText().toString()+" 至 " +stats_tv3.getText().toString()+"   "
@@ -470,7 +474,11 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
 
         private void initializeViews(Bean bean, ViewHolder holder) {
             //TODO implement
-            holder.itemTv1.setText(bean.number1);
+            if (bean.number1.equals("")) {
+                holder.itemTv1.setText("");
+            } else {
+                holder.itemTv1.setText(String.format("%04d",Integer.parseInt(bean.number1)));
+            }
             holder.itemTv2.setText(bean.number2);
             holder.itemTv3.setText(bean.date);
             holder.itemTv4.setText(bean.result);

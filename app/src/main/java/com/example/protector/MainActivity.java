@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.protector.SQl.TestData;
 import com.example.protector.util.DataUtils;
+import com.example.protector.util.MyDialog;
 import com.example.protector.util.SerialPortUtil;
 
 import org.litepal.crud.DataSupport;
@@ -158,9 +159,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View view = getLayoutInflater().inflate(R.layout.dialog_datequery, null);
-                final Dialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
-//                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_touming);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                final MyDialog dialog = new MyDialog(MainActivity.this,view,R.style.dialog);
+                dialog.show();
 
                 Button btn1 = view.findViewById(R.id.dialog_date_btn);
                 Button btn2 = view.findViewById(R.id.dialog_date_btn2);
@@ -180,9 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
                         editor.putString("what", "2").commit();
-
                         dialog.dismiss();
-
                     }
                 });
                 btn3.setOnClickListener(new View.OnClickListener() {
@@ -190,9 +188,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
                         editor.putString("what", "3").commit();
-
                         dialog.dismiss();
-
                     }
                 });
                 btn4.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),DateQuery.class));
                         editor.putString("what", "0").commit();
-
                         dialog.dismiss();
 
                     }
@@ -227,16 +222,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View view = LayoutInflater.from(getApplication()).inflate(R.layout.dialog_test1,null);
-                final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
+                final MyDialog dialog = new MyDialog(MainActivity.this, view, R.style.dialog);
+                dialog.show();
                 Button dialog1_btn1 = view.findViewById(R.id.test_dialog1_btn1);
                 Button dialog1_btn2 = view.findViewById(R.id.test_dialog1_btn2);
-
-             //   设置dialog 宽 高的大小
-//                final WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-//                params.width = 320;
-//                params.height = 300;
-//                dialog.getWindow().setAttributes(params);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog1_btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -248,7 +237,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         View view2 = LayoutInflater.from(getApplication()).inflate(R.layout.dialog_test2,null);
-                        final AlertDialog dialog2 = new AlertDialog.Builder(MainActivity.this).setView(view2).show();
+                        final MyDialog dialog2 = new MyDialog(MainActivity.this, view2, R.style.dialog);
+                        dialog2.show();
                         Button dialog2_btn1 = view2.findViewById(R.id.test_dialog2_btn1);
                         Button dialog2_btn2 = view2.findViewById(R.id.test_dialog2_btn2);
                         dialog2.getWindow().setBackgroundDrawableResource(android.R.color.transparent);

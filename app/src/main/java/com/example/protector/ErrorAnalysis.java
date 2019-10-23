@@ -273,7 +273,6 @@ public class ErrorAnalysis extends AppCompatActivity {
                 gongweiList4 = new ArrayList<>();
                 gongweiList5 = new ArrayList<>();
                 for (int j = 0; j < dataList.size(); j++) {
-                    System.out.println(dataList.get(j).getGongwei()+"-------QQQ");
                     switch (dataList.get(j).getGongwei()) {
                         case "1":
                             gongweiList1.add(dataList.get(j));

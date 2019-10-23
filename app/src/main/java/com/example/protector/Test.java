@@ -196,6 +196,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     class Bean{
         String ceshi,tongguo,weitongguo,yongshi;
     }
+
     public class TestGv1ItemAdapter extends BaseAdapter {
 
         private List<Bean> objects = new ArrayList<Bean>();
@@ -326,20 +327,20 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv17.setText("合格");
 
             int[] arr = new int[3];
-            int[] arr2 = new int[3];
-            int[] arr3 = new int[3];
+            double[] arr2 = new double[3];
+            double[] arr3 = new double[3];
             int[] arr4 = new int[9];
             arr[0] = Integer.parseInt(testData.getAduanxiangxiangying());
             arr[1] = Integer.parseInt(testData.getBduanxiangxiangying());
             arr[2] = Integer.parseInt(testData.getCduanxiangxiangying());
 
-            arr2[0] = Integer.parseInt(testData.getAduanxiangdianya());
-            arr2[1] = Integer.parseInt(testData.getBduanxiangdianya());
-            arr2[2] = Integer.parseInt(testData.getCduanxiangdianya());
+            arr2[0] = Double.parseDouble(testData.getAduanxiangdianya());
+            arr2[1] = Double.parseDouble(testData.getBduanxiangdianya());
+            arr2[2] = Double.parseDouble(testData.getCduanxiangdianya());
 
-            arr3[0] = Integer.parseInt(testData.getAxiangceyajiang());
-            arr3[1] = Integer.parseInt(testData.getBxiangceyajiang());
-            arr3[2] = Integer.parseInt(testData.getCxiangceyajiang());
+            arr3[0] = Double.parseDouble(testData.getAxiangceyajiang());
+            arr3[1] = Double.parseDouble(testData.getBxiangceyajiang());
+            arr3[2] = Double.parseDouble(testData.getCxiangceyajiang());
 
             arr4[0] = Integer.parseInt(testData.getAbxiangjianjueyuan());
             arr4[1] = Integer.parseInt(testData.getAcxiangjianjueyuan());

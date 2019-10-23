@@ -73,7 +73,6 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                 if(types.size()!=0){
                     xinghao.setText(types.get(i).getXinghao());
                 }
-
             }
 
             @Override
