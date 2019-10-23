@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -24,6 +25,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.protector.SQl.TestData;
+
+import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,20 +58,25 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
     private ListView listview2;
     private ImageView img_shang;
     private ImageView img_xia;
-    List list1 = new ArrayList();
-    List list2 = new ArrayList();
+    List<Bean> list1 = new ArrayList();
+    List<Bean> list2 = new ArrayList();
     DateQueryItemAdapter adapter1, adapter2;
     private int index = 0, num36 = 36, shuliang = 0, page;
     private SimpleDateFormat dateFormat;
     private Calendar calendar;
+    private List<TestData> dataList2;
+    private SimpleDateFormat dateFormat2;
+    private int cecheng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_query);
         initView();
+
         SharedPreferences preferences = getSharedPreferences("cecheng",0);
-        switch (Integer.parseInt(preferences.getString("what","1"))) {
+        cecheng = Integer.parseInt(preferences.getString("what","1"));
+        switch (cecheng) {
             case 0:
                 tv_cecheng.setText("其他");
                 break;
@@ -81,7 +93,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
 
         dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
         //spinner
-        List list = new ArrayList();
+        final List list = new ArrayList();
 
         for (int i = 0; i < 5; i++) {
             list.add(" 智能冗余型断相保护器" + (i + 1));
@@ -94,15 +106,11 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         listview1.setAdapter(adapter1);
         adapter2 = new DateQueryItemAdapter(this, list2);
         listview2.setAdapter(adapter2);
-        //翻页逻辑
-        if (shuliang % 36 == 0) {
-            page = shuliang / 36;
-        } else {
-            page = shuliang / 36 + 1;
-        }
+
         if (shuliang == 0) {
             init();
         }
+
         footer_tv3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -120,18 +128,19 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         list1.clear();
                         list2.clear();
                         int a = 0;
-                        if (num36 * index + num36 > shuliang) {
+                        if (num36 * index + num36 >shuliang ) {
                             a = shuliang;
                         } else {
                             a = num36 * index + num36;
                         }
                         for (int i = num36 * index; i < a; i++) {
                             Bean bean = new Bean();
-                            bean.number1 = "000" + (i + 1);
-                            bean.number2 = "8000000" + (i + 1);
-                            bean.date = dateFormat.format(new Date());
+                            bean.number1 = String.valueOf((i + 1));
+                            bean.number2 = dataList2.get(i).getChanpinbianma();
+                            bean.date = dateFormat2.format(dataList2.get(i).getDate());
                             bean.result = "合格";
-                            bean.name = "柳铁信息";
+                            bean.name = "人员1";
+                            bean.id = dataList2.get(i).getId();
                             if (i < num36 * index + 18) {
                                 list1.add(bean);
                             } else if (i >= num36 * index + 18 && i < num36 * index + num36) {
@@ -145,6 +154,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                                     bean.date = "";
                                     bean.result = "";
                                     bean.name = "";
+                                    bean.id = -1;
                                     if (num36 - shuliang % num36 - j > 18) {
                                         list1.add(bean);
                                     } else {
@@ -258,6 +268,35 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
             }
         });
 
+
+        listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (list1.get(position).id != -1) {
+                    Intent intent = new Intent(getApplicationContext(), QueryResult.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("data", list1.get(position).id);
+                    bundle.putInt("flag",2);
+                    intent.putExtra("s",bundle);
+                    startActivity(intent);
+                }
+            }
+        });
+        listview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (list2.get(position).id != -1) {
+                    Intent intent = new Intent(getApplicationContext(), QueryResult.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("data", list2.get(position).id);
+                    bundle.putInt("flag",2);
+                    intent.putExtra("s",bundle);
+                    startActivity(intent);
+                }
+            }
+        });
+
+
     }
 
     private void init() {
@@ -280,6 +319,13 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    private  void init2(){
+        if (shuliang % 36 == 0) {
+            page = shuliang / 36;
+        } else {
+            page = shuliang / 36 + 1;
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -299,8 +345,35 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(this, "请选择结束日期", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                List<TestData> dataList = DataSupport.findAll(TestData.class);
+                dataList2 = new ArrayList<>();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                for (int j = 0; j < dataList.size(); j++) {
+                    try {
+                        Long ceshiDate = dateFormat.parse(dateFormat.format(dataList.get(j).getDate())).getTime();
+                        Long startDate = dateFormat.parse(stats_tv2.getText().toString()).getTime();
+                        Long endDate = dateFormat.parse(stats_tv3.getText().toString()).getTime();
+                        if (ceshiDate >= startDate && ceshiDate <= endDate && Integer.parseInt(dataList.get(j).getCecheng())==(cecheng)) {
+                            dataList2.add(dataList.get(j));
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (dataList2.isEmpty()) {
+                    Toast.makeText(this, "没有符合条件的数据", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                shuliang = dataList2.size();
+                init2();
+                dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                footer_tv3.setText("1");
+                layout_footer.setVisibility(View.VISIBLE);
+                footer_tv1.setText("统计："+stats_tv2.getText().toString()+" 至 " +stats_tv3.getText().toString()+"   "
+                        +tv_cecheng.getText().toString()+"测试数量："+dataList2.size()+"台，通过"+dataList2.size()+"台，未通过0台");
+                footer_tv2.setText("共 "+page+" 页  第");
                 break;
+
         }
     }
 
@@ -330,7 +403,12 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
     }
 
     class Bean {
-        String number1, number2, date, result, name;
+        private String number1;
+        private String number2;
+        private String date;
+        private  String result;
+        private String name;
+        private int id;
     }
 
     public class DateQueryItemAdapter extends BaseAdapter {

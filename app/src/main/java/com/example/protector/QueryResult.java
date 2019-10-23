@@ -12,7 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protector.SQl.TestData;
 
+import org.litepal.crud.DataSupport;
+
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 public class QueryResult extends AppCompatActivity implements View.OnClickListener {
 
@@ -96,11 +99,24 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         if(getIntent().getBundleExtra("s").getInt("flag") == 1){
             testData = (TestData) getIntent().getBundleExtra("s").getSerializable("data");
             dianzu = getIntent().getBundleExtra("s").getInt("dianzu");
-            result2_tv12.setText(dianzu+"");
         }else
         {
-
+            int id = (int) getIntent().getBundleExtra("s").getSerializable("data");
+            testData = DataSupport.find(TestData.class, id);
+            final int[] arr4 = new int[9];
+            arr4[0] = Integer.parseInt(testData.getAbxiangjianjueyuan());
+            arr4[1] = Integer.parseInt(testData.getAcxiangjianjueyuan());
+            arr4[2] = Integer.parseInt(testData.getBcxiangjianjueyuan());
+            arr4[3] = Integer.parseInt(testData.getAxiangduidijueyuan());
+            arr4[4] = Integer.parseInt(testData.getBxiangduidijueyuan());
+            arr4[5] = Integer.parseInt(testData.getCxiangduidijueyuan());
+            arr4[6] = Integer.parseInt(testData.getAxiangduixianquanjueyuan());
+            arr4[7] = Integer.parseInt(testData.getBxiangduixianquanjueyuan());
+            arr4[8] = Integer.parseInt(testData.getCxiangduixianquanjeuyuan());
+            Arrays.sort(arr4);
+            dianzu = arr4[0];
         }
+        result2_tv12.setText(dianzu+"");
         textView6.setText(testData.getChanpinbianma());
         result_tv3.setText(testData.getGongwei());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

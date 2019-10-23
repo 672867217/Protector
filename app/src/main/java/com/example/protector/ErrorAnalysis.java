@@ -1,7 +1,9 @@
 package com.example.protector;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -10,8 +12,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +25,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
+
+import com.example.protector.SQl.TestData;
+
+import org.litepal.crud.DataSupport;
 
 public class ErrorAnalysis extends AppCompatActivity {
 
@@ -43,7 +53,9 @@ public class ErrorAnalysis extends AppCompatActivity {
     private ErroritemAdapter adapter;
     private ErrorlistitemAdapter errorlistitemAdapter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-    private List list2;
+    private List<Particular> list2;
+    private Calendar calendar;
+    private List<Particular2> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +68,18 @@ public class ErrorAnalysis extends AppCompatActivity {
                 finish();
             }
         });
-        List list = new ArrayList();
+        list = new ArrayList();
         list2 = new ArrayList();
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
+        list.add(new Particular2());
+        list.add(new Particular2());
+        list.add(new Particular2());
+        list.add(new Particular2());
+        list.add(new Particular2());
         init();
         adapter = new ErroritemAdapter(getApplicationContext(), list);
         gridView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
         errorlistitemAdapter = new ErrorlistitemAdapter(getApplicationContext(), list2);
         listView.setAdapter(errorlistitemAdapter);
         listView.setEnabled(false);
@@ -184,6 +197,156 @@ public class ErrorAnalysis extends AppCompatActivity {
                 }
             }
         });
+
+        //选择测试日期段
+        calendar = Calendar.getInstance();
+        statsTv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(ErrorAnalysis.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String mymonth, myday;
+                        if (month + 1 < 10) {
+                            mymonth = "0" + (month + 1);
+                        } else {
+                            mymonth = String.valueOf(month + 1);
+                        }
+                        if (dayOfMonth + 1 < 10) {
+                            myday = "0" + (dayOfMonth + 1);
+                        } else {
+                            myday = String.valueOf(dayOfMonth + 1);
+                        }
+                        statsTv2.setText(year + "-" + mymonth + "-" + myday);
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
+            }
+        });
+        statsTv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(ErrorAnalysis.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String mymonth, myday;
+                        if (month + 1 < 10) {
+                            mymonth = "0" + (month + 1);
+                        } else {
+                            mymonth = String.valueOf(month + 1);
+                        }
+                        if (dayOfMonth + 1 < 10) {
+                            myday = "0" + (dayOfMonth + 1);
+                        } else {
+                            myday = String.valueOf(dayOfMonth);
+                        }
+                        statsTv3.setText(year + "-" + mymonth + "-" + myday);
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
+            }
+        });
+        btnChaxun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.clear();
+                List<TestData> testDataList = DataSupport.findAll(TestData.class);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                //符合日期条件的所有数据list
+                List<TestData> dataList = new ArrayList<>();
+                for (int i = 0; i < testDataList.size(); i++) {
+                    try {
+                        Long startDate = dateFormat.parse(statsTv2.getText().toString()).getTime();
+                        Long endDate = dateFormat.parse(statsTv3.getText().toString()).getTime();
+                        Long ceshiDate = dateFormat.parse(dateFormat.format(testDataList.get(i).getDate())).getTime();
+                        if (ceshiDate >= startDate && ceshiDate <= endDate ) {
+                            dataList.add(testDataList.get(i));
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (dataList.isEmpty()) {
+                    Toast.makeText(ErrorAnalysis.this, "没有符合条件的数据", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //每个工位的所有数据list
+                List<TestData> gongweiList1 = new ArrayList<>();
+                List<TestData> gongweiList2 = new ArrayList<>();
+                List<TestData> gongweiList3 = new ArrayList<>();
+                List<TestData> gongweiList4 = new ArrayList<>();
+                List<TestData> gongweiList5 = new ArrayList<>();
+                for (int j = 0; j < dataList.size(); j++) {
+                    System.out.println(dataList.get(j).getGongwei()+"-------QQQ");
+                    switch (dataList.get(j).getGongwei()) {
+                        case "1":
+                            gongweiList1.add(dataList.get(j));
+                            break;
+                        case "2":
+                            gongweiList2.add(dataList.get(j));
+                            break;
+                        case "3":
+                            gongweiList3.add(dataList.get(j));
+                            break;
+                        case "4":
+                            gongweiList4.add(dataList.get(j));
+                            break;
+                        case "5":
+                            gongweiList5.add(dataList.get(j));
+                            break;
+                    }
+                }
+                for (int i = 0; i < 5; i++) {
+                    String[] data = new String[14];
+                    switch (i) {
+                        case 0:
+                            if (!gongweiList1.isEmpty()) {
+                                data = Wucha(gongweiList1);
+                            }
+                            break;
+                        case 1:
+                            if (!gongweiList2.isEmpty()) {
+                                data = Wucha(gongweiList2);
+                            }
+                            break;
+                        case 2:
+                            if (!gongweiList3.isEmpty()) {
+                                data = Wucha(gongweiList3);
+                            }
+                            break;
+                        case 3:
+                            if (!gongweiList4.isEmpty()) {
+                                data = Wucha(gongweiList4);
+                            }
+                            break;
+                        case 4:
+                            if (!gongweiList5.isEmpty()) {
+                                data = Wucha(gongweiList5);
+                            }
+                            break;
+                    }
+                    Particular2 particular2 = new Particular2();
+                    particular2.id = "工位"+(i+1);
+                    particular2.a = data[0];
+                    particular2.b = data[1];
+                    particular2.c = data[2];
+                    particular2.chuanlian = data[3];
+                    particular2.binglian = data[4];
+                    particular2.qidong = data[5];
+                    particular2.duanxiang = data[6];
+                    particular2.m13 = data[7];
+                    particular2.m30 = data[8];
+                    particular2.ceshi1 = data[9];
+                    particular2.ceshi2 = data[10];
+                    particular2.ceshi3 = data[11];
+                    particular2.qita = data[12];
+                    particular2.heji = data[13];
+                    list.add(particular2);
+                }
+                adapter.notifyDataSetChanged();
+
+
+            }
+        });
+
     }
     private void init(){
         for (int j = 0; j < 8; j++) {
@@ -200,11 +363,28 @@ public class ErrorAnalysis extends AppCompatActivity {
             particular.duanxiang = "";
             particular.m13 = "";
             particular.m30 = "";
-            particular.ceshi = "";
+            particular.ceshi ="";
             particular.man = "";
             list2.add(particular);
         }
     }
+
+    class Particular2 {
+        String id;
+        String number;
+        String time;
+        String a;
+        String b;
+        String c;
+        String chuanlian;
+        String binglian;
+        String qidong;
+        String duanxiang;
+        String m13;
+        String m30;
+        String ceshi1,ceshi2,ceshi3,qita,heji;
+    }
+
     class Particular {
         String id;
         String number;
@@ -218,8 +398,86 @@ public class ErrorAnalysis extends AppCompatActivity {
         String duanxiang;
         String m13;
         String m30;
-        String ceshi;
-        String man;
+        String ceshi,man;
+    }
+
+    private String[] Wucha(List<TestData> testDataList){
+        List<Double> list1 = new ArrayList<>();
+        List<Double> list2 = new ArrayList<>();
+        List<Double> list3 = new ArrayList<>();
+        List<Double> list4 = new ArrayList<>();
+        List<Double> list5 = new ArrayList<>();
+        List<Double> list6 = new ArrayList<>();
+        List<Double> list7 = new ArrayList<>();
+        List<Double> list8 = new ArrayList<>();
+        List<Double> list9 = new ArrayList<>();
+        List<Double> list10 = new ArrayList<>();
+        List<Double> list11 = new ArrayList<>();
+        List<Double> list12 = new ArrayList<>();
+        List<Double> list13 = new ArrayList<>();
+        List<Double> list14 = new ArrayList<>();
+        double ce1=0,ce2=0,ce3=0,qita =0;
+        for (int i = 0; i < testDataList.size(); i++) {
+            list1.add(0.0);
+            list2.add(0.0);
+            list3.add(0.0);
+            list4.add(0.0);
+            list5.add(Double.valueOf(testDataList.get(i).getXianquanbinglian()));
+            list6.add(Double.valueOf(testDataList.get(i).getQidongshijian()));
+            list7.add(0.0);
+            list8.add(Double.valueOf(testDataList.get(i).getM13xianshishijian()));
+            list9.add(Double.valueOf(testDataList.get(i).getM30xianshishijian()));
+            switch (testDataList.get(i).getCecheng()) {
+                case "0":
+                    qita++;
+                    break;
+                case "1":
+                    ce1++;
+                    break;
+                case "2":
+                    ce2++;
+                    break;
+                case "3":
+                    ce3++;
+                    break;
+            }
+        }
+        list10.add(ce1);
+        list11.add(ce2);
+        list12.add(ce3);
+        list13.add(qita);
+        list14.add(Double.valueOf(testDataList.size()));
+        //升序排序 排序后计算最大和最小 误差值
+        Collections.sort(list1);
+        Collections.sort(list2);
+        Collections.sort(list3);
+        Collections.sort(list4);
+        Collections.sort(list5);
+        Collections.sort(list6);
+        Collections.sort(list7);
+        Collections.sort(list8);
+        Collections.sort(list9);
+        Collections.sort(list10);
+        Collections.sort(list11);
+        Collections.sort(list12);
+        Collections.sort(list13);
+        Collections.sort(list14);
+        String[] data = new String[14];
+        data[0] = String.valueOf(list1.get(list1.size() - 1) - list1.get(0));
+        data[1] = String.valueOf(list2.get(list2.size() - 1) - list2.get(0));
+        data[2] = String.valueOf(list3.get(list3.size() - 1) - list3.get(0));
+        data[3] = String.valueOf(list4.get(list4.size() - 1) - list4.get(0));
+        data[4] = String.valueOf(list5.get(list5.size() - 1) - list5.get(0));
+        data[5] = String.valueOf(list6.get(list6.size() - 1) - list6.get(0));
+        data[6] = String.valueOf(list7.get(list7.size() - 1) - list7.get(0));
+        data[7] = String.valueOf(list8.get(list8.size() - 1) - list8.get(0));
+        data[8] = String.valueOf(list9.get(list9.size() - 1) - list9.get(0));
+        data[9] = String.valueOf(list10.get(list10.size() - 1) - list10.get(0));
+        data[10] = String.valueOf(list11.get(list11.size() - 1) - list11.get(0));
+        data[11] = String.valueOf(list12.get(list12.size() - 1) - list12.get(0));
+        data[12] = String.valueOf(list13.get(list13.size() - 1) - list13.get(0));
+        data[13] = String.valueOf(list14.get(list14.size() - 1) - list14.get(0));
+        return data;
     }
 
     private void initView() {
@@ -244,7 +502,7 @@ public class ErrorAnalysis extends AppCompatActivity {
 
     public class ErroritemAdapter extends BaseAdapter {
 
-        private List<String> objects = new ArrayList<String>();
+        private List<Particular2> objects = new ArrayList<Particular2>();
 
         private Context context;
         private LayoutInflater layoutInflater;
@@ -261,7 +519,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         }
 
         @Override
-        public String getItem(int position) {
+        public Particular2 getItem(int position) {
             return objects.get(position);
         }
 
@@ -276,12 +534,27 @@ public class ErrorAnalysis extends AppCompatActivity {
                 convertView = layoutInflater.inflate(R.layout.erroritem, null);
                 convertView.setTag(new ViewHolder(convertView));
             }
-            initializeViews((String) getItem(position), (ViewHolder) convertView.getTag());
+            initializeViews((Particular2) getItem(position), (ViewHolder) convertView.getTag());
             return convertView;
         }
 
-        private void initializeViews(String object, ViewHolder holder) {
+        private void initializeViews(Particular2 particular2, ViewHolder holder) {
             //TODO implement
+            holder.item1Title.setText(particular2.id);
+            holder.itemTv1.setText(particular2.a);
+            holder.itemTv2.setText(particular2.b);
+            holder.itemTv3.setText(particular2.c);
+            holder.itemTv4.setText(particular2.chuanlian);
+            holder.itemTv5.setText(particular2.binglian);
+            holder.itemTv6.setText(particular2.qidong);
+            holder.itemTv7.setText(particular2.duanxiang);
+            holder.itemTv8.setText(particular2.m13);
+            holder.itemTv9.setText(particular2.m30);
+            holder.itemTv10.setText(particular2.ceshi1);
+            holder.itemTv11.setText(particular2.ceshi2);
+            holder.itemTv12.setText(particular2.ceshi3);
+            holder.itemTv13.setText(particular2.qita);
+            holder.itemTv14.setText(particular2.heji);
         }
 
         protected class ViewHolder {

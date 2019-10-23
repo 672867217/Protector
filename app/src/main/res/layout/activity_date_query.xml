@@ -12,17 +12,18 @@
         android:layout_width="1329dp"
         android:layout_height="wrap_content"
         android:layout_x="20dp"
-        android:layout_y="920dp">
+        android:layout_y="920dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/footer_tv1"
-            android:layout_width="wrap_content"
+            android:layout_width="1048dp"
             android:layout_height="wrap_content"
             android:layout_x="0dp"
             android:layout_y="11dp"
             android:text="统计 ：2019-6-12 至 2019-6-20    一测测试数量：656台，通过645台，未通过11台"
             android:textColor="#ffffff"
-            android:textSize="28dp" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/footer_tv2"
