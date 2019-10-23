@@ -77,17 +77,31 @@ public class Setting extends Activity implements View.OnClickListener {
     private List<Operator> operators;
     private List<String> strings;
     private List<String> strings2;
-    private int index1 =1,index2 = 1;
+    private int index1 =0,index2 = 0;
     private ArrayAdapter arrayAdapter;
     private ArrayAdapter arrayAdapter2;
     private int a;
     private int b;
+    private List list;
+    private List list1;
+    private List<Chanpin> chanpins;
+    private List<Caozuoyuan> caozuoyuans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         initView();
+
+        list = new ArrayList();
+        for (int i = 0; i < 10; i++) {
+            list.add(String.format("%03d", i + 1));
+        }
+        list1 = new ArrayList();
+        list1.add("男");
+        list1.add("女");
+        chanpins = new ArrayList<>();
+        caozuoyuans = new ArrayList<>();
         strings = new ArrayList<>();
         strings2 = new ArrayList<>();
         init();
@@ -102,7 +116,7 @@ public class Setting extends Activity implements View.OnClickListener {
                     textView7.setText(types.get(i).getXinghao());
                     textView8.setText(types.get(i).getChangjia());
                 }
-                index1 = i+1;
+                index1 = i;
             }
 
             @Override
@@ -117,7 +131,7 @@ public class Setting extends Activity implements View.OnClickListener {
                     textView9.setText(operators.get(i).getNumber());
                     textView10.setText(operators.get(i).getSex());
                 }
-                index2 = i+1;
+                index2 = i;
             }
 
             @Override
@@ -166,17 +180,41 @@ public class Setting extends Activity implements View.OnClickListener {
         operators = DataSupport.findAll(Operator.class);
         strings.clear();
         strings2.clear();
+        chanpins.clear();
+        caozuoyuans.clear();
         if(types.size() != 0){
             for (int i = 0; i < types.size(); i++) {
                 strings.add(types.get(i).getName());
+                Chanpin chanpin = new Chanpin();
+                chanpin.id = types.get(i).getId();
+                chanpin.name = types.get(i).getName();
+                chanpin.xinghao = types.get(i).getXinghao();
+                chanpin.changjia = types.get(i).getChangjia();
+                chanpins.add(chanpin);
             }
+            textView7.setText(types.get(0).getXinghao());
+            textView8.setText(types.get(0).getChangjia());
+        }else{
+            textView7.setText("");
+            textView8.setText("");
         }
         if(operators.size() != 0){
             for (int i = 0; i < operators.size(); i++) {
                 strings2.add(operators.get(i).getName());
+                Caozuoyuan caozuoyuan = new Caozuoyuan();
+                caozuoyuan.id = operators.get(i).getId();
+                caozuoyuan.name = operators.get(i).getName();
+                caozuoyuan.number = operators.get(i).getNumber();
+                caozuoyuan.sex = operators.get(i).getSex();
+                caozuoyuans.add(caozuoyuan);
             }
+            textView9.setText(operators.get(0).getNumber());
+            textView10.setText(operators.get(0).getSex());
+        }else
+        {
+            textView9.setText("");
+            textView10.setText("");
         }
-
 
     }
     private void initView() {
@@ -302,7 +340,7 @@ public class Setting extends Activity implements View.OnClickListener {
                 button7 = (Button) view2.findViewById(R.id.button7);
                 button17 = (Button) view2.findViewById(R.id.button17);
                 textView3.setText("修改产品类型");
-                final ProductType type = DataSupport.find(ProductType.class,index1);
+                final ProductType type = DataSupport.find(ProductType.class,index1+1);
                 editText.setText(type.getName()+"");
                 editText2.setText(type.getXinghao());
                 editText3.setText(type.getChangjia());
@@ -351,7 +389,7 @@ public class Setting extends Activity implements View.OnClickListener {
                 testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DataSupport.delete(ProductType.class,index1);
+                        DataSupport.delete(ProductType.class,chanpins.get(index1).id);
                         Toast.makeText(Setting.this, "删除成功", Toast.LENGTH_SHORT).show();
                         init();
                         arrayAdapter.notifyDataSetChanged();
@@ -372,10 +410,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 myDialog.setCancelable(false);
                 myDialog.setCanceledOnTouchOutside(false);
                 myDialog.show();
-
                 Spinner spinner1;
                 Spinner spinner2;
-
                 textView3 = (TextView) view2.findViewById(R.id.textView3);
                 editText = (EditText) view2.findViewById(R.id.editText);
                 spinner1 = (Spinner) view2.findViewById(R.id.spinner1);
@@ -383,17 +419,11 @@ public class Setting extends Activity implements View.OnClickListener {
                 button7 = (Button) view2.findViewById(R.id.button7);
                 button17 = (Button) view2.findViewById(R.id.button17);
                 textView3.setText("添加操作员");
-                final List list = new ArrayList();
-                for (int i = 0; i < 10; i++) {
-                    list.add(String.format("%03d", i + 1));
-                }
-                final List list1 = new ArrayList();
-                list1.add("男");
-                list1.add("女");
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.spinner,list);
-                ArrayAdapter arrayAdapter2 = new ArrayAdapter(getApplicationContext(),R.layout.spinner,list1);
-                spinner1.setAdapter(arrayAdapter);
-                spinner2.setAdapter(arrayAdapter2);
+                editText.setText("");
+                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item, list);
+                ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item, list1);
+                spinner1.setAdapter(adapter);
+                spinner2.setAdapter(adapter2);
                 a = 0;
                 b = 0;
                 spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -431,6 +461,7 @@ public class Setting extends Activity implements View.OnClickListener {
                             operator.save();
                             myDialog.dismiss();
                             init();
+                            arrayAdapter2.notifyDataSetChanged();
                             Toast.makeText(Setting.this, "添加成功", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -454,11 +485,31 @@ public class Setting extends Activity implements View.OnClickListener {
                 spinner1 = (Spinner) view2.findViewById(R.id.spinner1);
                 spinner2 = (Spinner) view2.findViewById(R.id.spinner2);
                 textView3.setText("修改操作人员");
+                editText.setText(strings2.get(index2));
+                adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item, list);
+                adapter2 = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item, list1);
+                spinner1.setAdapter(adapter);
+                spinner2.setAdapter(adapter2);
+                spinner1.setSelection(Integer.parseInt(textView9.getText().toString())-1,true);
+                if(textView10.getText().equals("男")){
+                    spinner2.setSelection(0,true);
+                }else{
+                    spinner2.setSelection(1,true);
+                }
+
                 button7 = (Button) view2.findViewById(R.id.button7);
                 button17 = (Button) view2.findViewById(R.id.button17);
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Operator operator = DataSupport.find(Operator.class,index2+1);
+                        operator.setName(editText.getText().toString());
+                        operator.setNumber(list.get(a)+"");
+                        operator.setSex(list1.get(b)+"");
+                        operator.save();
+                        Toast.makeText(Setting.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        init();
+                        arrayAdapter2.notifyDataSetChanged();
                         myDialog.dismiss();
                     }
                 });
@@ -466,6 +517,28 @@ public class Setting extends Activity implements View.OnClickListener {
                     @Override
                     public void onClick(View view) {
                         myDialog.dismiss();
+                    }
+                });
+                spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        a = i;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+                spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        b = i;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
                     }
                 });
                 break;
@@ -481,11 +554,15 @@ public class Setting extends Activity implements View.OnClickListener {
                 testDialog2Img = (ImageView) view2.findViewById(R.id.test_dialog2_img);
                 testDialog2Btn1 = (Button) view2.findViewById(R.id.test_dialog2_btn1);
                 testDialog2Btn2 = (Button) view2.findViewById(R.id.test_dialog2_btn2);
-                testDialog2Tv.setText("修改操作人员");
-                testDialog2Tv2.setText("颤三");
+                testDialog2Tv.setText("删除操作人员");
+                testDialog2Tv2.setText(strings2.get(index2));
                 testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        DataSupport.delete(Operator.class,caozuoyuans.get(index2).id);
+                        Toast.makeText(Setting.this, "删除成功", Toast.LENGTH_SHORT).show();
+                        init();
+                        arrayAdapter2.notifyDataSetChanged();
                         myDialog.dismiss();
                     }
                 });
@@ -554,6 +631,18 @@ public class Setting extends Activity implements View.OnClickListener {
         }
     }
 
+    class Chanpin{
+        private int id;
+        private String name;
+        private String xinghao;
+        private String changjia;
+    }
+    class Caozuoyuan{
+        private int id;
+        private String name;
+        private String number;
+        private String sex;
+    }
     class Moren {
         String qidong = "150";
         String duanxiang = "250";
