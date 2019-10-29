@@ -29,6 +29,7 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.protector.SQl.TestData;
+import com.example.protector.SQl.XiuGai;
 
 import org.litepal.crud.DataSupport;
 
@@ -266,7 +267,7 @@ public class ErrorAnalysis extends AppCompatActivity {
                     Toast.makeText(ErrorAnalysis.this, "没有符合条件的数据", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //每个工位的所有数据list
+                //每个工位的所有数据  list
                 gongweiList1 = new ArrayList<>();
                 gongweiList2 = new ArrayList<>();
                 gongweiList3 = new ArrayList<>();
@@ -291,6 +292,7 @@ public class ErrorAnalysis extends AppCompatActivity {
                             break;
                     }
                 }
+                //按工位号处理数据
                 for (int i = 0; i < 5; i++) {
                     String[] data = new String[14];
                     switch (i) {
@@ -358,7 +360,6 @@ public class ErrorAnalysis extends AppCompatActivity {
         }
     }
     private void init(){
-
         for (int j = 0; j < 8; j++) {
             Particular particular = new Particular();
             particular.id = "";
@@ -427,16 +428,38 @@ public class ErrorAnalysis extends AppCompatActivity {
         List<Double> list13 = new ArrayList<>();
         List<Double> list14 = new ArrayList<>();
         double ce1=0,ce2=0,ce3=0,qita =0;
+
+        //空对象 后面无法计算
+        XiuGai xiuGai = DataSupport.find(XiuGai.class,0);
+
         for (int i = 0; i < testDataList.size(); i++) {
-            list1.add(0.0);
-            list2.add(0.0);
-            list3.add(0.0);
-            list4.add(0.0);
+            list1.add(Double.valueOf(testDataList.get(i).getAxiangawucha()));
+            list1.add(Double.valueOf(testDataList.get(i).getBxiangawucha()));
+
+            list2.add(Double.valueOf(testDataList.get(i).getAxiangbwucha()));
+            list2.add(Double.valueOf(testDataList.get(i).getBxiangbwucha()));
+
+            list3.add(Double.valueOf(testDataList.get(i).getBxiangcwucha()));
+            list3.add(Double.valueOf(testDataList.get(i).getBxiangcwucha()));
+
+            list4.add(Double.valueOf(testDataList.get(i).getXianquanchuanlian1()));
+            list4.add(Double.valueOf(testDataList.get(i).getXianquanchuanlian2()));
+            list4.add(Double.valueOf(testDataList.get(i).getXianquanchuanlian3()));
+            list4.add(Double.valueOf(testDataList.get(i).getXianquanchuanlian4()));
+            list4.add(Double.valueOf(testDataList.get(i).getXianquanchuanlian5()));
+
             list5.add(Double.valueOf(testDataList.get(i).getXianquanbinglian()));
-            list6.add(Double.valueOf(testDataList.get(i).getQidongshijian()));
-            list7.add(0.0);
-            list8.add(Double.valueOf(testDataList.get(i).getM13xianshishijian()));
-            list9.add(Double.valueOf(testDataList.get(i).getM30xianshishijian()));
+
+            //启动时间和设置的启动时间的差值 以最小值的绝对值作为显示值
+            System.out.println("qqqqq"+(Double.valueOf(testDataList.get(i).getQidongshijian())-Double.parseDouble(xiuGai.getQidong())));
+            list6.add(Double.valueOf(testDataList.get(i).getQidongshijian())-Double.parseDouble(xiuGai.getQidong()));
+            //断相响应时间和设置的断相响应时间的差值 以最小值的绝对值作为显示值
+            list7.add(Double.valueOf(testDataList.get(i).getAduanxiangxiangying())-Double.parseDouble(xiuGai.getDuanxiang()));
+            list7.add(Double.valueOf(testDataList.get(i).getBduanxiangxiangying())-Double.parseDouble(xiuGai.getDuanxiang()));
+            list7.add(Double.valueOf(testDataList.get(i).getCduanxiangxiangying())-Double.parseDouble(xiuGai.getDuanxiang()));
+            //同上
+            list8.add(Double.valueOf(testDataList.get(i).getM13xianshishijian())-Double.parseDouble(xiuGai.getM13()));
+            list9.add(Double.valueOf(testDataList.get(i).getM30xianshishijian())-Double.parseDouble(xiuGai.getM30()));
             switch (testDataList.get(i).getCecheng()) {
                 case "0":
                     qita++;
@@ -452,12 +475,15 @@ public class ErrorAnalysis extends AppCompatActivity {
                     break;
             }
         }
+        for (int i = 0; i < list1.size(); i++) {
+            System.out.println(list1.get(i)+"qqqqqqqqqqqqqqqqqqq");
+        }
         list10.add(ce1);
         list11.add(ce2);
         list12.add(ce3);
         list13.add(qita);
         list14.add(Double.valueOf(testDataList.size()));
-        //升序排序 排序后计算最大和最小 误差值
+        //升序排序 排序后拿 误差值
         Collections.sort(list1);
         Collections.sort(list2);
         Collections.sort(list3);
@@ -473,7 +499,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         Collections.sort(list13);
         Collections.sort(list14);
         String[] data = new String[14];
-        data[0] = String.valueOf(list1.get(list1.size() - 1) - list1.get(0));
+        data[0] = String.valueOf(list1.get(0));
         data[1] = String.valueOf(list2.get(list2.size() - 1) - list2.get(0));
         data[2] = String.valueOf(list3.get(list3.size() - 1) - list3.get(0));
         data[3] = String.valueOf(list4.get(list4.size() - 1) - list4.get(0));

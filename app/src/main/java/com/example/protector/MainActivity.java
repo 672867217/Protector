@@ -204,19 +204,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
-//        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
-//        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
-//
-//        Timer timer = new Timer();
-//        TimerTask timerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        };
-//        timer.schedule(timerTask,0,5000);
-
         //测试页
         button2.setOnClickListener(new View.OnClickListener() {
             @Override

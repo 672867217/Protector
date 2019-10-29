@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="768dp"
     android:background="#6665fe"
     tools:context=".DateQuery">
 
@@ -66,10 +66,295 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_dayin"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_x="668dp"
+        android:layout_y="8dp"
+        android:background="@drawable/baocun"
+        android:text="打印测试报告"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_x="886dp"
+        android:layout_y="9dp"
+        android:background="@drawable/baocun"
+        android:text="返  回"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="101dp" />
+
     <LinearLayout
-        android:layout_width="480dp"
-        android:layout_height="335dp"
-        android:layout_x="350dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:layout_x="20dp"
+        android:layout_y="65dp"
+        android:gravity="center|left"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:text="产品名称 :"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/stats_spinner"
+            android:layout_width="240dp"
+            android:layout_height="25dp"
+            android:background="@drawable/myspinner"
+            android:gravity="center"
+            android:popupBackground="@drawable/f_baisebiankuan"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="型号 :  "
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/stats_tv1"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test2_2"
+            android:gravity="center"
+            android:text="QDX2-S13/30"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:gravity="center"
+            android:text="产品编号 : "
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test2_2"
+            android:gravity="center"
+            android:text="80000001"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_x="20dp"
+        android:layout_y="120dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/result_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rouseyuanjiao"
+            android:gravity="center"
+            android:text="工位1"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_ziseyuanjiao2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="测试程序 :"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/result_tv2"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="测试工位 :"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/result_tv3"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="测试日期 :"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/result_tv4"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="开始时间 :"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/result_tv5"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="结束时间 :"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/result_tv6"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="测  试   人 :"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/result_tv7"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="265dp"
+        android:layout_x="280dp"
         android:layout_y="120dp"
         android:orientation="vertical">
 
@@ -81,7 +366,7 @@
             android:gravity="center"
             android:text="A机作为主控"
             android:textColor="#000000"
-            android:textSize="30sp" />
+            android:textSize="24sp" />
 
         <View
 
@@ -103,11 +388,11 @@
                 android:text="故障测试"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26dp" />
+                android:textSize="20sp" />
 
             <LinearLayout
-                android:layout_width="440dp"
-                android:layout_height="80dp"
+                android:layout_width="325dp"
+                android:layout_height="70dp"
 
                 android:layout_marginTop="5dp"
                 android:background="#e6e6e6"
@@ -122,41 +407,41 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
                         android:text="A机 ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv8"
-                        android:layout_width="80dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
 
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="90dp"
+                        android:layout_marginLeft="40dp"
                         android:text="A驱动 ："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv9"
-                        android:layout_width="80dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -172,36 +457,36 @@
                         android:text="B机 ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv10"
-                        android:layout_width="80dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
 
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="90dp"
+                        android:layout_marginLeft="40dp"
                         android:text="B驱动 ："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv11"
-                        android:layout_width="80dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -216,8 +501,8 @@
                 android:textSize="26dp" />
 
             <LinearLayout
-                android:layout_width="440dp"
-                android:layout_height="80dp"
+                android:layout_width="325dp"
+                android:layout_height="70dp"
 
                 android:layout_marginTop="5dp"
                 android:background="#e6e6e6"
@@ -232,22 +517,23 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
+                        android:textSize="14sp"
                         android:layout_height="wrap_content"
                         android:text="A相电流："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        />
 
                     <TextView
                         android:id="@+id/result_tv12"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -256,26 +542,26 @@
                         android:text="A"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
-
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
+                        android:textSize="14sp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:text=" C 相电流："
+                        android:text="C相电流："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                         />
 
                     <TextView
                         android:id="@+id/result_tv13"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -284,7 +570,7 @@
                         android:text="A"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -295,22 +581,23 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+
                         android:layout_height="wrap_content"
                         android:text="B相电流："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:layout_width="70dp"
+                        android:textSize="14sp"  />
 
                     <TextView
                         android:id="@+id/result_tv14"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -319,26 +606,26 @@
                         android:text="A"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
-                        android:layout_width="wrap_content"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:text="驱动电压："
                         android:textColor="#3a3cba"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result_tv15"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test4_baocun"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -347,7 +634,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -357,9 +644,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="480dp"
-        android:layout_height="335dp"
-        android:layout_x="860dp"
+        android:layout_width="350dp"
+        android:layout_height="265dp"
+        android:layout_x="650dp"
         android:layout_y="120dp"
         android:orientation="vertical">
 
@@ -371,7 +658,7 @@
             android:gravity="center"
             android:text="B机作为主控"
             android:textColor="#000000"
-            android:textSize="30sp" />
+            android:textSize="24sp" />
 
         <View
 
@@ -393,11 +680,11 @@
                 android:text="故障测试"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26dp" />
+                android:textSize="20sp" />
 
             <LinearLayout
-                android:layout_width="440dp"
-                android:layout_height="80dp"
+                android:layout_width="325dp"
+                android:layout_height="70dp"
 
                 android:layout_marginTop="5dp"
                 android:background="#e6e6e6"
@@ -412,41 +699,41 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
                         android:text="A机 ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv16"
-                        android:layout_width="80dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="90dp"
+                        android:layout_marginLeft="40dp"
                         android:text="A驱动 ："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv17"
-                        android:layout_width="80dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -457,31 +744,31 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
                         android:text="B机 ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv18"
-                        android:layout_width="80dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="90dp"
+                        android:layout_marginLeft="40dp"
                         android:text="B驱动 ："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv19"
@@ -491,7 +778,7 @@
                         android:gravity="center"
                         android:text="通过"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -503,11 +790,11 @@
                 android:text="误差"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26dp" />
+                android:textSize="20sp" />
 
             <LinearLayout
-                android:layout_width="440dp"
-                android:layout_height="80dp"
+                android:layout_width="325dp"
+                android:layout_height="70dp"
 
                 android:layout_marginTop="5dp"
                 android:background="#e6e6e6"
@@ -522,22 +809,22 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:text="A相电流："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv20"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -546,26 +833,26 @@
                         android:text="A"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:text=" C 相电流："
+                        android:text="C相电流："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv21"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -574,7 +861,7 @@
                         android:text="A"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -585,22 +872,22 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:text="B相电流："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv22"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -609,26 +896,26 @@
                         android:text="A"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
-                        android:layout_width="wrap_content"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:text="驱动电压："
                         android:textColor="#3a3cba"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/result_tv23"
-                        android:layout_width="70dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test4_baocun"
                         android:gravity="center"
                         android:text="+0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -637,7 +924,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -646,311 +933,275 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_dayin"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_x="940dp"
-        android:layout_y="7dp"
-        android:background="@drawable/baocun"
-        android:text="打印测试报告"
-        android:textSize="22sp"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="101dp" />
-
-    <LinearLayout
-        android:layout_width="1340dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="50dp"
-        android:layout_x="20dp"
-        android:layout_y="65dp"
-        android:gravity="center|left"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="产品名称 :"
-            android:textColor="#ffffff"
-            android:textSize="22dp" />
-
-        <Spinner
-            android:id="@+id/stats_spinner"
-            android:layout_width="291dp"
-            android:layout_height="40dp"
-            android:background="@drawable/myspinner"
-            android:gravity="center"
-            android:popupBackground="@drawable/f_baisebiankuan"
-            android:spinnerMode="dropdown" />
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="型号 :  "
-            android:textColor="#ffffff"
-            android:textSize="22dp" />
-
-        <TextView
-            android:id="@+id/stats_tv1"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_test2_2"
-            android:gravity="center"
-            android:text="QDX2-S13/30"
-            android:textColor="#000000"
-            android:textSize="22dp" />
-
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:gravity="center"
-            android:text="产品编号 : "
-            android:textColor="#ffffff"
-            android:textSize="22dp" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_test2_2"
-            android:gravity="center"
-            android:text="80000001"
-            android:textColor="#000"
-            android:textSize="22dp" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="1136dp"
-        android:layout_y="8dp"
-        android:background="@drawable/baocun"
-        android:text="返  回"
-        android:textSize="22sp"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="101dp" />
-
     <TextView
         android:id="@+id/test_item2_tv6"
-        android:layout_width="300dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_x="20dp"
-        android:layout_y="430dp"
+        android:layout_y="360dp"
         android:background="@drawable/bg_rouseyuanjiao"
         android:gravity="center"
         android:text="测试结果"
         android:textColor="#000000"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+    <AbsoluteLayout
+        android:layout_width="980dp"
+        android:layout_height="350dp"
         android:layout_x="20dp"
-        android:layout_y="120dp"
+        android:layout_y="392dp"
+        android:background="@drawable/bg_ziseyuanjiao3"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/result_tv1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_rouseyuanjiao"
-            android:gravity="center"
-            android:text="工位1"
-            android:textColor="#000000"
-            android:textSize="30sp" />
-
-        <View
-
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000000" />
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_ziseyuanjiao2"
-            android:gravity="center"
+            android:layout_width="230dp"
+            android:layout_height="210dp"
+            android:layout_x="20dp"
+            android:layout_y="10dp"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="时间特性"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:orientation="horizontal">
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="测试程序 ："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/result_tv2"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_test2_2"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13  秒  限  时 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv1"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="13.05"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="s     "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30  秒  限  时 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv2"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="30.25"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="s     "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="启  动  响  应 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv3"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="136"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A相断相响应："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv4"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B相断相响应："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv5"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="245"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C相断相响应："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv6"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="230"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-                android:gravity="left"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="测试工位 ："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/result_tv3"
-                    android:layout_width="135dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_test2_2"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-                android:gravity="left"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="测试日期 ："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/result_tv4"
-                    android:layout_width="135dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_test2_2"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
-                    android:text="2018-10-22"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="开始时间 ："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/result_tv5"
-                    android:layout_width="135dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_test2_2"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-                android:gravity="left"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="结束时间 ："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/result_tv6"
-                    android:layout_width="135dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_test2_2"
-                    android:gravity="right"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-                android:gravity="left"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="测  试   人 ："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/result_tv7"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_test2_2"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
-
-    <AbsoluteLayout
-        android:layout_width="1320dp"
-        android:layout_height="495dp"
-        android:layout_x="20dp"
-        android:layout_y="473dp"
-        android:background="@drawable/bg_ziseyuanjiao3"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="283dp"
@@ -969,7 +1220,7 @@
                 android:text="断相报警接点状态"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="24dp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="250dp"
@@ -1012,10 +1263,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="620dp"
+            android:layout_width="470dp"
             android:layout_height="350dp"
-            android:layout_x="350dp"
-            android:layout_y="10dp"
+            android:layout_x="276dp"
+            android:layout_y="9dp"
             android:orientation="vertical">
 
             <TextView
@@ -1028,7 +1279,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="165dp"
+                android:layout_height="100dp"
 
                 android:layout_marginTop="5dp"
                 android:background="#e6e6e6"
@@ -1048,7 +1299,7 @@
                         android:text="A相断相直流电压："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv7"
@@ -1059,7 +1310,7 @@
                         android:paddingRight="5dp"
                         android:text="0.05"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1068,7 +1319,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1077,7 +1328,7 @@
                         android:text="线圈并联电压："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
 
                     <TextView
@@ -1089,7 +1340,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1098,7 +1349,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1114,7 +1365,7 @@
                         android:text="B相断相直流电压："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv9"
@@ -1125,7 +1376,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1134,7 +1385,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1143,7 +1394,7 @@
                         android:text="线圈串联电压："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
 
                     <TextView
@@ -1155,7 +1406,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1164,7 +1415,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1181,7 +1432,7 @@
                         android:text="C相断相直流电压："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv11"
@@ -1192,7 +1443,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1201,7 +1452,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1210,7 +1461,7 @@
                         android:text="最小绝缘电阻："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
 
                     <TextView
@@ -1222,7 +1473,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1231,7 +1482,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1247,7 +1498,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#e6e6e6"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1256,7 +1507,7 @@
                         android:text="A相一次侧压降："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv13"
@@ -1268,7 +1519,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1277,7 +1528,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
 
                 </LinearLayout>
@@ -1287,7 +1538,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#e6e6e6"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1296,7 +1547,7 @@
                         android:text="B相一次侧压降："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv14"
@@ -1308,7 +1559,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1317,7 +1568,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
 
                 </LinearLayout>
@@ -1327,7 +1578,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#e6e6e6"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1336,7 +1587,7 @@
                         android:text="C相一次侧压降："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv15"
@@ -1348,7 +1599,7 @@
                         android:paddingRight="5dp"
                         android:text="236"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1357,260 +1608,10 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
 
                 </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="350dp"
-            android:layout_x="20dp"
-            android:layout_y="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="时间特性"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_marginTop="5dp"
-                android:background="#e6e6e6"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="13  秒  限  时 ："
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/result2_tv1"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dialog_test2_2"
-                        android:gravity="right"
-                        android:paddingRight="5dp"
-                        android:text="13.05"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="s     "
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30  秒  限  时 ："
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/result2_tv2"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dialog_test2_2"
-                        android:gravity="right"
-                        android:paddingRight="5dp"
-                        android:text="30.25"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="s     "
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="启  动  响  应 ："
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/result2_tv3"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dialog_test2_2"
-                        android:gravity="right"
-                        android:paddingRight="5dp"
-                        android:text="136"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ms"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="A相断相响应："
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/result2_tv4"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dialog_test2_2"
-                        android:gravity="right"
-                        android:paddingRight="5dp"
-                        android:text="236"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ms"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="B相断相响应："
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/result2_tv5"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dialog_test2_2"
-                        android:gravity="right"
-                        android:paddingRight="5dp"
-                        android:text="245"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ms"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="C相断相响应："
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/result2_tv6"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dialog_test2_2"
-                        android:gravity="right"
-                        android:paddingRight="5dp"
-                        android:text="230"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ms"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
             </LinearLayout>
 
         </LinearLayout>
@@ -1651,7 +1652,7 @@
                         android:text="AB相同     ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv16"
@@ -1661,7 +1662,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1670,7 +1671,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1687,7 +1688,7 @@
                         android:text="BC相同     ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv17"
@@ -1697,7 +1698,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1706,7 +1707,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1723,7 +1724,7 @@
                         android:text="AC相同     ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv18"
@@ -1733,7 +1734,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1742,7 +1743,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1759,7 +1760,7 @@
                         android:text="A相 -地     ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv19"
@@ -1769,7 +1770,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1778,7 +1779,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1795,7 +1796,7 @@
                         android:text="B相 -地     ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv20"
@@ -1805,7 +1806,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1814,7 +1815,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1831,7 +1832,7 @@
                         android:text="C相 -地     ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv21"
@@ -1841,7 +1842,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1850,7 +1851,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1867,7 +1868,7 @@
                         android:text="A相-线圈 ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv22"
@@ -1877,7 +1878,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1886,7 +1887,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1903,7 +1904,7 @@
                         android:text="B相-线圈 ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv23"
@@ -1913,7 +1914,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1922,7 +1923,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1939,7 +1940,7 @@
                         android:text="C相-线圈 ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv24"
@@ -1949,7 +1950,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1958,7 +1959,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -1975,7 +1976,7 @@
                         android:text="线圈-地    ："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result2_tv25"
@@ -1985,7 +1986,7 @@
                         android:gravity="center"
                         android:text="11111"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -1994,7 +1995,7 @@
                         android:text="MΩ"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -2003,10 +2004,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_x="20dp"
-            android:layout_y="375dp"
+            android:layout_y="230dp"
             android:orientation="vertical">
 
             <TextView
@@ -2046,7 +2047,7 @@
                 android:text="极限情况线圈串联电压"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26dp" />
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -2070,7 +2071,7 @@
                         android:text="304V/1A时："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result_tv27"
@@ -2080,7 +2081,7 @@
                         android:gravity="center"
                         android:text="23.25"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -2089,7 +2090,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -2098,7 +2099,7 @@
                         android:layout_marginLeft="90dp"
                         android:text="437V/1A时："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result_tv28"
@@ -2108,7 +2109,7 @@
                         android:gravity="center"
                         android:text="23.25"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -2117,7 +2118,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -2133,7 +2134,7 @@
                         android:text="304V/5A时："
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result_tv29"
@@ -2143,7 +2144,7 @@
                         android:gravity="center"
                         android:text="23.25"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -2152,7 +2153,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -2161,7 +2162,7 @@
                         android:layout_marginLeft="90dp"
                         android:text="437V/5A时："
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/result_tv30"
@@ -2171,7 +2172,7 @@
                         android:gravity="center"
                         android:text="23.25"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
 
                     <TextView
 
@@ -2180,7 +2181,7 @@
                         android:text="V"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
             </LinearLayout>

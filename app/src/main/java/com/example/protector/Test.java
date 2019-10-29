@@ -3,6 +3,7 @@ package com.example.protector;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -68,7 +70,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
         final List<TestData> dataList = DataSupport.findAll(TestData.class);
 
-
         for (int i = 1; i < 5; i++) {
             int shuliang=0,zongshijian=0;
             String num = String.valueOf(i);
@@ -98,6 +99,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         testGv2ItemAdapter.notifyDataSetChanged();
         List<ProductType> types = DataSupport.findAll(ProductType.class);
         List<Operator> operators = DataSupport.findAll(Operator.class);
+//        stats_tv1.setText(types.get(0).getXinghao());
         for (int i = 0; i < types.size(); i++) {
             sp_chanpin.add(types.get(i).getName());
             sp_shengchan.add(types.get(i).getChangjia());
@@ -119,6 +121,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 list2.clear();
+                //当测程改变  通过串口向测试台主机发送信息
                 switch (position) {
                     case 0:
                         for (int i = 0; i < 5; i++) {
@@ -302,6 +305,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
         private void initializeViews(TestData testData, ViewHolder holder,int what) {
             //TODO implement
+
             holder.testItem2Tv.setText("工位"+(what+1));
             holder.testItem2Tv1.setText("自动");
             holder.testItem2Tv2.setText(testData.getChanpinbianma());
@@ -318,11 +322,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv8.setText(testData.getQidongshijian());
             holder.testItem2Tv9.setText(testData.getM13xianshishijian());
             holder.testItem2Tv10.setText(testData.getM30xianshishijian());
-            holder.testItem2Tv11.setText("");
-            holder.testItem2Tv12.setText("");
-//            holder.testItem2Tv13.setText(testData.getQidongshijian());
-//            holder.testItem2Tv14.setText(testData.getQidongshijian());
-//            holder.testItem2Tv15.setText(testData.getQidongshijian());
+            holder.testItem2Tv11.setText(testData.getXianquanchuanlian5());
+            holder.testItem2Tv12.setText(testData.getXianquanbinglian());
             holder.testItem2Tv16.setText("无");
             holder.testItem2Tv17.setText("合格");
 
@@ -381,6 +382,18 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 //                    timer.schedule(timerTask,0,1000);
                 }
             });
+            if (what == 4) {
+                holder.testBtn2.setBackgroundResource(R.drawable.queding);
+                holder.testBtn3.setBackgroundResource(R.drawable.queding);
+                holder.testBtn4.setBackgroundResource(R.drawable.queding);
+                holder.testItem2Tv.setBackgroundResource(R.drawable.huiseshangyuanjiao);
+
+                holder.testBtn2.setEnabled(false);
+                holder.testBtn3.setEnabled(false);
+                holder.testBtn4.setEnabled(false);
+                holder.gv2_layout.setEnabled(false);
+            }
+
         }
 
         protected class ViewHolder {
@@ -405,6 +418,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             private Button testBtn4;
             private Button testBtn3;
             private Button testBtn2;
+            private LinearLayout gv2_layout;
 
             public ViewHolder(View view) {
                 testItem2Tv = (TextView) view.findViewById(R.id.test_item2_tv);
@@ -428,6 +442,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 testBtn4 = (Button) view.findViewById(R.id.test_btn4);
                 testBtn3 = (Button) view.findViewById(R.id.test_btn3);
                 testBtn2 = (Button) view.findViewById(R.id.test_btn2);
+                gv2_layout = view.findViewById(R.id.gv2_layout);
             }
         }
     }
