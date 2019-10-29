@@ -994,7 +994,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv1"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1031,7 +1031,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv2"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1068,7 +1068,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv3"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1105,7 +1105,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv4"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1142,7 +1142,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv5"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1179,7 +1179,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv6"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1264,7 +1264,7 @@
 
         <LinearLayout
             android:layout_width="470dp"
-            android:layout_height="350dp"
+            android:layout_height="225dp"
             android:layout_x="276dp"
             android:layout_y="9dp"
             android:orientation="vertical">
@@ -1303,7 +1303,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv7"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1333,7 +1333,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv8"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1369,7 +1369,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv9"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1399,7 +1399,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv10"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1436,7 +1436,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv11"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1466,7 +1466,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv12"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right"
@@ -1489,8 +1489,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="336dp"
-                android:layout_height="145dp"
+                android:layout_width="250dp"
+                android:layout_height="85dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -1511,7 +1511,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv13"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/dialog_test2_2"
@@ -1551,7 +1551,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv14"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/dialog_test2_2"
@@ -1591,7 +1591,7 @@
 
                     <TextView
                         android:id="@+id/result2_tv15"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/dialog_test2_2"
