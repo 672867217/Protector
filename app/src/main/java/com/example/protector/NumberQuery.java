@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protector.SQl.TestData;
+import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
@@ -47,6 +48,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_number_query);
         initView();
+        new Utils().hideNavKey(NumberQuery.this);
         list = new ArrayList();
         TestData testData = new TestData();
         list.add(testData);
@@ -194,7 +196,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 holder.item1Tv6.setText(arr[arr.length-1]+"");
                 holder.item1Tv7.setText(object.getM13xianshishijian());
                 holder.item1Tv8.setText(object.getM30xianshishijian());
-                holder.item1Tv9.setText("");
+                holder.item1Tv9.setText(object.getXianquanchuanlian5());
                 holder.item1Tv10.setText(arr2[arr2.length-1]+"");
                 holder.item1Tv11.setText(arr3[arr3.length-1]+"");
                 holder.item1Tv12.setText(arr4[0]+"");

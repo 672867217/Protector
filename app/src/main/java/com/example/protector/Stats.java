@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.protector.SQl.Operator;
 import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.TestData;
+import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
@@ -52,7 +53,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
         initView();
-
+        new Utils().hideNavKey(Stats.this);
 
         List list = new ArrayList();
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="250dp"
-    android:layout_height="550dp"
+    android:layout_width="192dp"
+    android:layout_height="449dp"
     android:layout_marginRight="43dp"
     android:background="@drawable/bg_huiseyuanjiao"
     android:gravity="center|top"
@@ -24,7 +24,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="288dp"
+        android:layout_height="230dp"
         android:orientation="horizontal">
 
         <TextView
@@ -33,18 +33,18 @@
             android:gravity="center"
             android:text="最\n大\n误\n差"
             android:textColor="#000"
-            android:textSize="22sp" />
+            android:textSize="17dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="230dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -55,30 +55,30 @@
                     android:layout_height="wrap_content"
                     android:text="A 相电流  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv1"
-                    android:layout_width="99dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="A"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -89,30 +89,30 @@
                     android:layout_height="wrap_content"
                     android:text="B 相电流  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv2"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="A"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -123,30 +123,30 @@
                     android:layout_height="wrap_content"
                     android:text="C 相电流  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv3"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="A"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -157,30 +157,30 @@
                     android:layout_height="wrap_content"
                     android:text="串联电压  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv4"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="V"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -191,30 +191,30 @@
                     android:layout_height="wrap_content"
                     android:text="并联电压  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv5"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="V"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -225,30 +225,30 @@
                     android:layout_height="wrap_content"
                     android:text="启动时间  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv6"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ms"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -259,30 +259,30 @@
                     android:layout_height="wrap_content"
                     android:text="断相时间  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv7"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ms"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -293,30 +293,30 @@
                     android:layout_height="wrap_content"
                     android:text="13秒时间 :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv8"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ms"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -327,23 +327,23 @@
                     android:layout_height="wrap_content"
                     android:text="30秒时间 :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv9"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ms"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -360,7 +360,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="130dp"
         android:orientation="horizontal">
 
         <TextView
@@ -369,7 +369,7 @@
             android:gravity="center"
             android:text="统\n计\n数\n量"
             android:textColor="#000"
-            android:textSize="22sp" />
+            android:textSize="17dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -378,8 +378,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -390,30 +390,30 @@
                     android:layout_height="wrap_content"
                     android:text="一测数量  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv10"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="台"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -424,30 +424,30 @@
                     android:layout_height="wrap_content"
                     android:text="二测数量  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv11"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="台"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -458,30 +458,30 @@
                     android:layout_height="wrap_content"
                     android:text="三测数量  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv12"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="台"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -492,30 +492,30 @@
                     android:layout_height="wrap_content"
                     android:text="其他数量  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv13"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="台"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#e6e6e6"
                 android:gravity="center|left"
@@ -526,23 +526,23 @@
                     android:layout_height="wrap_content"
                     android:text="合计数量  :  "
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/item_tv14"
-                    android:layout_width="99dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="台"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -559,8 +559,8 @@
 
         <Button
             android:id="@+id/item_btn"
-            android:layout_width="137dp"
-            android:layout_height="35dp"
+            android:layout_width="97dp"
+            android:layout_height="23dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/queding"
             android:text="详细信息" />

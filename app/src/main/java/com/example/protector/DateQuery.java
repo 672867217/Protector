@@ -32,6 +32,7 @@ import org.litepal.crud.DataSupport;
 import java.io.Serializable;
 import java.text.ParseException;
 import com.example.protector.SQl.ProductType;
+import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
@@ -77,7 +78,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_query);
         initView();
-
+        new Utils().hideNavKey(DateQuery.this);
         SharedPreferences preferences = getSharedPreferences("cecheng",0);
         cecheng = Integer.parseInt(preferences.getString("what","1"));
         switch (cecheng) {

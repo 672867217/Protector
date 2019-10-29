@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.protector.SQl.Operator;
 import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.TestData;
+import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
@@ -64,7 +65,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         initView();
-
+        new Utils().hideNavKey(Test.this);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         stats_tv2.setText(dateFormat.format(new Date()));
 
@@ -97,9 +98,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         testGv2ItemAdapter = new TestGv2ItemAdapter(this, list2);
         test_gv2.setAdapter(testGv2ItemAdapter);
         testGv2ItemAdapter.notifyDataSetChanged();
-        List<ProductType> types = DataSupport.findAll(ProductType.class);
+        final List<ProductType> types = DataSupport.findAll(ProductType.class);
         List<Operator> operators = DataSupport.findAll(Operator.class);
-//        stats_tv1.setText(types.get(0).getXinghao());
+
         for (int i = 0; i < types.size(); i++) {
             sp_chanpin.add(types.get(i).getName());
             sp_shengchan.add(types.get(i).getChangjia());
@@ -111,9 +112,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         ArrayAdapter ceshiAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item,sp_ceshi);
         ArrayAdapter chanpinAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_chanpin);
         ArrayAdapter saveAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_save);
-        ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, sp_shengchan);
+
         chanpin_spinner.setAdapter(chanpinAdapter);
-        chanpin_spinner2.setAdapter(shengchanAdapter);
+
         chanpin_spinner3.setAdapter(nameAdapter);
         chanpin_spinner4.setAdapter(saveAdapter);
         chanpin_spinner5.setAdapter(ceshiAdapter);
@@ -163,7 +164,21 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
             }
         });
+        chanpin_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(types.size() != 0){
+                    stats_tv1.setText(types.get(i).getXinghao());
+                    ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, new String[]{sp_shengchan.get(i)+""});
+                    chanpin_spinner2.setAdapter(shengchanAdapter);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
 

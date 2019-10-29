@@ -7,6 +7,7 @@ public class XiuGai extends DataSupport {
     //设置参数表
     //---------------------------
     private int id;
+    private int gonwei;
     private String qidong ="150";
     private String duanxiang ="250";
     private String m13 ="1";
@@ -28,6 +29,14 @@ public class XiuGai extends DataSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getGonwei() {
+        return gonwei;
+    }
+
+    public void setGonwei(int gonwei) {
+        this.gonwei = gonwei;
     }
 
     public String getQidong() {

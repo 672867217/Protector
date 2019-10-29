@@ -21,7 +21,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="443dp"
+        android:layout_height="471dp"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
@@ -29,8 +29,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70px"
-            android:layout_marginBottom="50px"
+            android:layout_height="129dp"
+            android:layout_marginBottom="25px"
             android:orientation="horizontal">
 
             <Button
@@ -57,8 +57,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70px"
-            android:layout_marginBottom="50px"
+            android:layout_height="129dp"
+            android:layout_marginBottom="25px"
             android:orientation="horizontal">
 
             <Button
@@ -86,7 +86,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70px"
+            android:layout_height="129dp"
             android:orientation="horizontal">
 
             <Button

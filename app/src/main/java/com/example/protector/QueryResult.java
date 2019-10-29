@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protector.SQl.TestData;
+import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
@@ -96,6 +97,7 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_result);
         initView();
+        new Utils().hideNavKey(QueryResult.this);
         if(getIntent().getBundleExtra("s").getInt("flag") == 1){
             testData = (TestData) getIntent().getBundleExtra("s").getSerializable("data");
             dianzu = getIntent().getBundleExtra("s").getInt("dianzu");

@@ -6,6 +6,8 @@
     android:layout_height="785dp"
     android:background="#035f5e"
     android:gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context=".Test">
 
@@ -115,7 +117,7 @@
                     android:gravity="center"
                     android:text="2018-10-22"
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="14dp" />
 
             </LinearLayout>
 

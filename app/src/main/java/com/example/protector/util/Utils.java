@@ -1,5 +1,10 @@
 package com.example.protector.util;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.Build;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +12,7 @@ import java.util.List;
  * 串口数据转换工具类
  * Created by Administrator on 2016/6/2.
  */
-public class DataUtils {
+public class Utils {
     //-------------------------------------------------------
     // 判断奇数或偶数，位运算，最后一位是1则为奇数，为0是偶数
     public static int isOdd(int num) {
@@ -30,6 +35,19 @@ public class DataUtils {
         return (byte) Integer.parseInt(inHex, 16);
     }
 
+
+    public static void hideNavKey(Context context) {
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
+            View v = ((Activity) context).getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = ((Activity) context).getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
     //-------------------------------------------------------
     //1字节转2个Hex字符
     public static String Byte2Hex(Byte inByte) {
@@ -127,13 +145,13 @@ public class DataUtils {
      * @return 结果
      */
     public static String sum(String cmd) {
-        List<String> cmdList = DataUtils.getDivLines(cmd, 2);
+        List<String> cmdList = Utils.getDivLines(cmd, 2);
         int sumInt = 0;
         for (String c : cmdList) {
-            sumInt += DataUtils.HexToInt(c);
+            sumInt += Utils.HexToInt(c);
         }
-        String sum = DataUtils.IntToHex(sumInt);
-        sum = DataUtils.twoByte(sum);
+        String sum = Utils.IntToHex(sumInt);
+        sum = Utils.twoByte(sum);
         cmd += sum;
         return cmd.toUpperCase();
     }
