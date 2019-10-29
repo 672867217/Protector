@@ -244,7 +244,9 @@ public class MainActivity extends AppCompatActivity {
                         dialog2_btn1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this,Test.class));
+                                Intent intent = new Intent(MainActivity.this,Test.class);
+                                intent.putExtra("what", 1);
+                                startActivity(intent);
                                 dialog.dismiss();
                                 dialog2.dismiss();
                             }

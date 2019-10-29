@@ -3,6 +3,7 @@ package com.example.protector;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -59,6 +60,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     String[] gv1_name2 = {"一测", "二测", "三测","其他"};
     List<Bean> list1 = new ArrayList();
     List<TestData> list2 = new ArrayList();
+    boolean saveMode ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,27 +71,42 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         stats_tv2.setText(dateFormat.format(new Date()));
 
+        //数据库数据
         final List<TestData> dataList = DataSupport.findAll(TestData.class);
 
-        for (int i = 1; i < 5; i++) {
-            int shuliang=0,zongshijian=0;
-            String num = String.valueOf(i);
-            if (i == 4) {
-                num = 0 + "";
+        //如果是新班次
+        int what = getIntent().getIntExtra("what", -1);
+        if (what == 1) {
+            for (int i = 0; i < 5; i++) {
+                Bean bean = new Bean();
+                bean.ceshi = String.valueOf(0);
+                bean.tongguo = String.valueOf(0);
+                bean.weitongguo = String.valueOf(0);
+                bean.yongshi = "0";
+                list1.add(bean);
             }
-            for (int j = 0; j < dataList.size(); j++) {
-                if (dataList.get(j).getCecheng().equals(num)) {
-                    shuliang++;
-                    zongshijian = Integer.parseInt(dataList.get(i).getCeshishichang());
+        } else {
+            for (int i = 1; i < 5; i++) {
+                int shuliang=0,zongshijian=0;
+                String num = String.valueOf(i);
+                if (i == 4) {
+                    num = 0 + "";
                 }
+                for (int j = 0; j < dataList.size(); j++) {
+                    if (dataList.get(j).getCecheng().equals(num)) {
+                        shuliang++;
+                        zongshijian = Integer.parseInt(dataList.get(i).getCeshishichang());
+                    }
+                }
+                Bean bean = new Bean();
+                bean.ceshi = String.valueOf(shuliang);
+                bean.tongguo = String.valueOf(shuliang);
+                bean.weitongguo = String.valueOf(shuliang);
+                bean.yongshi = zongshijian/60+"'"+zongshijian%60+"\"";
+                list1.add(bean);
             }
-            Bean bean = new Bean();
-            bean.ceshi = String.valueOf(shuliang);
-            bean.tongguo = String.valueOf(shuliang);
-            bean.weitongguo = String.valueOf(shuliang);
-            bean.yongshi = zongshijian/60+"'"+zongshijian%60+"\"";
-            list1.add(bean);
         }
+
 
         testGv1ItemAdapter = new TestGv1ItemAdapter(this, list1);
         test_gv1.setAdapter(testGv1ItemAdapter);
@@ -118,6 +135,21 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         chanpin_spinner3.setAdapter(nameAdapter);
         chanpin_spinner4.setAdapter(saveAdapter);
         chanpin_spinner5.setAdapter(ceshiAdapter);
+        chanpin_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(types.size() != 0){
+                    stats_tv1.setText(types.get(i).getXinghao());
+                    ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, new String[]{sp_shengchan.get(i)+""});
+                    chanpin_spinner2.setAdapter(shengchanAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         chanpin_spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -164,18 +196,19 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
             }
         });
-        chanpin_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        chanpin_spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(types.size() != 0){
-                    stats_tv1.setText(types.get(i).getXinghao());
-                    ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_spinner_dropdown_item, new String[]{sp_shengchan.get(i)+""});
-                    chanpin_spinner2.setAdapter(shengchanAdapter);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    saveMode = true;
+                } else {
+                    saveMode = false;
                 }
+                testGv2ItemAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -397,6 +430,13 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 //                    timer.schedule(timerTask,0,1000);
                 }
             });
+            if (saveMode) {
+                holder.testBtn2.setBackgroundResource(R.drawable.queding);
+                holder.testBtn2.setEnabled(false);
+            }else {
+                holder.testBtn2.setBackgroundResource(R.drawable.dayinweixiuqindan);
+                holder.testBtn2.setEnabled(true);
+            }
             if (what == 4) {
                 holder.testBtn2.setBackgroundResource(R.drawable.queding);
                 holder.testBtn3.setBackgroundResource(R.drawable.queding);
