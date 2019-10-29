@@ -87,7 +87,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             bean.ceshi = String.valueOf(shuliang);
             bean.tongguo = String.valueOf(shuliang);
             bean.weitongguo = String.valueOf(shuliang);
-            bean.yongshi = zongshijian/60+"'"+zongshijian%60+"s";
+            bean.yongshi = zongshijian/60+"'"+zongshijian%60+"\"";
             list1.add(bean);
         }
 
