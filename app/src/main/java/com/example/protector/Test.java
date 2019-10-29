@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -201,6 +202,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     saveMode = true;
+                    //自动模式 存数据
+//                    TestData testData = new TestData();
+//                    testData.save();
                 } else {
                     saveMode = false;
                 }
@@ -454,7 +458,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         protected class ViewHolder {
             private TextView testItem2Tv;
             private TextView testItem2Tv1;
-            private TextView testItem2Tv2;
+            private EditText testItem2Tv2;
             private TextView testItem2Tv3;
             private TextView testItem2Tv4;
             private TextView testItem2Tv5;
@@ -478,7 +482,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             public ViewHolder(View view) {
                 testItem2Tv = (TextView) view.findViewById(R.id.test_item2_tv);
                 testItem2Tv1 = (TextView) view.findViewById(R.id.test_item2_tv1);
-                testItem2Tv2 = (TextView) view.findViewById(R.id.test_item2_tv2);
+                testItem2Tv2 = (EditText) view.findViewById(R.id.test_item2_tv2);
                 testItem2Tv3 = (TextView) view.findViewById(R.id.test_item2_tv3);
                 testItem2Tv4 = (TextView) view.findViewById(R.id.test_item2_tv4);
                 testItem2Tv5 = (TextView) view.findViewById(R.id.test_item2_tv5);

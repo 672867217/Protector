@@ -75,7 +75,7 @@
                 android:textColor="#000000"
                 android:textSize="14dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/test_item2_tv2"
                 android:layout_width="93dp"
                 android:layout_height="wrap_content"
