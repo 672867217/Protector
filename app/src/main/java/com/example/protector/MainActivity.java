@@ -1,5 +1,6 @@
 package com.example.protector;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -10,6 +11,9 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.widget.Button;
@@ -23,6 +27,8 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
@@ -34,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
     private Button button5;
     private SharedPreferences.Editor editor;
     private SerialPortUtil utils = new SerialPortUtil();
-    private byte[] mBuffer;
-    public  char strChar;
     Utils util = new Utils();
     TestData testData ;
     BigDecimal b1 = new BigDecimal("0.001");
     BigDecimal b3 = new BigDecimal("0.01");
     BigDecimal b4 = new BigDecimal("0.1");
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    private Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,19 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         button6 = (Button) findViewById(R.id.button6);
         button5 = (Button) findViewById(R.id.button5);
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == 1) {
+                    timer.cancel();
+                    button2.performClick();
+                }
+            }
+        };
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
 //        utils.openSerialPort();
         util.hideNavKey(MainActivity.this);
         for (int i = 0; i < 5; i++) {
@@ -195,18 +214,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
-//        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
-//        editor = getSharedPreferences("diyici",MODE_PRIVATE).edit();
-//
-//        Timer timer = new Timer();
-//        TimerTask timerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        };
-//        timer.schedule(timerTask,0,5000);
 
         //测试页
         button2.setOnClickListener(new View.OnClickListener() {
@@ -216,12 +223,6 @@ public class MainActivity extends AppCompatActivity {
                 final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).setView(view).show();
                 Button dialog1_btn1 = view.findViewById(R.id.test_dialog1_btn1);
                 Button dialog1_btn2 = view.findViewById(R.id.test_dialog1_btn2);
-
-             //   设置dialog 宽 高的大小
-//                final WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-//                params.width = 320;
-//                params.height = 300;
-//                dialog.getWindow().setAttributes(params);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog1_btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -264,6 +265,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,Stats.class));
             }
         });
+
+        if (preferences.getBoolean("diyici", false)) {
+            return;
+        }else {
+            editor.putBoolean("diyici", true).commit();
+            timer = new Timer();
+            TimerTask timerTask =new TimerTask() {
+                @Override
+                public void run() {
+                    handler.sendEmptyMessage(1);
+                }
+            };
+            timer.schedule(timerTask,5000,500);
+        }
     }
 
     private String jisuan(String s){
