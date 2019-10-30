@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class Stats extends AppCompatActivity implements View.OnClickListener {
@@ -53,6 +54,10 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
         initView();
+
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+        stats_tv2.setText(dateFormat2.format(new Date()));
+
         new Utils().hideNavKey(Stats.this);
 
         List list = new ArrayList();

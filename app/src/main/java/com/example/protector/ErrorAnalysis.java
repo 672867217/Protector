@@ -76,6 +76,10 @@ public class ErrorAnalysis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error_analysis);
         initView();
+
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+        statsTv3.setText(dateFormat2.format(new Date()));
+        //下方控制栏
         new Utils().hideNavKey(ErrorAnalysis.this);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override

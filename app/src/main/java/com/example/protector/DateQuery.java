@@ -70,7 +70,6 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
     private SimpleDateFormat dateFormat;
     private Calendar calendar;
     private List<TestData> dataList2;
-    private SimpleDateFormat dateFormat2;
     private int cecheng;
 
     @Override
@@ -96,7 +95,9 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 break;
         }
 
-        dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+        stats_tv3.setText(dateFormat2.format(new Date()));
         //spinner
         final List list = new ArrayList();
 
@@ -159,7 +160,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                             Bean bean = new Bean();
                             bean.number1 = String.valueOf((i + 1));
                             bean.number2 = dataList2.get(i).getChanpinbianma();
-                            bean.date = dateFormat2.format(dataList2.get(i).getDate());
+                            bean.date = dateFormat.format(dataList2.get(i).getDate());
                             bean.result = "合格";
                             bean.name = "人员1";
                             bean.id = dataList2.get(i).getId();
@@ -388,7 +389,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 }
                 shuliang = dataList2.size();
                 init2();
-                dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
                 listview1.setEnabled(true);
                 listview2.setEnabled(true);
                 footer_tv3.setText("1");
