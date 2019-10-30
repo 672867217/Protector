@@ -11,7 +11,9 @@ public class TestData extends DataSupport implements Serializable {
 
 
     private int id;
-    private Date date;//时间
+    private Date date;//开始时间
+    private Date date2;//结束时间
+    private int type;//状态值    0---》上一班    1----》新班次
     private String gongwei = "";//工位
     private String cecheng = "";//测程
     private String ceshishichang = "";//测试时长

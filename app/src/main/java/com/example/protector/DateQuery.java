@@ -265,7 +265,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         }
                         stats_tv2.setText(year + "-" + mymonth + "-" + myday);
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_WEEK)).show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         stats_tv3.setOnClickListener(new View.OnClickListener() {
@@ -287,7 +287,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         }
                         stats_tv3.setText(year + "-" + mymonth + "-" + myday);
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_WEEK)).show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 

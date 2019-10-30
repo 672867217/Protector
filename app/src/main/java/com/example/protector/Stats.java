@@ -111,7 +111,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         stats_tv1.setText(year + "-" + mymonth + "-" + myday);
                         date1 = stats_tv1.getText().toString();
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_WEEK)).show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         stats_tv2.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +135,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         stats_tv2.setText(year + "-" + mymonth + "-" + myday);
                         date2 = stats_tv2.getText().toString();
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_WEEK)).show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 

@@ -1,6 +1,8 @@
 package com.example.protector;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Setting extends Activity implements View.OnClickListener {
 
@@ -642,36 +645,51 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
             case R.id.button16:
                 //默认值
-                Moren moren = new Moren();
-                ed_qidongxiangying.setText(moren.qidong);
-                ed_duanxiangxiangying.setText(moren.duanxiang);
-                ed_13xianshi.setText(moren.m13);
-                ed_30xianshi.setText(moren.m30);
-                ed_chuanlian1.setText(moren.chuanlian1);
-                ed_chuanlan2.setText(moren.chuanlian2);
-                ed_binglian1.setText(moren.binglian1);
-                ed_binglian2.setText(moren.binglian2);
-                ed_duanxiangzhiliu.setText(moren.duanxiangzhiliu);
-                ed_jiaoliuxianquan.setText(moren.jiaoliu);
-                ed_xiangjian.setText(moren.xiangjian);
-                ed_xiangduidi.setText(moren.xiangduixianquan);
-                ed_xiangdui.setText(moren.xiangduidi);
-                ed_xianquanduidi.setText(moren.xianquan);
-                xiuGai.setQidong("150");
-                xiuGai.setDuanxiang("250");
-                xiuGai.setM13("1");
-                xiuGai.setM30("1");
-                xiuGai.setChuanlian1("20.0");
-                xiuGai.setChuanlian2("27.5");
-                xiuGai.setBinglian1("10.0");
-                xiuGai.setBinglian2("14.0");
-                xiuGai.setDuanxiangzhiliu("0.2");
-                xiuGai.setJiaoliu("3.0");
-                xiuGai.setXiangjian("500");
-                xiuGai.setXiangduidi("500");
-                xiuGai.setXiangduixianquan("500");
-                xiuGai.setXianquan("500");
-                xiuGai.save();
+                final AlertDialog alertDialog = new AlertDialog.Builder(Setting.this).create();
+                alertDialog.setTitle("提示");
+                alertDialog.setMessage("是否恢复默认值");
+                alertDialog.setButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Moren moren = new Moren();
+                        ed_qidongxiangying.setText(moren.qidong);
+                        ed_duanxiangxiangying.setText(moren.duanxiang);
+                        ed_13xianshi.setText(moren.m13);
+                        ed_30xianshi.setText(moren.m30);
+                        ed_chuanlian1.setText(moren.chuanlian1);
+                        ed_chuanlan2.setText(moren.chuanlian2);
+                        ed_binglian1.setText(moren.binglian1);
+                        ed_binglian2.setText(moren.binglian2);
+                        ed_duanxiangzhiliu.setText(moren.duanxiangzhiliu);
+                        ed_jiaoliuxianquan.setText(moren.jiaoliu);
+                        ed_xiangjian.setText(moren.xiangjian);
+                        ed_xiangduidi.setText(moren.xiangduixianquan);
+                        ed_xiangdui.setText(moren.xiangduidi);
+                        ed_xianquanduidi.setText(moren.xianquan);
+                        xiuGai.setQidong("150");
+                        xiuGai.setDuanxiang("250");
+                        xiuGai.setM13("1");
+                        xiuGai.setM30("1");
+                        xiuGai.setChuanlian1("20.0");
+                        xiuGai.setChuanlian2("27.5");
+                        xiuGai.setBinglian1("10.0");
+                        xiuGai.setBinglian2("14.0");
+                        xiuGai.setDuanxiangzhiliu("0.2");
+                        xiuGai.setJiaoliu("3.0");
+                        xiuGai.setXiangjian("500");
+                        xiuGai.setXiangduidi("500");
+                        xiuGai.setXiangduixianquan("500");
+                        xiuGai.setXianquan("500");
+                        xiuGai.save();
+                    }
+                  });
+                alertDialog.setButton2("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
                 break;
         }
     }
@@ -849,8 +867,6 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        // TODO validate success, do something
         xiuGai.setQidong(ed_qidongxiangying.getText().toString());
         xiuGai.setDuanxiang(ed_duanxiangxiangying.getText().toString());
         xiuGai.setM13(ed_13xianshi.getText().toString());
@@ -866,5 +882,22 @@ public class Setting extends Activity implements View.OnClickListener {
         xiuGai.setXiangduixianquan(ed_xiangdui.getText().toString());
         xiuGai.setXianquan(ed_xianquanduidi.getText().toString());
         xiuGai.save();
+        // TODO validate success, do something
+        View view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu,null);
+        final MyDialog myDialog = new MyDialog(Setting.this,view,R.style.dialog);
+        myDialog.show();
+         TextView testDialog2Tv;
+         ImageView testDialog2Img;
+         Button testDialog2Btn1;
+
+        testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
+        testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
+        testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
+        testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
     }
 }

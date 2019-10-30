@@ -1,8 +1,10 @@
 package com.example.protector.util;
 
 import android.util.Log;
+import android.widget.Toast;
 
 
+import com.example.protector.MainActivity;
 import com.example.protector.SQl.TestData;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,13 +35,14 @@ public class SerialPortUtil {
     private ReceiveThread mReceiveThread = null;
     private boolean isStart = false;
     private TestData testData ;
+    public String str;
     /**
      * 打开串口，接收数据
      * 通过串口，接收单片机发送来的数据
      */
     public void openSerialPort() {
         try {
-            serialPort = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
+            serialPort = new SerialPort(new File("/dev/ttyS2"), 115200, 0);
             //调用对象SerialPort方法，获取串口中"读和写"的数据流
             inputStream = serialPort.getInputStream();
             outputStream = serialPort.getOutputStream();
@@ -111,6 +114,8 @@ public class SerialPortUtil {
                 try {
                     int size = inputStream.read(readData);
                     if (size > 0) {
+                        str = new String(readData).trim();
+
 //                        String readString2 = new String(readData).trim();
 //                        Utils utils = new Utils();
 //                        List<String> strings = utils.getDivLines(readString2,2);
