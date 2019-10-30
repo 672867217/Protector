@@ -363,7 +363,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(this, "请选择开始日期", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (stats_tv3.getText().toString().equals("")) {
+                if (stats_tv3.getText().toString().isEmpty()) {
                     Toast.makeText(this, "请选择结束日期", Toast.LENGTH_SHORT).show();
                     return;
                 }

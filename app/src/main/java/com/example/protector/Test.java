@@ -448,8 +448,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void run() {
                             //数据保存到数据库
-                            TestData testData = new TestData();
-                            testData.save();
+//                            TestData testData = new TestData();
+//                            testData.save();
                             dialog.dismiss();
                             timer.cancel();
                         }

@@ -147,7 +147,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                     Toast.makeText(this, "请选择开始日期", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (stats_tv2.getText().toString().equals("")) {
+                if (stats_tv2.getText().toString().isEmpty()) {
                     Toast.makeText(this, "请选择结束日期", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -195,8 +195,8 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         bean.value4 = String.valueOf(100);
                         bean.value5 = (shichang / shuliang) % 60 + "'" + (shichang / shuliang) / 60;
                         bean.value6 = shichangList.get(0) % 60 + "'" + shichangList.get(0) / 60;
-                        bean.value7 = shichangList.get(shichangList.size() - 1) % 60 + "'"
-                                + shichangList.get(shichangList.size() - 1) / 60;
+                        bean.value7 = shichangList.get(shichangList.size() - 1) % 60 + "\'"
+                                + shichangList.get(shichangList.size() - 1) / 60+"\"";
                     }
                     beanList.add(bean);
                 }
