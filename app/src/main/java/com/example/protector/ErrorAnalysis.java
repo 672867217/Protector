@@ -242,7 +242,7 @@ public class ErrorAnalysis extends AppCompatActivity {
                         }
                         statsTv2.setText(year + "-" + mymonth + "-" + myday);
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_WEEK)).show();
             }
         });
         statsTv3.setOnClickListener(new View.OnClickListener() {
@@ -264,7 +264,7 @@ public class ErrorAnalysis extends AppCompatActivity {
                         }
                         statsTv3.setText(year + "-" + mymonth + "-" + myday);
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.DAY_OF_WEEK)).show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_WEEK)).show();
             }
         });
         btnChaxun.setOnClickListener(new View.OnClickListener() {

@@ -95,9 +95,11 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 int shuliang=0,zongshijian=0;
                 String num = String.valueOf(i);
                 if (i == 4) {
+                    // num = 0 的时候 为其他测程
                     num = 0 + "";
                 }
                 for (int j = 0; j < dataList.size(); j++) {
+                    //遍历数据库数据 如果测程等于1 数量增加;
                     if (dataList.get(j).getCecheng().equals(num)) {
                         shuliang++;
                         zongshijian = Integer.parseInt(dataList.get(i).getCeshishichang());
@@ -379,8 +381,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv10.setText(testData.getM30xianshishijian());
             holder.testItem2Tv11.setText(testData.getXianquanchuanlian5());
             holder.testItem2Tv12.setText(testData.getXianquanbinglian());
-            holder.testItem2Tv16.setText("无");
-            holder.testItem2Tv17.setText("合格");
+            holder.testItem2Tv16.setText("");
+            holder.testItem2Tv17.setText("");
 
             int[] arr = new int[3];
             double[] arr2 = new double[3];
@@ -433,7 +435,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 //                    || Double.parseDouble(holder.testItem2Tv13.getText().toString()) > 0.2
 //                    || Double.parseDouble(holder.testItem2Tv14.getText().toString()) > 3
 //                    || Integer.parseInt(holder.testItem2Tv15.getText().toString()) < 500) {
-//
 //            }
 
             //点击保存弹出dialog 1秒后自动关闭
