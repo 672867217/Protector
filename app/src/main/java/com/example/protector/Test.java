@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.protector.SQl.Operator;
 import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.TestData;
+import com.example.protector.SQl.XiuGai;
+import com.example.protector.util.MyDialog;
 import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
@@ -33,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Test extends AppCompatActivity implements View.OnClickListener {
 
@@ -366,11 +370,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             if (Integer.parseInt(testData.getCeshishichang()) < 60) {
                 holder.testItem2Tv5.setText(testData.getCeshishichang()+"s");
             } else {
-                holder.testItem2Tv5.setText(Integer.parseInt(testData.getCeshishichang())/60+"'"
+                holder.testItem2Tv5.setText(Integer.parseInt(testData.getCeshishichang())/60+"\""
                         +Integer.parseInt(testData.getCeshishichang())%60+"s");
             }
             //测试结果
-//            holder.testItem2Tv7.setText(testData.getQidongshijian());
             holder.testItem2Tv8.setText(testData.getQidongshijian());
             holder.testItem2Tv9.setText(testData.getM13xianshishijian());
             holder.testItem2Tv10.setText(testData.getM30xianshishijian());
@@ -415,25 +418,47 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv14.setText(arr3[arr3.length-1]+"");
             holder.testItem2Tv15.setText(arr4[0]+"");
 
+//            List<XiuGai> biaozhun = DataSupport.findAll(XiuGai.class);
+            //参数是否合格是根据标准参数判断 还是根据生产参数判断  无法确定
+//            if (Integer.parseInt(holder.testItem2Tv7.getText().toString()) >= 150
+//                    || Integer.parseInt(holder.testItem2Tv8.getText().toString()) >= 250
+//                    || Double.parseDouble(holder.testItem2Tv9.getText().toString()) > 14
+//                    || Double.parseDouble(holder.testItem2Tv9.getText().toString()) < 12
+//                    || Double.parseDouble(holder.testItem2Tv10.getText().toString()) > 31
+//                    || Double.parseDouble(holder.testItem2Tv10.getText().toString()) < 29
+//                    || Double.parseDouble(holder.testItem2Tv11.getText().toString()) < 20
+//                    || Double.parseDouble(holder.testItem2Tv11.getText().toString()) > 27.5
+//                    || Double.parseDouble(holder.testItem2Tv12.getText().toString()) < 10
+//                    || Double.parseDouble(holder.testItem2Tv12.getText().toString()) > 14
+//                    || Double.parseDouble(holder.testItem2Tv13.getText().toString()) > 0.2
+//                    || Double.parseDouble(holder.testItem2Tv14.getText().toString()) > 3
+//                    || Integer.parseInt(holder.testItem2Tv15.getText().toString()) < 500) {
+//
+//            }
 
+            //点击保存弹出dialog 1秒后自动关闭
             holder.testBtn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     View view = LayoutInflater.from(Test.this).inflate(R.layout.dialog_test4, null);
-                    final Dialog dialog = new AlertDialog.Builder(Test.this).setView(view).show();
-                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-//                    final Timer timer = new Timer();
-//                    TimerTask timerTask = new TimerTask() {
-//                        @Override
-//                        public void run() {
-//                            dialog.dismiss();
-//                            System.out.println("提示关闭了~~~~~~");
-//                            timer.cancel();
-//                        }
-//                    };
-//                    timer.schedule(timerTask,0,1000);
+                    final MyDialog dialog = new MyDialog(Test.this, view, R.style.dialog);
+                    dialog.show();
+                    final Timer timer = new Timer();
+                    TimerTask timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            //数据保存到数据库
+                            TestData testData = new TestData();
+                            testData.save();
+                            dialog.dismiss();
+                            timer.cancel();
+                        }
+                    };
+                    timer.schedule(timerTask,1000,200);
                 }
             });
+
+            //保存模式为自动不可用 手动可用
             if (saveMode) {
                 holder.testBtn2.setBackgroundResource(R.drawable.queding);
                 holder.testBtn2.setEnabled(false);
@@ -441,6 +466,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 holder.testBtn2.setBackgroundResource(R.drawable.dayinweixiuqindan);
                 holder.testBtn2.setEnabled(true);
             }
+            //最后一个工位不工作 灰色
             if (what == 4) {
                 holder.testBtn2.setBackgroundResource(R.drawable.queding);
                 holder.testBtn3.setBackgroundResource(R.drawable.queding);
