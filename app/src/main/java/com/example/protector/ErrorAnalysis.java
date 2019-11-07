@@ -239,10 +239,10 @@ public class ErrorAnalysis extends AppCompatActivity {
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth + 1 < 10) {
-                            myday = "0" + (dayOfMonth + 1);
+                        if (dayOfMonth  < 10) {
+                            myday = "0" + dayOfMonth ;
                         } else {
-                            myday = String.valueOf(dayOfMonth + 1);
+                            myday = String.valueOf(dayOfMonth);
                         }
                         statsTv2.setText(year + "-" + mymonth + "-" + myday);
                     }
@@ -261,8 +261,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth + 1 < 10) {
-                            myday = "0" + (dayOfMonth + 1);
+                        if (dayOfMonth  < 10) {
+                            myday = "0" + dayOfMonth ;
                         } else {
                             myday = String.valueOf(dayOfMonth);
                         }

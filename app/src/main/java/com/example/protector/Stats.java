@@ -103,10 +103,10 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth + 1 < 10) {
-                            myday = "0" + (dayOfMonth + 1);
+                        if (dayOfMonth  < 10) {
+                            myday = "0" + dayOfMonth ;
                         } else {
-                            myday = String.valueOf(dayOfMonth + 1);
+                            myday = String.valueOf(dayOfMonth);
                         }
                         stats_tv1.setText(year + "-" + mymonth + "-" + myday);
                         date1 = stats_tv1.getText().toString();
@@ -127,8 +127,8 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth + 1 < 10) {
-                            myday = "0" + (dayOfMonth + 1);
+                        if (dayOfMonth  < 10) {
+                            myday = "0" + dayOfMonth ;
                         } else {
                             myday = String.valueOf(dayOfMonth);
                         }
