@@ -2,26 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="1024dp"
+    android:layout_height="768dp"
     android:background="#FEFEC9"
     android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
         android:layout_marginBottom="30dp"
+        android:gravity="center_vertical|center_horizontal"
         android:text="断相保护器测试台"
         android:textColor="#62332E"
-        android:textSize="100px"
+        android:textSize="95sp"
         tools:layout_editor_absoluteX="710dp"
         tools:layout_editor_absoluteY="327dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="471dp"
+        android:layout_height="437dp"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
@@ -30,7 +31,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="129dp"
-            android:layout_marginBottom="25px"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal">
 
             <Button
@@ -58,7 +59,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="129dp"
-            android:layout_marginBottom="25px"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal">
 
             <Button

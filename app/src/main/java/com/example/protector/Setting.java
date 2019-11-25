@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +21,13 @@ import com.example.protector.SQl.Operator;
 import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.XiuGai;
 import com.example.protector.util.MyDialog;
+import com.example.protector.util.SerialPortUtil;
 import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +37,7 @@ public class Setting extends Activity implements View.OnClickListener {
     private TextView erptongxun;
     private TextView neibutongxun2;
     private Button fanhui;
+    private Button fanhui2;
     private Spinner spinner1;
     private TextView textView7;
     private TextView textView8;
@@ -94,7 +99,12 @@ public class Setting extends Activity implements View.OnClickListener {
     private List<Caozuoyuan> caozuoyuans;
     private Spinner spinner;
     private int gonwei = 1;
-
+    private View view = null;
+    BigDecimal b1 = new BigDecimal("0.001");
+    BigDecimal b3 = new BigDecimal("0.01");
+    BigDecimal b4 = new BigDecimal("0.1");
+    DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    SerialPortUtil util = MainActivity.utils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,8 +120,9 @@ public class Setting extends Activity implements View.OnClickListener {
         list1.add("男");
         list1.add("女");
         for (int i = 0; i < 5; i++) {
-            list2.add(i+1+"");
+            list2.add(i + 1 + "");
         }
+
         chanpins = new ArrayList<>();
         caozuoyuans = new ArrayList<>();
         strings = new ArrayList<>();
@@ -126,25 +137,13 @@ public class Setting extends Activity implements View.OnClickListener {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                gonwei = i+1;
+                gonwei = i + 1;
                 List<XiuGai> xiuGais = DataSupport.findAll(XiuGai.class);
-                if(xiuGais.size() == 0)
-                {
-                    add(1);
-                }else {
-                    int a = 0;
-                    for (int j = 0; j < xiuGais.size(); j++) {
-                        if(xiuGais.get(j).getGonwei() == gonwei){
-                            a++;
-                            set(j);
-                        }
-                    }
-                    if(a==0){
-                        add(gonwei);
-                        set(xiuGais.size());
+                for (int j = 0; j < xiuGais.size(); j++) {
+                    if (xiuGais.get(j).getGonwei() == gonwei) {
+                        set(j);
                     }
                 }
-
             }
 
             @Override
@@ -182,11 +181,77 @@ public class Setting extends Activity implements View.OnClickListener {
 
             }
         });
-
+        //util.sendSerialPort("AAFF00511903028CF0070800D20104006E00820F00FF028A02EE0352028A19");
+        util.onReceive(new SerialPortUtil.Receive() {
+            @Override
+            public void set(String str, List<String> list) {
+                if(str.equals("60")){
+                    view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
+                    final MyDialog myDialog = new MyDialog(Setting.this, view, R.style.dialog);
+                    myDialog.show();
+                    TextView testDialog2Tv;
+                    ImageView testDialog2Img;
+                    Button testDialog2Btn1;
+                    testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
+                    testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
+                    testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
+                    testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view1) {
+                            myDialog.dismiss();
+                            view = null;
+                        }
+                    });
+                }
+                if(str.equals("50")){
+                    int a = 0;
+                    switch (new Utils().HexToInt(list.get(5))){
+                        case 1:
+                            xiuGai = DataSupport.find(XiuGai.class,1);
+                            a = 1;
+                            break;
+                        case 2:
+                            xiuGai = DataSupport.find(XiuGai.class,2);
+                            a = 2;
+                            break;
+                        case 3:
+                            xiuGai = DataSupport.find(XiuGai.class,3);
+                            a = 3;
+                            break;
+                        case 4:
+                            xiuGai = DataSupport.find(XiuGai.class,4);
+                            a = 4;
+                            break;
+                        case 5:
+                            xiuGai = DataSupport.find(XiuGai.class,5);
+                            a = 5;
+                            break;
+                    }
+                    xiuGai.setCecheng(new Utils().HexToInt(list.get(6))+"");
+                    xiuGai.setQidong(new Utils().HexToInt(list.get(7))+"");
+                    xiuGai.setDuanxiang(new Utils().HexToInt(list.get(8))+"");
+                    xiuGai.setM13(jisuan3(new Utils().HexToInt(list.get(9))+""));
+                    xiuGai.setM30(jisuan3(new Utils().HexToInt(list.get(10))+""));
+                    xiuGai.setChuanlian1(jisuan3(new Utils().HexToInt(list.get(11)+list.get(12))+""));
+                    xiuGai.setChuanlian2(jisuan3(new Utils().HexToInt(list.get(13)+list.get(14))+""));
+                    xiuGai.setBinglian1(jisuan3(new Utils().HexToInt(list.get(15)+list.get(16))+""));
+                    xiuGai.setBinglian2(jisuan3(new Utils().HexToInt(list.get(17)+list.get(18))+""));
+                    xiuGai.setDuanxiangzhiliu(jisuan2(new Utils().HexToInt(list.get(19))+""));
+                    xiuGai.setJiaoliu(jisuan2(new Utils().HexToInt(list.get(20)+list.get(21))+""));
+                    xiuGai.setXiangjian(new Utils().HexToInt(list.get(22)+list.get(23))+"");
+                    xiuGai.setXiangduidi(new Utils().HexToInt(list.get(24)+list.get(25))+"");
+                    xiuGai.setXiangduixianquan(new Utils().HexToInt(list.get(26)+list.get(27))+"");
+                    xiuGai.setXianquan(new Utils().HexToInt(list.get(28)+list.get(29))+"");
+                    xiuGai.save();
+                    Setting.this.set(a);
+                }
+            }
+        });
     }
 
-    private void add(int gonwei){
+    public void add(int gonwei) {
         XiuGai xiuGai = new XiuGai();
+        xiuGai.setCecheng("1");
         xiuGai.setQidong("150");
         xiuGai.setGonwei(gonwei);
         xiuGai.setDuanxiang("250");
@@ -204,8 +269,9 @@ public class Setting extends Activity implements View.OnClickListener {
         xiuGai.setXianquan("500");
         xiuGai.save();
     }
-    private void set(int j){
-        xiuGai = DataSupport.find(XiuGai.class, j+1);
+
+    private void set(int j) {
+        xiuGai = DataSupport.find(XiuGai.class, j + 1);
         ed_qidongxiangying.setText(xiuGai.getQidong());
         ed_duanxiangxiangying.setText(xiuGai.getDuanxiang());
         ed_13xianshi.setText(xiuGai.getM13());
@@ -221,6 +287,7 @@ public class Setting extends Activity implements View.OnClickListener {
         ed_xiangdui.setText(xiuGai.getXiangduidi());
         ed_xianquanduidi.setText(xiuGai.getXianquan());
     }
+
     private void init() {
         types = DataSupport.findAll(ProductType.class);
         operators = DataSupport.findAll(Operator.class);
@@ -267,6 +334,7 @@ public class Setting extends Activity implements View.OnClickListener {
         erptongxun = (TextView) findViewById(R.id.erptongxun);
         neibutongxun2 = (TextView) findViewById(R.id.neibutongxun2);
         fanhui = (Button) findViewById(R.id.fanhui);
+        fanhui2 = (Button) findViewById(R.id.fanhui2);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         textView7 = (TextView) findViewById(R.id.textView7);
         textView8 = (TextView) findViewById(R.id.textView8);
@@ -309,6 +377,7 @@ public class Setting extends Activity implements View.OnClickListener {
         button15 = (Button) findViewById(R.id.button15);
         button16 = (Button) findViewById(R.id.button16);
 
+        fanhui2.setOnClickListener(this);
         fanhui.setOnClickListener(this);
         button8.setOnClickListener(this);
         button9.setOnClickListener(this);
@@ -327,6 +396,9 @@ public class Setting extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.fanhui:
                 finish();
+                break;
+            case R.id.fanhui2:
+                util.sendSerialPort("AAFF00500000");
                 break;
             case R.id.button8:
                 //添加产品
@@ -681,8 +753,9 @@ public class Setting extends Activity implements View.OnClickListener {
                         xiuGai.setXiangduixianquan("500");
                         xiuGai.setXianquan("500");
                         xiuGai.save();
+                        util.sendSerialPort(cmd());
                     }
-                  });
+                });
                 alertDialog.setButton2("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -692,6 +765,26 @@ public class Setting extends Activity implements View.OnClickListener {
                 alertDialog.show();
                 break;
         }
+    }
+    private String cmd(){
+        String s = "AAFF005119";
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong())));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiang())));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13())*10));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30())*10));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1())*10));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2())*10));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1())*10));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2())*10));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu())*100));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu())*100));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
+
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
+        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
+        s+="19";
+        return s;
     }
 
     class Chanpin {
@@ -727,7 +820,7 @@ public class Setting extends Activity implements View.OnClickListener {
 
     private void submit() {
         // validate
-        int a = Integer.parseInt(ed_qidongxiangying.getText().toString().trim());
+        float a = Float.parseFloat(ed_qidongxiangying.getText().toString().trim());
         if (a > 150) {
             Toast.makeText(this, "启动响应时间只能输入小于150的数值！", Toast.LENGTH_SHORT).show();
             return;
@@ -737,7 +830,7 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        int b = Integer.parseInt(ed_duanxiangxiangying.getText().toString().trim());
+        float b = Float.parseFloat(ed_duanxiangxiangying.getText().toString().trim());
         if (b > 250) {
             Toast.makeText(this, "断相响应时间只能输入小于250的数值！", Toast.LENGTH_SHORT).show();
             return;
@@ -747,68 +840,68 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-//        int c = Integer.parseInt(ed_13xianshi.getText().toString().trim());
-//        if (c > 1) {
-//            Toast.makeText(this, "13秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        float c = Float.parseFloat(ed_13xianshi.getText().toString().trim());
+        if (c > 1) {
+            Toast.makeText(this, "13秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String m13xianshi = ed_13xianshi.getText().toString().trim();
         if (TextUtils.isEmpty(m13xianshi)) {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-//        int d = Integer.parseInt(ed_30xianshi.getText().toString().trim());
-//        if (d > 1) {
-//            Toast.makeText(this, "30秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        float d = Float.parseFloat(ed_30xianshi.getText().toString().trim());
+        if (d > 1) {
+            Toast.makeText(this, "30秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String m30xianshi = ed_30xianshi.getText().toString().trim();
         if (TextUtils.isEmpty(m30xianshi)) {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-//        int e = Integer.parseInt(ed_chuanlian1.getText().toString().trim());
-//        if (e > 150) {
-//            Toast.makeText(this, "只能输入小于150的数值！", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        float e = Float.parseFloat(ed_chuanlian1.getText().toString().trim());
+        if (e < 20) {
+            Toast.makeText(this, "只能输入大于20的数值！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String chuanlian1 = ed_chuanlian1.getText().toString().trim();
         if (TextUtils.isEmpty(chuanlian1)) {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-//        int f = Integer.parseInt(ed_chuanlan2.getText().toString().trim());
-//        if (f > 150) {
-//            Toast.makeText(this, "只能输入小于150的数值！", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        double f = Double.parseDouble(ed_chuanlan2.getText().toString().trim());
+        if (f > 27.5) {
+            Toast.makeText(this, "只能输入小于27.5的数值！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String chuanlan2 = ed_chuanlan2.getText().toString().trim();
         if (TextUtils.isEmpty(chuanlan2)) {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-//        int g = Integer.parseInt(ed_binglian1.getText().toString().trim());
-//        if (g > 150) {
-//            Toast.makeText(this, "只能输入小于150的数值！", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        float g =Float.parseFloat(ed_binglian1.getText().toString().trim());
+        if (g < 10) {
+            Toast.makeText(this, "只能输入大于10的数值！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String binglian1 = ed_binglian1.getText().toString().trim();
         if (TextUtils.isEmpty(binglian1)) {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-//        int h = Integer.parseInt(ed_binglian2.getText().toString().trim());
-//        if (h > 150) {
-//            Toast.makeText(this, "只能输入小于150的数值！", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        float h = Float.parseFloat(ed_binglian2.getText().toString().trim());
+        if (h > 14) {
+            Toast.makeText(this, "只能输入小于14的数值！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String binglian2 = ed_binglian2.getText().toString().trim();
         if (TextUtils.isEmpty(binglian2)) {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         double i = Double.parseDouble(ed_duanxiangzhiliu.getText().toString().trim());
-        if (i > 0.2) {
+        if (i >0.2) {
             Toast.makeText(this, "断相直流输出电压只能输入小于0.2的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -817,9 +910,9 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        double  j= Double.parseDouble(ed_jiaoliuxianquan.getText().toString().trim());
+        float j = Float.parseFloat(ed_jiaoliuxianquan.getText().toString().trim());
         if (j > 3) {
-            Toast.makeText(this, "交流线圈压降只能输入小于3.0的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "交流线圈压降只能输入小于3的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String jiaoliuxianquan = ed_jiaoliuxianquan.getText().toString().trim();
@@ -827,9 +920,9 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        int k = Integer.parseInt(ed_xiangjian.getText().toString().trim());
-        if (k > 500) {
-            Toast.makeText(this, "相间绝缘电阻只能输入小于500的数值！", Toast.LENGTH_SHORT).show();
+        float k = Float.parseFloat(ed_xiangjian.getText().toString().trim());
+        if (k < 500) {
+            Toast.makeText(this, "相间绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xiangjian = ed_xiangjian.getText().toString().trim();
@@ -837,9 +930,9 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        int l = Integer.parseInt(ed_xiangduidi.getText().toString().trim());
-        if (l > 500) {
-            Toast.makeText(this, "相对地绝缘电阻只能输入小于500的数值！", Toast.LENGTH_SHORT).show();
+        float l = Float.parseFloat(ed_xiangduidi.getText().toString().trim());
+        if (l < 500) {
+            Toast.makeText(this, "相对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xiangduidi = ed_xiangduidi.getText().toString().trim();
@@ -847,9 +940,9 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        int m = Integer.parseInt(ed_xiangdui.getText().toString().trim());
-        if (m > 500) {
-            Toast.makeText(this, "相对线圈绝缘电阻只能输入小于500的数值！", Toast.LENGTH_SHORT).show();
+        float m = Float.parseFloat(ed_xiangdui.getText().toString().trim());
+        if (m < 500) {
+            Toast.makeText(this, "相对线圈绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xiangdui = ed_xiangdui.getText().toString().trim();
@@ -857,9 +950,9 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        int n = Integer.parseInt(ed_xianquanduidi.getText().toString().trim());
-        if (n > 500) {
-            Toast.makeText(this, "线圈对地绝缘电阻只能输入小于500的数值！", Toast.LENGTH_SHORT).show();
+        float n = Float.parseFloat(ed_xianquanduidi.getText().toString().trim());
+        if (n < 500) {
+            Toast.makeText(this, "线圈对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xianquanduidi = ed_xianquanduidi.getText().toString().trim();
@@ -882,22 +975,46 @@ public class Setting extends Activity implements View.OnClickListener {
         xiuGai.setXiangduixianquan(ed_xiangdui.getText().toString());
         xiuGai.setXianquan(ed_xianquanduidi.getText().toString());
         xiuGai.save();
-        // TODO validate success, do something
-        View view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu,null);
-        final MyDialog myDialog = new MyDialog(Setting.this,view,R.style.dialog);
-        myDialog.show();
-         TextView testDialog2Tv;
-         ImageView testDialog2Img;
-         Button testDialog2Btn1;
-
-        testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
-        testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
-        testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
-        testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
+        util.sendSerialPort(cmd());
+        Toast.makeText(this, cmd(), Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
+            public void run() {
+                if(view == null){
+                    View view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
+                    final MyDialog myDialog = new MyDialog(Setting.this, view, R.style.dialog);
+                    myDialog.show();
+                    TextView testDialog2Tv;
+                    ImageView testDialog2Img;
+                    Button testDialog2Btn1;
+
+                    testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
+                    testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
+                    testDialog2Tv.setText("修改参数失败");
+                    testDialog2Img.setImageResource(R.drawable.baozhi2);
+                    testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
+                    testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            myDialog.dismiss();
+                        }
+                    });
+                }
             }
-        });
+        },1000);
+    }
+    private String jisuan(String s) {
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b1));
+    }
+
+    private String jisuan2(String s) {
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b3));
+    }
+
+    private String jisuan3(String s) {
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b4));
     }
 }

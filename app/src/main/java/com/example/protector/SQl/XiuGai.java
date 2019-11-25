@@ -9,6 +9,7 @@ public class XiuGai extends DataSupport {
     private int id;
     private int gonwei;
     private String qidong ="150";
+    private String cecheng ="1";
     private String duanxiang ="250";
     private String m13 ="1";
     private String m30 ="1";
@@ -22,6 +23,14 @@ public class XiuGai extends DataSupport {
     private String xiangduidi ="500";
     private String xiangduixianquan ="500";
     private String xianquan ="500";
+
+    public String getCecheng() {
+        return cecheng;
+    }
+
+    public void setCecheng(String cecheng) {
+        this.cecheng = cecheng;
+    }
 
     public int getId() {
         return id;

@@ -566,6 +566,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
+                        android:inputType="number|numberDecimal"
                         android:text="150"
                         android:textColor="#000"
                         android:textSize="15dp" />
@@ -599,6 +600,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
+                        android:inputType="number|numberDecimal"
                         android:text="250"
                         android:textColor="#000"
                         android:textSize="15dp" />
@@ -633,6 +635,7 @@
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
                         android:text="0.5"
+                        android:inputType="number|numberDecimal"
                         android:textColor="#000"
                         android:textSize="15dp" />
 
@@ -665,6 +668,7 @@
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
                         android:text="0.5"
+                        android:inputType="number|numberDecimal"
                         android:textColor="#000"
                         android:textSize="15dp" />
 
@@ -697,6 +701,7 @@
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
                         android:text="20.0"
+                        android:inputType="number|numberDecimal"
                         android:textColor="#000"
                         android:textSize="15dp" />
 
@@ -714,6 +719,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
+                        android:inputType="number|numberDecimal"
                         android:text="27.5"
                         android:textColor="#000"
                         android:textSize="15dp" />
@@ -746,6 +752,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
+                        android:inputType="number|numberDecimal"
                         android:text="10.0"
                         android:textColor="#000"
                         android:textSize="15dp" />
@@ -766,6 +773,7 @@
                         android:gravity="center"
                         android:text="14.0"
                         android:textColor="#000"
+                        android:inputType="number|numberDecimal"
                         android:textSize="15dp" />
 
                     <TextView
@@ -797,6 +805,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
+                        android:inputType="number|numberDecimal"
                         android:text="0.2"
                         android:textColor="#000"
                         android:textSize="15dp" />
@@ -830,6 +839,7 @@
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
                         android:text="3.0"
+                        android:inputType="number|numberDecimal"
                         android:textColor="#000"
                         android:textSize="15dp" />
 
@@ -861,6 +871,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
+                        android:inputType="number|numberDecimal"
                         android:text="500"
                         android:textColor="#000"
                         android:textSize="15dp" />
@@ -894,6 +905,7 @@
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
                         android:text="500"
+                        android:inputType="number|numberDecimal"
                         android:textColor="#000"
                         android:textSize="15dp" />
 
@@ -926,6 +938,7 @@
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
                         android:text="500"
+                        android:inputType="number|numberDecimal"
                         android:textColor="#000"
                         android:textSize="15dp" />
 
@@ -957,6 +970,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/f_yuanjiaotouming"
                         android:gravity="center"
+                        android:inputType="number|numberDecimal"
                         android:text="500"
                         android:textColor="#000"
                         android:textSize="15dp" />
