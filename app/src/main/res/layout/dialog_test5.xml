@@ -8,36 +8,36 @@
 
 
     <LinearLayout
-        android:layout_width="340dp"
-        android:layout_height="340dp"
+        android:layout_width="400dp"
+        android:layout_height="350dp"
         android:layout_x="521dp"
         android:layout_y="328dp"
-        android:background="@drawable/dialog_test2_1"
+        android:background="@drawable/adddailogkuang"
         android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="180dp"
+            android:layout_height="223dp"
             android:layout_marginTop="25dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/add_hui"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/test_dialog2_tv"
+                android:id="@+id/test_dialog3_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="开始新班次?"
+                android:text="编码成功！"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="45dp" />
+                android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/test_dialog2_img"
+                android:id="@+id/test_dialog3_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baozhi2" />
+                android:src="@drawable/gou" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,25 +47,16 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/test_dialog2_btn1"
-                android:layout_width="140dp"
+                android:id="@+id/test_dialog3_btn"
+                android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/baocun"
+                android:background="@drawable/queding"
                 android:text="确  定"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="36dp" />
 
-            <Button
-                android:id="@+id/test_dialog2_btn2"
-                android:layout_width="140dp"
-                android:layout_height="60dp"
-                android:background="@drawable/baocun"
-                android:text="取  消"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="36dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

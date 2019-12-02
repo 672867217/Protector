@@ -23,6 +23,7 @@ import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,7 +57,6 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         initView();
 
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-        stats_tv2.setText(dateFormat2.format(new Date()));
 
         new Utils().hideNavKey(Stats.this);
 
@@ -71,7 +71,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         for (int i = 0; i < types.size(); i++) {
             list.add(types.get(i).getName());
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner, list);
         chanpin_spinner.setAdapter(arrayAdapter);
         chanpin_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -165,7 +165,9 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                         Long ceshiDate = dateFormat.parse(dateFormat.format(dataList.get(j).getDate())).getTime();
                         Long startDate = dateFormat.parse(date1).getTime();
                         Long endDate = dateFormat.parse(date2).getTime();
-                        if (ceshiDate >= startDate && ceshiDate <= endDate) {
+                        if (ceshiDate >= startDate && ceshiDate <= endDate
+                                && dataList.get(j).getChanpinname().equals(chanpin_spinner.getSelectedItem())
+                                && dataList.get(j).getXinghao().equals(xinghao.getText().toString())) {
                             dataList2.add(dataList.get(j));
                         } else {
                             Toast.makeText(this, "没有符合条件的统计结果！", Toast.LENGTH_SHORT).show();
@@ -195,9 +197,24 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                     if (shuliang != 0) {
                         Collections.sort(shichangList);
                         bean.value1 = String.valueOf(shuliang);
-                        bean.value2 = String.valueOf(shuliang);
-                        bean.value3 = String.valueOf(0);
-                        bean.value4 = String.valueOf(100);
+                        float a = 0,b = 0;
+                        for (int j = 0; j < shuliang; j++) {
+                            if(dataList2.get(j).getTongguo().equals("合格")){
+                                a++;
+                            }else
+                            {
+                                b++;
+                            }
+                        }
+                        bean.value2 = String.valueOf((int) a);
+                        bean.value3 = String.valueOf((int)b);
+                        if(a == 0){
+                            bean.value4 = 0+"";
+                        }else
+                        {
+                            bean.value4 = String.format("%.2f",a/(a+b)*100);
+                        }
+
                         bean.value5 = (shichang / shuliang) % 60 + "'" + (shichang / shuliang) / 60+"\"";
                         bean.value6 = shichangList.get(0) % 60 + "'" + shichangList.get(0) / 60+"\"";
                         bean.value7 = shichangList.get(shichangList.size() - 1) % 60 + "'"

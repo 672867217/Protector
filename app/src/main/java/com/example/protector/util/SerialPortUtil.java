@@ -1,6 +1,7 @@
 package com.example.protector.util;
 
 import android.app.Application;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 
@@ -37,9 +40,11 @@ public class SerialPortUtil {
     private OutputStream outputStream = null;
     private ReceiveThread mReceiveThread = null;
     private boolean isStart = false;
-    private TestData testData;
+    private boolean is = false;
     private Receive receive;
-    public String str,str2 = "";
+    public String str;
+    public StringBuffer str2 = new StringBuffer();
+    private Timer timer;
 
     /**
      * 打开串口，接收数据
@@ -52,7 +57,6 @@ public class SerialPortUtil {
             inputStream = serialPort.getInputStream();
             outputStream = serialPort.getOutputStream();
             isStart = true;
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,31 +122,41 @@ public class SerialPortUtil {
     private class ReceiveThread extends Thread {
         @Override
         public void run() {
-            super.run();
             while (isStart) {
                 if (inputStream == null) {
                     return;
                 }
+                if(timer == null && is == true){
+                    timer = new Timer();
+                    TimerTask timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            String[] s = str2.toString().split("AA00FF");
+                            for (int i = 1; i < s.length; i++) {
+                                if(timer!= null){
+                                    timer.cancel();
+                                    timer = null;
+                                }
+                                Utils utils = new Utils();
+                                List<String> strings = utils.getDivLines("AA00FF" + s[i], 2);
+                                receive.set(strings.get(3), strings);
+                                str2 = new StringBuffer();
+                            }
+                        }
+                    };
+                    timer.schedule(timerTask,200,2000);
+                }
+                is = true;
                 byte[] readData = new byte[1024];
+                int size = 0;
                 try {
-                    int size = inputStream.read(readData);
-                    if (size > 0) {
-                        str = new String(readData).trim();
-                        System.out.println(str);
-//                        if(str2.length() < 6){
-//                            str2+=str;
-//                        }else
-//                        {
-//                            String s = str2.substring(0,6);
-//                            System.out.println(s+"....."+str2);
-//                        }
-//                        String readString2 = new String(readData).trim();
-//                        Utils utils = new Utils();
-//                        List<String> strings = utils.getDivLines(readString2, 2);
-//                        receive.set(strings.get(3), strings);
-                    }
+                    size = inputStream.read(readData);
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                if (size > 0) {
+                    str = new String(readData).trim();
+                    str2.append(str);
                 }
             }
 

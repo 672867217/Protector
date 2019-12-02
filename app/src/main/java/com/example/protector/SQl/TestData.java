@@ -14,52 +14,131 @@ public class TestData extends DataSupport implements Serializable {
     private Date date;//开始时间
     private Date date2;//结束时间
     private int type;//状态值    0---》上一班    1----》新班次
-    private String gongwei = "";//工位
-    private String cecheng = "";//测程
-    private String ceshishichang = "";//测试时长
-    private String chanpinbianma = "";//产品编码
-    private String ajiguzhang = "";//A机故障测试结果
-    private String bjiguzhang = "";//B机故障测试结果
-    private String baojin = "";//报警状态
-    private String xianquanchuanlian1 = "";//线圈串联电压1
-    private String xianquanchuanlian2 = "";//线圈串联电压2
-    private String xianquanchuanlian3 = "";//线圈串联电压3
-    private String xianquanchuanlian4 = "";//线圈串联电压4
-    private String xianquanchuanlian5 = "";//线圈串联电压5
-    private String xianquanbinglian = "";//线圈并联电压
-    private String ajiwucha = "";//A机驱动电压误差值
-    private String bjiwucha = "";//B机驱动电压误差值
-    private String axiangawucha = "";//A机A相电流误差值
-    private String axiangbwucha = "";//A机B相电流误差值
-    private String axiangcwucha = "";//A机C相电流误差值
-    private String bxiangawucha = "";//B机A相电流误差值
-    private String bxiangbwucha = "";//B机B相电流误差值
-    private String bxiangcwucha = "";//B机C相电流误差值
-    private String aduanxiangdianya = "";//A相断相后驱动电压
-    private String bduanxiangdianya = "";//B相断相后驱动电压
-    private String cduanxiangdianya = "";//C相断相后驱动电压
-    private String axiangceyajiang = "";//A相一次侧压降
-    private String bxiangceyajiang = "";//B相一次侧压降
-    private String cxiangceyajiang = "";//C相一次侧压降
-    private String qidongshijian = "";//启动时间
-    private String aduanxiangxiangying = "";//A相断相响应时间
-    private String bduanxiangxiangying = "";//B相断相响应时间
-    private String cduanxiangxiangying = "";//C相断相响应时间
-    private String m13xianshishijian = "";//13秒限时时间
-    private String m30xianshishijian = "";//30秒限时时间
-    private String abxiangjianjueyuan = "";//AB相间绝缘电阻
-    private String acxiangjianjueyuan = "";//AC相间绝缘电阻
-    private String bcxiangjianjueyuan = "";//BC相间绝缘电阻
-    private String axiangduidijueyuan = "";//A相对地绝缘电阻
-    private String bxiangduidijueyuan = "";//B相对地绝缘电阻
-    private String cxiangduidijueyuan = "";//C相对地绝缘电阻
-    private String axiangduixianquanjueyuan = "";//A相对线圈绝缘电阻
-    private String bxiangduixianquanjueyuan = "";//B相对线圈绝缘电阻
-    private String cxiangduixianquanjeuyuan = "";//C相对线圈绝缘电阻
-    private String xianquanduidijueyuan = "";//线圈对地绝缘电阻
+    private String gongwei = "0";//工位
+    private String name = "无";//测试人员
+    private String xinghao = "无";//型号
+    private String shengchanchang = "无";//生产厂
+    private String chanpinname = "无";//产品明
+    private String mode = "0";//模式
+    private String tongguo = "0";//是否通过
+    private String cecheng = "0";//测程
+    private String ceshishichang = "0";//测试时长
+    private String chanpinbianma = "0";//产品编码
+    private String shengchanbianma = "0";//生产编码
+    private String ajiguzhang = "0";//A机故障测试结果
+    private String bjiguzhang = "0";//B机故障测试结果
+    private String baojin = "0";//报警状态
+    private String xianquanchuanlian1 = "0";//线圈串联电压1
+    private String xianquanchuanlian2 = "0";//线圈串联电压2
+    private String xianquanchuanlian3 = "0";//线圈串联电压3
+    private String xianquanchuanlian4 = "0";//线圈串联电压4
+    private String xianquanchuanlian5 = "0";//线圈串联电压5
+    private String xianquanbinglian = "0";//线圈并联电压
+    private String ajiwucha = "0";//A机驱动电压误差值
+    private String bjiwucha = "0";//B机驱动电压误差值
+    private String axiangawucha = "0";//A机A相电流误差值
+    private String axiangbwucha = "0";//A机B相电流误差值
+    private String axiangcwucha = "0";//A机C相电流误差值
+    private String bxiangawucha = "0";//B机A相电流误差值
+    private String bxiangbwucha = "0";//B机B相电流误差值
+    private String bxiangcwucha = "0";//B机C相电流误差值
+    private String aduanxiangdianya = "0";//A相断相后驱动电压
+    private String bduanxiangdianya = "0";//B相断相后驱动电压
+    private String cduanxiangdianya = "0";//C相断相后驱动电压
+    private String axiangceyajiang = "0";//A相一次侧压降
+    private String bxiangceyajiang = "0";//B相一次侧压降
+    private String cxiangceyajiang = "0";//C相一次侧压降
+    private String qidongshijian = "0";//启动时间
+    private String aduanxiangxiangying = "0";//A相断相响应时间
+    private String bduanxiangxiangying = "0";//B相断相响应时间
+    private String cduanxiangxiangying = "0";//C相断相响应时间
+    private String m13xianshishijian = "0";//13秒限时时间
+    private String m30xianshishijian = "0";//30秒限时时间
+    private String abxiangjianjueyuan = "0";//AB相间绝缘电阻
+    private String acxiangjianjueyuan = "0";//AC相间绝缘电阻
+    private String bcxiangjianjueyuan = "0";//BC相间绝缘电阻
+    private String axiangduidijueyuan = "0";//A相对地绝缘电阻
+    private String bxiangduidijueyuan = "0";//B相对地绝缘电阻
+    private String cxiangduidijueyuan = "0";//C相对地绝缘电阻
+    private String axiangduixianquanjueyuan = "0";//A相对线圈绝缘电阻
+    private String bxiangduixianquanjueyuan = "0";//B相对线圈绝缘电阻
+    private String cxiangduixianquanjeuyuan = "0";//C相对线圈绝缘电阻
+    private String xianquanduidijueyuan = "0";//线圈对地绝缘电阻
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public String getTongguo() {
+        return tongguo;
+    }
+
+    public void setTongguo(String tongguo) {
+        this.tongguo = tongguo;
+    }
+
+    public String getShengchanbianma() {
+        return shengchanbianma;
+    }
+
+    public void setShengchanbianma(String shengchanbianma) {
+        this.shengchanbianma = shengchanbianma;
+    }
+
+    public String getChanpinname() {
+        return chanpinname;
+    }
+
+    public void setChanpinname(String chanpinname) {
+        this.chanpinname = chanpinname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getXinghao() {
+        return xinghao;
+    }
+
+    public void setXinghao(String xinghao) {
+        this.xinghao = xinghao;
+    }
+
+    public String getShengchanchang() {
+        return shengchanchang;
+    }
+
+    public void setShengchanchang(String shengchanchang) {
+        this.shengchanchang = shengchanchang;
+    }
 
     public Date getDate() {
         return date;
+    }
+
+    public Date getDate2() {
+        return date2;
+    }
+
+    public void setDate2(Date date2) {
+        this.date2 = date2;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public void setDate(Date date) {

@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protector.SQl.TestData;
+import com.example.protector.SQl.XiuGai;
 import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
@@ -49,12 +52,13 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_number_query);
         initView();
         new Utils().hideNavKey(NumberQuery.this);
+
         list = new ArrayList();
-        TestData testData = new TestData();
-        list.add(testData);
-        list.add(testData);
-        list.add(testData);
-        list.add(testData);
+        for (int i = 0; i < 4; i++) {
+            TestData testData = new TestData();
+            list.add(testData);
+        }
+
         numberQueryItemAdapter = new NumberQueryItemAdapter(getApplicationContext(), list);
         gridView.setAdapter(numberQueryItemAdapter);
         numberQueryItemAdapter.notifyDataSetChanged();
@@ -82,22 +86,35 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.chaxun:
-                list.clear();
                 List<TestData> data = DataSupport.findAll(TestData.class);
+                int a = 0;
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getChanpinbianma().equals(chanpinbianhao.getText().toString().trim())) {
                         if (data.get(i).getCecheng().equals("1")) {
-                            list.add(data.get(i));
+                            list.set(0,data.get(i));
+                            a++;
                         } else if (data.get(i).getCecheng().equals("2")) {
-                            list.add(data.get(i));
+                            list.set(1,data.get(i));
+                            a++;
                         } else if (data.get(i).getCecheng().equals("3")) {
-                            list.add(data.get(i));
+                            list.set(2,data.get(i));
+                            a++;
                         } else if (data.get(i).getCecheng().equals("0")) {
-                            list.add(data.get(i));
+                            list.set(3,data.get(i));
+                            a++;
                         }
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(NumberQuery.this,R.layout.spinner, new String[]{data.get(i).getChanpinname()});
+                        chanpin_spinner.setAdapter(arrayAdapter);
+                        xinghao.setText(data.get(i).getXinghao());
+                        shengchanchang.setText(data.get(i).getShengchanchang());
                     }
                 }
-                numberQueryItemAdapter.notifyDataSetChanged();
+                if(a>0){
+                    numberQueryItemAdapter.notifyDataSetChanged();
+                }else
+                {
+                    Toast.makeText(this, "没有查到"+chanpinbianhao.getText().toString()+"的数据", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.fanhui:
                 finish();
@@ -160,12 +177,13 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                     holder.item1Title.setText("其他");
                     break;
             }
-            if(!object.getAduanxiangxiangying().equals("")){
+            if (!object.getAduanxiangxiangying().equals("0")) {
                 holder.item1Tv1.setText(object.getGongwei());
-                //holder.item1Tv2.setText(simpleDateFormat.format(object.getDate())+"");
-                holder.item1Tv3.setText(simpleDateFormat2.format(object.getDate())+"");
+                holder.item1Tv2.setText(simpleDateFormat.format(object.getDate())+"");
+                holder.item1Tv3.setText(simpleDateFormat2.format(object.getDate2()) + "");
                 System.out.println(object.getDate());
-                holder.item1Tv4.setText("");
+                holder.item1Tv4.setText(object.getName());
+
                 holder.item1Tv5.setText(object.getQidongshijian());
                 int[] arr = new int[3];
                 double[] arr2 = new double[3];
@@ -193,37 +211,101 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 Arrays.sort(arr2);
                 Arrays.sort(arr3);
                 Arrays.sort(arr4);
-                holder.item1Tv6.setText(arr[arr.length-1]+"");
+                holder.item1Tv6.setText(arr[arr.length - 1] + "");
                 holder.item1Tv7.setText(object.getM13xianshishijian());
                 holder.item1Tv8.setText(object.getM30xianshishijian());
                 holder.item1Tv9.setText(object.getXianquanchuanlian5());
-                holder.item1Tv10.setText(arr2[arr2.length-1]+"");
-                holder.item1Tv11.setText(arr3[arr3.length-1]+"");
-                holder.item1Tv12.setText(arr4[0]+"");
-                holder.item1Tv13.setText("");
-                holder.item1Tv14.setText("");
+                holder.item1Tv10.setText(arr2[arr2.length - 1] + "");
+                holder.item1Tv11.setText(arr3[arr3.length - 1] + "");
+                holder.item1Tv12.setText(arr4[0] + "");
                 holder.item1Title.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getApplicationContext(), QueryResult.class);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("data",object);
-                        bundle.putInt("dianzu",arr4[0]);
-                        bundle.putInt("flag",1);
-                        intent.putExtra("s",bundle);
+                        bundle.putSerializable("data", object);
+                        bundle.putInt("dianzu", arr4[0]);
+                        bundle.putInt("flag", 1);
+                        intent.putExtra("s", bundle);
                         startActivity(intent);
                     }
                 });
+                boolean is = true;
+                XiuGai xiuGai = DataSupport.find(XiuGai.class, Integer.parseInt(object.getGongwei()));
+                if (Double.parseDouble(object.getQidongshijian()) * 100
+                        > Double.parseDouble(xiuGai.getQidong()) * 100) {
+                    holder.item1Tv5.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                if (arr[2] * 100
+                        > Double.parseDouble(xiuGai.getDuanxiang()) * 100) {
+                    holder.item1Tv6.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                if (Double.parseDouble(object.getM13xianshishijian()) * 100
+                        < (13-Double.parseDouble(xiuGai.getM13())) * 100
+                        || Double.parseDouble(object.getM13xianshishijian()) * 100
+                        > (13+Double.parseDouble(xiuGai.getM13())) * 100) {
+                    holder.item1Tv7.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                if (Double.parseDouble(object.getM30xianshishijian()) * 100
+                        < (30-Double.parseDouble(xiuGai.getM30())) * 100
+                        || Double.parseDouble(object.getM30xianshishijian()) * 100
+                        > (30+Double.parseDouble(xiuGai.getM30())) * 100) {
+                    holder.item1Tv8.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                if (Double.parseDouble(object.getXianquanchuanlian5()) * 100
+                        > Double.parseDouble(xiuGai.getChuanlian2()) * 100
+                        || Double.parseDouble(object.getXianquanchuanlian5()) * 100
+                        < Double.parseDouble(xiuGai.getChuanlian1()) * 100) {
+                    holder.item1Tv9.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                if (arr2[2] * 100
+                        > Double.parseDouble(xiuGai.getDuanxiangzhiliu()) * 100) {
+                    holder.item1Tv10.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                if (arr3[2] * 100
+                        > Double.parseDouble(xiuGai.getJiaoliu()) * 100) {
+                    holder.item1Tv11.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                if (arr4[0] * 100
+                       < Double.parseDouble(xiuGai.getXianquan()) * 100) {
+                    holder.item1Tv12.setBackgroundResource(R.drawable.dialog_test2_3);
+                    is = false;
+                }
+                holder.item1Tv13.setText(guzhang(object.getAjiguzhang(), object.getBjiguzhang()));
+                if(guzhang(object.getAjiguzhang(), object.getBjiguzhang()).equals("不合格"))
+                {
+                    holder.item1Tv13.setBackgroundResource(R.drawable.dialog_test2_3);
+                }
+                if (is && holder.item1Tv13.getText().toString().equals("合格")) {
+                    holder.item1Tv14.setText("合格");
+                } else {
+                    holder.item1Tv14.setText("不合格");
+                    holder.item1Tv14.setBackgroundResource(R.drawable.dialog_test2_3);
+                }
             }
 
             holder.item1Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Toast.makeText(NumberQuery.this, "测试中。。。", Toast.LENGTH_SHORT).show();
                 }
             });
         }
-
+        private String guzhang(String s1, String s2) {
+            for (int i = 0; i < s1.length(); i++) {
+                if (s1.charAt(i) == '1' || s2.charAt(i) == '1') {
+                    return "不合格";
+                }
+            }
+            return "合格";
+        }
         protected class ViewHolder {
             private TextView item1Title;
             private TextView item1Tv1;

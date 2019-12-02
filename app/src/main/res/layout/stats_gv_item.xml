@@ -1,211 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
-    android:layout_height="500dp"
-    android:background="#00000000"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="1024dp"
+    android:layout_height="446dp"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <AbsoluteLayout
+        android:layout_width="188dp"
+        android:layout_height="281dp"
+        android:layout_x="15dp"
+        android:layout_y="136dp">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:layout_y="25dp"
+            android:background="@drawable/f_baisebiankuan"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="44dp">
+
+        </FrameLayout>
         <TextView
             android:id="@+id/stats_item_tv"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="36dp"
+            android:layout_y="0dp"
             android:background="@drawable/fenseshangyuanjiao"
             android:gravity="center"
             android:text="一测统计"
             android:textColor="#000000"
-            android:textSize="30sp" />
-    </LinearLayout>
+            android:textSize="25sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#e6e6e6"
-        android:gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="52dp"
             android:text="测试数量  :  "
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/stats_item_tv1"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="22dp"
+            android:layout_x="101dp"
+            android:layout_y="52dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#e6e6e6"
-        android:gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="84dp"
             android:text="通过数量  :  "
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/stats_item_tv2"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="22dp"
+            android:layout_x="101dp"
+            android:layout_y="84dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#e6e6e6"
-        android:gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="115dp"
             android:text="未通过数  :  "
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/stats_item_tv3"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="22dp"
+            android:layout_x="100dp"
+            android:layout_y="114dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="20dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#e6e6e6"
-        android:gravity="center"
-        android:orientation="horizontal">
+            android:textSize="17sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_x="13dp"
+            android:layout_y="147dp"
             android:text="通过比率  :  "
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/stats_item_tv4"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_width="56dp"
+            android:layout_height="22dp"
+            android:layout_x="100dp"
+            android:layout_y="146dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:layout_width="20dp"
             android:layout_height="wrap_content"
+            android:layout_x="156dp"
+            android:layout_y="143dp"
             android:gravity="center"
             android:text="%"
             android:textColor="#000000"
             android:textSize="20dp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#e6e6e6"
-        android:gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="179dp"
             android:text="平均用时  :  "
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/stats_item_tv5"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="22dp"
+            android:layout_x="102dp"
+            android:layout_y="179dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#e6e6e6"
-        android:gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="211dp"
             android:text="最小用时  :  "
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/stats_item_tv6"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="22dp"
+            android:layout_x="100dp"
+            android:layout_y="210dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#e6e6e6"
-        android:gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_x="14dp"
+            android:layout_y="243dp"
             android:text="最大用时  :  "
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/stats_item_tv7"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="22dp"
+            android:layout_x="100dp"
+            android:layout_y="240dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="17sp" />
 
-    </LinearLayout>
+
+
+    </AbsoluteLayout>
 </LinearLayout>

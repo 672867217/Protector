@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
 
 public class Setting extends Activity implements View.OnClickListener {
 
@@ -105,6 +108,13 @@ public class Setting extends Activity implements View.OnClickListener {
     BigDecimal b4 = new BigDecimal("0.1");
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     SerialPortUtil util = MainActivity.utils;
+    private Handler handler;
+    TextView testDialog2Tv;
+    ImageView testDialog2Img;
+    Button testDialog2Btn1;
+    private int a1;
+    private MyDialog myDialog1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +126,9 @@ public class Setting extends Activity implements View.OnClickListener {
         for (int i = 0; i < 10; i++) {
             list.add(String.format("%03d", i + 1));
         }
+
+
+
         list1 = new ArrayList();
         list1.add("男");
         list1.add("女");
@@ -128,9 +141,9 @@ public class Setting extends Activity implements View.OnClickListener {
         strings = new ArrayList<>();
         strings2 = new ArrayList<>();
         init();
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
-        arrayAdapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings2);
-        arrayAdapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list2);
+        arrayAdapter = new ArrayAdapter(this, R.layout.spinner, strings);
+        arrayAdapter2 = new ArrayAdapter(this,  R.layout.spinner, strings2);
+        arrayAdapter3 = new ArrayAdapter(this,  R.layout.spinner, list2);
         spinner1.setAdapter(arrayAdapter);
         spinner2.setAdapter(arrayAdapter2);
         spinner.setAdapter(arrayAdapter3);
@@ -141,7 +154,7 @@ public class Setting extends Activity implements View.OnClickListener {
                 List<XiuGai> xiuGais = DataSupport.findAll(XiuGai.class);
                 for (int j = 0; j < xiuGais.size(); j++) {
                     if (xiuGais.get(j).getGonwei() == gonwei) {
-                        set(j);
+                        set(j+1);
                     }
                 }
             }
@@ -185,68 +198,117 @@ public class Setting extends Activity implements View.OnClickListener {
         util.onReceive(new SerialPortUtil.Receive() {
             @Override
             public void set(String str, List<String> list) {
-                if(str.equals("60")){
-                    view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
-                    final MyDialog myDialog = new MyDialog(Setting.this, view, R.style.dialog);
-                    myDialog.show();
-                    TextView testDialog2Tv;
-                    ImageView testDialog2Img;
-                    Button testDialog2Btn1;
-                    testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
-                    testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
-                    testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
-                    testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view1) {
-                            myDialog.dismiss();
-                            view = null;
-                        }
-                    });
+                if (str.equals("60")) {
+                    handler.sendEmptyMessage(1);
                 }
-                if(str.equals("50")){
-                    int a = 0;
-                    switch (new Utils().HexToInt(list.get(5))){
+                if (str.equals("50")) {
+                    a1 = 0;
+                    switch (new Utils().HexToInt(list.get(5))) {
                         case 1:
-                            xiuGai = DataSupport.find(XiuGai.class,1);
-                            a = 1;
+                            xiuGai = DataSupport.find(XiuGai.class, 1);
+                            a1 = 1;
                             break;
                         case 2:
-                            xiuGai = DataSupport.find(XiuGai.class,2);
-                            a = 2;
+                            xiuGai = DataSupport.find(XiuGai.class, 2);
+                            a1 = 2;
                             break;
                         case 3:
-                            xiuGai = DataSupport.find(XiuGai.class,3);
-                            a = 3;
+                            xiuGai = DataSupport.find(XiuGai.class, 3);
+                            a1 = 3;
                             break;
                         case 4:
-                            xiuGai = DataSupport.find(XiuGai.class,4);
-                            a = 4;
+                            xiuGai = DataSupport.find(XiuGai.class, 4);
+                            a1 = 4;
                             break;
                         case 5:
-                            xiuGai = DataSupport.find(XiuGai.class,5);
-                            a = 5;
+                            xiuGai = DataSupport.find(XiuGai.class, 5);
+                            a1 = 5;
                             break;
                     }
-                    xiuGai.setCecheng(new Utils().HexToInt(list.get(6))+"");
-                    xiuGai.setQidong(new Utils().HexToInt(list.get(7))+"");
-                    xiuGai.setDuanxiang(new Utils().HexToInt(list.get(8))+"");
-                    xiuGai.setM13(jisuan3(new Utils().HexToInt(list.get(9))+""));
-                    xiuGai.setM30(jisuan3(new Utils().HexToInt(list.get(10))+""));
-                    xiuGai.setChuanlian1(jisuan3(new Utils().HexToInt(list.get(11)+list.get(12))+""));
-                    xiuGai.setChuanlian2(jisuan3(new Utils().HexToInt(list.get(13)+list.get(14))+""));
-                    xiuGai.setBinglian1(jisuan3(new Utils().HexToInt(list.get(15)+list.get(16))+""));
-                    xiuGai.setBinglian2(jisuan3(new Utils().HexToInt(list.get(17)+list.get(18))+""));
-                    xiuGai.setDuanxiangzhiliu(jisuan2(new Utils().HexToInt(list.get(19))+""));
-                    xiuGai.setJiaoliu(jisuan2(new Utils().HexToInt(list.get(20)+list.get(21))+""));
-                    xiuGai.setXiangjian(new Utils().HexToInt(list.get(22)+list.get(23))+"");
-                    xiuGai.setXiangduidi(new Utils().HexToInt(list.get(24)+list.get(25))+"");
-                    xiuGai.setXiangduixianquan(new Utils().HexToInt(list.get(26)+list.get(27))+"");
-                    xiuGai.setXianquan(new Utils().HexToInt(list.get(28)+list.get(29))+"");
+                    xiuGai.setCecheng(new Utils().HexToInt(list.get(6)) + "");
+                    xiuGai.setQidong(new Utils().HexToInt(list.get(7)) + "");
+                    xiuGai.setDuanxiang(new Utils().HexToInt(list.get(8)) + "");
+                    xiuGai.setM13(jisuan3(new Utils().HexToInt(list.get(9)) + ""));
+                    xiuGai.setM30(jisuan3(new Utils().HexToInt(list.get(10)) + ""));
+                    xiuGai.setChuanlian1(jisuan3(new Utils().HexToInt(list.get(11) + list.get(12)) + ""));
+                    xiuGai.setChuanlian2(jisuan3(new Utils().HexToInt(list.get(13) + list.get(14)) + ""));
+                    xiuGai.setBinglian1(jisuan3(new Utils().HexToInt(list.get(15) + list.get(16)) + ""));
+                    xiuGai.setBinglian2(jisuan3(new Utils().HexToInt(list.get(17) + list.get(18)) + ""));
+                    xiuGai.setDuanxiangzhiliu(jisuan2(new Utils().HexToInt(list.get(19)) + ""));
+                    xiuGai.setJiaoliu(jisuan2(new Utils().HexToInt(list.get(20) + list.get(21)) + ""));
+                    xiuGai.setXiangjian(new Utils().HexToInt(list.get(22) + list.get(23)) + "");
+                    xiuGai.setXiangduidi(new Utils().HexToInt(list.get(24) + list.get(25)) + "");
+                    xiuGai.setXiangduixianquan(new Utils().HexToInt(list.get(26) + list.get(27)) + "");
+                    xiuGai.setXianquan(new Utils().HexToInt(list.get(28) + list.get(29)) + "");
                     xiuGai.save();
-                    Setting.this.set(a);
+                    handler.sendEmptyMessage(2);
                 }
             }
         });
+        handler = new Handler() {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case 1:
+                        view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
+                        myDialog1 = new MyDialog(Setting.this, view, R.style.dialog);
+                        testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
+                        testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
+                        testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
+                        xiuGai.setQidong(ed_qidongxiangying.getText().toString());
+                        xiuGai.setDuanxiang(ed_duanxiangxiangying.getText().toString());
+                        xiuGai.setM13(ed_13xianshi.getText().toString());
+                        xiuGai.setM30(ed_30xianshi.getText().toString());
+                        xiuGai.setChuanlian1(ed_chuanlian1.getText().toString());
+                        xiuGai.setChuanlian2(ed_chuanlan2.getText().toString());
+                        xiuGai.setBinglian1(ed_binglian1.getText().toString());
+                        xiuGai.setBinglian2(ed_binglian2.getText().toString());
+                        xiuGai.setDuanxiangzhiliu(ed_duanxiangzhiliu.getText().toString());
+                        xiuGai.setJiaoliu(ed_jiaoliuxianquan.getText().toString());
+                        xiuGai.setXiangjian(ed_xiangjian.getText().toString());
+                        xiuGai.setXiangduidi(ed_xiangduidi.getText().toString());
+                        xiuGai.setXiangduixianquan(ed_xiangdui.getText().toString());
+                        xiuGai.setXianquan(ed_xianquanduidi.getText().toString());
+                        xiuGai.save();
+                        myDialog1.show();
+                        testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view1) {
+                                myDialog1.dismiss();
+                                view = null;
+                            }
+                        });
+                        break;
+                    case 2:
+                        if(spinner.getSelectedItem().equals(a1)){
+                            set(a1);
+                        }
+                        break;
+                    case 3:
+                        view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
+                        myDialog1 = new MyDialog(Setting.this, view, R.style.dialog);
+                        TextView testDialog2Tv;
+                        ImageView testDialog2Img;
+                        Button testDialog2Btn1;
+                        testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
+                        testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
+                        myDialog1.show();
+                        testDialog2Tv.setText("修改参数失败");
+                        testDialog2Img.setImageResource(R.drawable.baozhi2);
+                        testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
+                        testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view1) {
+                                myDialog1.dismiss();
+                                view = null;
+                                set(Integer.parseInt( spinner.getSelectedItem()+""));
+                            }
+                        });
+                        break;
+                }
+            }
+        };
     }
 
     public void add(int gonwei) {
@@ -271,7 +333,7 @@ public class Setting extends Activity implements View.OnClickListener {
     }
 
     private void set(int j) {
-        xiuGai = DataSupport.find(XiuGai.class, j + 1);
+        xiuGai = DataSupport.find(XiuGai.class, j);
         ed_qidongxiangying.setText(xiuGai.getQidong());
         ed_duanxiangxiangying.setText(xiuGai.getDuanxiang());
         ed_13xianshi.setText(xiuGai.getM13());
@@ -398,7 +460,7 @@ public class Setting extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.fanhui2:
-                util.sendSerialPort("AAFF00500000");
+                util.sendSerialPort("AA00FF500000");
                 break;
             case R.id.button8:
                 //添加产品
@@ -539,8 +601,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 button17 = (Button) view2.findViewById(R.id.button17);
                 textView3.setText("添加操作员");
                 editText.setText("");
-                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, list);
-                ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, list1);
+                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),  R.layout.spinner, list);
+                ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(),  R.layout.spinner, list1);
                 spinner1.setAdapter(adapter);
                 spinner2.setAdapter(adapter2);
                 a = 0;
@@ -766,24 +828,25 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
         }
     }
-    private String cmd(){
-        String s = "AAFF005119";
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong())));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiang())));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13())*10));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30())*10));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1())*10));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2())*10));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1())*10));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2())*10));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu())*100));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu())*100));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
 
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
-        s+=Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
-        s+="19";
+    private String cmd() {
+        String s = "AA00FF51190101";
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong())));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiang())));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()) * 10));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()) * 10));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
+
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
+        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
+        s += "19";
         return s;
     }
 
@@ -880,7 +943,7 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        float g =Float.parseFloat(ed_binglian1.getText().toString().trim());
+        float g = Float.parseFloat(ed_binglian1.getText().toString().trim());
         if (g < 10) {
             Toast.makeText(this, "只能输入大于10的数值！", Toast.LENGTH_SHORT).show();
             return;
@@ -901,7 +964,7 @@ public class Setting extends Activity implements View.OnClickListener {
             return;
         }
         double i = Double.parseDouble(ed_duanxiangzhiliu.getText().toString().trim());
-        if (i >0.2) {
+        if (i > 0.2) {
             Toast.makeText(this, "断相直流输出电压只能输入小于0.2的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -960,49 +1023,17 @@ public class Setting extends Activity implements View.OnClickListener {
             Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        xiuGai.setQidong(ed_qidongxiangying.getText().toString());
-        xiuGai.setDuanxiang(ed_duanxiangxiangying.getText().toString());
-        xiuGai.setM13(ed_13xianshi.getText().toString());
-        xiuGai.setM30(ed_30xianshi.getText().toString());
-        xiuGai.setChuanlian1(ed_chuanlian1.getText().toString());
-        xiuGai.setChuanlian2(ed_chuanlan2.getText().toString());
-        xiuGai.setBinglian1(ed_binglian1.getText().toString());
-        xiuGai.setBinglian2(ed_binglian2.getText().toString());
-        xiuGai.setDuanxiangzhiliu(ed_duanxiangzhiliu.getText().toString());
-        xiuGai.setJiaoliu(ed_jiaoliuxianquan.getText().toString());
-        xiuGai.setXiangjian(ed_xiangjian.getText().toString());
-        xiuGai.setXiangduidi(ed_xiangduidi.getText().toString());
-        xiuGai.setXiangduixianquan(ed_xiangdui.getText().toString());
-        xiuGai.setXianquan(ed_xianquanduidi.getText().toString());
-        xiuGai.save();
         util.sendSerialPort(cmd());
-        Toast.makeText(this, cmd(), Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(view == null){
-                    View view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
-                    final MyDialog myDialog = new MyDialog(Setting.this, view, R.style.dialog);
-                    myDialog.show();
-                    TextView testDialog2Tv;
-                    ImageView testDialog2Img;
-                    Button testDialog2Btn1;
-
-                    testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
-                    testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
-                    testDialog2Tv.setText("修改参数失败");
-                    testDialog2Img.setImageResource(R.drawable.baozhi2);
-                    testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
-                    testDialog2Btn1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            myDialog.dismiss();
-                        }
-                    });
+                if (view == null) {
+                    handler.sendEmptyMessage(3);
                 }
             }
-        },1000);
+        }, 1000);
     }
+
     private String jisuan(String s) {
         BigDecimal b2 = new BigDecimal(s);
         return decimalFormat.format(b2.multiply(b1));

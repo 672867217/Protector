@@ -3,6 +3,7 @@ package com.example.protector;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -15,8 +16,12 @@ import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class QueryResult extends AppCompatActivity implements View.OnClickListener {
 
@@ -92,17 +97,20 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
     private int dianzu;
     private TestData testData;
 
+    BigDecimal b4 = new BigDecimal("0.1");
+    BigDecimal b3 = new BigDecimal("0.01");
+    DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_result);
         initView();
         new Utils().hideNavKey(QueryResult.this);
-        if(getIntent().getBundleExtra("s").getInt("flag") == 1){
+        if (getIntent().getBundleExtra("s").getInt("flag") == 1) {
             testData = (TestData) getIntent().getBundleExtra("s").getSerializable("data");
             dianzu = getIntent().getBundleExtra("s").getInt("dianzu");
-        }else
-        {
+        } else {
             int id = (int) getIntent().getBundleExtra("s").getSerializable("data");
             testData = DataSupport.find(TestData.class, id);
             final int[] arr4 = new int[9];
@@ -118,19 +126,40 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
             Arrays.sort(arr4);
             dianzu = arr4[0];
         }
-        result2_tv12.setText(dianzu+"");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(QueryResult.this, R.layout.spinner, new String[]{testData.getChanpinname() + ""});
+        stats_spinner.setAdapter(arrayAdapter);
+        stats_tv1.setText(testData.getXinghao());
         textView6.setText(testData.getChanpinbianma());
+        result_tv2.setText(testData.getCecheng());
         result_tv3.setText(testData.getGongwei());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("HH:mm:ss");
         result_tv4.setText(simpleDateFormat.format(testData.getDate()));
+        result_tv5.setText(simpleDateFormat2.format(testData.getDate()));
+        result_tv6.setText(simpleDateFormat2.format(testData.getDate2()));
+        result_tv7.setText(testData.getName());
+        List list = guzhang(testData.getAjiguzhang());
+        result_tv8.setText(list.get(0) + "");
+        result_tv9.setText(list.get(2) + "");
+        result_tv10.setText(list.get(1) + "");
+        result_tv11.setText(list.get(3) + "");
+
         result_tv12.setText(testData.getAxiangawucha());
         result_tv13.setText(testData.getAxiangcwucha());
         result_tv14.setText(testData.getAxiangbwucha());
-        result_tv15.setText(testData.getAduanxiangdianya());
+        result_tv15.setText(testData.getAjiwucha());
+
+        List list2 = guzhang(testData.getBjiguzhang());
+        result_tv16.setText(list2.get(0) + "");
+        result_tv17.setText(list2.get(2) + "");
+        result_tv18.setText(list2.get(1) + "");
+        result_tv19.setText(list2.get(3) + "");
+
         result_tv20.setText(testData.getBxiangawucha());
         result_tv21.setText(testData.getBxiangcwucha());
         result_tv22.setText(testData.getBxiangbwucha());
-        result_tv23.setText(testData.getBduanxiangdianya());
+        result_tv23.setText(testData.getBjiwucha());
+
         result2_tv1.setText(testData.getM13xianshishijian());
         result2_tv2.setText(testData.getM30xianshishijian());
         result2_tv3.setText(testData.getQidongshijian());
@@ -140,11 +169,21 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         result2_tv7.setText(testData.getAduanxiangdianya());
         result2_tv8.setText(testData.getXianquanbinglian());
         result2_tv9.setText(testData.getBduanxiangdianya());
-        result2_tv10.setText("");
+        result2_tv10.setText(testData.getXianquanchuanlian5() + "");
         result2_tv11.setText(testData.getCduanxiangdianya());
-        /////////////////////////////////////
-        //result2_tv12.setText(dianzu+"");
-        ////////////////////////////////////
+        result2_tv12.setText(dianzu + "");
+        if(testData.getBaojin().charAt(11) == '0'){
+            image1.setImageResource(R.drawable.weijietong);
+        }else
+        {
+            image1.setImageResource(R.drawable.jietong);
+        }
+        if(testData.getBaojin().charAt(12) == '0'){
+            image2.setImageResource(R.drawable.weijietong);
+        }else
+        {
+            image2.setImageResource(R.drawable.jietong);
+        }
         result2_tv13.setText(testData.getAxiangceyajiang());
         result2_tv14.setText(testData.getBxiangceyajiang());
         result2_tv15.setText(testData.getCxiangceyajiang());
@@ -162,6 +201,56 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         result2_tv23.setText(testData.getBxiangduixianquanjueyuan());
         result2_tv24.setText(testData.getCxiangduixianquanjeuyuan());
         result2_tv25.setText(testData.getXianquanduidijueyuan());
+    }
+
+    private String jisuan3(String s) {
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b4));
+    }
+
+    private String jisuan2(String s) {
+        BigDecimal b2 = new BigDecimal(s);
+        return decimalFormat.format(b2.multiply(b3));
+    }
+
+    private List guzhang(String s1) {
+        List list = new ArrayList();
+        s1 = String.format("%08d", Integer.parseInt(s1));
+        System.out.println(s1);
+        for (int i = 0; i < s1.length(); i++) {
+            switch (i) {
+                case 1:
+                    if (s1.charAt(i) == '0') {
+                        list.add("通过");
+                    } else {
+                        list.add("不通过");
+                    }
+                    break;
+                case 3:
+                    if (s1.charAt(i) == '0') {
+                        list.add("通过");
+                    } else {
+                        list.add("不通过");
+                    }
+                    break;
+                case 5:
+                    if (s1.charAt(i) == '0') {
+                        list.add("通过");
+                    } else {
+                        list.add("不通过");
+                    }
+                    break;
+                case 7:
+                    if (s1.charAt(i) == '0') {
+                        list.add("通过");
+                    } else {
+                        list.add("不通过");
+                    }
+                    break;
+            }
+        }
+
+        return list;
     }
 
     private void initView() {

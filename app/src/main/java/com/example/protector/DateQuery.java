@@ -97,7 +97,6 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-        stats_tv3.setText(dateFormat2.format(new Date()));
         //spinner
         final List list = new ArrayList();
 
@@ -106,7 +105,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
             list.add(types.get(i).getName());
         }
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner, list);
         stats_spinner.setAdapter(arrayAdapter);
         stats_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -161,8 +160,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                             bean.number1 = String.valueOf((i + 1));
                             bean.number2 = dataList2.get(i).getChanpinbianma();
                             bean.date = dateFormat.format(dataList2.get(i).getDate());
-                            bean.result = "合格";
-                            bean.name = "人员1";
+                            bean.result = dataList2.get(i).getTongguo();
+                            bean.name = dataList2.get(i).getName();
                             bean.id = dataList2.get(i).getId();
                             if (i < num36 * index + 18) {
                                 list1.add(bean);
@@ -376,7 +375,9 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         Long ceshiDate = dateFormat.parse(dateFormat.format(dataList.get(j).getDate())).getTime();
                         Long startDate = dateFormat.parse(stats_tv2.getText().toString()).getTime();
                         Long endDate = dateFormat.parse(stats_tv3.getText().toString()).getTime();
-                        if (ceshiDate >= startDate && ceshiDate <= endDate && Integer.parseInt(dataList.get(j).getCecheng())==(cecheng)) {
+                        if (ceshiDate >= startDate && ceshiDate <= endDate && Integer.parseInt(dataList.get(j).getCecheng())==(cecheng)
+                                && dataList.get(j).getChanpinname().equals(stats_spinner.getSelectedItem())
+                                && dataList.get(j).getXinghao().equals(stats_tv1.getText().toString())) {
                             dataList2.add(dataList.get(j));
                         }
                     } catch (ParseException e) {
@@ -394,8 +395,14 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 listview2.setEnabled(true);
                 footer_tv3.setText("1");
                 layout_footer.setVisibility(View.VISIBLE);
+                int sum = 0;
+                for (int i = 0; i < dataList2.size(); i++) {
+                    if(dataList2.get(i).getTongguo().equals("合格")){
+                        sum++;
+                    }
+                }
                 footer_tv1.setText("统计："+stats_tv2.getText().toString()+" 至 " +stats_tv3.getText().toString()+"   "
-                        +tv_cecheng.getText().toString()+"测试数量："+dataList2.size()+"台，通过"+dataList2.size()+"台，未通过0台");
+                        +tv_cecheng.getText().toString()+"测试数量："+dataList2.size()+"台，通过"+sum+"台，未通过"+(dataList2.size()-sum)+"台");
                 footer_tv2.setText("共 "+page+" 页  第");
                 break;
 
