@@ -347,6 +347,7 @@ public class ErrorAnalysis extends AppCompatActivity {
             up.setBackgroundResource(R.drawable.shangjiantouhui);
             down.setBackgroundResource(R.drawable.xiajiantou);
             up.setEnabled(false);
+            down.setEnabled(true);
         } else {
             up.setBackgroundResource(R.drawable.shangjiantouhui);
             down.setBackgroundResource(R.drawable.xiajiantouhui);
@@ -407,12 +408,16 @@ public class ErrorAnalysis extends AppCompatActivity {
         XiuGai xiuGai = DataSupport.find(XiuGai.class,gongwei);
         int a = 0,b = 0,c = 0,d = 0;
         for (int i = 0; i < testDataList.size(); i++) {
-            list1.add(Double.valueOf(testDataList.get(i).getAxiangawucha()));
-            list1.add(Double.valueOf(testDataList.get(i).getBxiangawucha()));
-            list2.add(Double.valueOf(testDataList.get(i).getAxiangbwucha()));
-            list2.add(Double.valueOf(testDataList.get(i).getBxiangbwucha()));
-            list3.add(Double.valueOf(testDataList.get(i).getAxiangcwucha()));
-            list3.add(Double.valueOf(testDataList.get(i).getBxiangcwucha()));
+            list1.add(Math.abs(Double.valueOf(testDataList.get(i).getAxiangawucha())));
+            list1.add(Math.abs(Double.valueOf(testDataList.get(i).getBxiangawucha())));
+            list2.add(Math.abs(Double.valueOf(testDataList.get(i).getAxiangbwucha())));
+            list2.add(Math.abs(Double.valueOf(testDataList.get(i).getBxiangbwucha())));
+            list3.add(Math.abs(Double.valueOf(testDataList.get(i).getAxiangcwucha())));
+            list3.add(Math.abs(Double.valueOf(testDataList.get(i).getBxiangcwucha())));
+            list4.add(Double.valueOf(testDataList.get(i).getAjiwucha()));
+            list4.add(Double.valueOf(testDataList.get(i).getBjiwucha()));
+            list5.add(Double.valueOf(testDataList.get(i).getAjiwucha()));
+            list5.add(Double.valueOf(testDataList.get(i).getBjiwucha()));
             if(Integer.parseInt(testDataList.get(i).getQidongshijian())-Integer.parseInt(xiuGai.getQidong())<0){
                 list6.add(Integer.parseInt(testDataList.get(i).getQidongshijian())-Integer.parseInt(xiuGai.getQidong()));
             }
@@ -450,6 +455,8 @@ public class ErrorAnalysis extends AppCompatActivity {
         Collections.sort(list1);
         Collections.sort(list2);
         Collections.sort(list3);
+        Collections.sort(list4);
+        Collections.sort(list5);
         Collections.sort(list6);
         Collections.sort(list7);
         Collections.sort(list8);
@@ -458,11 +465,8 @@ public class ErrorAnalysis extends AppCompatActivity {
         data[0] = list1.get(list1.size()-1)+"";
         data[1] = list2.get(list2.size()-1)+"";
         data[2] = list3.get(list3.size()-1)+"";
-        System.out.println(list1.toString());
-        System.out.println(list2.toString());
-        System.out.println(list3.toString());
-        data[3] = "";
-        data[4] = "";
+        data[3] = Math.abs(list4.get(list4.size()-1))+"";
+        data[4] = Math.abs(list5.get(list5.size()-1))+"";
         data[5] = Math.abs(list6.get(0))+"";
         data[6] = Math.abs(list7.get(0))+"";
         data[7] = Math.abs(list8.get(0))+"";
@@ -543,9 +547,9 @@ public class ErrorAnalysis extends AppCompatActivity {
                 holder.itemBtn.setTextColor(Color.parseColor("#000000"));
             }else
             {
-                holder.itemTv1.setText(particular2.a.replace("-",""));
-                holder.itemTv2.setText(particular2.b.replace("-",""));
-                holder.itemTv3.setText(particular2.c.replace("-",""));
+                holder.itemTv1.setText(particular2.a);
+                holder.itemTv2.setText(particular2.b);
+                holder.itemTv3.setText(particular2.c);
                 holder.itemTv4.setText(particular2.chuanlian);
                 holder.itemTv5.setText(particular2.binglian);
                 holder.itemTv6.setText(particular2.qidong);
@@ -575,15 +579,15 @@ public class ErrorAnalysis extends AppCompatActivity {
                     holder.itemTv3.setBackgroundResource(R.drawable.dialog_test2_3);
                 }
 
-//                if(Double.parseDouble(particular2.chuanlian)>0.5){
-//                    holder.itemTv4.setTextColor(Color.parseColor("#ffffff"));
-//                    holder.itemTv4.setBackgroundResource(R.drawable.dialog_test2_3);
-//                }
-//
-//                if(Double.parseDouble(particular2.binglian)>0.5){
-//                    holder.itemTv5.setTextColor(Color.parseColor("#ffffff"));
-//                    holder.itemTv5.setBackgroundResource(R.drawable.dialog_test2_3);
-//                }
+                if(Double.parseDouble(particular2.chuanlian)>0.5){
+                    holder.itemTv4.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv4.setBackgroundResource(R.drawable.dialog_test2_3);
+                }
+
+                if(Double.parseDouble(particular2.binglian)>0.5){
+                    holder.itemTv5.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv5.setBackgroundResource(R.drawable.dialog_test2_3);
+                }
             }
             holder.itemBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -678,11 +682,32 @@ public class ErrorAnalysis extends AppCompatActivity {
         particular.id = String.format("%04d", i + 1);
         particular.number = data.get(i).getChanpinbianma();
         particular.time = dateFormat.format(data.get(i).getDate());
-        particular.a = data.get(i).getAxiangawucha();
-        particular.b = data.get(i).getAxiangbwucha();
-        particular.c = data.get(i).getAxiangcwucha();
-        particular.chuanlian = data.get(i).getXianquanchuanlian5();
-        particular.binglian = data.get(i).getXianquanbinglian();
+        if(Math.abs(Double.valueOf(data.get(i).getAxiangawucha()))>Math.abs(Double.valueOf(data.get(i).getBxiangawucha()))){
+            particular.a = data.get(i).getAxiangawucha();
+        }else
+        {
+            particular.a = data.get(i).getBxiangawucha();
+        }
+        if(Math.abs(Double.valueOf(data.get(i).getAxiangbwucha()))>Math.abs(Double.valueOf(data.get(i).getBxiangbwucha()))){
+            particular.b = data.get(i).getAxiangbwucha();
+        }else
+        {
+            particular.b = data.get(i).getBxiangbwucha();
+        }
+        if(Math.abs(Double.valueOf(data.get(i).getAxiangcwucha()))>Math.abs(Double.valueOf(data.get(i).getBxiangcwucha()))){
+            particular.c = data.get(i).getAxiangcwucha();
+        }else
+        {
+            particular.c = data.get(i).getBxiangcwucha();
+        }
+        if(Math.abs(Double.valueOf(data.get(i).getAjiwucha()))>Math.abs(Double.valueOf(data.get(i).getBjiwucha()))){
+            particular.chuanlian = data.get(i).getAjiwucha();
+            particular.binglian = data.get(i).getAjiwucha();
+        }else
+        {
+            particular.chuanlian = data.get(i).getBjiwucha();
+            particular.binglian = data.get(i).getBjiwucha();
+        }
         particular.qidong = data.get(i).getQidongshijian();
         double[] arr = new double[3];
         arr[0] = Double.parseDouble(data.get(i).getAduanxiangxiangying());
@@ -746,25 +771,33 @@ public class ErrorAnalysis extends AppCompatActivity {
                 holder.textView17.setText(object.c);
                 holder.textView18.setText(object.chuanlian);
                 holder.textView19.setText(object.binglian);
-                holder.textView20.setText(Integer.parseInt(object.qidong)-Integer.parseInt(xiuGai.getQidong())+"");
-                holder.textView21.setText(Integer.parseInt(object.duanxiang.replace(".0",""))-Integer.parseInt(xiuGai.getDuanxiang().replace(".0",""))+"");
-                holder.textView22.setText(Integer.parseInt(String.valueOf(Double.parseDouble(object.m13)*100-(13+Double.parseDouble(xiuGai.getM13()))*100).replace(".0",""))+"");
-                holder.textView23.setText(Integer.parseInt(String.valueOf(Double.parseDouble(object.m30)*100-(30+Double.parseDouble(xiuGai.getM30()))*100).replace(".0",""))+"");
+                holder.textView20.setText(Math.abs(Integer.parseInt(object.qidong)-Integer.parseInt(xiuGai.getQidong()))+"");
+                holder.textView21.setText(Math.abs(Integer.parseInt(object.duanxiang.replace(".0",""))-Integer.parseInt(xiuGai.getDuanxiang().replace(".0","")))+"");
+                holder.textView22.setText(Math.abs(Integer.parseInt(String.valueOf(Double.parseDouble(object.m13)*100-(13+Double.parseDouble(xiuGai.getM13()))*100).replace(".0","")))+"");
+                holder.textView23.setText(Math.abs(Integer.parseInt(String.valueOf(Double.parseDouble(object.m30)*100-(30+Double.parseDouble(xiuGai.getM30()))*100).replace(".0","")))+"");
                 holder.textView25.setText(object.ceshi);
                 holder.textView26.setText(object.man);
-                if(Double.parseDouble(object.a)>0.1){
+                if(Math.abs(Double.parseDouble(object.a))>0.1){
                     holder.textView15.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView15.setTextColor(Color.parseColor("#ffffff"));
                 }
 
-                if(Double.parseDouble(object.b)>0.1){
+                if(Math.abs(Double.parseDouble(object.b))>0.1){
                     holder.textView16.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView16.setTextColor(Color.parseColor("#ffffff"));
                 }
 
-                if(Double.parseDouble(object.c)>0.1){
+                if(Math.abs(Double.parseDouble(object.c))>0.1){
                     holder.textView17.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView17.setTextColor(Color.parseColor("#ffffff"));
+                }
+                if(Math.abs(Double.parseDouble(object.chuanlian))>0.5){
+                    holder.textView18.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView18.setTextColor(Color.parseColor("#ffffff"));
+                }
+                if(Math.abs(Double.parseDouble(object.binglian))>0.5){
+                    holder.textView19.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView19.setTextColor(Color.parseColor("#ffffff"));
                 }
             }
         }

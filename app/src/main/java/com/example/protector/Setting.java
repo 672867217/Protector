@@ -2,6 +2,7 @@ package com.example.protector;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,7 +36,7 @@ import java.util.Set;
 
 import androidx.annotation.NonNull;
 
-public class Setting extends Activity implements View.OnClickListener {
+public class Setting extends MyDialog implements View.OnClickListener {
 
     private TextView erptongxun;
     private TextView neibutongxun2;
@@ -114,13 +115,11 @@ public class Setting extends Activity implements View.OnClickListener {
     Button testDialog2Btn1;
     private int a1;
     private MyDialog myDialog1;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+    Context mycontext;
+    public Setting(final Context context, View layout, int style) {
+        super(context, layout, style);
         initView();
-        new Utils().hideNavKey(Setting.this);
+        mycontext = context;
         list = new ArrayList();
         list2 = new ArrayList();
         for (int i = 0; i < 10; i++) {
@@ -141,9 +140,9 @@ public class Setting extends Activity implements View.OnClickListener {
         strings = new ArrayList<>();
         strings2 = new ArrayList<>();
         init();
-        arrayAdapter = new ArrayAdapter(this, R.layout.spinner, strings);
-        arrayAdapter2 = new ArrayAdapter(this,  R.layout.spinner, strings2);
-        arrayAdapter3 = new ArrayAdapter(this,  R.layout.spinner, list2);
+        arrayAdapter = new ArrayAdapter(context, R.layout.spinner, strings);
+        arrayAdapter2 = new ArrayAdapter(context,  R.layout.spinner, strings2);
+        arrayAdapter3 = new ArrayAdapter(context,  R.layout.spinner, list2);
         spinner1.setAdapter(arrayAdapter);
         spinner2.setAdapter(arrayAdapter2);
         spinner.setAdapter(arrayAdapter3);
@@ -194,7 +193,6 @@ public class Setting extends Activity implements View.OnClickListener {
 
             }
         });
-        //util.sendSerialPort("AAFF00511903028CF0070800D20104006E00820F00FF028A02EE0352028A19");
         util.onReceive(new SerialPortUtil.Receive() {
             @Override
             public void set(String str, List<String> list) {
@@ -251,8 +249,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case 1:
-                        view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
-                        myDialog1 = new MyDialog(Setting.this, view, R.style.dialog);
+                        view = LayoutInflater.from(context).inflate(R.layout.dialog_canshu, null);
+                        myDialog1 = new MyDialog(context, view, R.style.dialog);
                         testDialog2Tv = (TextView) view.findViewById(R.id.test_dialog2_tv);
                         testDialog2Img = (ImageView) view.findViewById(R.id.test_dialog2_img);
                         testDialog2Btn1 = (Button) view.findViewById(R.id.test_dialog2_btn1);
@@ -286,8 +284,8 @@ public class Setting extends Activity implements View.OnClickListener {
                         }
                         break;
                     case 3:
-                        view = LayoutInflater.from(Setting.this).inflate(R.layout.dialog_canshu, null);
-                        myDialog1 = new MyDialog(Setting.this, view, R.style.dialog);
+                        view = LayoutInflater.from(context).inflate(R.layout.dialog_canshu, null);
+                        myDialog1 = new MyDialog(context, view, R.style.dialog);
                         TextView testDialog2Tv;
                         ImageView testDialog2Img;
                         Button testDialog2Btn1;
@@ -310,7 +308,6 @@ public class Setting extends Activity implements View.OnClickListener {
             }
         };
     }
-
     public void add(int gonwei) {
         XiuGai xiuGai = new XiuGai();
         xiuGai.setCecheng("1");
@@ -457,15 +454,15 @@ public class Setting extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fanhui:
-                finish();
+                dismiss();
                 break;
             case R.id.fanhui2:
-                util.sendSerialPort("AA00FF500000");
+                util.sendSerialPort("AA00FF500"+spinner.getSelectedItem());
                 break;
             case R.id.button8:
                 //添加产品
-                View view = LayoutInflater.from(getApplication()).inflate(R.layout.dailog_add, null);
-                myDialog = new MyDialog(this, view, R.style.dialog);
+                View view = LayoutInflater.from(mycontext).inflate(R.layout.dailog_add, null);
+                myDialog = new MyDialog(mycontext, view, R.style.dialog);
                 myDialog.setCancelable(false);
                 myDialog.setCanceledOnTouchOutside(false);
                 myDialog.show();
@@ -486,7 +483,7 @@ public class Setting extends Activity implements View.OnClickListener {
                     @Override
                     public void onClick(View view) {
                         if (editText.getText().equals("") && editText2.getText().equals("") && editText3.getText().equals("")) {
-                            Toast.makeText(Setting.this, "请输入完整", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "请输入完整", Toast.LENGTH_SHORT).show();
                         } else {
                             ProductType type = new ProductType();
                             type.setName(editText.getText().toString());
@@ -496,7 +493,7 @@ public class Setting extends Activity implements View.OnClickListener {
                             myDialog.dismiss();
                             init();
                             arrayAdapter.notifyDataSetChanged();
-                            Toast.makeText(Setting.this, "添加成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "添加成功", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -509,8 +506,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
             case R.id.button9:
                 //修改产品
-                View view2 = LayoutInflater.from(getApplication()).inflate(R.layout.dailog_add, null);
-                myDialog = new MyDialog(this, view2, R.style.dialog);
+                View view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_add, null);
+                myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
                 myDialog.setCanceledOnTouchOutside(false);
                 myDialog.show();
@@ -529,7 +526,7 @@ public class Setting extends Activity implements View.OnClickListener {
                     @Override
                     public void onClick(View view) {
                         if (editText.getText().equals("") && editText2.getText().equals("") && editText3.getText().equals("")) {
-                            Toast.makeText(Setting.this, "请输入完整", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "请输入完整", Toast.LENGTH_SHORT).show();
                         } else {
                             type.setName(editText.getText().toString());
                             type.setXinghao(editText2.getText().toString());
@@ -538,7 +535,7 @@ public class Setting extends Activity implements View.OnClickListener {
                             myDialog.dismiss();
                             init();
                             arrayAdapter.notifyDataSetChanged();
-                            Toast.makeText(Setting.this, "修改成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "修改成功", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -551,8 +548,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
             case R.id.button10:
                 //删除产品
-                view2 = LayoutInflater.from(getApplication()).inflate(R.layout.dailog_remove, null);
-                myDialog = new MyDialog(this, view2, R.style.dialog);
+                view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_remove, null);
+                myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
                 myDialog.setCanceledOnTouchOutside(false);
                 myDialog.show();
@@ -571,7 +568,7 @@ public class Setting extends Activity implements View.OnClickListener {
                     @Override
                     public void onClick(View view) {
                         DataSupport.delete(ProductType.class, chanpins.get(index1).id);
-                        Toast.makeText(Setting.this, "删除成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mycontext, "删除成功", Toast.LENGTH_SHORT).show();
                         init();
                         arrayAdapter.notifyDataSetChanged();
                         myDialog.dismiss();
@@ -586,8 +583,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
             case R.id.button11:
                 //添加操作人员
-                view2 = LayoutInflater.from(getApplication()).inflate(R.layout.dailog_addren, null);
-                myDialog = new MyDialog(this, view2, R.style.dialog);
+                view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_addren, null);
+                myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
                 myDialog.setCanceledOnTouchOutside(false);
                 myDialog.show();
@@ -601,8 +598,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 button17 = (Button) view2.findViewById(R.id.button17);
                 textView3.setText("添加操作员");
                 editText.setText("");
-                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),  R.layout.spinner, list);
-                ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(),  R.layout.spinner, list1);
+                ArrayAdapter adapter = new ArrayAdapter(mycontext,  R.layout.spinner, list);
+                ArrayAdapter adapter2 = new ArrayAdapter(mycontext,  R.layout.spinner, list1);
                 spinner1.setAdapter(adapter);
                 spinner2.setAdapter(adapter2);
                 a = 0;
@@ -633,7 +630,7 @@ public class Setting extends Activity implements View.OnClickListener {
                     @Override
                     public void onClick(View view) {
                         if (editText.getText().equals("")) {
-                            Toast.makeText(Setting.this, "请输入完整", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "请输入完整", Toast.LENGTH_SHORT).show();
                         } else {
                             Operator operator = new Operator();
                             operator.setName(editText.getText().toString());
@@ -643,7 +640,7 @@ public class Setting extends Activity implements View.OnClickListener {
                             myDialog.dismiss();
                             init();
                             arrayAdapter2.notifyDataSetChanged();
-                            Toast.makeText(Setting.this, "添加成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "添加成功", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -656,8 +653,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
             case R.id.button12:
                 //修改操作人员
-                view2 = LayoutInflater.from(getApplication()).inflate(R.layout.dailog_addren, null);
-                myDialog = new MyDialog(this, view2, R.style.dialog);
+                view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_addren, null);
+                myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
                 myDialog.setCanceledOnTouchOutside(false);
                 myDialog.show();
@@ -667,8 +664,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 spinner2 = (Spinner) view2.findViewById(R.id.spinner2);
                 textView3.setText("修改操作人员");
                 editText.setText(strings2.get(index2));
-                adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, list);
-                adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, list1);
+                adapter = new ArrayAdapter(mycontext, android.R.layout.simple_spinner_item, list);
+                adapter2 = new ArrayAdapter(mycontext, android.R.layout.simple_spinner_item, list1);
                 spinner1.setAdapter(adapter);
                 spinner2.setAdapter(adapter2);
                 spinner1.setSelection(Integer.parseInt(textView9.getText().toString()) - 1, true);
@@ -688,7 +685,7 @@ public class Setting extends Activity implements View.OnClickListener {
                         operator.setNumber(list.get(a) + "");
                         operator.setSex(list1.get(b) + "");
                         operator.save();
-                        Toast.makeText(Setting.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mycontext, "修改成功", Toast.LENGTH_SHORT).show();
                         init();
                         arrayAdapter2.notifyDataSetChanged();
                         myDialog.dismiss();
@@ -725,8 +722,8 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
             case R.id.button13:
                 //删除操作员
-                view2 = LayoutInflater.from(getApplication()).inflate(R.layout.dailog_remove, null);
-                myDialog = new MyDialog(this, view2, R.style.dialog);
+                view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_remove, null);
+                myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
                 myDialog.setCanceledOnTouchOutside(false);
                 myDialog.show();
@@ -741,7 +738,7 @@ public class Setting extends Activity implements View.OnClickListener {
                     @Override
                     public void onClick(View view) {
                         DataSupport.delete(Operator.class, caozuoyuans.get(index2).id);
-                        Toast.makeText(Setting.this, "删除成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mycontext, "删除成功", Toast.LENGTH_SHORT).show();
                         init();
                         arrayAdapter2.notifyDataSetChanged();
                         myDialog.dismiss();
@@ -779,7 +776,7 @@ public class Setting extends Activity implements View.OnClickListener {
                 break;
             case R.id.button16:
                 //默认值
-                final AlertDialog alertDialog = new AlertDialog.Builder(Setting.this).create();
+                final AlertDialog alertDialog = new AlertDialog.Builder(mycontext).create();
                 alertDialog.setTitle("提示");
                 alertDialog.setMessage("是否恢复默认值");
                 alertDialog.setButton("确定", new DialogInterface.OnClickListener() {
@@ -885,142 +882,142 @@ public class Setting extends Activity implements View.OnClickListener {
         // validate
         float a = Float.parseFloat(ed_qidongxiangying.getText().toString().trim());
         if (a > 150) {
-            Toast.makeText(this, "启动响应时间只能输入小于150的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "启动响应时间只能输入小于150的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String qidongxiangying = ed_qidongxiangying.getText().toString().trim();
         if (TextUtils.isEmpty(qidongxiangying)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float b = Float.parseFloat(ed_duanxiangxiangying.getText().toString().trim());
         if (b > 250) {
-            Toast.makeText(this, "断相响应时间只能输入小于250的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "断相响应时间只能输入小于250的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String duanxiangxiangying = ed_duanxiangxiangying.getText().toString().trim();
         if (TextUtils.isEmpty(duanxiangxiangying)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float c = Float.parseFloat(ed_13xianshi.getText().toString().trim());
         if (c > 1) {
-            Toast.makeText(this, "13秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "13秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String m13xianshi = ed_13xianshi.getText().toString().trim();
         if (TextUtils.isEmpty(m13xianshi)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float d = Float.parseFloat(ed_30xianshi.getText().toString().trim());
         if (d > 1) {
-            Toast.makeText(this, "30秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "30秒限时时间只能输入小于1的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String m30xianshi = ed_30xianshi.getText().toString().trim();
         if (TextUtils.isEmpty(m30xianshi)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float e = Float.parseFloat(ed_chuanlian1.getText().toString().trim());
         if (e < 20) {
-            Toast.makeText(this, "只能输入大于20的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "只能输入大于20的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String chuanlian1 = ed_chuanlian1.getText().toString().trim();
         if (TextUtils.isEmpty(chuanlian1)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         double f = Double.parseDouble(ed_chuanlan2.getText().toString().trim());
         if (f > 27.5) {
-            Toast.makeText(this, "只能输入小于27.5的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "只能输入小于27.5的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String chuanlan2 = ed_chuanlan2.getText().toString().trim();
         if (TextUtils.isEmpty(chuanlan2)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float g = Float.parseFloat(ed_binglian1.getText().toString().trim());
         if (g < 10) {
-            Toast.makeText(this, "只能输入大于10的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "只能输入大于10的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String binglian1 = ed_binglian1.getText().toString().trim();
         if (TextUtils.isEmpty(binglian1)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float h = Float.parseFloat(ed_binglian2.getText().toString().trim());
         if (h > 14) {
-            Toast.makeText(this, "只能输入小于14的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "只能输入小于14的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String binglian2 = ed_binglian2.getText().toString().trim();
         if (TextUtils.isEmpty(binglian2)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         double i = Double.parseDouble(ed_duanxiangzhiliu.getText().toString().trim());
         if (i > 0.2) {
-            Toast.makeText(this, "断相直流输出电压只能输入小于0.2的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "断相直流输出电压只能输入小于0.2的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String duanxiangzhiliu = ed_duanxiangzhiliu.getText().toString().trim();
         if (TextUtils.isEmpty(duanxiangzhiliu)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float j = Float.parseFloat(ed_jiaoliuxianquan.getText().toString().trim());
         if (j > 3) {
-            Toast.makeText(this, "交流线圈压降只能输入小于3的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "交流线圈压降只能输入小于3的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String jiaoliuxianquan = ed_jiaoliuxianquan.getText().toString().trim();
         if (TextUtils.isEmpty(jiaoliuxianquan)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float k = Float.parseFloat(ed_xiangjian.getText().toString().trim());
         if (k < 500) {
-            Toast.makeText(this, "相间绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "相间绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xiangjian = ed_xiangjian.getText().toString().trim();
         if (TextUtils.isEmpty(xiangjian)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float l = Float.parseFloat(ed_xiangduidi.getText().toString().trim());
         if (l < 500) {
-            Toast.makeText(this, "相对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "相对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xiangduidi = ed_xiangduidi.getText().toString().trim();
         if (TextUtils.isEmpty(xiangduidi)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float m = Float.parseFloat(ed_xiangdui.getText().toString().trim());
         if (m < 500) {
-            Toast.makeText(this, "相对线圈绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "相对线圈绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xiangdui = ed_xiangdui.getText().toString().trim();
         if (TextUtils.isEmpty(xiangdui)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         float n = Float.parseFloat(ed_xianquanduidi.getText().toString().trim());
         if (n < 500) {
-            Toast.makeText(this, "线圈对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "线圈对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xianquanduidi = ed_xianquanduidi.getText().toString().trim();
         if (TextUtils.isEmpty(xianquanduidi)) {
-            Toast.makeText(this, "不能留空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
         util.sendSerialPort(cmd());

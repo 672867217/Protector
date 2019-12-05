@@ -68,7 +68,7 @@
         android:layout_y="40dp"
         android:background="@drawable/tongji"
         android:text="查  询"
-        android:textSize="18sp"
+        android:textSize="20sp"
         tools:layout_editor_absoluteX="164dp"
         tools:layout_editor_absoluteY="101dp" />
 
@@ -77,10 +77,10 @@
         android:layout_width="64dp"
         android:layout_height="32dp"
         android:layout_x="516dp"
-        android:layout_y="41dp"
+        android:layout_y="40dp"
         android:background="@drawable/baocun"
         android:text="返  回"
-        android:textSize="18sp"
+        android:textSize="20sp"
         tools:layout_editor_absoluteX="164dp"
         tools:layout_editor_absoluteY="101dp" />
 

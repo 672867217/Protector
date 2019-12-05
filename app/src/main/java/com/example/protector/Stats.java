@@ -1,6 +1,7 @@
 package com.example.protector;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.protector.SQl.Operator;
 import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.TestData;
+import com.example.protector.util.MyDialog;
 import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
@@ -32,7 +34,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class Stats extends AppCompatActivity implements View.OnClickListener {
+public class Stats extends MyDialog implements View.OnClickListener {
     StatsGvItemAdapter adapter;
     private Calendar calendar;
     List<Bean> beanList = new ArrayList<>();
@@ -49,16 +51,11 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
     private TextView stats_tv1;
     private TextView stats_tv2;
     private GridView stats_gridview;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stats);
+    Context mycontext;
+    public Stats(final Context context, View layout, int style) {
+        super(context, layout, style);
+        mycontext = context;
         initView();
-
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-
-        new Utils().hideNavKey(Stats.this);
 
         List list = new ArrayList();
 
@@ -71,7 +68,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
         for (int i = 0; i < types.size(); i++) {
             list.add(types.get(i).getName());
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner, list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(context, R.layout.spinner, list);
         chanpin_spinner.setAdapter(arrayAdapter);
         chanpin_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -94,7 +91,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 calendar = Calendar.getInstance();
-                new DatePickerDialog(Stats.this, new DatePickerDialog.OnDateSetListener() {
+                new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String mymonth, myday;
@@ -118,7 +115,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 calendar = Calendar.getInstance();
-                new DatePickerDialog(Stats.this, new DatePickerDialog.OnDateSetListener() {
+                new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String mymonth, myday;
@@ -139,7 +136,6 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-
     }
 
 
@@ -149,11 +145,11 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
             //统计
             case R.id.stats_btn1:
                 if (stats_tv1.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "请选择开始日期", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mycontext, "请选择开始日期", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (stats_tv2.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "请选择结束日期", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mycontext, "请选择结束日期", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 beanList.clear();
@@ -170,7 +166,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                                 && dataList.get(j).getXinghao().equals(xinghao.getText().toString())) {
                             dataList2.add(dataList.get(j));
                         } else {
-                            Toast.makeText(this, "没有符合条件的统计结果！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "没有符合条件的统计结果！", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     } catch (ParseException e) {
@@ -227,7 +223,7 @@ public class Stats extends AppCompatActivity implements View.OnClickListener {
                 break;
             //返回
             case R.id.stats_btn2:
-                finish();
+                dismiss();
                 break;
 
         }

@@ -43,10 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button3;
     private Button button6;
     private Button button5;
-    private SharedPreferences.Editor editor;
     public static SerialPortUtil utils = new SerialPortUtil();
     Utils util = new Utils();
-    TestData testData;
     BigDecimal b1 = new BigDecimal("0.001");
     BigDecimal b3 = new BigDecimal("0.01");
     BigDecimal b4 = new BigDecimal("0.1");
@@ -84,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void set(String str, List<String> list) {
                 switch (str) {
                     case "61":
+                        utils.sendSerialPort("AAFF0031");
                         List<String> strings = util.getDivLines(String.format("%08d",Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(5))))),1);
                         System.out.println(strings.toString());
                         if(DataSupport.findAll(Gonwei.class).size() == 0){
@@ -144,7 +143,9 @@ public class MainActivity extends AppCompatActivity {
                 if (timer != null) {
                     timer.cancel();
                 }
-                startActivity(new Intent(getApplicationContext(), Setting.class));
+                View view1 = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_setting,null);
+                Setting setting = new Setting(MainActivity.this,view1,R.style.dialog);
+                setting.show();
             }
         });
         //编号查询
@@ -279,7 +280,9 @@ public class MainActivity extends AppCompatActivity {
                 if (timer != null) {
                     timer.cancel();
                 }
-                startActivity(new Intent(MainActivity.this, Stats.class));
+                View view1 = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_stats,null);
+                Stats stats = new Stats(MainActivity.this,view1,R.style.dialog);
+                stats.show();
             }
         });
 
@@ -287,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else {
             for (int i = 0; i < 5; i++) {
-                new Setting().add(i+1);
+                add(i+1);
             }
             editor.putBoolean("diyici", true).commit();
             timer = new Timer();
@@ -299,6 +302,26 @@ public class MainActivity extends AppCompatActivity {
             };
             timer.schedule(timerTask, 5000, 500);
         }
+    }
+    public void add(int gonwei) {
+        XiuGai xiuGai = new XiuGai();
+        xiuGai.setCecheng("1");
+        xiuGai.setQidong("150");
+        xiuGai.setGonwei(gonwei);
+        xiuGai.setDuanxiang("250");
+        xiuGai.setM13("1");
+        xiuGai.setM30("1");
+        xiuGai.setChuanlian1("20.0");
+        xiuGai.setChuanlian2("27.5");
+        xiuGai.setBinglian1("10.0");
+        xiuGai.setBinglian2("14.0");
+        xiuGai.setDuanxiangzhiliu("0.2");
+        xiuGai.setJiaoliu("3.0");
+        xiuGai.setXiangjian("500");
+        xiuGai.setXiangduidi("500");
+        xiuGai.setXiangduixianquan("500");
+        xiuGai.setXianquan("500");
+        xiuGai.save();
     }
     private boolean is(int num){
         if(num == 0){

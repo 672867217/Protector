@@ -85,6 +85,17 @@
         android:textSize="20sp" />
 
 
+    <Button
+        android:id="@+id/duqu"
+        android:layout_width="61dp"
+        android:layout_height="30dp"
+        android:layout_x="875dp"
+        android:layout_y="20dp"
+        android:background="@drawable/baocun"
+        android:text="连  接"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <AbsoluteLayout
         android:layout_width="417dp"
         android:layout_height="141dp"
@@ -203,13 +214,13 @@
 
         <Spinner
             android:id="@+id/chanpin_spinner3"
-            android:layout_width="50dp"
+            android:layout_width="54dp"
             android:layout_height="16dp"
             android:layout_x="301dp"
             android:layout_y="38dp"
-            android:paddingRight="10dp"
             android:background="@drawable/my_spinner"
             android:gravity="center"
+            android:paddingRight="10dp"
             android:spinnerMode="dropdown" />
 
 

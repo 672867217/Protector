@@ -1,15 +1,10 @@
 package com.example.protector;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,10 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protector.SQl.Gonwei;
 import com.example.protector.SQl.Operator;
@@ -54,6 +45,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class Test extends AppCompatActivity implements View.OnClickListener {
 
     private TextView header_tv;
@@ -73,7 +67,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     private Spinner chanpin_spinner3;
     private Spinner chanpin_spinner;
     private TextView stats_tv1;
-    String[] sp_name = {"其他测程", "一测", "二测", "三测"};
+    String[] sp_name = {"其他", "一测", "二测", "三测"};
     String[] sp_save = {"自动", "手动"};
     List sp_ceshi = new ArrayList();
     List sp_chanpin = new ArrayList();
@@ -82,7 +76,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     List<Bean> list1 = new ArrayList();
     List<TestData> list2 = new ArrayList();
     private List<XiuGai> list;
-    private int cecheng = 1, type = 0;
+    private int cecheng = 0, type = 0;
     private Timer timer;
     private MyDialog myDialog;
     TextView testDialog3Tv;
@@ -93,8 +87,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     BigDecimal b3 = new BigDecimal("0.01");
     BigDecimal b4 = new BigDecimal("0.1");
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    SimpleDateFormat s1 = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat s2 = new SimpleDateFormat("HH:mm:ss");
     Map<String, Date> map = new HashMap<>();
     private int gonwei;
     private Handler handler;
@@ -102,7 +94,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     private List anniu;
     private Gonwei gonwei1;
     private String shengchanbianma;
-
+    private Button duqu;
+    private boolean is = false;
     private String num2(String s) {
         String ss = String.format("%08d", Integer.parseInt(Integer.toBinaryString(Integer.parseInt(s))));
         if (ss.charAt(0) == '0') {
@@ -111,6 +104,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             return "-" + jisuan2((Integer.parseInt(Integer.toBinaryString(~Integer.parseInt(s)).substring(24, 32), 2) + 1) + "");
         }
     }
+
     private String num(String s) {
         String ss = String.format("%08d", Integer.parseInt(Integer.toBinaryString(Integer.parseInt(s))));
         if (ss.charAt(0) == '0') {
@@ -119,12 +113,13 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             return "-" + jisuan3((Integer.parseInt(Integer.toBinaryString(~Integer.parseInt(s)).substring(24, 32), 2) + 1) + "");
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         initView();
-        gonwei1 = DataSupport.find(Gonwei.class,1);
+        gonwei1 = DataSupport.find(Gonwei.class, 1);
         View view = LayoutInflater.from(Test.this).inflate(R.layout.dialog_test5, null);
         myDialog = new MyDialog(Test.this, view, R.style.dialog);
         testDialog3Tv = (TextView) view.findViewById(R.id.test_dialog3_tv);
@@ -142,7 +137,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                     case "60":
                         if (timer != null) {
                             timer.cancel();
-                            timer=null;
+                            timer = null;
                             handler.sendEmptyMessage(3);
                         }
                         handler2.sendEmptyMessage(2);
@@ -157,6 +152,24 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         timer2.schedule(timerTask, 240000, 240000);
                         map.put("gonwei" + gonwei, new Date());
                         break;
+                    case "61":
+                        MainActivity.utils.sendSerialPort("AAFF0031");
+                        chanpin_spinner3.setSelection(0,true);
+                        List<String> strings = new Utils().getDivLines(String.format("%08d",Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(5))))),1);
+                        System.out.println(strings.toString());
+                        if(DataSupport.findAll(Gonwei.class).size() == 0){
+                            gonwei1 = new Gonwei();
+                        }else {
+                            gonwei1 = DataSupport.find(Gonwei.class,1);
+                        }
+                        gonwei1.one = is(Integer.parseInt(strings.get(7)));
+                        gonwei1.two = is(Integer.parseInt(strings.get(6)));
+                        gonwei1.three = is(Integer.parseInt(strings.get(5)));
+                        gonwei1.four = is(Integer.parseInt(strings.get(4)));
+                        gonwei1.five = is(Integer.parseInt(strings.get(3)));
+                        gonwei1.save();
+                        handler.sendEmptyMessage(2);
+                        break;
                     case "10":
                         if (timer2 != null) {
                             timer2.cancel();
@@ -164,9 +177,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         TestData testData = new TestData();
                         testData.setMode(sp_save[type]);
                         testData.setType(1);
-                        testData.setName(chanpin_spinner5.getSelectedItem()+"");
-                        testData.setChanpinname(chanpin_spinner.getSelectedItem()+"");
-                        testData.setShengchanchang(chanpin_spinner2.getSelectedItem()+"");
+                        testData.setName(chanpin_spinner5.getSelectedItem() + "");
+                        testData.setChanpinname(chanpin_spinner.getSelectedItem() + "");
+                        testData.setShengchanchang(chanpin_spinner2.getSelectedItem() + "");
                         testData.setXinghao(stats_tv1.getText().toString());
                         testData.setGongwei(new Utils().HexToInt(list.get(5)) + "");
                         testData.setDate(map.get("gonwei" + testData.getGongwei()));
@@ -177,7 +190,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         testData.setShengchanbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
                         testData.setAjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(13))));
                         testData.setBjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(14))));
-                        testData.setBaojin(String.format("%08d",Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(15))))) + String.format("%08d",Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(16))))));
+                        testData.setBaojin(String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(15))))) + String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(16))))));
                         testData.setXianquanchuanlian1(jisuan3(new Utils().HexToInt(list.get(17) + list.get(18)) + ""));
                         testData.setXianquanchuanlian2(jisuan3(new Utils().HexToInt(list.get(19) + list.get(20)) + ""));
                         testData.setXianquanchuanlian3(jisuan3(new Utils().HexToInt(list.get(21) + list.get(22)) + ""));
@@ -266,56 +279,64 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         test_gv1.setAdapter(testGv1ItemAdapter);
         testGv1ItemAdapter.notifyDataSetChanged();
 
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-                case 0:
-                    if (gonwei1.one == true) {
-                        list2.add(new TestData());
-                    } else {
-                        TestData testData = new TestData();
-                        testData.setShengchanbianma("");
-                        list2.add(testData);
-                    }
+        if(gonwei1 == null){
+            for (int i = 0; i < 5; i++) {
+                list2.add(new TestData());
+            }
+        }else
+        {
+            for (int i = 0; i < 5; i++) {
+                switch (i) {
+                    case 0:
+                        if (gonwei1.one == true) {
+                            list2.add(new TestData());
+                        } else {
+                            TestData testData = new TestData();
+                            testData.setShengchanbianma("");
+                            list2.add(testData);
+                        }
 
-                    break;
-                case 1:
-                    if (gonwei1.two == true) {
-                        list2.add(new TestData());
-                    } else {
-                        TestData testData = new TestData();
-                        testData.setShengchanbianma("");
-                        list2.add(testData);
-                    }
-                    break;
-                case 2:
-                    if (gonwei1.three == true) {
-                        list2.add(new TestData());
-                    } else {
-                        TestData testData = new TestData();
-                        testData.setShengchanbianma("");
-                        list2.add(testData);
-                    }
-                    break;
-                case 3:
-                    if (gonwei1.four == true) {
-                        list2.add(new TestData());
-                    } else {
-                        TestData testData = new TestData();
-                        testData.setShengchanbianma("");
-                        list2.add(testData);
-                    }
-                    break;
-                case 4:
-                    if (gonwei1.five == true) {
-                        list2.add(new TestData());
-                    } else {
-                        TestData testData = new TestData();
-                        testData.setShengchanbianma("");
-                        list2.add(testData);
-                    }
-                    break;
+                        break;
+                    case 1:
+                        if (gonwei1.two == true) {
+                            list2.add(new TestData());
+                        } else {
+                            TestData testData = new TestData();
+                            testData.setShengchanbianma("");
+                            list2.add(testData);
+                        }
+                        break;
+                    case 2:
+                        if (gonwei1.three == true) {
+                            list2.add(new TestData());
+                        } else {
+                            TestData testData = new TestData();
+                            testData.setShengchanbianma("");
+                            list2.add(testData);
+                        }
+                        break;
+                    case 3:
+                        if (gonwei1.four == true) {
+                            list2.add(new TestData());
+                        } else {
+                            TestData testData = new TestData();
+                            testData.setShengchanbianma("");
+                            list2.add(testData);
+                        }
+                        break;
+                    case 4:
+                        if (gonwei1.five == true) {
+                            list2.add(new TestData());
+                        } else {
+                            TestData testData = new TestData();
+                            testData.setShengchanbianma("");
+                            list2.add(testData);
+                        }
+                        break;
+                }
             }
         }
+
         testGv2ItemAdapter = new TestGv2ItemAdapter(this, list2);
         test_gv2.setAdapter(testGv2ItemAdapter);
         final List<ProductType> types = DataSupport.findAll(ProductType.class);
@@ -343,7 +364,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (types.size() != 0) {
                     stats_tv1.setText(types.get(i).getXinghao());
-                    ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this,R.layout.spinner, new String[]{sp_shengchan.get(i) + ""});
+                    ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this, R.layout.spinner, new String[]{sp_shengchan.get(i) + ""});
                     chanpin_spinner2.setAdapter(shengchanAdapter);
                 }
             }
@@ -356,11 +377,18 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         chanpin_spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cecheng = position + 1;
+                cecheng = position;
+                test_gv2.setAdapter(testGv2ItemAdapter);
                 //当测程改变  通过串口向测试台主机发送信息
-                for (int i = 0; i < 5; i++) {
-                    MainActivity.utils.sendSerialPort(cmd(i+1));
+                if(is){
+                    for (int i = 0; i < 5; i++) {
+                        MainActivity.utils.sendSerialPort(cmd(i + 1));
+                    }
+                }else
+                {
+                    is = true;
                 }
+
             }
 
             @Override
@@ -413,8 +441,19 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
             }
         };
-    }
+        if(gonwei1 == null){
+            MainActivity.utils.sendSerialPort("AAFF0030");
+        }
 
+    }
+    private boolean is(int num){
+        if(num == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
+    }
     private void initView() {
         header_tv = (TextView) findViewById(R.id.header_tv);
         header_tv2 = (TextView) findViewById(R.id.header_tv2);
@@ -433,6 +472,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         chanpin_spinner = (Spinner) findViewById(R.id.chanpin_spinner);
         stats_tv1 = (TextView) findViewById(R.id.stats_tv1);
         test_btn.setOnClickListener(this);
+        duqu = (Button) findViewById(R.id.duqu);
+        duqu.setOnClickListener(this);
     }
 
     private String jisuan2(String s) {
@@ -456,108 +497,95 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             case R.id.test_btn:
                 finish();
                 break;
+            case R.id.duqu:
+                MainActivity.utils.sendSerialPort("AAFF0030");
+                break;
         }
     }
 
     private String cmd(int gongwei) {
-        XiuGai xiuGai = list.get(gongwei-1);
-        String s = "AA00FF5119";
-        if(Integer.toHexString(gongwei).length() == 2){
+        XiuGai xiuGai = list.get(gongwei - 1);
+        String s = "AAFF005119";
+        if (Integer.toHexString(gongwei).length() == 2) {
             s += Integer.toHexString(gongwei);
-        }else
-        {
-            s += "0"+Integer.toHexString(gongwei);
+        } else {
+            s += "0" + Integer.toHexString(gongwei);
         }
-        if(Integer.toHexString(cecheng).length() == 2){
+        if (Integer.toHexString(cecheng).length() == 2) {
             s += Integer.toHexString(cecheng);
-        }else
-        {
-            s += "0"+Integer.toHexString(cecheng);
+        } else {
+            s += "0" + Integer.toHexString(cecheng);
         }
-        if(Integer.toHexString(Integer.parseInt(xiuGai.getQidong())).length() == 2){
+        if (Integer.toHexString(Integer.parseInt(xiuGai.getQidong())).length() == 2) {
             s += Integer.toHexString(Integer.parseInt(xiuGai.getQidong()));
-        }else
-        {
-            s += "0"+Integer.toHexString(Integer.parseInt(xiuGai.getQidong()));
+        } else {
+            s += "0" + Integer.toHexString(Integer.parseInt(xiuGai.getQidong()));
         }
         System.out.println(xiuGai.getQidong());
-        if(Integer.toHexString(Integer.parseInt(xiuGai.getDuanxiang())).length() == 2){
+        if (Integer.toHexString(Integer.parseInt(xiuGai.getDuanxiang())).length() == 2) {
             s += Integer.toHexString(Integer.parseInt(xiuGai.getDuanxiang()));
-        }else
-        {
-            s += "0"+Integer.toHexString(Integer.parseInt(xiuGai.getDuanxiang()));
+        } else {
+            s += "0" + Integer.toHexString(Integer.parseInt(xiuGai.getDuanxiang()));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()) * 10)).length() == 2){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()) * 10)).length() == 2) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()) * 10));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()) * 10));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()) * 10)).length() == 2){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()) * 10)).length() == 2) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()) * 10));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()) * 10));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10)).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10)).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10)).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10)).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10)).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10)).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10)).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10)).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100)).length() == 2){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100)).length() == 2) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100)).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100)).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian()))).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian()))).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi()))).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi()))).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan()))).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan()))).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
         }
-        if(Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan()))).length() == 4){
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan()))).length() == 4) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
-        }else
-        {
-            s += "0"+Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
         }
         s += "19";
         return s;
@@ -673,35 +701,11 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
         private void initializeViews(final TestData testData, final ViewHolder holder, final int what) {
             //TODO implement
-            switch (what) {
-                case 0:
-                    if (!gonwei1.one) {
-                        set(holder);
-                    }
-                    break;
-                case 1:
-                    if (!gonwei1.two) {
-                        set(holder);
-                    }
-                    break;
-                case 2:
-                    if (!gonwei1.three) {
-                        set(holder);
-                    }
-                    break;
-                case 3:
-                    if (!gonwei1.four) {
-                        set(holder);
-                    }
-                    break;
-                case 4:
-                    if (!gonwei1.five) {
-                        set(holder);
-                    }
-                    break;
-            }
+            holder.testItem2Tv2.setEnabled(true);
+
+
             for (int i = 0; i < anniu.size(); i++) {
-                if(anniu.get(i).equals(what+1)){
+                if (anniu.get(i).equals(what + 1)) {
                     holder.testBtn2.setEnabled(false);
                     holder.testBtn3.setEnabled(true);
                     holder.testBtn4.setEnabled(true);
@@ -710,7 +714,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                     holder.testBtn4.setBackgroundResource(R.drawable.dayinweixiuqindan);
                 }
             }
-            holder.testItem2Tv2.setEnabled(true);
             handler2 = new Handler() {
                 @Override
                 public void handleMessage(@NonNull Message msg) {
@@ -723,7 +726,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         case 2:
                             TestData testData1 = new TestData();
                             testData1.setShengchanbianma(shengchanbianma);
-                            list2.set(gonwei-1,testData1);
+                            list2.set(gonwei - 1, testData1);
                             notifyDataSetInvalidated();
                             break;
                     }
@@ -734,9 +737,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    if(actionId== EditorInfo.IME_ACTION_DONE){
-                        if(anniu.size()!=0){
-                            anniu.remove(gonwei+"");
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        if (anniu.size() != 0) {
+                            anniu.remove(gonwei + "");
                         }
                         shengchanbianma = holder.testItem2Tv2.getText().toString();
                         holder.testItem2Tv2.clearFocus();
@@ -744,8 +747,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         im.hideSoftInputFromWindow(holder.testItem2Tv2.getWindowToken(), 0);
                         gonwei = 1 + what;
                         String s = Integer.toHexString(Integer.parseInt(holder.testItem2Tv2.getText().toString()));
-                        if(s.length()<8){
-                            s="0"+s;
+                        if (s.length() < 8) {
+                            s = "0" + s;
                         }
                         MainActivity.utils.sendSerialPort("AA00FF20050" + gonwei + s);
                         holder.testItem2Tv2.setEnabled(false);
@@ -817,6 +820,39 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv7.setText(arr[arr.length - 1] + "");
             holder.testItem2Tv13.setText(arr2[arr2.length - 1] + "");
             holder.testItem2Tv15.setText(arr4[0] + "");
+            if(cecheng == 0){
+                set2(holder);
+            }
+            if(gonwei1 != null)
+            {
+                switch (what) {
+                    case 0:
+                        if (!gonwei1.one) {
+                            set(holder);
+                        }
+                        break;
+                    case 1:
+                        if (!gonwei1.two) {
+                            set(holder);
+                        }
+                        break;
+                    case 2:
+                        if (!gonwei1.three) {
+                            set(holder);
+                        }
+                        break;
+                    case 3:
+                        if (!gonwei1.four) {
+                            set(holder);
+                        }
+                        break;
+                    case 4:
+                        if (!gonwei1.five) {
+                            set(holder);
+                        }
+                        break;
+                }
+            }
             XiuGai xiuGai = DataSupport.find(XiuGai.class, what + 1);
             boolean is = true;
             if (!testData.getChanpinbianma().equals("0")) {
@@ -832,16 +868,16 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                     is = false;
                 }
                 if (Double.parseDouble(testData.getM13xianshishijian()) * 100
-                        < (13-Double.parseDouble(xiuGai.getM13())) * 100
+                        < (13 - Double.parseDouble(xiuGai.getM13())) * 100
                         || Double.parseDouble(testData.getM13xianshishijian()) * 100
-                        > (13+Double.parseDouble(xiuGai.getM13())) * 100) {
+                        > (13 + Double.parseDouble(xiuGai.getM13())) * 100) {
                     holder.testItem2Tv9.setBackgroundResource(R.drawable.dialog_test2_3);
                     is = false;
                 }
                 if (Double.parseDouble(testData.getM30xianshishijian()) * 100
-                        < (30-Double.parseDouble(xiuGai.getM30())) * 100
+                        < (30 - Double.parseDouble(xiuGai.getM30())) * 100
                         || Double.parseDouble(testData.getM30xianshishijian()) * 100
-                        > (30+Double.parseDouble(xiuGai.getM30())) * 100) {
+                        > (30 + Double.parseDouble(xiuGai.getM30())) * 100) {
                     holder.testItem2Tv10.setBackgroundResource(R.drawable.dialog_test2_3);
                     is = false;
                 }
@@ -882,8 +918,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 //保存模式为自动不可用 手动可用
                 testData.setTongguo(holder.testItem2Tv17.getText().toString());
                 if (type == 0) {
-                    if(!anniu.contains(gonwei))
-                    {
+                    if (!anniu.contains(gonwei)) {
                         anniu.add(gonwei);
                     }
 
@@ -918,8 +953,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 holder.testBtn2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!anniu.contains(gonwei))
-                        {
+                        if (!anniu.contains(gonwei)) {
                             anniu.add(gonwei);
                         }
                         holder.testBtn2.setEnabled(false);
@@ -946,8 +980,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             }
 
 
-
-
         }
 
         private String guzhang(String s1, String s2) {
@@ -959,6 +991,30 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             return "无";
         }
 
+        private void set2(ViewHolder holder){
+            holder.testBtn2.setBackgroundResource(R.drawable.queding);
+            holder.testBtn3.setBackgroundResource(R.drawable.queding);
+            holder.testBtn4.setBackgroundResource(R.drawable.queding);
+            holder.testBtn2.setEnabled(false);
+            holder.testBtn2.setTextColor(Color.parseColor("#868686"));
+            holder.testBtn3.setEnabled(false);
+            holder.testBtn3.setTextColor(Color.parseColor("#868686"));
+            holder.testBtn4.setEnabled(false);
+            holder.testBtn4.setTextColor(Color.parseColor("#868686"));
+            holder.testItem2Tv2.setEnabled(false);
+            holder.testItem2Tv1.setTextColor(Color.parseColor("#868686"));
+            holder.testItem2Tv1.setBackgroundResource(R.drawable.dialog_test2_22);
+            holder.testItem2Tv2.setBackgroundResource(R.drawable.dialog_test2_22);
+            holder.testItem2Tv3.setBackgroundResource(R.drawable.dialog_test2_22);
+            holder.testItem2Tv2.setTextColor(Color.parseColor("#868686"));
+            holder.testItem2Tv3.setTextColor(Color.parseColor("#868686"));
+            holder.t1.setTextColor(Color.parseColor("#868686"));
+            holder.t2.setTextColor(Color.parseColor("#868686"));
+            holder.t3.setTextColor(Color.parseColor("#868686"));
+            holder.testItem2Tv1.setText("");
+            holder.testItem2Tv2.setText("0");
+            holder.testItem2Tv3.setText("0");
+        }
         private void set(ViewHolder holder) {
             holder.testBtn2.setBackgroundResource(R.drawable.queding);
             holder.testBtn3.setBackgroundResource(R.drawable.queding);
@@ -990,6 +1046,20 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.t21.setTextColor(Color.parseColor("#868686"));
             holder.t22.setTextColor(Color.parseColor("#868686"));
             holder.t23.setTextColor(Color.parseColor("#868686"));
+            holder.testItem2Tv1.setText("");
+            holder.testItem2Tv2.setText("");
+            holder.testItem2Tv3.setText("");
+            holder.testItem2Tv4.setText("");
+            holder.testItem2Tv5.setText("");
+            holder.testItem2Tv7.setText("");
+            holder.testItem2Tv8.setText("");
+            holder.testItem2Tv9.setText("");
+            holder.testItem2Tv10.setText("");
+            holder.testItem2Tv11.setText("");
+            holder.testItem2Tv12.setText("");
+            holder.testItem2Tv13.setText("");
+            holder.testItem2Tv15.setText("");
+            holder.testItem2Tv17.setText("");
             holder.textView27.setTextColor(Color.parseColor("#868686"));
             holder.testBtn2.setEnabled(false);
             holder.testBtn2.setTextColor(Color.parseColor("#868686"));
