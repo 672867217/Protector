@@ -52,6 +52,7 @@
                     android:layout_height="29dp"
                     android:paddingLeft="5dp"
                     android:textColor="#000"
+                    android:singleLine="true"
                     android:background="@drawable/dialog_test2_2"
                     android:ems="10" />
             </LinearLayout>

@@ -49,7 +49,7 @@
             android:layout_height="20dp"
             android:layout_x="97dp"
             android:layout_y="50dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="17sp" />
@@ -70,7 +70,7 @@
             android:layout_height="20dp"
             android:layout_x="97dp"
             android:layout_y="78dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="17sp" />
@@ -91,7 +91,7 @@
             android:layout_height="20dp"
             android:layout_x="97dp"
             android:layout_y="109dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="17sp" />
@@ -111,7 +111,7 @@
             android:layout_height="20dp"
             android:layout_x="97dp"
             android:layout_y="139dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="17sp" />
@@ -142,7 +142,7 @@
             android:layout_height="20dp"
             android:layout_x="97dp"
             android:layout_y="170dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="17sp" />
@@ -163,7 +163,7 @@
             android:layout_height="20dp"
             android:layout_x="97dp"
             android:layout_y="197dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="17sp" />
@@ -184,7 +184,7 @@
             android:layout_height="20dp"
             android:layout_x="97dp"
             android:layout_y="228dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="17sp" />

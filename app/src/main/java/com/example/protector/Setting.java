@@ -9,7 +9,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +23,9 @@ import android.widget.Toast;
 
 import com.example.protector.SQl.Operator;
 import com.example.protector.SQl.ProductType;
+import com.example.protector.SQl.TestData;
 import com.example.protector.SQl.XiuGai;
+import com.example.protector.util.MyApplication;
 import com.example.protector.util.MyDialog;
 import com.example.protector.util.SerialPortUtil;
 import com.example.protector.util.Utils;
@@ -31,6 +35,7 @@ import org.litepal.crud.DataSupport;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -116,6 +121,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
     private int a1;
     private MyDialog myDialog1;
     Context mycontext;
+    private MyApplication app;
+
     public Setting(final Context context, View layout, int style) {
         super(context, layout, style);
         initView();
@@ -126,8 +133,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
             list.add(String.format("%03d", i + 1));
         }
 
-
-
+        app = (MyApplication) getContext().getApplicationContext();
         list1 = new ArrayList();
         list1.add("男");
         list1.add("女");
@@ -141,8 +147,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
         strings2 = new ArrayList<>();
         init();
         arrayAdapter = new ArrayAdapter(context, R.layout.spinner, strings);
-        arrayAdapter2 = new ArrayAdapter(context,  R.layout.spinner, strings2);
-        arrayAdapter3 = new ArrayAdapter(context,  R.layout.spinner, list2);
+        arrayAdapter2 = new ArrayAdapter(context, R.layout.spinner, strings2);
+        arrayAdapter3 = new ArrayAdapter(context, R.layout.spinner, list2);
         spinner1.setAdapter(arrayAdapter);
         spinner2.setAdapter(arrayAdapter2);
         spinner.setAdapter(arrayAdapter3);
@@ -153,7 +159,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 List<XiuGai> xiuGais = DataSupport.findAll(XiuGai.class);
                 for (int j = 0; j < xiuGais.size(); j++) {
                     if (xiuGais.get(j).getGonwei() == gonwei) {
-                        set(j+1);
+                        set(j + 1);
                     }
                 }
             }
@@ -240,6 +246,57 @@ public class Setting extends MyDialog implements View.OnClickListener {
                     xiuGai.setXianquan(new Utils().HexToInt(list.get(28) + list.get(29)) + "");
                     xiuGai.save();
                     handler.sendEmptyMessage(2);
+
+                }
+                if (str.equals("10")) {
+                    TestData testData = new TestData();
+                    testData.setType(1);
+                    testData.setGongwei(new Utils().HexToInt(list.get(5)) + "");
+                    testData.setDate2(new Date());
+                    testData.setCecheng(new Utils().HexToInt(list.get(6)) + "");
+                    testData.setCeshishichang(new Utils().HexToInt(list.get(7) + list.get(8)) + "");
+                    testData.setChanpinbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
+                    testData.setShengchanbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
+                    testData.setAjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(13))));
+                    testData.setBjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(14))));
+                    testData.setBaojin(String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(15))))) + String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(16))))));
+                    testData.setXianquanchuanlian1(MainActivity.jisuan3(new Utils().HexToInt(list.get(17) + list.get(18)) + ""));
+                    testData.setXianquanchuanlian2(MainActivity.jisuan3(new Utils().HexToInt(list.get(19) + list.get(20)) + ""));
+                    testData.setXianquanchuanlian3(MainActivity.jisuan3(new Utils().HexToInt(list.get(21) + list.get(22)) + ""));
+                    testData.setXianquanchuanlian4(MainActivity.jisuan3(new Utils().HexToInt(list.get(23) + list.get(24)) + ""));
+                    testData.setXianquanchuanlian5(MainActivity.jisuan3(new Utils().HexToInt(list.get(25) + list.get(26)) + ""));
+                    testData.setXianquanbinglian(MainActivity.jisuan3(new Utils().HexToInt(list.get(27) + list.get(28)) + ""));
+                    testData.setAjiwucha(MainActivity.num(new Utils().HexToInt(list.get(29)) + ""));
+                    testData.setBjiwucha(MainActivity.num(new Utils().HexToInt(list.get(30)) + ""));
+                    testData.setAxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(31)) + ""));
+                    testData.setAxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(32)) + ""));
+                    testData.setAxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(33)) + ""));
+                    testData.setBxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(34)) + ""));
+                    testData.setBxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(35)) + ""));
+                    testData.setBxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(36)) + ""));
+                    testData.setAduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(37)) + ""));
+                    testData.setBduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(38)) + ""));
+                    testData.setCduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(39)) + ""));
+                    testData.setAxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(40) + list.get(41)) + ""));
+                    testData.setBxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(42) + list.get(43)) + ""));
+                    testData.setCxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(44) + list.get(45)) + ""));
+                    testData.setQidongshijian(new Utils().HexToInt(list.get(46) + list.get(47)) + "");
+                    testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
+                    testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
+                    testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
+                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
+                    testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
+                    testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
+                    testData.setAxiangduidijueyuan(new Utils().HexToInt(list.get(64) + list.get(65)) + "");
+                    testData.setBxiangduidijueyuan(new Utils().HexToInt(list.get(66) + list.get(67)) + "");
+                    testData.setCxiangduidijueyuan(new Utils().HexToInt(list.get(68) + list.get(69)) + "");
+                    testData.setAxiangduixianquanjueyuan(new Utils().HexToInt(list.get(70) + list.get(71)) + "");
+                    testData.setBxiangduixianquanjueyuan(new Utils().HexToInt(list.get(72) + list.get(73)) + "");
+                    testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
+                    testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
+                    app.map.put(new Utils().HexToInt(list.get(5)) + "", testData);
                 }
             }
         });
@@ -279,7 +336,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
                         });
                         break;
                     case 2:
-                        if(spinner.getSelectedItem().equals(a1)){
+                        if (spinner.getSelectedItem().equals(a1)) {
                             set(a1);
                         }
                         break;
@@ -300,7 +357,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
                             public void onClick(View view1) {
                                 myDialog1.dismiss();
                                 view = null;
-                                set(Integer.parseInt( spinner.getSelectedItem()+""));
+                                set(Integer.parseInt(spinner.getSelectedItem() + ""));
                             }
                         });
                         break;
@@ -308,6 +365,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
             }
         };
     }
+
     public void add(int gonwei) {
         XiuGai xiuGai = new XiuGai();
         xiuGai.setCecheng("1");
@@ -457,7 +515,13 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.fanhui2:
-                util.sendSerialPort("AA00FF500"+spinner.getSelectedItem());
+                String q = "";
+                if (new Utils().getXor(new Utils().getDivLines("AAFF00500" + spinner.getSelectedItem(), 2)).length() < 2) {
+                    q += "0" + new Utils().getXor(new Utils().getDivLines("AAFF00500" + spinner.getSelectedItem(), 2));
+                } else {
+                    q += new Utils().getXor(new Utils().getDivLines("AAFF00500" + spinner.getSelectedItem(), 2));
+                }
+                util.sendSerialPort("AAFF0050010" + spinner.getSelectedItem() +""+ q);
                 break;
             case R.id.button8:
                 //添加产品
@@ -482,8 +546,12 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (editText.getText().equals("") && editText2.getText().equals("") && editText3.getText().equals("")) {
-                            Toast.makeText(mycontext, "请输入完整", Toast.LENGTH_SHORT).show();
+                        if (editText.getText().toString().equals("")) {
+                            Toast.makeText(mycontext, "产品名称不能为空", Toast.LENGTH_SHORT).show();
+                        } else if (editText2.getText().toString().equals("")) {
+                            Toast.makeText(mycontext, "产品型号不能为空", Toast.LENGTH_SHORT).show();
+                        } else if (editText3.getText().toString().equals("")) {
+                            Toast.makeText(mycontext, "生产厂家不能为空", Toast.LENGTH_SHORT).show();
                         } else {
                             ProductType type = new ProductType();
                             type.setName(editText.getText().toString());
@@ -506,6 +574,10 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 break;
             case R.id.button9:
                 //修改产品
+                if (textView7.getText().toString().equals("")) {
+                    Toast.makeText(mycontext, "暂无可修改的操作员", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 View view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_add, null);
                 myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
@@ -525,8 +597,12 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (editText.getText().equals("") && editText2.getText().equals("") && editText3.getText().equals("")) {
-                            Toast.makeText(mycontext, "请输入完整", Toast.LENGTH_SHORT).show();
+                        if (editText.getText().toString().equals("")) {
+                            Toast.makeText(mycontext, "产品名称不能为空", Toast.LENGTH_SHORT).show();
+                        } else if (editText2.getText().toString().equals("")) {
+                            Toast.makeText(mycontext, "产品型号不能为空", Toast.LENGTH_SHORT).show();
+                        } else if (editText3.getText().toString().equals("")) {
+                            Toast.makeText(mycontext, "生产厂家不能为空", Toast.LENGTH_SHORT).show();
                         } else {
                             type.setName(editText.getText().toString());
                             type.setXinghao(editText2.getText().toString());
@@ -548,6 +624,11 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 break;
             case R.id.button10:
                 //删除产品
+                List plist = DataSupport.findAll(ProductType.class);
+                if (plist == null || plist.size() == 0) {
+                    Toast.makeText(mycontext, "没有可以删除的产品", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_remove, null);
                 myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
@@ -561,6 +642,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
 
                 testDialog2Tv = (TextView) view2.findViewById(R.id.test_dialog2_tv);
                 testDialog2Tv2 = (TextView) view2.findViewById(R.id.test_dialog2_tv2);
+                testDialog2Tv2.setText(textView7.getText().toString());
                 testDialog2Img = (ImageView) view2.findViewById(R.id.test_dialog2_img);
                 testDialog2Btn1 = (Button) view2.findViewById(R.id.test_dialog2_btn1);
                 testDialog2Btn2 = (Button) view2.findViewById(R.id.test_dialog2_btn2);
@@ -580,6 +662,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
                         myDialog.dismiss();
                     }
                 });
+
                 break;
             case R.id.button11:
                 //添加操作人员
@@ -598,8 +681,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button17 = (Button) view2.findViewById(R.id.button17);
                 textView3.setText("添加操作员");
                 editText.setText("");
-                ArrayAdapter adapter = new ArrayAdapter(mycontext,  R.layout.spinner, list);
-                ArrayAdapter adapter2 = new ArrayAdapter(mycontext,  R.layout.spinner, list1);
+                ArrayAdapter adapter = new ArrayAdapter(mycontext, R.layout.spinner, list);
+                ArrayAdapter adapter2 = new ArrayAdapter(mycontext, R.layout.spinner, list1);
                 spinner1.setAdapter(adapter);
                 spinner2.setAdapter(adapter2);
                 a = 0;
@@ -629,8 +712,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (editText.getText().equals("")) {
-                            Toast.makeText(mycontext, "请输入完整", Toast.LENGTH_SHORT).show();
+                        if (editText.getText().toString().equals("")) {
+                            Toast.makeText(mycontext, "操作员不能为空", Toast.LENGTH_SHORT).show();
                         } else {
                             Operator operator = new Operator();
                             operator.setName(editText.getText().toString());
@@ -653,6 +736,10 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 break;
             case R.id.button12:
                 //修改操作人员
+                if (textView9.getText().toString().equals("")) {
+                    Toast.makeText(mycontext, "暂无可修改的操作员", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 view2 = LayoutInflater.from(mycontext).inflate(R.layout.dailog_addren, null);
                 myDialog = new MyDialog(mycontext, view2, R.style.dialog);
                 myDialog.setCancelable(false);
@@ -812,7 +899,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
                         xiuGai.setXiangduixianquan("500");
                         xiuGai.setXianquan("500");
                         xiuGai.save();
-                        util.sendSerialPort(cmd());
+                        util.sendSerialPort(cmd(Integer.parseInt((String) spinner.getSelectedItem())));
                     }
                 });
                 alertDialog.setButton2("取消", new DialogInterface.OnClickListener() {
@@ -826,24 +913,108 @@ public class Setting extends MyDialog implements View.OnClickListener {
         }
     }
 
-    private String cmd() {
-        String s = "AA00FF51190101";
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong())));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiang())));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()) * 10));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()) * 10));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager im = (InputMethodManager) mycontext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        return super.onTouchEvent(event);
+    }
 
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
-        s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
-        s += "19";
+    private String cmd(int gonwei) {
+        String s = "AAFF0051190" + gonwei + "01";
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong()))).length() == 2) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong())));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiang()))).length() == 2) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiang())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiang())));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13()))).length() == 2) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getM13())));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30()))).length() == 2) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getM30())));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10)).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10)).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian1()) * 10));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10)).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10)).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getChuanlian2()) * 10));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10)).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10)).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian1()) * 10));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10)).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10)).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getBinglian2()) * 10));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100)).length() == 2) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getDuanxiangzhiliu()) * 100));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100)).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100)).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getJiaoliu()) * 100));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian()))).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian()))).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangjian())));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi()))).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi()))).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduidi())));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan()))).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan()))).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXiangduixianquan())));
+        }
+        if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan()))).length() == 4) {
+            s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
+        } else if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan()))).length() == 2) {
+            s += "00" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
+        } else {
+            s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
+        }
+        if (new Utils().getXor(new Utils().getDivLines(s, 2)).length() < 2) {
+            s += "0" + new Utils().getXor(new Utils().getDivLines(s, 2));
+        } else {
+            s += new Utils().getXor(new Utils().getDivLines(s, 2));
+        }
         return s;
     }
 
@@ -980,19 +1151,9 @@ public class Setting extends MyDialog implements View.OnClickListener {
             Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        float k = Float.parseFloat(ed_xiangjian.getText().toString().trim());
-        if (k < 500) {
-            Toast.makeText(mycontext, "相间绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
-            return;
-        }
         String xiangjian = ed_xiangjian.getText().toString().trim();
         if (TextUtils.isEmpty(xiangjian)) {
             Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        float l = Float.parseFloat(ed_xiangduidi.getText().toString().trim());
-        if (l < 500) {
-            Toast.makeText(mycontext, "相对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xiangduidi = ed_xiangduidi.getText().toString().trim();
@@ -1000,19 +1161,9 @@ public class Setting extends MyDialog implements View.OnClickListener {
             Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        float m = Float.parseFloat(ed_xiangdui.getText().toString().trim());
-        if (m < 500) {
-            Toast.makeText(mycontext, "相对线圈绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
-            return;
-        }
         String xiangdui = ed_xiangdui.getText().toString().trim();
         if (TextUtils.isEmpty(xiangdui)) {
             Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        float n = Float.parseFloat(ed_xianquanduidi.getText().toString().trim());
-        if (n < 500) {
-            Toast.makeText(mycontext, "线圈对地绝缘电阻只能输入大于500的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
         String xianquanduidi = ed_xianquanduidi.getText().toString().trim();
@@ -1020,7 +1171,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
             Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        util.sendSerialPort(cmd());
+        util.sendSerialPort(cmd(Integer.parseInt((String) spinner.getSelectedItem())));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -1028,7 +1179,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
                     handler.sendEmptyMessage(3);
                 }
             }
-        }, 1000);
+        }, 2000);
     }
 
     private String jisuan(String s) {

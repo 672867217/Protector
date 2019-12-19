@@ -131,9 +131,9 @@
             android:layout_x="383dp"
             android:layout_y="64dp"
             android:background="@drawable/dialog_test2_2"
-            android:gravity="center"
+            android:gravity="center_vertical|center"
             android:textColor="#000000"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -152,9 +152,9 @@
             android:layout_x="609dp"
             android:layout_y="64dp"
             android:background="@drawable/f_yuanjiao"
-            android:gravity="center"
+            android:gravity="center_vertical|center"
             android:textColor="#000000"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -173,9 +173,9 @@
             android:layout_x="764dp"
             android:layout_y="65dp"
             android:background="@drawable/f_yuanjiao"
-            android:gravity="center"
+            android:gravity="center_vertical|center"
             android:textColor="#000000"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
 
         <GridView

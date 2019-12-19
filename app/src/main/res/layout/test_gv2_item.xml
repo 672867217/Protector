@@ -54,7 +54,7 @@
             android:layout_height="17dp"
             android:layout_x="76dp"
             android:layout_y="41dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -75,12 +75,14 @@
             android:layout_width="93dp"
             android:layout_height="17dp"
             android:layout_x="76dp"
-            android:maxLines="1"
-            android:imeOptions="actionDone"
             android:layout_y="64dp"
             android:background="@drawable/dialog_test2_2"
             android:gravity="center"
+            android:imeOptions="actionDone"
             android:inputType="number"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="#000000"
             android:textSize="13sp" />
 
@@ -98,9 +100,9 @@
             android:id="@+id/test_item2_tv3"
             android:layout_width="93dp"
             android:layout_height="17dp"
-            android:layout_x="77dp"
+            android:layout_x="76dp"
             android:layout_y="88dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -122,7 +124,7 @@
             android:layout_height="17dp"
             android:layout_x="76dp"
             android:layout_y="112dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -144,7 +146,7 @@
             android:layout_height="17dp"
             android:layout_x="76dp"
             android:layout_y="136dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -166,6 +168,7 @@
             android:layout_y="170dp"
             android:text="测试结果"
             android:textAlignment="center"
+            android:textColor="#000"
             android:textSize="18sp" />
 
 
@@ -185,7 +188,7 @@
             android:layout_height="17dp"
             android:layout_x="98dp"
             android:layout_y="200dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -217,7 +220,7 @@
             android:layout_height="17dp"
             android:layout_x="98dp"
             android:layout_y="225dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -249,7 +252,7 @@
             android:layout_height="17dp"
             android:layout_x="98dp"
             android:layout_y="248dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -281,7 +284,7 @@
             android:layout_height="17dp"
             android:layout_x="98dp"
             android:layout_y="272dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -311,9 +314,9 @@
             android:id="@+id/test_item2_tv11"
             android:layout_width="60dp"
             android:layout_height="17dp"
-            android:layout_x="99dp"
+            android:layout_x="98dp"
             android:layout_y="296dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -345,7 +348,7 @@
             android:layout_height="17dp"
             android:layout_x="98dp"
             android:layout_y="320dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -375,9 +378,9 @@
             android:id="@+id/test_item2_tv13"
             android:layout_width="60dp"
             android:layout_height="17dp"
-            android:layout_x="99dp"
+            android:layout_x="98dp"
             android:layout_y="344dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -407,9 +410,9 @@
             android:id="@+id/test_item2_tv15"
             android:layout_width="60dp"
             android:layout_height="17dp"
-            android:layout_x="100dp"
+            android:layout_x="98dp"
             android:layout_y="368dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -440,9 +443,9 @@
             android:layout_width="60dp"
             android:layout_height="17dp"
             android:layout_marginRight="30dp"
-            android:layout_x="100dp"
+            android:layout_x="98dp"
             android:layout_y="393dp"
-            android:background="@drawable/dialog_test2_2"
+            android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -469,23 +472,12 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/test_btn3"
-            android:layout_width="49dp"
-            android:layout_height="25dp"
-            android:layout_x="104dp"
-            android:layout_y="428dp"
-            android:background="@drawable/baocun"
-            android:text="取 消"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <Button
             android:id="@+id/test_btn2"
-            android:layout_width="49dp"
+            android:layout_width="112dp"
             android:layout_height="25dp"
             android:layout_x="42dp"
             android:layout_y="428dp"
-            android:background="@drawable/baocun"
+            android:background="@drawable/dayinweixiuqindan"
             android:text="保 存"
             android:textColor="#000000"
             android:textSize="16sp" />

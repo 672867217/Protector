@@ -155,5 +155,12 @@ public class Utils {
         cmd += sum;
         return cmd.toUpperCase();
     }
-
+//    异或校验
+    public static String getXor(List list) {
+        int sum = 0;
+        for (int i = 0; i < list.size(); i++) {
+            sum = sum ^ Integer.parseInt((String) list.get(i),16);
+        }
+        return Integer.toHexString(sum);
+    }
 }

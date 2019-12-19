@@ -11,6 +11,7 @@ public class TestData extends DataSupport implements Serializable {
 
 
     private int id;
+    private int save = 0;//是否保存，1保存，0没保存
     private Date date;//开始时间
     private Date date2;//结束时间
     private int type;//状态值    0---》上一班    1----》新班次
@@ -64,6 +65,14 @@ public class TestData extends DataSupport implements Serializable {
     private String bxiangduixianquanjueyuan = "0";//B相对线圈绝缘电阻
     private String cxiangduixianquanjeuyuan = "0";//C相对线圈绝缘电阻
     private String xianquanduidijueyuan = "0";//线圈对地绝缘电阻
+
+    public int getSave() {
+        return save;
+    }
+
+    public void setSave(int save) {
+        this.save = save;
+    }
 
     public String getMode() {
         return mode;

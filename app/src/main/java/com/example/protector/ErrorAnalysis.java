@@ -34,10 +34,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.example.protector.SQl.Gonwei;
 import com.example.protector.SQl.Operator;
 import com.example.protector.SQl.ProductType;
 import com.example.protector.SQl.TestData;
 import com.example.protector.SQl.XiuGai;
+import com.example.protector.util.MyApplication;
+import com.example.protector.util.SerialPortUtil;
 import com.example.protector.util.Utils;
 
 import org.litepal.crud.DataSupport;
@@ -63,7 +66,7 @@ public class ErrorAnalysis extends AppCompatActivity {
     private int page, index = 8, shuliang = 0;
     private ErroritemAdapter adapter;
     private ErrorlistitemAdapter errorlistitemAdapter;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private List<Particular> list2;
     private Calendar calendar;
     private List<Particular2> list;
@@ -78,6 +81,7 @@ public class ErrorAnalysis extends AppCompatActivity {
     BigDecimal b3 = new BigDecimal("0.01");
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     private int posi;
+    private MyApplication app;
 
     private String jisuan2(String s) {
         BigDecimal b2 = new BigDecimal(s);
@@ -89,7 +93,62 @@ public class ErrorAnalysis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error_analysis);
         initView();
-
+        app = (MyApplication) getApplication();
+        MainActivity.utils.onReceive(new SerialPortUtil.Receive() {
+            @Override
+            public void set(String str, List<String> list) {
+                if (str.equals("10")) {
+                    TestData testData = new TestData();
+                    testData.setType(1);
+                    testData.setGongwei(new Utils().HexToInt(list.get(5)) + "");
+                    testData.setDate2(new Date());
+                    testData.setCecheng(new Utils().HexToInt(list.get(6)) + "");
+                    testData.setCeshishichang(new Utils().HexToInt(list.get(7) + list.get(8)) + "");
+                    testData.setChanpinbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
+                    testData.setShengchanbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
+                    testData.setAjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(13))));
+                    testData.setBjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(14))));
+                    testData.setBaojin(String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(15))))) + String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(16))))));
+                    testData.setXianquanchuanlian1(MainActivity.jisuan3(new Utils().HexToInt(list.get(17) + list.get(18)) + ""));
+                    testData.setXianquanchuanlian2(MainActivity.jisuan3(new Utils().HexToInt(list.get(19) + list.get(20)) + ""));
+                    testData.setXianquanchuanlian3(MainActivity.jisuan3(new Utils().HexToInt(list.get(21) + list.get(22)) + ""));
+                    testData.setXianquanchuanlian4(MainActivity.jisuan3(new Utils().HexToInt(list.get(23) + list.get(24)) + ""));
+                    testData.setXianquanchuanlian5(MainActivity.jisuan3(new Utils().HexToInt(list.get(25) + list.get(26)) + ""));
+                    testData.setXianquanbinglian(MainActivity.jisuan3(new Utils().HexToInt(list.get(27) + list.get(28)) + ""));
+                    testData.setAjiwucha(MainActivity.num(new Utils().HexToInt(list.get(29)) + ""));
+                    testData.setBjiwucha(MainActivity.num(new Utils().HexToInt(list.get(30)) + ""));
+                    testData.setAxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(31)) + ""));
+                    testData.setAxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(32)) + ""));
+                    testData.setAxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(33)) + ""));
+                    testData.setBxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(34)) + ""));
+                    testData.setBxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(35)) + ""));
+                    testData.setBxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(36)) + ""));
+                    testData.setAduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(37)) + ""));
+                    testData.setBduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(38)) + ""));
+                    testData.setCduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(39)) + ""));
+                    testData.setAxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(40) + list.get(41)) + ""));
+                    testData.setBxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(42) + list.get(43)) + ""));
+                    testData.setCxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(44) + list.get(45)) + ""));
+                    testData.setQidongshijian(new Utils().HexToInt(list.get(46) + list.get(47)) + "");
+                    testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
+                    testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
+                    testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
+                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
+                    testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
+                    testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
+                    testData.setAxiangduidijueyuan(new Utils().HexToInt(list.get(64) + list.get(65)) + "");
+                    testData.setBxiangduidijueyuan(new Utils().HexToInt(list.get(66) + list.get(67)) + "");
+                    testData.setCxiangduidijueyuan(new Utils().HexToInt(list.get(68) + list.get(69)) + "");
+                    testData.setAxiangduixianquanjueyuan(new Utils().HexToInt(list.get(70) + list.get(71)) + "");
+                    testData.setBxiangduixianquanjueyuan(new Utils().HexToInt(list.get(72) + list.get(73)) + "");
+                    testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
+                    testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
+                    app.map.put(new Utils().HexToInt(list.get(5)) + "", testData);
+                }
+            }
+        });
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
         //下方控制栏
         new Utils().hideNavKey(ErrorAnalysis.this);
@@ -120,7 +179,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         statsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                statsTv1.setText(sp2.get(i)+"");
+                statsTv1.setText(sp2.get(i) + "");
             }
 
             @Override
@@ -154,8 +213,9 @@ public class ErrorAnalysis extends AppCompatActivity {
                     }
                     for (int i = index * page; i < a; i++) {
                         list2.add(get(i));
-                        errorlistitemAdapter.notifyDataSetChanged();
                     }
+                    errorlistitemAdapter = new ErrorlistitemAdapter(getApplicationContext(),list2);
+                    listView.setAdapter(errorlistitemAdapter);
                 }
             }
         });
@@ -185,7 +245,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                                 list2.add(new Particular());
                             }
                         }
-                        errorlistitemAdapter.notifyDataSetChanged();
+                        errorlistitemAdapter = new ErrorlistitemAdapter(getApplicationContext(),list2);
+                        listView.setAdapter(errorlistitemAdapter);
                     }
                 }
             }
@@ -205,8 +266,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth  < 10) {
-                            myday = "0" + dayOfMonth ;
+                        if (dayOfMonth < 10) {
+                            myday = "0" + dayOfMonth;
                         } else {
                             myday = String.valueOf(dayOfMonth);
                         }
@@ -227,8 +288,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth  < 10) {
-                            myday = "0" + dayOfMonth ;
+                        if (dayOfMonth < 10) {
+                            myday = "0" + dayOfMonth;
                         } else {
                             myday = String.valueOf(dayOfMonth);
                         }
@@ -243,6 +304,9 @@ public class ErrorAnalysis extends AppCompatActivity {
                 list.clear();
                 List<TestData> testDataList = DataSupport.findAll(TestData.class);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                for (TestData test : testDataList) {
+                    System.out.println(dateFormat.format(test.getDate()) + "...........");
+                }
                 //符合日期条件的所有数据list
                 List<TestData> dataList = new ArrayList<>();
                 for (int i = 0; i < testDataList.size(); i++) {
@@ -293,32 +357,32 @@ public class ErrorAnalysis extends AppCompatActivity {
                     switch (i) {
                         case 0:
                             if (!gongweiList1.isEmpty()) {
-                                data = Wucha(gongweiList1,1);
+                                data = Wucha(gongweiList1, 1);
                             }
                             break;
                         case 1:
                             if (!gongweiList2.isEmpty()) {
-                                data = Wucha(gongweiList2,2);
+                                data = Wucha(gongweiList2, 2);
                             }
                             break;
                         case 2:
                             if (!gongweiList3.isEmpty()) {
-                                data = Wucha(gongweiList3,3);
+                                data = Wucha(gongweiList3, 3);
                             }
                             break;
                         case 3:
                             if (!gongweiList4.isEmpty()) {
-                                data = Wucha(gongweiList4,4);
+                                data = Wucha(gongweiList4, 4);
                             }
                             break;
                         case 4:
                             if (!gongweiList5.isEmpty()) {
-                                data = Wucha(gongweiList5,5);
+                                data = Wucha(gongweiList5, 5);
                             }
                             break;
                     }
                     Particular2 particular2 = new Particular2();
-                    particular2.id = "工位"+(i+1);
+                    particular2.id = "工位" + (i + 1);
                     particular2.a = data[0];
                     particular2.b = data[1];
                     particular2.c = data[2];
@@ -342,7 +406,8 @@ public class ErrorAnalysis extends AppCompatActivity {
         });
 
     }
-    private void btn(){
+
+    private void btn() {
         if (shuliang > 8) {
             up.setBackgroundResource(R.drawable.shangjiantouhui);
             down.setBackgroundResource(R.drawable.xiajiantou);
@@ -355,7 +420,8 @@ public class ErrorAnalysis extends AppCompatActivity {
             down.setEnabled(false);
         }
     }
-    private void init(){
+
+    private void init() {
 
         for (int j = 0; j < 8; j++) {
             Particular particular = new Particular();
@@ -376,37 +442,36 @@ public class ErrorAnalysis extends AppCompatActivity {
         String duanxiang;
         String m13;
         String m30;
-        String ceshi1,ceshi2,ceshi3,qita,heji;
+        String ceshi1, ceshi2, ceshi3, qita, heji;
     }
 
     class Particular {
         String id = "";
-        String number= "";
-        String time= "";
-        String a= "";
-        String b= "";
-        String c= "";
-        String chuanlian= "";
-        String binglian= "";
-        String qidong= "";
-        String duanxiang= "";
-        String m13= "";
-        String m30= "";
-        String ceshi= "",man= "";
+        String number = "";
+        String time = "";
+        String a = "";
+        String b = "";
+        String c = "";
+        String chuanlian = "";
+        String binglian = "";
+        String qidong = "";
+        String duanxiang = "";
+        String m13 = "";
+        String m30 = "";
+        String ceshi = "", man = "";
     }
 
-    private String[] Wucha(List<TestData> testDataList,int gongwei){
+    private String[] Wucha(List<TestData> testDataList, int gongwei) {
         List<Double> list1 = new ArrayList<>();
         List<Double> list2 = new ArrayList<>();
         List<Double> list3 = new ArrayList<>();
         List<Double> list4 = new ArrayList<>();
         List<Double> list5 = new ArrayList<>();
-        List<Integer> list6 = new ArrayList<>();
-        List<Integer> list7 = new ArrayList<>();
-        List<Integer> list8 = new ArrayList<>();
-        List<Integer> list9 = new ArrayList<>();
-        XiuGai xiuGai = DataSupport.find(XiuGai.class,gongwei);
-        int a = 0,b = 0,c = 0,d = 0;
+        List<Double> list6 = new ArrayList<>();
+        List<Double> list7 = new ArrayList<>();
+        List<Double> list8 = new ArrayList<>();
+        List<Double> list9 = new ArrayList<>();
+        int a = 0, b = 0, c = 0, d = 0;
         for (int i = 0; i < testDataList.size(); i++) {
             list1.add(Math.abs(Double.valueOf(testDataList.get(i).getAxiangawucha())));
             list1.add(Math.abs(Double.valueOf(testDataList.get(i).getBxiangawucha())));
@@ -414,28 +479,16 @@ public class ErrorAnalysis extends AppCompatActivity {
             list2.add(Math.abs(Double.valueOf(testDataList.get(i).getBxiangbwucha())));
             list3.add(Math.abs(Double.valueOf(testDataList.get(i).getAxiangcwucha())));
             list3.add(Math.abs(Double.valueOf(testDataList.get(i).getBxiangcwucha())));
-            list4.add(Double.valueOf(testDataList.get(i).getAjiwucha()));
-            list4.add(Double.valueOf(testDataList.get(i).getBjiwucha()));
-            list5.add(Double.valueOf(testDataList.get(i).getAjiwucha()));
-            list5.add(Double.valueOf(testDataList.get(i).getBjiwucha()));
-            if(Integer.parseInt(testDataList.get(i).getQidongshijian())-Integer.parseInt(xiuGai.getQidong())<0){
-                list6.add(Integer.parseInt(testDataList.get(i).getQidongshijian())-Integer.parseInt(xiuGai.getQidong()));
-            }
-            if(Integer.parseInt(testDataList.get(i).getAduanxiangxiangying())-Integer.parseInt(xiuGai.getDuanxiang())<0){
-                list7.add(Integer.parseInt(testDataList.get(i).getAduanxiangxiangying())-Integer.parseInt(xiuGai.getDuanxiang()));
-            }
-            if(Integer.parseInt(testDataList.get(i).getBduanxiangxiangying())-Integer.parseInt(xiuGai.getDuanxiang())<0){
-                list7.add(Integer.parseInt(testDataList.get(i).getBduanxiangxiangying())-Integer.parseInt(xiuGai.getDuanxiang()));
-            }
-            if(Integer.parseInt(testDataList.get(i).getCduanxiangxiangying())-Integer.parseInt(xiuGai.getDuanxiang())<0){
-                list7.add(Integer.parseInt(testDataList.get(i).getCduanxiangxiangying())-Integer.parseInt(xiuGai.getDuanxiang()));
-            }
-            if(Double.parseDouble(testDataList.get(i).getM13xianshishijian())*100-(13+Double.parseDouble(xiuGai.getM13()))*100<0){
-                list8.add(Integer.parseInt(String.valueOf(Double.parseDouble(testDataList.get(i).getM13xianshishijian())*100-(13+Double.parseDouble(xiuGai.getM13()))*100).replace(".0","")));
-            }
-            if(Double.parseDouble(testDataList.get(i).getM30xianshishijian())*100-(30+Double.parseDouble(xiuGai.getM30()))*100<0){
-                list9.add(Integer.parseInt(String.valueOf(Double.parseDouble(testDataList.get(i).getM30xianshishijian())*100-(30+Double.parseDouble(xiuGai.getM13()))*100).replace(".0","")));
-            }
+            list4.add(Math.abs(Double.valueOf(testDataList.get(i).getAjiwucha())));
+            list4.add(Math.abs(Double.valueOf(testDataList.get(i).getBjiwucha())));
+            list5.add(Math.abs(Double.valueOf(testDataList.get(i).getAjiwucha())));
+            list5.add(Math.abs(Double.valueOf(testDataList.get(i).getBjiwucha())));
+            list6.add(Double.parseDouble(testDataList.get(i).getQidongshijian()));
+            list7.add(Double.parseDouble(testDataList.get(i).getAduanxiangxiangying()));
+            list7.add(Double.parseDouble(testDataList.get(i).getBduanxiangxiangying()));
+            list7.add(Double.parseDouble(testDataList.get(i).getCduanxiangxiangying()));
+            list8.add(Double.parseDouble(testDataList.get(i).getM13xianshishijian()) * 1000);
+            list9.add(Double.parseDouble(testDataList.get(i).getM30xianshishijian()) * 1000);
             switch (testDataList.get(i).getCecheng()) {
                 case "0":
                     d++;
@@ -462,20 +515,20 @@ public class ErrorAnalysis extends AppCompatActivity {
         Collections.sort(list8);
         Collections.sort(list9);
         String[] data = new String[14];
-        data[0] = list1.get(list1.size()-1)+"";
-        data[1] = list2.get(list2.size()-1)+"";
-        data[2] = list3.get(list3.size()-1)+"";
-        data[3] = Math.abs(list4.get(list4.size()-1))+"";
-        data[4] = Math.abs(list5.get(list5.size()-1))+"";
-        data[5] = Math.abs(list6.get(0))+"";
-        data[6] = Math.abs(list7.get(0))+"";
-        data[7] = Math.abs(list8.get(0))+"";
-        data[8] = Math.abs(list9.get(0))+"";
-        data[9] = a+"";
-        data[10] = b+"";
-        data[11] = c+"";
-        data[12] = d+"";
-        data[13] = testDataList.size()+"";
+        data[0] = list1.get(list1.size() - 1) + "";
+        data[1] = list2.get(list2.size() - 1) + "";
+        data[2] = list3.get(list3.size() - 1) + "";
+        data[3] = Math.abs(list4.get(list4.size() - 1)) + "";
+        data[4] = Math.abs(list5.get(list5.size() - 1)) + "";
+        data[5] = list6.get(0) + "";
+        data[6] = list7.get(0) + "";
+        data[7] = list8.get(0) + "";
+        data[8] = list9.get(0) + "";
+        data[9] = a + "";
+        data[10] = b + "";
+        data[11] = c + "";
+        data[12] = d + "";
+        data[13] = testDataList.size() + "";
         return data;
     }
 
@@ -533,29 +586,74 @@ public class ErrorAnalysis extends AppCompatActivity {
                 convertView = layoutInflater.inflate(R.layout.erroritem, null);
                 convertView.setTag(new ViewHolder(convertView));
             }
-            initializeViews((Particular2) getItem(position), (ViewHolder) convertView.getTag(),position);
+            initializeViews((Particular2) getItem(position), (ViewHolder) convertView.getTag(), position);
             return convertView;
         }
 
         private void initializeViews(Particular2 particular2, ViewHolder holder, final int position) {
             //TODO implement
-            holder.item1Title.setText("工位"+(position+1));
-
-            if(particular2.m13 == null){
+            holder.item1Title.setText("工位" + (position + 1));
+            XiuGai xiuGai = DataSupport.find(XiuGai.class, position + 1);
+            if (particular2.m13 == null) {
                 holder.itemBtn.setBackgroundResource(R.drawable.queding);
                 holder.itemBtn.setEnabled(false);
                 holder.itemBtn.setTextColor(Color.parseColor("#000000"));
-            }else
-            {
+            } else {
                 holder.itemTv1.setText(particular2.a);
                 holder.itemTv2.setText(particular2.b);
                 holder.itemTv3.setText(particular2.c);
                 holder.itemTv4.setText(particular2.chuanlian);
                 holder.itemTv5.setText(particular2.binglian);
-                holder.itemTv6.setText(particular2.qidong);
-                holder.itemTv7.setText(particular2.duanxiang);
-                holder.itemTv8.setText(particular2.m13);
-                holder.itemTv9.setText(particular2.m30);
+                if (Double.parseDouble(particular2.qidong) >= Double.parseDouble(xiuGai.getQidong())) {
+                    holder.itemTv6.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv6.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.itemTv6.setText("+" + (int) (Double.parseDouble(particular2.qidong) - Double.parseDouble(xiuGai.getQidong())));
+                } else {
+
+                    if (Double.parseDouble(particular2.qidong) - Double.parseDouble(xiuGai.getQidong()) < 0) {
+                        holder.itemTv6.setText((int) Math.abs(Double.parseDouble(particular2.qidong) - Double.parseDouble(xiuGai.getQidong())) + "");
+                    } else {
+                        holder.itemTv6.setTextColor(Color.parseColor("#ffffff"));
+                        holder.itemTv6.setBackgroundResource(R.drawable.dialog_test2_3);
+                        holder.itemTv6.setText("-" + (int) (Double.parseDouble(particular2.qidong) - Double.parseDouble(xiuGai.getQidong())));
+                    }
+                }
+                if (Double.parseDouble(particular2.duanxiang) >= Double.parseDouble(xiuGai.getDuanxiang())) {
+                    holder.itemTv7.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv7.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.itemTv7.setText("+" + (int) (Double.parseDouble(particular2.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang())));
+                } else {
+
+                    if (Double.parseDouble(particular2.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang()) < 0) {
+                        holder.itemTv7.setText((int) Math.abs(Double.parseDouble(particular2.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang())) + "");
+                    } else {
+                        holder.itemTv7.setTextColor(Color.parseColor("#ffffff"));
+                        holder.itemTv7.setBackgroundResource(R.drawable.dialog_test2_3);
+                        holder.itemTv7.setText("-" + (int) (Double.parseDouble(particular2.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang())));
+                    }
+                }
+                if (Double.parseDouble(particular2.m13) - Double.parseDouble(xiuGai.getM13()) * 1000 > (13 + Double.parseDouble(xiuGai.getM13())) * 1000) {
+                    holder.itemTv8.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv8.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.itemTv8.setText("+" + (int) (Double.parseDouble(particular2.m13) - (13 + Double.parseDouble(xiuGai.getM13())) * 1000));
+                } else if (Double.parseDouble(particular2.m13) + Double.parseDouble(xiuGai.getM13()) * 1000 < (13 - Double.parseDouble(xiuGai.getM13())) * 1000) {
+                    holder.itemTv8.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv8.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.itemTv8.setText((int) (Double.parseDouble(particular2.m13) - (13 - Double.parseDouble(xiuGai.getM13())) * 1000) + "");
+                } else {
+                    holder.itemTv8.setText((int) (Double.parseDouble(particular2.m13) - 13000) + "");
+                }
+                if (Double.parseDouble(particular2.m30) - Double.parseDouble(xiuGai.getM30()) * 1000 > (30 + Double.parseDouble(xiuGai.getM30())) * 1000) {
+                    holder.itemTv9.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv9.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.itemTv9.setText("+" + (int) (Double.parseDouble(particular2.m30) - (30 + Double.parseDouble(xiuGai.getM30())) * 1000));
+                } else if (Double.parseDouble(particular2.m30) + Double.parseDouble(xiuGai.getM30()) * 1000 < (30 - Double.parseDouble(xiuGai.getM30())) * 1000) {
+                    holder.itemTv9.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemTv9.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.itemTv9.setText((int) (Double.parseDouble(particular2.m30) - (30 - Double.parseDouble(xiuGai.getM30())) * 1000) + "");
+                } else {
+                    holder.itemTv9.setText((int) (Double.parseDouble(particular2.m30) - 30000) + "");
+                }
                 holder.itemTv10.setText(particular2.ceshi1);
                 holder.itemTv11.setText(particular2.ceshi2);
                 holder.itemTv12.setText(particular2.ceshi3);
@@ -564,27 +662,27 @@ public class ErrorAnalysis extends AppCompatActivity {
                 holder.itemBtn.setBackgroundResource(R.drawable.xiangxixinxi);
                 holder.itemBtn.setEnabled(true);
                 holder.itemBtn.setTextColor(Color.parseColor("#000000"));
-                if(Double.parseDouble(particular2.a)>0.1){
+                if (Double.parseDouble(particular2.a) > 0.15) {
                     holder.itemTv1.setTextColor(Color.parseColor("#ffffff"));
                     holder.itemTv1.setBackgroundResource(R.drawable.dialog_test2_3);
                 }
 
-                if(Double.parseDouble(particular2.b)>0.1){
+                if (Double.parseDouble(particular2.b) > 0.15) {
                     holder.itemTv2.setTextColor(Color.parseColor("#ffffff"));
                     holder.itemTv2.setBackgroundResource(R.drawable.dialog_test2_3);
                 }
 
-                if(Double.parseDouble(particular2.c)>0.1){
+                if (Double.parseDouble(particular2.c) > 0.15) {
                     holder.itemTv3.setTextColor(Color.parseColor("#ffffff"));
                     holder.itemTv3.setBackgroundResource(R.drawable.dialog_test2_3);
                 }
 
-                if(Double.parseDouble(particular2.chuanlian)>0.5){
+                if (Double.parseDouble(particular2.chuanlian) > 0.5) {
                     holder.itemTv4.setTextColor(Color.parseColor("#ffffff"));
                     holder.itemTv4.setBackgroundResource(R.drawable.dialog_test2_3);
                 }
 
-                if(Double.parseDouble(particular2.binglian)>0.5){
+                if (Double.parseDouble(particular2.binglian) > 0.5) {
                     holder.itemTv5.setTextColor(Color.parseColor("#ffffff"));
                     holder.itemTv5.setBackgroundResource(R.drawable.dialog_test2_3);
                 }
@@ -592,9 +690,8 @@ public class ErrorAnalysis extends AppCompatActivity {
             holder.itemBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    posi = position;
-                    switch (position)
-                    {
+                    posi = position + 1;
+                    switch (position) {
                         case 0:
                             data = gongweiList1;
                             break;
@@ -612,7 +709,11 @@ public class ErrorAnalysis extends AppCompatActivity {
                             break;
                     }
                     shuliang = data.size();
+                    btn();
+                    page = 0;
                     list2.clear();
+                    textView11.setText("1");
+                    errorlistitemAdapter.notifyDataSetInvalidated();
                     int a = 0;
                     if (8 * page + 8 > shuliang) {
                         a = shuliang;
@@ -627,10 +728,10 @@ public class ErrorAnalysis extends AppCompatActivity {
                                 list2.add(new Particular());
                             }
                         }
-                        errorlistitemAdapter = new ErrorlistitemAdapter(ErrorAnalysis.this,list2);
+                        errorlistitemAdapter = new ErrorlistitemAdapter(ErrorAnalysis.this, list2);
                         listView.setAdapter(errorlistitemAdapter);
                     }
-                    if(data.size()>8){
+                    if (data.size() > 8) {
                         down.setBackgroundResource(R.drawable.xiajiantou);
                         down.setEnabled(true);
                     }
@@ -677,50 +778,50 @@ public class ErrorAnalysis extends AppCompatActivity {
         }
     }
 
-    private Particular get(int i){
+    private Particular get(int i) {
         Particular particular = new Particular();
         particular.id = String.format("%04d", i + 1);
         particular.number = data.get(i).getChanpinbianma();
-        particular.time = dateFormat.format(data.get(i).getDate());
-        if(Math.abs(Double.valueOf(data.get(i).getAxiangawucha()))>Math.abs(Double.valueOf(data.get(i).getBxiangawucha()))){
+        particular.time = dateFormat.format(data.get(i).getDate2());
+        if (Math.abs(Double.valueOf(data.get(i).getAxiangawucha())) > Math.abs(Double.valueOf(data.get(i).getBxiangawucha()))) {
             particular.a = data.get(i).getAxiangawucha();
-        }else
-        {
+        } else {
             particular.a = data.get(i).getBxiangawucha();
         }
-        if(Math.abs(Double.valueOf(data.get(i).getAxiangbwucha()))>Math.abs(Double.valueOf(data.get(i).getBxiangbwucha()))){
+
+        if (Math.abs(Double.valueOf(data.get(i).getAxiangbwucha())) > Math.abs(Double.valueOf(data.get(i).getBxiangbwucha()))) {
             particular.b = data.get(i).getAxiangbwucha();
-        }else
-        {
+        } else {
             particular.b = data.get(i).getBxiangbwucha();
         }
-        if(Math.abs(Double.valueOf(data.get(i).getAxiangcwucha()))>Math.abs(Double.valueOf(data.get(i).getBxiangcwucha()))){
+        if (Math.abs(Double.valueOf(data.get(i).getAxiangcwucha())) > Math.abs(Double.valueOf(data.get(i).getBxiangcwucha()))) {
             particular.c = data.get(i).getAxiangcwucha();
-        }else
-        {
+        } else {
             particular.c = data.get(i).getBxiangcwucha();
         }
-        if(Math.abs(Double.valueOf(data.get(i).getAjiwucha()))>Math.abs(Double.valueOf(data.get(i).getBjiwucha()))){
+        if (Math.abs(Double.valueOf(data.get(i).getAjiwucha())) > Math.abs(Double.valueOf(data.get(i).getBjiwucha()))) {
             particular.chuanlian = data.get(i).getAjiwucha();
             particular.binglian = data.get(i).getAjiwucha();
-        }else
-        {
+        } else {
             particular.chuanlian = data.get(i).getBjiwucha();
             particular.binglian = data.get(i).getBjiwucha();
         }
+
         particular.qidong = data.get(i).getQidongshijian();
         double[] arr = new double[3];
         arr[0] = Double.parseDouble(data.get(i).getAduanxiangxiangying());
         arr[1] = Double.parseDouble(data.get(i).getBduanxiangxiangying());
         arr[2] = Double.parseDouble(data.get(i).getCduanxiangxiangying());
         Arrays.sort(arr);
-        particular.duanxiang = arr[2]+"";
-        particular.m13 = data.get(i).getM13xianshishijian();
-        particular.m30 = data.get(i).getM30xianshishijian();
+        particular.duanxiang = arr[0] + "";
+        particular.m13 = Double.parseDouble(data.get(i).getM13xianshishijian())*1000+"";
+        particular.m30 = Double.parseDouble(data.get(i).getM30xianshishijian())*1000+"";
+        System.out.println(data.get(i).getM13xianshishijian()+"...."+data.get(i).getM30xianshishijian());
         particular.ceshi = data.get(i).getTongguo();
         particular.man = data.get(i).getName();
         return particular;
     }
+
     public class ErrorlistitemAdapter extends BaseAdapter {
 
         private List<Particular> objects = new ArrayList();
@@ -761,8 +862,8 @@ public class ErrorAnalysis extends AppCompatActivity {
 
         private void initializeViews(Particular object, ViewHolder holder) {
             //TODO implement
-            XiuGai xiuGai =DataSupport.find(XiuGai.class,posi);
-            if(!object.a.equals("")){
+            XiuGai xiuGai = DataSupport.find(XiuGai.class, posi);
+            if (!object.a.equals("")) {
                 holder.textView12.setText(object.id);
                 holder.textView13.setText(object.number);
                 holder.textView14.setText(object.time);
@@ -771,34 +872,85 @@ public class ErrorAnalysis extends AppCompatActivity {
                 holder.textView17.setText(object.c);
                 holder.textView18.setText(object.chuanlian);
                 holder.textView19.setText(object.binglian);
-                holder.textView20.setText(Math.abs(Integer.parseInt(object.qidong)-Integer.parseInt(xiuGai.getQidong()))+"");
-                holder.textView21.setText(Math.abs(Integer.parseInt(object.duanxiang.replace(".0",""))-Integer.parseInt(xiuGai.getDuanxiang().replace(".0","")))+"");
-                holder.textView22.setText(Math.abs(Integer.parseInt(String.valueOf(Double.parseDouble(object.m13)*100-(13+Double.parseDouble(xiuGai.getM13()))*100).replace(".0","")))+"");
-                holder.textView23.setText(Math.abs(Integer.parseInt(String.valueOf(Double.parseDouble(object.m30)*100-(30+Double.parseDouble(xiuGai.getM30()))*100).replace(".0","")))+"");
+                if (Double.parseDouble(object.qidong) >= Double.parseDouble(xiuGai.getQidong())) {
+                    holder.textView20.setTextColor(Color.parseColor("#ffffff"));
+                    holder.textView20.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView20.setText("+" + (int) (Double.parseDouble(object.qidong) - Double.parseDouble(xiuGai.getQidong())));
+                } else {
+
+                    if (Double.parseDouble(object.qidong) - Double.parseDouble(xiuGai.getQidong()) < 0) {
+                        holder.textView20.setText((int) Math.abs(Double.parseDouble(object.qidong) - Double.parseDouble(xiuGai.getQidong())) + "");
+                    } else {
+                        holder.textView20.setTextColor(Color.parseColor("#ffffff"));
+                        holder.textView20.setBackgroundResource(R.drawable.dialog_test2_3);
+                        holder.textView20.setText("-" + (int) (Double.parseDouble(object.qidong) - Double.parseDouble(xiuGai.getQidong())));
+                    }
+                }
+                if (Double.parseDouble(object.duanxiang) >= Double.parseDouble(xiuGai.getDuanxiang())) {
+                    holder.textView21.setTextColor(Color.parseColor("#ffffff"));
+                    holder.textView21.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView21.setText("+" + (int) (Double.parseDouble(object.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang())));
+                } else {
+
+                    if (Double.parseDouble(object.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang()) < 0) {
+                        holder.textView21.setText((int) Math.abs(Double.parseDouble(object.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang())) + "");
+                    } else {
+                        holder.textView21.setTextColor(Color.parseColor("#ffffff"));
+                        holder.textView21.setBackgroundResource(R.drawable.dialog_test2_3);
+                        holder.textView21.setText("-" + (int) (Double.parseDouble(object.duanxiang) - Double.parseDouble(xiuGai.getDuanxiang())));
+                    }
+                }
+                if (Double.parseDouble(object.m13) - Double.parseDouble(xiuGai.getM13()) * 1000 > (13 + Double.parseDouble(xiuGai.getM13())) * 1000) {
+                    holder.textView22.setTextColor(Color.parseColor("#ffffff"));
+                    holder.textView22.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView22.setText("+" + (int) (Double.parseDouble(object.m13) - (13 + Double.parseDouble(xiuGai.getM13())) * 1000));
+                } else if (Double.parseDouble(object.m13) + Double.parseDouble(xiuGai.getM13()) * 1000 < (13 - Double.parseDouble(xiuGai.getM13())) * 1000) {
+                    holder.textView22.setTextColor(Color.parseColor("#ffffff"));
+                    holder.textView22.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView22.setText((int) (Double.parseDouble(object.m13) - (13 - Double.parseDouble(xiuGai.getM13())) * 1000) + "");
+                } else {
+                    holder.textView22.setText((int) (Double.parseDouble(object.m13) - 13000) + "");
+                }
+                if (Double.parseDouble(object.m30) - Double.parseDouble(xiuGai.getM30()) * 1000 > (30 + Double.parseDouble(xiuGai.getM30())) * 1000) {
+                    holder.textView23.setTextColor(Color.parseColor("#ffffff"));
+                    holder.textView23.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView23.setText("+" + (int) (Double.parseDouble(object.m30) - (30 + Double.parseDouble(xiuGai.getM30())) * 1000));
+                } else if (Double.parseDouble(object.m30) + Double.parseDouble(xiuGai.getM30()) * 1000 < (30 - Double.parseDouble(xiuGai.getM30())) * 1000) {
+                    holder.textView23.setTextColor(Color.parseColor("#ffffff"));
+                    holder.textView23.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView23.setText((int) (Double.parseDouble(object.m30) - (30 - Double.parseDouble(xiuGai.getM30())) * 1000) + "");
+                } else {
+                    holder.textView23.setText((int) (Double.parseDouble(object.m30) - 30000) + "");
+                }
                 holder.textView25.setText(object.ceshi);
                 holder.textView26.setText(object.man);
-                if(Math.abs(Double.parseDouble(object.a))>0.1){
+                if (Math.abs(Double.parseDouble(object.a)) > 0.15) {
                     holder.textView15.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView15.setTextColor(Color.parseColor("#ffffff"));
                 }
 
-                if(Math.abs(Double.parseDouble(object.b))>0.1){
+                if (Math.abs(Double.parseDouble(object.b)) > 0.15) {
                     holder.textView16.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView16.setTextColor(Color.parseColor("#ffffff"));
                 }
 
-                if(Math.abs(Double.parseDouble(object.c))>0.1){
+                if (Math.abs(Double.parseDouble(object.c)) > 0.15) {
                     holder.textView17.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView17.setTextColor(Color.parseColor("#ffffff"));
                 }
-                if(Math.abs(Double.parseDouble(object.chuanlian))>0.5){
+                if (Math.abs(Double.parseDouble(object.chuanlian)) > 0.5) {
                     holder.textView18.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView18.setTextColor(Color.parseColor("#ffffff"));
                 }
-                if(Math.abs(Double.parseDouble(object.binglian))>0.5){
+                if (Math.abs(Double.parseDouble(object.binglian)) > 0.5) {
                     holder.textView19.setBackgroundResource(R.drawable.dialog_test2_3);
                     holder.textView19.setTextColor(Color.parseColor("#ffffff"));
                 }
+                if (object.ceshi.equals("不合格")) {
+                    holder.textView25.setBackgroundResource(R.drawable.dialog_test2_3);
+                    holder.textView25.setTextColor(Color.parseColor("#ffffff"));
+                }
+
             }
         }
 

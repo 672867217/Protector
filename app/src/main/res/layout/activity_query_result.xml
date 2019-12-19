@@ -322,10 +322,11 @@
             android:background="@drawable/bg_rouseyuanjiao"
             android:gravity="center"
             android:text="A机作为主控"
-            android:textColor="#000000"
+            android:textColor="#000"
             android:textSize="24sp" />
 
         <LinearLayout
+            android:id="@+id/q13"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_ziseyuanjiao2"
@@ -351,6 +352,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/q1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="12dp"
@@ -374,6 +376,7 @@
 
                 <TextView
 
+                    android:id="@+id/q3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -396,6 +399,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/q2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="12dp"
@@ -409,7 +413,7 @@
                     android:id="@+id/result_tv10"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="60dp"
+                    android:layout_x="59dp"
                     android:layout_y="35dp"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
@@ -419,6 +423,7 @@
 
                 <TextView
 
+                    android:id="@+id/q4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -432,7 +437,7 @@
                     android:id="@+id/result_tv11"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="233dp"
+                    android:layout_x="232dp"
                     android:layout_y="36dp"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
@@ -461,6 +466,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/q5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="11dp"
@@ -484,6 +490,7 @@
 
                 <TextView
 
+                    android:id="@+id/q9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="143dp"
@@ -494,6 +501,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/q7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -517,6 +525,7 @@
 
                 <TextView
 
+                    android:id="@+id/q11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="304dp"
@@ -529,6 +538,7 @@
 
                 <TextView
 
+                    android:id="@+id/q6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="11dp"
@@ -542,7 +552,7 @@
                     android:id="@+id/result_tv14"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="84dp"
+                    android:layout_x="83dp"
                     android:layout_y="39dp"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
@@ -552,6 +562,7 @@
 
                 <TextView
 
+                    android:id="@+id/q10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="143dp"
@@ -563,6 +574,7 @@
 
                 <TextView
 
+                    android:id="@+id/q8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -576,7 +588,7 @@
                     android:id="@+id/result_tv15"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="245dp"
+                    android:layout_x="246dp"
                     android:layout_y="39dp"
                     android:background="@drawable/dialog_test4_baocun"
                     android:gravity="center"
@@ -586,6 +598,7 @@
 
                 <TextView
 
+                    android:id="@+id/q12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="304dp"
@@ -610,6 +623,7 @@
 
         <TextView
 
+            android:id="@+id/q29"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/bg_rouseyuanjiao"
@@ -619,6 +633,7 @@
             android:textSize="24sp" />
 
         <LinearLayout
+            android:id="@+id/q28"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_ziseyuanjiao2"
@@ -627,6 +642,7 @@
 
             <TextView
 
+                android:id="@+id/q14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="故障测试"
@@ -645,6 +661,7 @@
 
 
                 <TextView
+                    android:id="@+id/q15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="12dp"
@@ -658,7 +675,7 @@
                     android:id="@+id/result_tv16"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="58dp"
+                    android:layout_x="59dp"
                     android:layout_y="8dp"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
@@ -668,6 +685,7 @@
 
                 <TextView
 
+                    android:id="@+id/q17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -690,6 +708,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/q16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="12dp"
@@ -713,6 +732,7 @@
 
                 <TextView
 
+                    android:id="@+id/q18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -726,7 +746,7 @@
                     android:id="@+id/result_tv19"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="234dp"
+                    android:layout_x="232dp"
                     android:layout_y="37dp"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
@@ -738,6 +758,7 @@
 
             <TextView
 
+                android:id="@+id/q19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="误差"
@@ -756,6 +777,7 @@
 
 
                 <TextView
+                    android:id="@+id/q20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="11dp"
@@ -779,6 +801,7 @@
 
                 <TextView
 
+                    android:id="@+id/q24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="143dp"
@@ -790,6 +813,7 @@
 
                 <TextView
 
+                    android:id="@+id/q22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -813,6 +837,7 @@
 
                 <TextView
 
+                    android:id="@+id/q26"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="304dp"
@@ -823,6 +848,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/q21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="11dp"
@@ -836,7 +862,7 @@
                     android:id="@+id/result_tv22"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="84dp"
+                    android:layout_x="83dp"
                     android:layout_y="39dp"
                     android:background="@drawable/dialog_test2_2"
                     android:gravity="center"
@@ -846,6 +872,7 @@
 
                 <TextView
 
+                    android:id="@+id/q25"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="143dp"
@@ -857,6 +884,7 @@
 
                 <TextView
 
+                    android:id="@+id/q23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -870,7 +898,7 @@
                     android:id="@+id/result_tv23"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
-                    android:layout_x="245dp"
+                    android:layout_x="246dp"
                     android:layout_y="39dp"
                     android:background="@drawable/dialog_test4_baocun"
                     android:gravity="center"
@@ -880,6 +908,7 @@
 
                 <TextView
 
+                    android:id="@+id/q27"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_x="304dp"
@@ -2006,6 +2035,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/jielun"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
                 android:layout_x="20dp"
@@ -2070,7 +2100,7 @@
 
                     <TextView
                         android:id="@+id/result_tv27"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right|center"
@@ -2101,7 +2131,7 @@
 
                     <TextView
                         android:id="@+id/result_tv28"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right|center"
@@ -2139,7 +2169,7 @@
 
                     <TextView
                         android:id="@+id/result_tv29"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right|center"
@@ -2170,7 +2200,7 @@
 
                     <TextView
                         android:id="@+id/result_tv30"
-                        android:layout_width="80dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/dialog_test2_2"
                         android:gravity="right|center"

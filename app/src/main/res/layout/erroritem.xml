@@ -66,7 +66,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="A 相电流  :  "
                             android:textColor="#000000"
@@ -76,7 +76,7 @@
                             android:id="@+id/item_tv1"
                             android:layout_width="64dp"
                             android:layout_height="20dp"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -100,7 +100,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="B 相电流  :  "
                             android:textColor="#000000"
@@ -110,7 +110,7 @@
                             android:id="@+id/item_tv2"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -134,7 +134,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="C 相电流  :  "
                             android:textColor="#000000"
@@ -144,7 +144,7 @@
                             android:id="@+id/item_tv3"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -168,7 +168,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="串联电压  :  "
                             android:textColor="#000000"
@@ -178,7 +178,7 @@
                             android:id="@+id/item_tv4"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -202,7 +202,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="并联电压  :  "
                             android:textColor="#000000"
@@ -212,7 +212,7 @@
                             android:id="@+id/item_tv5"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -236,7 +236,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="启动时间  :  "
                             android:textColor="#000000"
@@ -246,7 +246,7 @@
                             android:id="@+id/item_tv6"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -270,7 +270,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="断相时间  :  "
                             android:textColor="#000000"
@@ -280,7 +280,7 @@
                             android:id="@+id/item_tv7"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -304,7 +304,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="13秒时间 :  "
                             android:textColor="#000000"
@@ -314,7 +314,7 @@
                             android:id="@+id/item_tv8"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -338,7 +338,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="30秒时间 :  "
                             android:textColor="#000000"
@@ -348,7 +348,7 @@
                             android:id="@+id/item_tv9"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -401,7 +401,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="一测数量  :  "
                             android:textColor="#000000"
@@ -411,7 +411,7 @@
                             android:id="@+id/item_tv10"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -435,7 +435,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="二测数量  :  "
                             android:textColor="#000000"
@@ -445,7 +445,7 @@
                             android:id="@+id/item_tv11"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -469,7 +469,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="三测数量  :  "
                             android:textColor="#000000"
@@ -479,7 +479,7 @@
                             android:id="@+id/item_tv12"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -503,7 +503,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="其他数量  :  "
                             android:textColor="#000000"
@@ -513,7 +513,7 @@
                             android:id="@+id/item_tv13"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />
@@ -537,7 +537,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:text="合计数量  :  "
                             android:textColor="#000000"
@@ -547,7 +547,7 @@
                             android:id="@+id/item_tv14"
                             android:layout_width="64dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/dialog_test2_2"
+                            android:background="@drawable/dialog_test2_22"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:textSize="14dp" />

@@ -38,7 +38,7 @@ public class SerialPortUtil {
     private SerialPort serialPort = null;
     private InputStream inputStream = null;
     private OutputStream outputStream = null;
-    private ReceiveThread mReceiveThread = null;
+    public ReceiveThread mReceiveThread = null;
     private boolean isStart = false;
     private boolean is = false;
     private Receive receive;
@@ -140,11 +140,10 @@ public class SerialPortUtil {
                                 Utils utils = new Utils();
                                 List<String> strings = utils.getDivLines("AA00FF" + s[i], 2);
                                 receive.set(strings.get(3), strings);
-                                str2 = new StringBuffer();
-                            }
+                            }str2 = new StringBuffer();
                         }
                     };
-                    timer.schedule(timerTask,200,2000);
+                    timer.schedule(timerTask,1000,2000);
                 }
                 is = true;
                 byte[] readData = new byte[1024];
