@@ -98,4 +98,15 @@
         tools:layout_editor_absoluteX="406dp"
         tools:layout_editor_absoluteY="561dp" />
 
+    <FrameLayout
+        android:id="@+id/click"
+        android:layout_width="82dp"
+        android:layout_height="84dp"
+        android:layout_x="943dp"
+        android:layout_y="2dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+    </FrameLayout>
+
 </AbsoluteLayout>

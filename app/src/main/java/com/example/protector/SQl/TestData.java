@@ -12,6 +12,7 @@ public class TestData extends DataSupport implements Serializable {
 
     private int id;
     private int save = 0;//是否保存，1保存，0没保存
+    private XiuGai xiuGai;//存入生产参数
     private Date date;//开始时间
     private Date date2;//结束时间
     private int type;//状态值    0---》上一班    1----》新班次
@@ -65,6 +66,141 @@ public class TestData extends DataSupport implements Serializable {
     private String bxiangduixianquanjueyuan = "0";//B相对线圈绝缘电阻
     private String cxiangduixianquanjeuyuan = "0";//C相对线圈绝缘电阻
     private String xianquanduidijueyuan = "0";//线圈对地绝缘电阻
+
+    private String qidong ="150";
+    private String duanxiang ="250";
+    private String m13 ="1";
+    private String m30 ="1";
+    private String chuanlian1 ="20.0";
+    private String chuanlian2 ="27.5";
+    private String binglian1 ="10.0";
+    private String binglian2 ="14.0";
+    private String duanxiangzhiliu ="0.2";
+    private String jiaoliu ="3.0";
+    private String xiangjian ="500";
+    private String xiangduidi ="500";
+    private String xiangduixianquan ="500";
+    private String xianquan ="500";
+
+    public XiuGai getXiuGai() {
+        return xiuGai;
+    }
+
+    public void setXiuGai(XiuGai xiuGai) {
+        this.xiuGai = xiuGai;
+    }
+
+    public String getQidong() {
+        return qidong;
+    }
+
+    public void setQidong(String qidong) {
+        this.qidong = qidong;
+    }
+
+    public String getDuanxiang() {
+        return duanxiang;
+    }
+
+    public void setDuanxiang(String duanxiang) {
+        this.duanxiang = duanxiang;
+    }
+
+    public String getM13() {
+        return m13;
+    }
+
+    public void setM13(String m13) {
+        this.m13 = m13;
+    }
+
+    public String getM30() {
+        return m30;
+    }
+
+    public void setM30(String m30) {
+        this.m30 = m30;
+    }
+
+    public String getChuanlian1() {
+        return chuanlian1;
+    }
+
+    public void setChuanlian1(String chuanlian1) {
+        this.chuanlian1 = chuanlian1;
+    }
+
+    public String getChuanlian2() {
+        return chuanlian2;
+    }
+
+    public void setChuanlian2(String chuanlian2) {
+        this.chuanlian2 = chuanlian2;
+    }
+
+    public String getBinglian1() {
+        return binglian1;
+    }
+
+    public void setBinglian1(String binglian1) {
+        this.binglian1 = binglian1;
+    }
+
+    public String getBinglian2() {
+        return binglian2;
+    }
+
+    public void setBinglian2(String binglian2) {
+        this.binglian2 = binglian2;
+    }
+
+    public String getDuanxiangzhiliu() {
+        return duanxiangzhiliu;
+    }
+
+    public void setDuanxiangzhiliu(String duanxiangzhiliu) {
+        this.duanxiangzhiliu = duanxiangzhiliu;
+    }
+
+    public String getJiaoliu() {
+        return jiaoliu;
+    }
+
+    public void setJiaoliu(String jiaoliu) {
+        this.jiaoliu = jiaoliu;
+    }
+
+    public String getXiangjian() {
+        return xiangjian;
+    }
+
+    public void setXiangjian(String xiangjian) {
+        this.xiangjian = xiangjian;
+    }
+
+    public String getXiangduidi() {
+        return xiangduidi;
+    }
+
+    public void setXiangduidi(String xiangduidi) {
+        this.xiangduidi = xiangduidi;
+    }
+
+    public String getXiangduixianquan() {
+        return xiangduixianquan;
+    }
+
+    public void setXiangduixianquan(String xiangduixianquan) {
+        this.xiangduixianquan = xiangduixianquan;
+    }
+
+    public String getXianquan() {
+        return xianquan;
+    }
+
+    public void setXianquan(String xianquan) {
+        this.xianquan = xianquan;
+    }
 
     public int getSave() {
         return save;

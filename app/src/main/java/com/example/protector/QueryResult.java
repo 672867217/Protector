@@ -136,7 +136,6 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
     private TextView q25;
     private TextView q23;
     private TextView q27;
-    private XiuGai xiuGai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,8 +181,8 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
                     testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                     testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                     testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                     testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                     testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                     testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -195,6 +194,9 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
                     testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                     testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                     app.map.put(new Utils().HexToInt(list.get(5))+"",testData);
+                    if(!testData.getCecheng().equals("0")){
+                        testData.save();
+                    }
                 }
             }
         });
@@ -218,7 +220,6 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
             Arrays.sort(arr4);
             dianzu = arr4[0];
         }
-        xiuGai = DataSupport.find(XiuGai.class, Long.parseLong(testData.getGongwei()));
         ArrayAdapter arrayAdapter = new ArrayAdapter(QueryResult.this, R.layout.spinner, new String[]{testData.getChanpinname() + ""});
         stats_spinner.setAdapter(arrayAdapter);
         stats_tv1.setText(testData.getXinghao());
@@ -366,125 +367,125 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
             result_tv23.setTextColor(Color.WHITE);
             result_tv23.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Math.abs(Double.parseDouble(testData.getM13xianshishijian()))-13>Double.parseDouble(xiuGai.getM13())){
+        if(Math.abs(Double.parseDouble(testData.getM13xianshishijian())-13)>Double.parseDouble(testData.getM13())){
             result2_tv1.setTextColor(Color.WHITE);
             result2_tv1.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Math.abs(Double.parseDouble(testData.getM30xianshishijian()))-30>Double.parseDouble(xiuGai.getM30())){
+        if(Math.abs(Double.parseDouble(testData.getM30xianshishijian())-30)>Double.parseDouble(testData.getM30())){
             result2_tv2.setTextColor(Color.WHITE);
             result2_tv2.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getQidongshijian())>Double.parseDouble(xiuGai.getQidong())){
+        if(Double.parseDouble(testData.getQidongshijian())>Double.parseDouble(testData.getQidong())){
             result2_tv3.setTextColor(Color.WHITE);
             result2_tv3.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getAduanxiangxiangying())>Double.parseDouble(xiuGai.getDuanxiang())){
+        if(Double.parseDouble(testData.getAduanxiangxiangying())>Double.parseDouble(testData.getDuanxiang())){
             result2_tv4.setTextColor(Color.WHITE);
             result2_tv4.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getBduanxiangxiangying())>Double.parseDouble(xiuGai.getDuanxiang())){
+        if(Double.parseDouble(testData.getBduanxiangxiangying())>Double.parseDouble(testData.getDuanxiang())){
             result2_tv5.setTextColor(Color.WHITE);
             result2_tv5.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getCduanxiangxiangying())>Double.parseDouble(xiuGai.getDuanxiang())){
+        if(Double.parseDouble(testData.getCduanxiangxiangying())>Double.parseDouble(testData.getDuanxiang())){
             result2_tv6.setTextColor(Color.WHITE);
             result2_tv6.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getAduanxiangdianya())>Double.parseDouble(xiuGai.getDuanxiangzhiliu())){
+        if(Double.parseDouble(testData.getAduanxiangdianya())>Double.parseDouble(testData.getDuanxiangzhiliu())){
             result2_tv7.setTextColor(Color.WHITE);
             result2_tv7.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getXianquanbinglian())>Double.parseDouble(xiuGai.getBinglian2()) ||
-                Double.parseDouble(testData.getXianquanbinglian())<Double.parseDouble(xiuGai.getBinglian1())  ){
+        if(Double.parseDouble(testData.getXianquanbinglian())>Double.parseDouble(testData.getBinglian2()) ||
+                Double.parseDouble(testData.getXianquanbinglian())<Double.parseDouble(testData.getBinglian1())  ){
             result2_tv8.setTextColor(Color.WHITE);
             result2_tv8.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getBduanxiangdianya())>Double.parseDouble(xiuGai.getDuanxiangzhiliu())){
+        if(Double.parseDouble(testData.getBduanxiangdianya())>Double.parseDouble(testData.getDuanxiangzhiliu())){
             result2_tv9.setTextColor(Color.WHITE);
             result2_tv9.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getXianquanchuanlian5())>Double.parseDouble(xiuGai.getChuanlian2()) ||
-                Double.parseDouble(testData.getXianquanchuanlian5())<Double.parseDouble(xiuGai.getChuanlian1())){
+        if(Double.parseDouble(testData.getXianquanchuanlian5())>Double.parseDouble(testData.getChuanlian2()) ||
+                Double.parseDouble(testData.getXianquanchuanlian5())<Double.parseDouble(testData.getChuanlian1())){
             result2_tv10.setTextColor(Color.WHITE);
             result2_tv10.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getCduanxiangdianya())>Double.parseDouble(xiuGai.getDuanxiangzhiliu())){
+        if(Double.parseDouble(testData.getCduanxiangdianya())>Double.parseDouble(testData.getDuanxiangzhiliu())){
             result2_tv11.setTextColor(Color.WHITE);
             result2_tv11.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(String.valueOf(dianzu))<Double.parseDouble(xiuGai.getXiangduidi())){
+        if(Double.parseDouble(String.valueOf(dianzu))<Double.parseDouble(testData.getXiangduidi())){
             result2_tv12.setTextColor(Color.WHITE);
             result2_tv12.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getAxiangceyajiang())>Double.parseDouble(xiuGai.getJiaoliu())){
+        if(Double.parseDouble(testData.getAxiangceyajiang())>Double.parseDouble(testData.getJiaoliu())){
             result2_tv13.setTextColor(Color.WHITE);
             result2_tv13.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getBxiangceyajiang())>Double.parseDouble(xiuGai.getJiaoliu())){
+        if(Double.parseDouble(testData.getBxiangceyajiang())>Double.parseDouble(testData.getJiaoliu())){
             result2_tv14.setTextColor(Color.WHITE);
             result2_tv14.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getCxiangceyajiang())>Double.parseDouble(xiuGai.getJiaoliu())){
+        if(Double.parseDouble(testData.getCxiangceyajiang())>Double.parseDouble(testData.getJiaoliu())){
             result2_tv15.setTextColor(Color.WHITE);
             result2_tv15.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getAbxiangjianjueyuan())<Double.parseDouble(xiuGai.getXiangjian())){
+        if(Double.parseDouble(testData.getAbxiangjianjueyuan())<Double.parseDouble(testData.getXiangjian())){
             result2_tv16.setTextColor(Color.WHITE);
             result2_tv16.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getBcxiangjianjueyuan())<Double.parseDouble(xiuGai.getXiangjian())){
+        if(Double.parseDouble(testData.getBcxiangjianjueyuan())<Double.parseDouble(testData.getXiangjian())){
             result2_tv17.setTextColor(Color.WHITE);
             result2_tv17.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getAcxiangjianjueyuan())<Double.parseDouble(xiuGai.getXiangjian())){
+        if(Double.parseDouble(testData.getAcxiangjianjueyuan())<Double.parseDouble(testData.getXiangjian())){
             result2_tv18.setTextColor(Color.WHITE);
             result2_tv18.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getAxiangduidijueyuan())<Double.parseDouble(xiuGai.getXiangduidi())){
+        if(Double.parseDouble(testData.getAxiangduidijueyuan())<Double.parseDouble(testData.getXiangduidi())){
             result2_tv19.setTextColor(Color.WHITE);
             result2_tv19.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getBxiangduidijueyuan())<Double.parseDouble(xiuGai.getXiangduidi())){
+        if(Double.parseDouble(testData.getBxiangduidijueyuan())<Double.parseDouble(testData.getXiangduidi())){
             result2_tv20.setTextColor(Color.WHITE);
             result2_tv20.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getCxiangduidijueyuan())<Double.parseDouble(xiuGai.getXiangduidi())){
+        if(Double.parseDouble(testData.getCxiangduidijueyuan())<Double.parseDouble(testData.getXiangduidi())){
             result2_tv21.setTextColor(Color.WHITE);
             result2_tv21.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getAxiangduixianquanjueyuan())<Double.parseDouble(xiuGai.getXiangduixianquan())){
+        if(Double.parseDouble(testData.getAxiangduixianquanjueyuan())<Double.parseDouble(testData.getXiangduixianquan())){
             result2_tv22.setTextColor(Color.WHITE);
             result2_tv22.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getBxiangduixianquanjueyuan())<Double.parseDouble(xiuGai.getXiangduixianquan())){
+        if(Double.parseDouble(testData.getBxiangduixianquanjueyuan())<Double.parseDouble(testData.getXiangduixianquan())){
             result2_tv23.setTextColor(Color.WHITE);
             result2_tv23.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getCxiangduixianquanjeuyuan())<Double.parseDouble(xiuGai.getXiangduixianquan())){
+        if(Double.parseDouble(testData.getCxiangduixianquanjeuyuan())<Double.parseDouble(testData.getXiangduixianquan())){
             result2_tv24.setTextColor(Color.WHITE);
             result2_tv24.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getXianquanduidijueyuan())<Double.parseDouble(xiuGai.getXianquan())){
+        if(Double.parseDouble(testData.getXianquanduidijueyuan())<Double.parseDouble(testData.getXianquan())){
             result2_tv25.setTextColor(Color.WHITE);
             result2_tv25.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getXianquanchuanlian1())>Double.parseDouble(xiuGai.getChuanlian2()) ||
-                Double.parseDouble(testData.getXianquanchuanlian1())<Double.parseDouble(xiuGai.getChuanlian1())){
+        if(Double.parseDouble(testData.getXianquanchuanlian1())>Double.parseDouble(testData.getChuanlian2()) ||
+                Double.parseDouble(testData.getXianquanchuanlian1())<Double.parseDouble(testData.getChuanlian1())){
             result_tv27.setTextColor(Color.WHITE);
             result_tv27.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getXianquanchuanlian3())>Double.parseDouble(xiuGai.getChuanlian2()) ||
-                Double.parseDouble(testData.getXianquanchuanlian3())<Double.parseDouble(xiuGai.getChuanlian1())){
+        if(Double.parseDouble(testData.getXianquanchuanlian3())>Double.parseDouble(testData.getChuanlian2()) ||
+                Double.parseDouble(testData.getXianquanchuanlian3())<Double.parseDouble(testData.getChuanlian1())){
             result_tv28.setTextColor(Color.WHITE);
             result_tv28.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getXianquanchuanlian2())>Double.parseDouble(xiuGai.getChuanlian2()) ||
-                Double.parseDouble(testData.getXianquanchuanlian2())<Double.parseDouble(xiuGai.getChuanlian1())){
+        if(Double.parseDouble(testData.getXianquanchuanlian2())>Double.parseDouble(testData.getChuanlian2()) ||
+                Double.parseDouble(testData.getXianquanchuanlian2())<Double.parseDouble(testData.getChuanlian1())){
             result_tv29.setTextColor(Color.WHITE);
             result_tv29.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Double.parseDouble(testData.getXianquanchuanlian4())>Double.parseDouble(xiuGai.getChuanlian2()) ||
-                Double.parseDouble(testData.getXianquanchuanlian4())<Double.parseDouble(xiuGai.getChuanlian1())){
+        if(Double.parseDouble(testData.getXianquanchuanlian4())>Double.parseDouble(testData.getChuanlian2()) ||
+                Double.parseDouble(testData.getXianquanchuanlian4())<Double.parseDouble(testData.getChuanlian1())){
             result_tv30.setTextColor(Color.WHITE);
             result_tv30.setBackgroundResource(R.drawable.dialog_test2_3);
         }

@@ -31,6 +31,7 @@ import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
 import java.text.ParseException;
+
 import com.example.protector.SQl.ProductType;
 import com.example.protector.util.MyApplication;
 import com.example.protector.util.SerialPortUtil;
@@ -74,6 +75,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
     private List<TestData> dataList2;
     private int cecheng;
     private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,61 +85,64 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         MainActivity.utils.onReceive(new SerialPortUtil.Receive() {
             @Override
             public void set(String str, List<String> list) {
-                if(str.equals("10")){
-                        TestData testData = new TestData();
-                        testData.setType(1);
-                        testData.setGongwei(new Utils().HexToInt(list.get(5)) + "");
-                        testData.setDate2(new Date());
-                        testData.setCecheng(new Utils().HexToInt(list.get(6)) + "");
-                        testData.setCeshishichang(new Utils().HexToInt(list.get(7) + list.get(8)) + "");
-                        testData.setChanpinbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
-                        testData.setShengchanbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
-                        testData.setAjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(13))));
-                        testData.setBjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(14))));
-                        testData.setBaojin(String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(15))))) + String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(16))))));
-                        testData.setXianquanchuanlian1(MainActivity.jisuan3(new Utils().HexToInt(list.get(17) + list.get(18)) + ""));
-                        testData.setXianquanchuanlian2(MainActivity.jisuan3(new Utils().HexToInt(list.get(19) + list.get(20)) + ""));
-                        testData.setXianquanchuanlian3(MainActivity.jisuan3(new Utils().HexToInt(list.get(21) + list.get(22)) + ""));
-                        testData.setXianquanchuanlian4(MainActivity.jisuan3(new Utils().HexToInt(list.get(23) + list.get(24)) + ""));
-                        testData.setXianquanchuanlian5(MainActivity.jisuan3(new Utils().HexToInt(list.get(25) + list.get(26)) + ""));
-                        testData.setXianquanbinglian(MainActivity.jisuan3(new Utils().HexToInt(list.get(27) + list.get(28)) + ""));
-                        testData.setAjiwucha(MainActivity.num(new Utils().HexToInt(list.get(29)) + ""));
-                        testData.setBjiwucha(MainActivity.num(new Utils().HexToInt(list.get(30)) + ""));
-                        testData.setAxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(31)) + ""));
-                        testData.setAxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(32)) + ""));
-                        testData.setAxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(33)) + ""));
-                        testData.setBxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(34)) + ""));
-                        testData.setBxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(35)) + ""));
-                        testData.setBxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(36)) + ""));
-                        testData.setAduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(37)) + ""));
-                        testData.setBduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(38)) + ""));
-                        testData.setCduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(39)) + ""));
-                        testData.setAxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(40) + list.get(41)) + ""));
-                        testData.setBxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(42) + list.get(43)) + ""));
-                        testData.setCxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(44) + list.get(45)) + ""));
-                        testData.setQidongshijian(new Utils().HexToInt(list.get(46) + list.get(47)) + "");
-                        testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
-                        testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
-                        testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                        testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                        testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
-                        testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
-                        testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
-                        testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
-                        testData.setAxiangduidijueyuan(new Utils().HexToInt(list.get(64) + list.get(65)) + "");
-                        testData.setBxiangduidijueyuan(new Utils().HexToInt(list.get(66) + list.get(67)) + "");
-                        testData.setCxiangduidijueyuan(new Utils().HexToInt(list.get(68) + list.get(69)) + "");
-                        testData.setAxiangduixianquanjueyuan(new Utils().HexToInt(list.get(70) + list.get(71)) + "");
-                        testData.setBxiangduixianquanjueyuan(new Utils().HexToInt(list.get(72) + list.get(73)) + "");
-                        testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
-                        testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
-                        app.map.put(new Utils().HexToInt(list.get(5))+"",testData);
+                if (str.equals("10")) {
+                    TestData testData = new TestData();
+                    testData.setType(1);
+                    testData.setGongwei(new Utils().HexToInt(list.get(5)) + "");
+                    testData.setDate2(new Date());
+                    testData.setCecheng(new Utils().HexToInt(list.get(6)) + "");
+                    testData.setCeshishichang(new Utils().HexToInt(list.get(7) + list.get(8)) + "");
+                    testData.setChanpinbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
+                    testData.setShengchanbianma(new Utils().HexToInt(list.get(9) + list.get(10) + list.get(11) + list.get(12)) + "");
+                    testData.setAjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(13))));
+                    testData.setBjiguzhang(Integer.toBinaryString(new Utils().HexToInt(list.get(14))));
+                    testData.setBaojin(String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(15))))) + String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(16))))));
+                    testData.setXianquanchuanlian1(MainActivity.jisuan3(new Utils().HexToInt(list.get(17) + list.get(18)) + ""));
+                    testData.setXianquanchuanlian2(MainActivity.jisuan3(new Utils().HexToInt(list.get(19) + list.get(20)) + ""));
+                    testData.setXianquanchuanlian3(MainActivity.jisuan3(new Utils().HexToInt(list.get(21) + list.get(22)) + ""));
+                    testData.setXianquanchuanlian4(MainActivity.jisuan3(new Utils().HexToInt(list.get(23) + list.get(24)) + ""));
+                    testData.setXianquanchuanlian5(MainActivity.jisuan3(new Utils().HexToInt(list.get(25) + list.get(26)) + ""));
+                    testData.setXianquanbinglian(MainActivity.jisuan3(new Utils().HexToInt(list.get(27) + list.get(28)) + ""));
+                    testData.setAjiwucha(MainActivity.num(new Utils().HexToInt(list.get(29)) + ""));
+                    testData.setBjiwucha(MainActivity.num(new Utils().HexToInt(list.get(30)) + ""));
+                    testData.setAxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(31)) + ""));
+                    testData.setAxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(32)) + ""));
+                    testData.setAxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(33)) + ""));
+                    testData.setBxiangawucha(MainActivity.num2(new Utils().HexToInt(list.get(34)) + ""));
+                    testData.setBxiangbwucha(MainActivity.num2(new Utils().HexToInt(list.get(35)) + ""));
+                    testData.setBxiangcwucha(MainActivity.num2(new Utils().HexToInt(list.get(36)) + ""));
+                    testData.setAduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(37)) + ""));
+                    testData.setBduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(38)) + ""));
+                    testData.setCduanxiangdianya(MainActivity.jisuan2(new Utils().HexToInt(list.get(39)) + ""));
+                    testData.setAxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(40) + list.get(41)) + ""));
+                    testData.setBxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(42) + list.get(43)) + ""));
+                    testData.setCxiangceyajiang(MainActivity.jisuan(new Utils().HexToInt(list.get(44) + list.get(45)) + ""));
+                    testData.setQidongshijian(new Utils().HexToInt(list.get(46) + list.get(47)) + "");
+                    testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
+                    testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
+                    testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
+                    testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
+                    testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
+                    testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
+                    testData.setAxiangduidijueyuan(new Utils().HexToInt(list.get(64) + list.get(65)) + "");
+                    testData.setBxiangduidijueyuan(new Utils().HexToInt(list.get(66) + list.get(67)) + "");
+                    testData.setCxiangduidijueyuan(new Utils().HexToInt(list.get(68) + list.get(69)) + "");
+                    testData.setAxiangduixianquanjueyuan(new Utils().HexToInt(list.get(70) + list.get(71)) + "");
+                    testData.setBxiangduixianquanjueyuan(new Utils().HexToInt(list.get(72) + list.get(73)) + "");
+                    testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
+                    testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
+                    app.map.put(new Utils().HexToInt(list.get(5)) + "", testData);
+                    if (!testData.getCecheng().equals("0")) {
+                        testData.save();
+                    }
                 }
             }
         });
         new Utils().hideNavKey(DateQuery.this);
-        SharedPreferences preferences = getSharedPreferences("cecheng",0);
-        cecheng = Integer.parseInt(preferences.getString("what","1"));
+        SharedPreferences preferences = getSharedPreferences("cecheng", 0);
+        cecheng = Integer.parseInt(preferences.getString("what", "1"));
         switch (cecheng) {
             case 0:
                 tv_cecheng.setText("其他");
@@ -168,7 +173,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         stats_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(types.size()!=0){
+                if (types.size() != 0) {
                     stats_tv1.setText(types.get(i).getXinghao());
                 }
 
@@ -208,7 +213,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         list1.clear();
                         list2.clear();
                         int a = 0;
-                        if (num36 * index + num36 >shuliang ) {
+                        if (num36 * index + num36 > shuliang) {
                             a = shuliang;
                         } else {
                             a = num36 * index + num36;
@@ -315,8 +320,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth  < 10) {
-                            myday = "0" + dayOfMonth ;
+                        if (dayOfMonth < 10) {
+                            myday = "0" + dayOfMonth;
                         } else {
                             myday = String.valueOf(dayOfMonth);
                         }
@@ -337,8 +342,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         } else {
                             mymonth = String.valueOf(month + 1);
                         }
-                        if (dayOfMonth  < 10) {
-                            myday = "0" + dayOfMonth ;
+                        if (dayOfMonth < 10) {
+                            myday = "0" + dayOfMonth;
                         } else {
                             myday = String.valueOf(dayOfMonth);
                         }
@@ -356,8 +361,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                     Intent intent = new Intent(getApplicationContext(), QueryResult.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("data", list1.get(position).id);
-                    bundle.putInt("flag",2);
-                    intent.putExtra("s",bundle);
+                    bundle.putInt("flag", 2);
+                    intent.putExtra("s", bundle);
                     startActivity(intent);
                 }
             }
@@ -369,8 +374,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                     Intent intent = new Intent(getApplicationContext(), QueryResult.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("data", list2.get(position).id);
-                    bundle.putInt("flag",2);
-                    intent.putExtra("s",bundle);
+                    bundle.putInt("flag", 2);
+                    intent.putExtra("s", bundle);
                     startActivity(intent);
                 }
             }
@@ -399,7 +404,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private  void init2(){
+    private void init2() {
         if (shuliang % 36 == 0) {
             page = shuliang / 36;
         } else {
@@ -433,7 +438,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         Long ceshiDate = dateFormat.parse(dateFormat.format(dataList.get(j).getDate())).getTime();
                         Long startDate = dateFormat.parse(stats_tv2.getText().toString()).getTime();
                         Long endDate = dateFormat.parse(stats_tv3.getText().toString()).getTime();
-                        if (ceshiDate >= startDate && ceshiDate <= endDate && Integer.parseInt(dataList.get(j).getCecheng())==(cecheng)
+                        if (ceshiDate >= startDate && ceshiDate <= endDate && Integer.parseInt(dataList.get(j).getCecheng()) == (cecheng)
                                 && dataList.get(j).getChanpinname().equals(stats_spinner.getSelectedItem())
                                 && dataList.get(j).getXinghao().equals(stats_tv1.getText().toString())) {
                             dataList2.add(dataList.get(j));
@@ -455,13 +460,13 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                 layout_footer.setVisibility(View.VISIBLE);
                 int sum = 0;
                 for (int i = 0; i < dataList2.size(); i++) {
-                    if(dataList2.get(i).getTongguo().equals("合格")){
+                    if (dataList2.get(i).getTongguo().equals("合格")) {
                         sum++;
                     }
                 }
-                footer_tv1.setText("统计："+stats_tv2.getText().toString()+" 至 " +stats_tv3.getText().toString()+"   "
-                        +tv_cecheng.getText().toString()+"测试数量："+dataList2.size()+"台，通过"+sum+"台，未通过"+(dataList2.size()-sum)+"台");
-                footer_tv2.setText("共 "+page+" 页  第");
+                footer_tv1.setText("统计：" + stats_tv2.getText().toString() + " 至 " + stats_tv3.getText().toString() + "   "
+                        + tv_cecheng.getText().toString() + "测试数量：" + dataList2.size() + "台，通过" + sum + "台，未通过" + (dataList2.size() - sum) + "台");
+                footer_tv2.setText("共 " + page + " 页  第");
                 break;
 
         }
@@ -496,7 +501,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
         private String number1;
         private String number2;
         private String date;
-        private  String result;
+        private String result;
         private String name;
         private int id;
     }
@@ -544,7 +549,7 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
             if (bean.number1.equals("")) {
                 holder.itemTv1.setText("");
             } else {
-                holder.itemTv1.setText(String.format("%04d",Integer.parseInt(bean.number1)));
+                holder.itemTv1.setText(String.format("%04d", Integer.parseInt(bean.number1)));
             }
             holder.itemTv2.setText(bean.number2);
             holder.itemTv3.setText(bean.date);

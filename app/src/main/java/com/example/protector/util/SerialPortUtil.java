@@ -89,10 +89,9 @@ public class SerialPortUtil {
      *
      * @param data 要发送的数据
      */
-    public void sendSerialPort(String data) {
+    public void sendSerialPort(int data) {
         try {
-            byte[] sendData = data.getBytes();
-            outputStream.write(sendData);
+            outputStream.write(data);
             outputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -131,7 +130,9 @@ public class SerialPortUtil {
                     TimerTask timerTask = new TimerTask() {
                         @Override
                         public void run() {
+                            System.out.println(str2.toString());
                             String[] s = str2.toString().split("AA00FF");
+                            System.out.println(s.length+".....");
                             for (int i = 1; i < s.length; i++) {
                                 if(timer!= null){
                                     timer.cancel();
@@ -140,6 +141,7 @@ public class SerialPortUtil {
                                 Utils utils = new Utils();
                                 List<String> strings = utils.getDivLines("AA00FF" + s[i], 2);
                                 receive.set(strings.get(3), strings);
+                                System.out.println(strings.get(3)+".............");
                             }str2 = new StringBuffer();
                         }
                     };
@@ -154,12 +156,11 @@ public class SerialPortUtil {
                     e.printStackTrace();
                 }
                 if (size > 0) {
-                    str = new String(readData).trim();
+                    str = new String(new Utils().ByteArrToHex(readData,0,size)).trim();
                     str2.append(str);
                 }
             }
 
         }
     }
-
 }

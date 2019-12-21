@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button3;
     private Button button6;
     private Button button5;
+    private FrameLayout click;
     public static SerialPortUtil utils = new SerialPortUtil();
     Utils util = new Utils();
     private static BigDecimal b1 = new BigDecimal("0.001");
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         app = (MyApplication) getApplication();
         textView = (TextView) findViewById(R.id.textView);
         button2 = (Button) findViewById(R.id.button2);
+        click = (FrameLayout) findViewById(R.id.click);
         button = (Button) findViewById(R.id.button);
         button4 = (Button) findViewById(R.id.button4);
         button3 = (Button) findViewById(R.id.button3);
@@ -93,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+        click.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                System.exit(0);
+                return true;
+            }
+        });
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         if(utils.mReceiveThread ==null){
@@ -103,7 +113,10 @@ public class MainActivity extends AppCompatActivity {
             public void set(String str, List<String> list) {
                 switch (str) {
                     case "61":
-                        utils.sendSerialPort("AAFF00310064");
+                        int[] arr = new int[]{0xAA,0xFF,0x00,0x31,0x00,0x64};
+                        for (int i = 0; i < arr.length; i++) {
+                            utils.sendSerialPort(arr[i]);
+                        }
                         List<String> strings = util.getDivLines(String.format("%08d",Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(5))))),1);
                         System.out.println(strings.toString());
                         if(DataSupport.findAll(Gonwei.class).size() == 0){
@@ -189,8 +202,8 @@ public class MainActivity extends AppCompatActivity {
                         testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                         testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                         testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                        testData.setM13xianshishijian(jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                        testData.setM30xianshishijian(jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                        testData.setM13xianshishijian(jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                        testData.setM30xianshishijian(jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                         testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                         testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                         testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -202,7 +215,9 @@ public class MainActivity extends AppCompatActivity {
                         testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                         testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                         app.map.put(new Utils().HexToInt(list.get(5))+"",testData);
-                        System.out.println(list.toString());
+                        if(!testData.getCecheng().equals("0")){
+                            testData.save();
+                        }
                         break;
                 }
             }
@@ -387,8 +402,8 @@ public class MainActivity extends AppCompatActivity {
         xiuGai.setM30("1");
         xiuGai.setChuanlian1("20.0");
         xiuGai.setChuanlian2("27.5");
-        xiuGai.setBinglian1("10.0");
-        xiuGai.setBinglian2("14.0");
+        xiuGai.setBinglian1("20.0");
+        xiuGai.setBinglian2("27.5");
         xiuGai.setDuanxiangzhiliu("0.2");
         xiuGai.setJiaoliu("3.0");
         xiuGai.setXiangjian("500");

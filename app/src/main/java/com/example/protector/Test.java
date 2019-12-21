@@ -1,5 +1,6 @@
 package com.example.protector;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -158,8 +159,11 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         map.put("gonwei" + gonwei, new Date());
                         break;
                     case "61":
-                        MainActivity.utils.sendSerialPort("AAFF00310064");
-                        chanpin_spinner3.setSelection(0, true);
+                        int[] arr = new int[]{0xaa,0xff,0x00,0x31,0x00,0x64};
+                        for (int j = 0; j < arr.length; j++) {
+                            MainActivity.utils.sendSerialPort(arr[j]);
+                        }
+                        //chanpin_spinner3.setSelection(0, true);
                         List<String> strings = new Utils().getDivLines(String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(5))))), 1);
                         System.out.println(strings.toString());
                         if (DataSupport.findAll(Gonwei.class).size() == 0) {
@@ -363,7 +367,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 //当测程改变  通过串口向测试台主机发送信息
                 if (is) {
                     for (int i = 0; i < 5; i++) {
-                        MainActivity.utils.sendSerialPort(cmd(i + 1));
+                        int[] arr = cmd(i + 1);
+                        for (int j = 0; j < arr.length; j++) {
+                            MainActivity.utils.sendSerialPort(arr[j]);
+                        }
                     }
                 } else {
                     is = true;
@@ -399,9 +406,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         int what = getIntent().getIntExtra("what", -1);
         if (what == 1) {
             for (int i = 0; i < 4; i++) {
-                TestData testData = new TestData();
-                testData.setType(1);
-                testData.updateAll("type = ?", "0");
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("type",0);
+                DataSupport.updateAll(TestData.class,contentValues);
                 Bean bean = new Bean();
                 bean.ceshi = String.valueOf(0);
                 bean.tongguo = String.valueOf(0);
@@ -415,26 +422,29 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             chanpin_spinner4.setSelection(app.type, true);
             chanpin_spinner5.setSelection(app.name, true);
             final List<TestData> dataList = DataSupport.findAll(TestData.class);
-            for (int i = 1; i < 5; i++) {
-                int shuliang = 0, zongshijian = 0;
-                String num = String.valueOf(i);
-                if (i == 4) {
-                    // num = 0 的时候 为其他测程
-                    num = 0 + "";
+            for (int i = 0; i < 4; i++) {
+                int shuliang = 0, zongshijian = 0,tongguo = 0,weitongguo = 0;
+                int a = i;
+                if(a == 3){
+                    a = 0;
                 }
                 for (int j = 0; j < dataList.size(); j++) {
-                    //遍历数据库数据 如果测程等于1 数量增加;
-                    if (dataList.get(j).getType() == 1) {
-                        if (dataList.get(j).getCecheng().equals(num)) {
-                            shuliang++;
-                            zongshijian = Integer.parseInt(dataList.get(j).getCeshishichang());
+
+                    if(dataList.get(j).getType() == 1 && dataList.get(j).getCecheng().equals(a+"")){
+                        shuliang++;
+                        zongshijian = Integer.parseInt(dataList.get(j).getCeshishichang());
+                        if(dataList.get(j).getTongguo().equals("合格")){
+                            tongguo++;
+                        }else
+                        {
+                            weitongguo++;
                         }
                     }
                 }
                 Bean bean = new Bean();
                 bean.ceshi = String.valueOf(shuliang);
-                bean.tongguo = String.valueOf(shuliang);
-                bean.weitongguo = String.valueOf(shuliang);
+                bean.tongguo = String.valueOf(tongguo);
+                bean.weitongguo = String.valueOf(weitongguo);
                 bean.yongshi = zongshijian / 60 + "'" + zongshijian % 60 + "\"";
                 list1.add(bean);
             }
@@ -480,7 +490,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             }
         };
         if (gonwei1 == null) {
-            MainActivity.utils.sendSerialPort("AAFF00300065");
+            int[] arr = new int[]{0xaa,0xff,0x00,0x30,0x00,0x65};
+            for (int i = 0; i < arr.length; i++) {
+                MainActivity.utils.sendSerialPort(arr[i]);
+            }
         }
 
     }
@@ -541,12 +554,16 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 app.type = chanpin_spinner4.getSelectedItemPosition();
                 break;
             case R.id.duqu:
-                MainActivity.utils.sendSerialPort("AAFF00300065");
+                int[] arr = new int[]{0xaa,0xff,0x00,0x30,0x00,0x65};
+                for (int i = 0; i < arr.length; i++) {
+                    MainActivity.utils.sendSerialPort(arr[i]);
+                }
+
                 break;
         }
     }
 
-    private String cmd(int gongwei) {
+    private int[] cmd(int gongwei) {
         XiuGai xiuGai = list.get(gongwei - 1);
         String s = "AAFF005119";
         if (Integer.toHexString(gongwei).length() == 2) {
@@ -647,12 +664,14 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         } else {
             s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
         }
-        if (new Utils().getXor(new Utils().getDivLines(s, 2)).length() < 2) {
-            s += "0" + new Utils().getXor(new Utils().getDivLines(s, 2));
-        } else {
-            s += new Utils().getXor(new Utils().getDivLines(s, 2));
+        int[] arr = new int[31];
+        List list = new Utils().getDivLines(s,2);
+        System.out.println(list.size()+"///////");
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = 0x00+Integer.parseInt((String) list.get(i),16);
         }
-        return s;
+        arr[list.size()] = new Utils().getXor(new Utils().getDivLines(s, 2));
+        return arr;
     }
 
     class Bean {
@@ -836,11 +855,19 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                             InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             im.hideSoftInputFromWindow(holder.testItem2Tv2.getWindowToken(), 0);
                             gonwei = 1 + what;
-                            String s = Integer.toHexString(Integer.parseInt(holder.testItem2Tv2.getText().toString()));
-                            if (s.length() < 8) {
-                                s = "0" + s;
+
+                            List list = new Utils().getDivLines(Integer.toHexString(Integer.parseInt(holder.testItem2Tv2.getText().toString())),2);
+                            int[] arr2 = new int[4];
+                            for (int i = 0; i < list.size(); i++) {
+                                arr2[i] = Integer.parseInt(String.valueOf(list.get(i)),16);
+                                System.out.println(arr2[i]);
                             }
-                            MainActivity.utils.sendSerialPort("AAFF0020050" + gonwei + s + new Utils().getXor(new Utils().getDivLines("AAFF0020050" + gonwei + s, 2)));
+
+                            int aa = new Utils().getXor(new Utils().getDivLines("AAFF0020050" + gonwei +Integer.toHexString(Integer.parseInt(holder.testItem2Tv2.getText().toString())) , 2));
+                            int[] arr = new int[]{0xaa,0xff,0x00,0x20,0x05,0x00+gonwei, 0x00+arr2[0],0x00+arr2[1],0x00+arr2[2],0x00+arr2[3],0x00+aa};
+                            for (int i = 0; i < arr.length; i++) {
+                                MainActivity.utils.sendSerialPort(arr[i]);
+                            }
                             holder.testItem2Tv2.setEnabled(false);
                             timer = new Timer();
                             TimerTask timerTask = new TimerTask() {
@@ -1035,6 +1062,20 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 }
                 //保存模式为自动不可用 手动可用
                 testData.setTongguo(holder.testItem2Tv17.getText().toString());
+                testData.setQidong(xiuGai.getQidong());
+                testData.setBinglian1(xiuGai.getBinglian1());
+                testData.setBinglian2(xiuGai.getBinglian2());
+                testData.setChuanlian1(xiuGai.getChuanlian1());
+                testData.setChuanlian2(xiuGai.getChuanlian2());
+                testData.setDuanxiang(xiuGai.getDuanxiang());
+                testData.setDuanxiangzhiliu(xiuGai.getDuanxiangzhiliu());
+                testData.setJiaoliu(xiuGai.getJiaoliu());
+                testData.setM13(xiuGai.getM13());
+                testData.setM30(xiuGai.getM30());
+                testData.setXianquan(xiuGai.getXianquan());
+                testData.setXiangduidi(xiuGai.getXiangduidi());
+                testData.setXiangduixianquan(xiuGai.getXiangduixianquan());
+                testData.setXiangjian(xiuGai.getXiangjian());
                 if (type == 0 && !chanpin_spinner3.getSelectedItem().equals("其他") && testData.getSave() == 0) {
                     if (!anniu.contains(gonwei)) {
                         anniu.add(gonwei);
@@ -1460,7 +1501,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                     holder.testBtn4.setEnabled(false);
                     holder.testBtn4.setBackgroundResource(R.drawable.queding);
                 }
-                holder.testItem2Tv17.setBackgroundResource(R.drawable.dialog_test2_3);
                 holder.testBtn2.setEnabled(false);
                 holder.testBtn4.setEnabled(false);
                 holder.testBtn4.setBackgroundResource(R.drawable.queding);
